@@ -12,26 +12,13 @@
     "Segoe UI", Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1a18;
-    --surface: #232320;
-    --surface-2: #2b2b27;
-    --text: #ededea;
-    --text-muted: #a1a19b;
-    --border: #38383300;
-    --border: #3a3a35;
-    --accent: #6ca9e6;
-    --accent-bg: #22303f;
-  }
-}
-
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  color-scheme: light;
 }
 
 .app {
