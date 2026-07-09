@@ -1,0 +1,8 @@
+node_modules
+dist
+public/dict
+public/vendor
+*.local
+*.tsbuildinfo
+.claude
+.DS_Store
