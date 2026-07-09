@@ -1,33 +1,30 @@
 import { useMemo, useRef, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
-
-const SAMPLE = `子どもたちと過ごす日々
-出勤は大体8時より少し前です。大体8時半から子どもたちが登園してくるので、朝の支度を手伝ったり、声をかけたりします。9時半過ぎにクラスの全員がそろうので、そこからトイレや手洗いなどをうながし、10時前後から一斉の活動が始まります。出欠を取ったり、その日のお当番を決めたりした後、図画工作などの「製作」やプール、体操などの主活動に入ります。12時から給食の準備が始まり、13時ごろまで給食の時間です。午後は天気がよければ外で、悪ければ室内で子どもたちと遊びます。13時半から帰りの準備が始まり、子どもたちに絵本や紙芝居を読んで、13時45分には子どもたちは降園となります。ただ、通園バスに乗って帰る子と保護者がお迎えに来る子たちの時間がバラバラなので、全員帰るのは大体14時45分です。全員が降園するまでは子どもたちと室内で遊んだりして過ごし、預かり保育の子は昼間とは別の先生が担当しますので、そこで交代になります。
-子どもたちが帰った後は、園舎や部屋の掃除をして、その日の日誌を書きます。16時ぐらいに終礼があり、終わったら同じ学年の先生と打ち合わせや準備をして、17時15分に退勤します。
-土日祝日と、夏休み、春休み、冬休みなどの長期休みは幼稚園も基本的にはお休みですが、預かり保育を希望するご家庭もあるので、先生たちは交代で出勤します。`;
-
-type Paragraph = Sentence[];
+import { buildUnits, type Unit } from "./units";
+import { ARTICLES, type Annotation, type Article } from "./content";
 
 interface Sentence {
-  tokens: Token[];
+  units: Unit[];
   text: string;
 }
+type Paragraph = Sentence[];
 
 const SENTENCE_ENDERS = new Set(["。", "！", "？", "!", "?"]);
 
-function splitSentences(tokens: Token[]): Sentence[] {
-  const sentences: Sentence[] = [];
+function splitIntoSentences(tokens: Token[]): { tokens: Token[]; text: string }[] {
+  const sentences: { tokens: Token[]; text: string }[] = [];
   let current: Token[] = [];
-  for (const t of tokens) {
-    current.push(t);
-    if (SENTENCE_ENDERS.has(t.surface)) {
+  const flush = () => {
+    if (current.length) {
       sentences.push({ tokens: current, text: current.map((x) => x.surface).join("") });
       current = [];
     }
+  };
+  for (const t of tokens) {
+    current.push(t);
+    if (SENTENCE_ENDERS.has(t.surface)) flush();
   }
-  if (current.length) {
-    sentences.push({ tokens: current, text: current.map((x) => x.surface).join("") });
-  }
+  flush();
   return sentences;
 }
 
@@ -40,36 +37,45 @@ function speak(text: string) {
   window.speechSynthesis.speak(u);
 }
 
+function unitReading(unit: Unit): string {
+  if (unit.annotation?.reading) return unit.annotation.reading;
+  return unit.tokens.map((t) => t.reading).join("");
+}
+
 interface PopupState {
-  token: Token;
+  unit: Unit;
   left: number;
   top: number;
 }
 
 export default function App() {
-  const [input, setInput] = useState(SAMPLE);
+  const [input, setInput] = useState("");
+  const [article, setArticle] = useState<Article | null>(null);
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<PopupState | null>(null);
   const readerRef = useRef<HTMLDivElement>(null);
 
-  const wordCount = useMemo(
-    () =>
-      paragraphs
-        .flat()
-        .reduce((n, s) => n + s.tokens.filter((t) => t.clickable).length, 0),
-    [paragraphs],
-  );
+  const counts = useMemo(() => {
+    const units = paragraphs.flat().flatMap((s) => s.units);
+    return {
+      words: units.filter((u) => u.clickable).length,
+      annotated: units.filter((u) => u.annotation).length,
+    };
+  }, [paragraphs]);
 
-  async function handleRead() {
+  async function analyze(text: string, annotations: Record<string, Annotation>) {
     setLoading(true);
     setPopup(null);
     try {
       const tokenizer = await loadTokenizer();
-      const lines = input.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-      const result = lines.map((line) =>
-        splitSentences(toTokens(tokenizer.tokenize(line))),
+      const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+      const result: Paragraph[] = lines.map((line) =>
+        splitIntoSentences(toTokens(tokenizer.tokenize(line))).map((s) => ({
+          units: buildUnits(s.tokens, annotations),
+          text: s.text,
+        })),
       );
       setParagraphs(result);
     } catch (e) {
@@ -80,22 +86,48 @@ export default function App() {
     }
   }
 
-  function openPopup(token: Token, el: HTMLElement) {
+  function loadArticle(a: Article) {
+    setArticle(a);
+    setInput(a.text);
+    analyze(a.text, a.annotations);
+  }
+
+  function readPaste() {
+    setArticle(null);
+    analyze(input, {});
+  }
+
+  function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
     if (!container) return;
     const cr = container.getBoundingClientRect();
     const er = el.getBoundingClientRect();
-    const width = 260;
+    const width = 268;
     let left = er.left - cr.left + container.scrollLeft;
     left = Math.min(left, container.clientWidth - width);
     if (left < 0) left = 0;
-    setPopup({ token, left, top: er.bottom - cr.top + container.scrollTop + 6 });
+    setPopup({ unit, left, top: er.bottom - cr.top + container.scrollTop + 6 });
   }
 
+  const renderTokens = (tokens: Token[]) =>
+    tokens.map((t, k) =>
+      showFurigana && t.hasKanji && t.reading ? (
+        <ruby key={k}>
+          {t.surface}
+          <rt>{t.reading}</rt>
+        </ruby>
+      ) : (
+        <span key={k}>{t.surface}</span>
+      ),
+    );
+
   return (
-    <div className="app" onClick={(e) => {
-      if (!(e.target as HTMLElement).closest(".popup, .word")) setPopup(null);
-    }}>
+    <div
+      className="app"
+      onClick={(e) => {
+        if (!(e.target as HTMLElement).closest(".popup, .word")) setPopup(null);
+      }}
+    >
       <header className="header">
         <div className="brand">
           <span className="logo">読</span>
@@ -115,43 +147,66 @@ export default function App() {
         </label>
       </header>
 
-      <textarea
-        className="input"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="日本語の文章を貼り付けてください…"
-        rows={6}
-      />
-      <div className="actions">
-        <button className="primary" onClick={handleRead} disabled={loading}>
-          {loading ? "解析中…" : "読む"}
-        </button>
-        {wordCount > 0 && <span className="meta">{wordCount} 語</span>}
+      <div className="source-group">
+        <span className="source-label">記事から読む</span>
+        <div className="chips">
+          {ARTICLES.map((a) => (
+            <button
+              key={a.id}
+              className={"chip" + (article?.id === a.id ? " active" : "")}
+              onClick={() => loadArticle(a)}
+            >
+              {a.title}
+            </button>
+          ))}
+        </div>
       </div>
+
+      <div className="source-group">
+        <span className="source-label">自分の文章を読む</span>
+        <textarea
+          className="input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="日本語の文章を貼り付けてください…"
+          rows={5}
+        />
+        <div className="actions">
+          <button className="primary" onClick={readPaste} disabled={loading || !input.trim()}>
+            {loading ? "解析中…" : "読む"}
+          </button>
+          {counts.words > 0 && (
+            <span className="meta">
+              {counts.words} 語
+              {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {article && (
+        <div className="article-head">
+          <h2>{article.title}</h2>
+          {article.subtitle && <p>{article.subtitle}</p>}
+        </div>
+      )}
 
       <div className="reader" ref={readerRef}>
         {paragraphs.map((sents, pi) => (
           <p className="para" key={pi}>
             {sents.map((s, i) => (
               <span className="sentence" key={i}>
-                {s.tokens.map((t, j) =>
-                  t.clickable ? (
+                {s.units.map((u, j) =>
+                  u.clickable ? (
                     <span
-                      className="word"
+                      className={"word" + (u.annotation ? " annotated" : "")}
                       key={j}
-                      onClick={(e) => openPopup(t, e.currentTarget)}
+                      onClick={(e) => openPopup(u, e.currentTarget)}
                     >
-                      {showFurigana && t.hasKanji && t.reading ? (
-                        <ruby>
-                          {t.surface}
-                          <rt>{t.reading}</rt>
-                        </ruby>
-                      ) : (
-                        t.surface
-                      )}
+                      {renderTokens(u.tokens)}
                     </span>
                   ) : (
-                    <span key={j}>{t.surface}</span>
+                    <span key={j}>{renderTokens(u.tokens)}</span>
                   ),
                 )}
                 <button
@@ -167,31 +222,53 @@ export default function App() {
           </p>
         ))}
         {paragraphs.length === 0 && !loading && (
-          <p className="hint">「読む」を押すと、文章が単語ごとに解析されます。</p>
+          <p className="hint">
+            上の記事を選ぶか、文章を貼って「読む」を押すと、単語ごとに解析されます。
+          </p>
         )}
 
         {popup && (
           <div className="popup" style={{ left: popup.left, top: popup.top }}>
-            <div className="popup-head">
-              <span className="popup-tag">辞書</span>
+            <div className={"popup-head" + (popup.unit.annotation ? " authored" : "")}>
+              <span className="popup-tag">
+                {popup.unit.annotation ? "解説" : "辞書"}
+              </span>
               <button className="popup-close" aria-label="閉じる" onClick={() => setPopup(null)}>
                 ×
               </button>
             </div>
             <div className="popup-body">
               <div className="popup-word">
-                <span className="pw">{popup.token.base}</span>
-                {popup.token.reading && <span className="pr">{popup.token.reading}</span>}
+                <span className="pw">{popup.unit.key}</span>
+                {unitReading(popup.unit) && (
+                  <span className="pr">{unitReading(popup.unit)}</span>
+                )}
               </div>
-              <p className="pos">{popup.token.pos}</p>
+              <p className="pos">{popup.unit.pos}</p>
+
+              {popup.unit.annotation ? (
+                <>
+                  <p className="meaning">{popup.unit.annotation.meaning}</p>
+                  {popup.unit.annotation.note && (
+                    <p className="note">{popup.unit.annotation.note}</p>
+                  )}
+                  {popup.unit.annotation.examples?.map((ex, k) => (
+                    <p className="example" key={k}>
+                      <span className="ex-ja">{ex.ja}</span>
+                      <span className="ex-en">{ex.en}</span>
+                    </p>
+                  ))}
+                </>
+              ) : null}
+
               <div className="popup-actions">
-                <button onClick={() => speak(popup.token.base)}>▶ 読み上げ</button>
+                <button onClick={() => speak(popup.unit.surface)}>▶ 読み上げ</button>
                 <a
-                  href={`https://jisho.org/search/${encodeURIComponent(popup.token.base)}`}
+                  href={`https://jisho.org/search/${encodeURIComponent(popup.unit.key)}`}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Jisho で意味を見る
+                  Jisho で見る
                 </a>
               </div>
             </div>
@@ -200,7 +277,7 @@ export default function App() {
       </div>
 
       <footer className="footer">
-        単語をクリックで詳細・文末の ▶ で読み上げ。英語の語義（JMdict）は次の段階で追加します。
+        単語をクリックで詳細・文末の ▶ で読み上げ。色の濃い単語には解説が付いています。
       </footer>
     </div>
   );

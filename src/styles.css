@@ -67,6 +67,37 @@ body {
 .toggle input:checked + .switch { background: var(--accent); }
 .toggle input:checked + .switch::after { left: 19px; }
 
+.source-group { margin-bottom: 16px; }
+.source-label {
+  display: block;
+  font-size: 12px; letter-spacing: .03em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.article-head {
+  margin: 4px 0 -6px;
+}
+.article-head h2 { margin: 0; font-size: 22px; font-weight: 500; }
+.article-head p { margin: 2px 0 0; font-size: 14px; color: var(--text-muted); }
+
 .input {
   width: 100%;
   font-size: 16px; line-height: 1.7;
@@ -123,6 +154,9 @@ body {
   transition: background .1s;
 }
 .word:hover { background: var(--accent-bg); border-bottom-color: var(--accent); }
+/* Words with an authored annotation get a persistent accent underline. */
+.word.annotated { border-bottom-color: var(--accent); color: var(--accent); }
+.word.annotated:hover { background: var(--accent-bg); }
 
 ruby rt {
   font-size: .5em;
@@ -172,11 +206,29 @@ ruby rt {
   border: none; background: none; cursor: pointer;
   font-size: 18px; line-height: 1; color: var(--accent);
 }
+.popup-head.authored { background: var(--accent); }
+.popup-head.authored .popup-tag,
+.popup-head.authored .popup-close { color: #fff; }
+
 .popup-body { padding: 12px 14px; }
 .popup-word { display: flex; align-items: baseline; gap: 8px; }
 .pw { font-size: 20px; font-weight: 600; }
 .pr { font-size: 13px; color: var(--text-muted); }
 .pos { margin: 4px 0 0; font-size: 13px; color: var(--text-muted); }
+.meaning { margin: 8px 0 0; font-size: 15px; font-weight: 500; }
+.note {
+  margin: 8px 0 0; font-size: 13px; line-height: 1.65;
+  color: var(--text);
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: 8px;
+}
+.example {
+  margin: 8px 0 0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column;
+}
+.ex-ja { color: var(--text); }
+.ex-en { color: var(--text-muted); }
 .popup-actions {
   display: flex; align-items: center; gap: 14px;
   margin-top: 12px;
