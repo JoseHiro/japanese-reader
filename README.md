@@ -25,7 +25,8 @@ npm run preview  # ビルド結果を確認
 ## デプロイ
 
 `main` への push で GitHub Actions（`.github/workflows/deploy.yml`）が
-自動ビルドし、GitHub Pages に公開する。Vite の `base` は `./`（相対）なので
+自動ビルドし、`dist` を `gh-pages` ブランチに公開する（GitHub Pages は
+`gh-pages` ブランチを配信）。Vite の `base` は `./`（相対）なので
 プロジェクトページ（`/<repo>/`）でそのまま動く。
 
 ## Phase 0 のスコープ
