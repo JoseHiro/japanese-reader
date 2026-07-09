@@ -6,6 +6,7 @@ import { ARTICLES, type Annotation, type Article } from "./content";
 interface Sentence {
   units: Unit[];
   text: string;
+  translation?: string;
 }
 type Paragraph = Sentence[];
 
@@ -55,7 +56,17 @@ export default function App() {
   const [showFurigana, setShowFurigana] = useState(true);
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<PopupState | null>(null);
+  const [shownTr, setShownTr] = useState<Set<string>>(new Set());
   const readerRef = useRef<HTMLDivElement>(null);
+
+  function toggleTranslation(key: string) {
+    setShownTr((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }
 
   const counts = useMemo(() => {
     const units = paragraphs.flat().flatMap((s) => s.units);
@@ -65,9 +76,14 @@ export default function App() {
     };
   }, [paragraphs]);
 
-  async function analyze(text: string, annotations: Record<string, Annotation>) {
+  async function analyze(
+    text: string,
+    annotations: Record<string, Annotation>,
+    translations?: Record<string, string>,
+  ) {
     setLoading(true);
     setPopup(null);
+    setShownTr(new Set());
     try {
       const tokenizer = await loadTokenizer();
       const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
@@ -75,6 +91,7 @@ export default function App() {
         splitIntoSentences(toTokens(tokenizer.tokenize(line))).map((s) => ({
           units: buildUnits(s.tokens, annotations),
           text: s.text,
+          translation: translations?.[s.text],
         })),
       );
       setParagraphs(result);
@@ -89,7 +106,7 @@ export default function App() {
   function loadArticle(a: Article) {
     setArticle(a);
     setInput(a.text);
-    analyze(a.text, a.annotations);
+    analyze(a.text, a.annotations, a.translations);
   }
 
   function readPaste() {
@@ -194,31 +211,51 @@ export default function App() {
       <div className="reader" ref={readerRef}>
         {paragraphs.map((sents, pi) => (
           <p className="para" key={pi}>
-            {sents.map((s, i) => (
-              <span className="sentence" key={i}>
-                {s.units.map((u, j) =>
-                  u.clickable ? (
-                    <span
-                      className={"word" + (u.annotation ? " annotated" : "")}
-                      key={j}
-                      onClick={(e) => openPopup(u, e.currentTarget)}
+            {sents.map((s, i) => {
+              const trKey = `${pi}:${i}`;
+              const trShown = shownTr.has(trKey);
+              return (
+                <span className="sentence" key={i}>
+                  {s.units.map((u, j) =>
+                    u.clickable ? (
+                      <span
+                        className={"word" + (u.annotation ? " annotated" : "")}
+                        key={j}
+                        onClick={(e) => openPopup(u, e.currentTarget)}
+                      >
+                        {renderTokens(u.tokens)}
+                      </span>
+                    ) : (
+                      <span key={j}>{renderTokens(u.tokens)}</span>
+                    ),
+                  )}
+                  <span className="sent-tools">
+                    <button
+                      className="speak-btn"
+                      title="読み上げ"
+                      aria-label="この文を読み上げる"
+                      onClick={() => speak(s.text)}
                     >
-                      {renderTokens(u.tokens)}
-                    </span>
-                  ) : (
-                    <span key={j}>{renderTokens(u.tokens)}</span>
-                  ),
-                )}
-                <button
-                  className="speak-btn"
-                  title="読み上げ"
-                  aria-label="この文を読み上げる"
-                  onClick={() => speak(s.text)}
-                >
-                  ▶
-                </button>{" "}
-              </span>
-            ))}
+                      ▶
+                    </button>
+                    {s.translation && (
+                      <button
+                        className={"tr-btn" + (trShown ? " on" : "")}
+                        title="英訳"
+                        aria-label="この文の英訳を表示"
+                        aria-pressed={trShown}
+                        onClick={() => toggleTranslation(trKey)}
+                      >
+                        訳
+                      </button>
+                    )}
+                  </span>{" "}
+                  {s.translation && trShown && (
+                    <span className="translation">{s.translation}</span>
+                  )}
+                </span>
+              );
+            })}
           </p>
         ))}
         {paragraphs.length === 0 && !loading && (

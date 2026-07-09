@@ -32,6 +32,11 @@ export interface Article {
    * consecutive tokens (e.g. "降園", which kuromoji may split into 降 + 園).
    */
   annotations: Record<string, Annotation>;
+  /**
+   * Sentence-level English translations, keyed by the exact sentence text
+   * (including trailing 。). Shown on demand via the per-sentence 訳 button.
+   */
+  translations?: Record<string, string>;
 }
 
 export const ARTICLES: Article[] = [
@@ -146,6 +151,31 @@ export const ARTICLES: Article[] = [
         meaning: "being in charge of; taking care of",
       },
     },
+    translations: {
+      "出勤は大体8時より少し前です。": "I usually get to work a little before 8.",
+      "大体8時半から子どもたちが登園してくるので、朝の支度を手伝ったり、声をかけたりします。":
+        "The children start arriving around 8:30, so I help them get ready in the morning and greet them.",
+      "9時半過ぎにクラスの全員がそろうので、そこからトイレや手洗いなどをうながし、10時前後から一斉の活動が始まります。":
+        "By a little after 9:30 the whole class has gathered, so from there I get them to use the toilet and wash their hands, and around 10 the group activities begin.",
+      "出欠を取ったり、その日のお当番を決めたりした後、図画工作などの「製作」やプール、体操などの主活動に入ります。":
+        "After taking attendance and deciding the day's helpers, we move into the main activities, such as arts and crafts (\"seisaku\"), swimming, and exercises.",
+      "12時から給食の準備が始まり、13時ごろまで給食の時間です。":
+        "Lunch preparation starts at 12, and lunchtime lasts until around 1.",
+      "午後は天気がよければ外で、悪ければ室内で子どもたちと遊びます。":
+        "In the afternoon, if the weather is nice we play outside with the children, and if not, indoors.",
+      "13時半から帰りの準備が始まり、子どもたちに絵本や紙芝居を読んで、13時45分には子どもたちは降園となります。":
+        "Preparation for going home starts at 1:30; we read the children picture books and kamishibai, and at 1:45 they head home.",
+      "ただ、通園バスに乗って帰る子と保護者がお迎えに来る子たちの時間がバラバラなので、全員帰るのは大体14時45分です。":
+        "However, since the times differ for children who take the bus and those whose guardians come to pick them up, everyone is gone by about 2:45.",
+      "全員が降園するまでは子どもたちと室内で遊んだりして過ごし、預かり保育の子は昼間とは別の先生が担当しますので、そこで交代になります。":
+        "Until everyone has left, I spend the time playing indoors with the children, and since a different teacher takes charge of the extended-care kids, we switch over at that point.",
+      "子どもたちが帰った後は、園舎や部屋の掃除をして、その日の日誌を書きます。":
+        "After the children go home, I clean the building and the rooms and write the day's log.",
+      "16時ぐらいに終礼があり、終わったら同じ学年の先生と打ち合わせや準備をして、17時15分に退勤します。":
+        "Around 4 there's an end-of-day meeting, and afterward I plan and prepare with the teachers in the same grade, then leave work at 5:15.",
+      "土日祝日と、夏休み、春休み、冬休みなどの長期休みは幼稚園も基本的にはお休みですが、預かり保育を希望するご家庭もあるので、先生たちは交代で出勤します。":
+        "The kindergarten is basically closed on weekends, holidays, and long breaks like summer, spring, and winter vacation, but since some families want extended childcare, the teachers take turns coming in to work.",
+    },
   },
   {
     id: "mocha",
@@ -177,6 +207,14 @@ export const ARTICLES: Article[] = [
         pos: "名詞",
         meaning: "glutton; someone who loves eating",
       },
+    },
+    translations: {
+      "モカはコーヒー豆の色によく似ている猫です。":
+        "Mocha is a cat whose color closely resembles that of coffee beans.",
+      "名前はその毛の色から付けられました。":
+        "Her name was given after the color of her fur.",
+      "とても食いしんぼうで、いつも何か食べています。":
+        "She's a real glutton and is always eating something.",
     },
   },
 ];

@@ -164,12 +164,16 @@ ruby rt {
   font-weight: 400;
 }
 
-.speak-btn {
-  font-size: 11px;
-  width: 22px; height: 22px;
-  margin: 0 2px;
-  padding: 0;
+.sent-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 4px;
   vertical-align: middle;
+}
+.speak-btn, .tr-btn {
+  width: 22px; height: 22px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 50%;
   background: var(--surface-2);
@@ -177,7 +181,22 @@ ruby rt {
   cursor: pointer;
   line-height: 1;
 }
-.speak-btn:hover { color: var(--accent); border-color: var(--accent); }
+.speak-btn { font-size: 11px; }
+.tr-btn { font-size: 12px; }
+.speak-btn:hover, .tr-btn:hover { color: var(--accent); border-color: var(--accent); }
+.tr-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.translation {
+  display: block;
+  margin: 6px 0 10px;
+  padding: 8px 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+}
 
 .hint { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
 
