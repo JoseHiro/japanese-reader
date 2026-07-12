@@ -55,6 +55,14 @@ body {
 .article-item:hover { border-color: var(--accent); }
 .article-item.active { background: var(--accent-bg); border-color: var(--accent); }
 .ai-title { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.new-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px; font-weight: 500; letter-spacing: .03em;
+  color: #fff; background: #1f9d57;
+  padding: 1px 6px; border-radius: 999px;
+  vertical-align: middle; text-transform: uppercase;
+}
 .article-item.active .ai-title { color: var(--accent); }
 .ai-sub { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
 .ai-date { font-size: 11px; color: var(--text-muted); margin-top: 2px; }

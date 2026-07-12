@@ -227,13 +227,16 @@ export default function App() {
         </div>
         <nav className="article-list">
           <span className="list-label">記事</span>
-          {SORTED_ARTICLES.map((a) => (
+          {SORTED_ARTICLES.map((a, idx) => (
             <button
               key={a.id}
               className={"article-item" + (article?.id === a.id ? " active" : "")}
               onClick={() => loadArticle(a)}
             >
-              <span className="ai-title">{a.title}</span>
+              <span className="ai-title">
+                {a.title}
+                {idx === 0 && <span className="new-badge">New</span>}
+              </span>
               {a.subtitle && <span className="ai-sub">{a.subtitle}</span>}
               {a.date && <span className="ai-date">{formatDate(a.date)}</span>}
             </button>
