@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import { ARTICLES, type Annotation, type Article } from "./content";
+import { lookupGlosses } from "./dictionary";
 
 interface Sentence {
   units: Unit[];
@@ -92,6 +93,8 @@ export default function App() {
   const [showFurigana, setShowFurigana] = useState(true);
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<PopupState | null>(null);
+  const [glosses, setGlosses] = useState<"loading" | string[] | null>(null);
+  const lookupSeq = useRef(0);
   const [shownTr, setShownTr] = useState<Set<string>>(new Set());
   const [headings, setHeadings] = useState<Set<string>>(new Set());
   const [clozePick, setClozePick] = useState<Record<number, number>>({});
@@ -172,6 +175,21 @@ export default function App() {
     left = Math.min(left, container.clientWidth - width);
     if (left < 0) left = 0;
     setPopup({ unit, left, top: er.bottom - cr.top + container.scrollTop + 6 });
+
+    // Authored words show their annotation; look up everything else in JMdict.
+    const seq = ++lookupSeq.current;
+    if (unit.annotation) {
+      setGlosses(null);
+      return;
+    }
+    setGlosses("loading");
+    lookupGlosses(unit.key, unit.surface, unitReading(unit))
+      .then((g) => {
+        if (lookupSeq.current === seq) setGlosses(g);
+      })
+      .catch(() => {
+        if (lookupSeq.current === seq) setGlosses(null);
+      });
   }
 
   const renderTokens = (tokens: Token[]) =>
@@ -350,7 +368,13 @@ export default function App() {
                     </p>
                   ))}
                 </>
-              ) : null}
+              ) : glosses === "loading" ? (
+                <p className="meaning dim">辞書を読み込み中…</p>
+              ) : glosses && glosses.length ? (
+                <p className="meaning">{glosses.join("; ")}</p>
+              ) : (
+                <p className="meaning dim">辞書に登録がありません</p>
+              )}
 
               <div className="popup-actions">
                 <button onClick={() => speak(popup.unit.surface)}>▶ 読み上げ</button>

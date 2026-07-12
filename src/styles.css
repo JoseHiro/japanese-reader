@@ -238,6 +238,7 @@ ruby rt {
 .pr { font-size: 13px; color: var(--text-muted); }
 .pos { margin: 4px 0 0; font-size: 13px; color: var(--text-muted); }
 .meaning { margin: 8px 0 0; font-size: 15px; font-weight: 500; }
+.meaning.dim { color: var(--text-muted); font-weight: 400; }
 .note {
   margin: 8px 0 0; font-size: 13px; line-height: 1.65;
   color: var(--text);
