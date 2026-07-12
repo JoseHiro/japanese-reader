@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import { ARTICLES, type Annotation, type Article } from "./content";
@@ -52,6 +52,37 @@ interface PopupState {
   unit: Unit;
   left: number;
   top: number;
+}
+
+// Renders an arbitrary Japanese string with furigana (used for quiz text,
+// which isn't part of the tokenized reader). Falls back to plain text until
+// the tokenizer is ready, and honors the global furigana toggle via `show`.
+function Furigana({ text, show }: { text: string; show: boolean }) {
+  const [tokens, setTokens] = useState<Token[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    loadTokenizer().then((tk) => {
+      if (alive) setTokens(toTokens(tk.tokenize(text)));
+    });
+    return () => {
+      alive = false;
+    };
+  }, [text]);
+  if (!tokens) return <>{text}</>;
+  return (
+    <>
+      {tokens.map((t, k) =>
+        show && t.hasKanji && t.reading ? (
+          <ruby key={k}>
+            {t.surface}
+            <rt>{t.reading}</rt>
+          </ruby>
+        ) : (
+          <span key={k}>{t.surface}</span>
+        ),
+      )}
+    </>
+  );
 }
 
 export default function App() {
@@ -349,11 +380,15 @@ export default function App() {
                 return (
                   <div className="quiz-card" key={qi}>
                     <p className="cloze-sentence">
-                      {q.before}
+                      <Furigana text={q.before} show={showFurigana} />
                       <span className="blank">
-                        {answered ? q.options[q.answer] : "＿＿"}
+                        {answered ? (
+                          <Furigana text={q.options[q.answer]} show={showFurigana} />
+                        ) : (
+                          "＿＿"
+                        )}
                       </span>
-                      {q.after}
+                      <Furigana text={q.after} show={showFurigana} />
                     </p>
                     <div className="opts">
                       {q.options.map((opt, oi) => {
@@ -367,13 +402,15 @@ export default function App() {
                             disabled={answered}
                             onClick={() => setClozePick((p) => ({ ...p, [qi]: oi }))}
                           >
-                            {opt}
+                            <Furigana text={opt} show={showFurigana} />
                           </button>
                         );
                       })}
                     </div>
                     {answered && q.explanation && (
-                      <p className="explain">{q.explanation}</p>
+                      <p className="explain">
+                        <Furigana text={q.explanation} show={showFurigana} />
+                      </p>
                     )}
                   </div>
                 );
@@ -388,7 +425,9 @@ export default function App() {
                 const shown = readReveal.has(qi);
                 return (
                   <div className="quiz-card" key={qi}>
-                    <p className="q-text">{q.question}</p>
+                    <p className="q-text">
+                      <Furigana text={q.question} show={showFurigana} />
+                    </p>
                     <button
                       className="reveal-btn"
                       aria-expanded={shown}
@@ -403,7 +442,11 @@ export default function App() {
                     >
                       {shown ? "解答を隠す" : "解答を見る"}
                     </button>
-                    {shown && <p className="model-answer">{q.answer}</p>}
+                    {shown && (
+                      <p className="model-answer">
+                        <Furigana text={q.answer} show={showFurigana} />
+                      </p>
+                    )}
                   </div>
                 );
               })}
