@@ -86,8 +86,16 @@ function Furigana({ text, show }: { text: string; show: boolean }) {
   );
 }
 
+const SORTED_ARTICLES = [...ARTICLES].sort((a, b) =>
+  (b.date ?? "").localeCompare(a.date ?? ""),
+);
+
+function formatDate(d: string): string {
+  const dt = new Date(d);
+  return isNaN(dt.getTime()) ? d : dt.toLocaleDateString("ja-JP");
+}
+
 export default function App() {
-  const [input, setInput] = useState("");
   const [article, setArticle] = useState<Article | null>(null);
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
@@ -152,18 +160,16 @@ export default function App() {
 
   function loadArticle(a: Article) {
     setArticle(a);
-    setInput(a.text);
     setHeadings(new Set(a.headings ?? []));
     resetQuiz();
     analyze(a.text, a.annotations, a.translations);
   }
 
-  function readPaste() {
-    setArticle(null);
-    setHeadings(new Set());
-    resetQuiz();
-    analyze(input, {});
-  }
+  // Open the most recently added article on first load.
+  useEffect(() => {
+    if (SORTED_ARTICLES[0]) loadArticle(SORTED_ARTICLES[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
@@ -211,7 +217,7 @@ export default function App() {
         if (!(e.target as HTMLElement).closest(".popup, .word")) setPopup(null);
       }}
     >
-      <header className="header">
+      <aside className="sidebar">
         <div className="brand">
           <span className="logo">読</span>
           <div>
@@ -219,60 +225,47 @@ export default function App() {
             <p>日本語リーダー</p>
           </div>
         </div>
-        <label className="toggle">
-          振り仮名
-          <input
-            type="checkbox"
-            checked={showFurigana}
-            onChange={(e) => setShowFurigana(e.target.checked)}
-          />
-          <span className="switch" aria-hidden />
-        </label>
-      </header>
-
-      <div className="source-group">
-        <span className="source-label">記事から読む</span>
-        <div className="chips">
-          {ARTICLES.map((a) => (
+        <nav className="article-list">
+          <span className="list-label">記事</span>
+          {SORTED_ARTICLES.map((a) => (
             <button
               key={a.id}
-              className={"chip" + (article?.id === a.id ? " active" : "")}
+              className={"article-item" + (article?.id === a.id ? " active" : "")}
               onClick={() => loadArticle(a)}
             >
-              {a.title}
+              <span className="ai-title">{a.title}</span>
+              {a.subtitle && <span className="ai-sub">{a.subtitle}</span>}
+              {a.date && <span className="ai-date">{formatDate(a.date)}</span>}
             </button>
           ))}
-        </div>
-      </div>
+        </nav>
+      </aside>
 
-      <div className="source-group">
-        <span className="source-label">自分の文章を読む</span>
-        <textarea
-          className="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="日本語の文章を貼り付けてください…"
-          rows={5}
-        />
-        <div className="actions">
-          <button className="primary" onClick={readPaste} disabled={loading || !input.trim()}>
-            {loading ? "解析中…" : "読む"}
-          </button>
-          {counts.words > 0 && (
-            <span className="meta">
-              {counts.words} 語
-              {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
-            </span>
-          )}
+      <main className="main">
+        <div className="topbar">
+          <label className="toggle">
+            振り仮名
+            <input
+              type="checkbox"
+              checked={showFurigana}
+              onChange={(e) => setShowFurigana(e.target.checked)}
+            />
+            <span className="switch" aria-hidden />
+          </label>
         </div>
-      </div>
 
-      {article && (
-        <div className="article-head">
-          <h2>{article.title}</h2>
-          {article.subtitle && <p>{article.subtitle}</p>}
-        </div>
-      )}
+        {article && (
+          <div className="article-head">
+            <h2>{article.title}</h2>
+            {article.subtitle && <p>{article.subtitle}</p>}
+            {counts.words > 0 && (
+              <span className="meta">
+                {counts.words} 語
+                {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
+              </span>
+            )}
+          </div>
+        )}
 
       <div className="reader" ref={readerRef}>
         {paragraphs.map((sents, pi) => {
@@ -330,10 +323,9 @@ export default function App() {
             </p>
           );
         })}
+        {loading && <p className="hint">解析中…</p>}
         {paragraphs.length === 0 && !loading && (
-          <p className="hint">
-            上の記事を選ぶか、文章を貼って「読む」を押すと、単語ごとに解析されます。
-          </p>
+          <p className="hint">左の記事を選ぶと、単語ごとに解析されます。</p>
         )}
 
         {popup && (
@@ -479,9 +471,10 @@ export default function App() {
         </section>
       )}
 
-      <footer className="footer">
-        単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
-      </footer>
+        <footer className="footer">
+          単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
+        </footer>
+      </main>
     </div>
   );
 }

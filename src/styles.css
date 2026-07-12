@@ -22,9 +22,46 @@ body {
 }
 
 .app {
-  max-width: 760px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 24px 20px 64px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 244px;
+  flex: none;
+  position: sticky;
+  top: 20px;
+}
+.main { flex: 1; min-width: 0; }
+
+.topbar { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+
+.article-list { display: flex; flex-direction: column; gap: 6px; }
+.list-label {
+  font-size: 12px; letter-spacing: .03em;
+  color: var(--text-muted); margin-bottom: 4px;
+}
+.article-item {
+  display: flex; flex-direction: column; gap: 2px;
+  text-align: left; width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+.article-item:hover { border-color: var(--accent); }
+.article-item.active { background: var(--accent-bg); border-color: var(--accent); }
+.ai-title { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.article-item.active .ai-title { color: var(--accent); }
+.ai-sub { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
+.ai-date { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+@media (max-width: 760px) {
+  .app { flex-direction: column; gap: 18px; padding: 16px 16px 56px; }
+  .sidebar { width: 100%; position: static; }
 }
 
 .header {
@@ -35,7 +72,7 @@ body {
   margin-bottom: 20px;
 }
 
-.brand { display: flex; align-items: center; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 
 .logo {
   width: 40px; height: 40px;
@@ -97,6 +134,7 @@ body {
 }
 .article-head h2 { margin: 0; font-size: 22px; font-weight: 500; }
 .article-head p { margin: 2px 0 0; font-size: 14px; color: var(--text-muted); }
+.article-head .meta { display: block; margin-top: 6px; font-size: 13px; color: var(--text-muted); }
 
 .input {
   width: 100%;
