@@ -20,6 +20,30 @@ export interface Annotation {
   examples?: Example[];
 }
 
+/** Fill-in-the-blank vocabulary question (4 choices). */
+export interface ClozeQuestion {
+  /** Text before the blank. */
+  before: string;
+  /** Text after the blank. */
+  after: string;
+  options: string[];
+  /** Index into options of the correct word. */
+  answer: number;
+  explanation?: string;
+}
+
+/** Open reading-comprehension question with a reveal-on-click model answer. */
+export interface ReadingQuestion {
+  question: string;
+  /** Model answer, revealed when the reader clicks "解答を見る". */
+  answer: string;
+}
+
+export interface Quiz {
+  cloze?: ClozeQuestion[];
+  reading?: ReadingQuestion[];
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -42,6 +66,8 @@ export interface Article {
    * rather than body text.
    */
   headings?: string[];
+  /** Optional per-article quiz (fill-in-the-blank + reading comprehension). */
+  quiz?: Quiz;
 }
 
 export const ARTICLES: Article[] = [
@@ -359,6 +385,66 @@ export const ARTICLES: Article[] = [
         "When children are doing something bad or dangerous, brushing it off with a light \"no, don't\" can escalate and lead to injury.",
       "悪いことをしたときは「ダメだよ」と、その都度きちんと教えるようにしています。":
         "So when they do something wrong, I make sure to teach them properly, each and every time, with a firm \"no.\"",
+    },
+    quiz: {
+      cloze: [
+        {
+          before: "年少クラスの幼いときから見ていた子が、年中、年長となり、",
+          after: "していくときにはいつもすごく感動します。",
+          options: ["登園", "卒園", "出勤", "開園"],
+          answer: 1,
+          explanation:
+            "「卒園」は幼稚園を終えて出ていくこと。来る「登園」／帰る「降園」とセットで覚えると◎。",
+        },
+        {
+          before: "また、普通の仕事よりも、「一年間の流れ」というのを",
+          after: "することが多い仕事ではないでしょうか。",
+          options: ["意識", "感動", "再会", "準備"],
+          answer: 0,
+          explanation: "「〜を意識する」＝〜を強く気にかける。ここでは一年の流れを常に気にかける。",
+        },
+        {
+          before: "登園してきた子どもがけがなどをせず、来たときと同じように元気な",
+          after: "で帰宅できるように、ということです。",
+          options: ["状態", "気持ち", "笑顔", "季節"],
+          answer: 0,
+          explanation: "「状態」＝コンディション。「元気な状態で帰宅する」。",
+        },
+        {
+          before: "もちろん、朝なにかがあり泣きながら登園してくる子どももいるので、そういう子は",
+          after: "で帰れるといいですよね。",
+          options: ["笑顔", "状態", "都度", "行事"],
+          answer: 0,
+          explanation: "泣いて来た子が「笑顔」で帰れるといい、という対比。",
+        },
+      ],
+      reading: [
+        {
+          question: "筆者がこの仕事に最も「やりがい」を感じるのはどんなときですか。本文の言葉を使って書きましょう。",
+          answer:
+            "年少のときから見ていた子が年中・年長となり、卒園していくとき。子どもたちの成長を近くで感じられることに、やりがいと感動を覚えている。",
+        },
+        {
+          question: "「一年ごとに『今年もやりきった！』という気持ちになれる」のはなぜですか。",
+          answer:
+            "幼稚園は普通の仕事より「一年間の流れ」を意識する仕事で、季節の移ろいや行事を子どもに教えながら自分自身も感じるため、一年の区切りで達成感を得られるから。",
+        },
+        {
+          question: "足立つばめ幼稚園が長く続いていることで生まれる「再会」を、2つ挙げましょう。",
+          answer:
+            "①この園を卒園した人が大人になり、自分の子を同じ幼稚園に通わせること。②年長で同じクラスだった卒園生同士が結婚し、子どもを通わせること。",
+        },
+        {
+          question: "「来たときと同じ状態で子どもを帰す」とは、具体的にどういうことですか。",
+          answer:
+            "登園してきた子どもがけがなどをせず、来たときと同じように元気な状態で帰宅できるようにする、ということ。",
+        },
+        {
+          question: "子どもが危ないことをしたとき、筆者はなぜ「その都度きちんと教える」のですか。",
+          answer:
+            "軽く「ダメだよ」と流してしまうと、行動がエスカレートしてけがにつながることがあるから。",
+        },
+      ],
     },
   },
 ];

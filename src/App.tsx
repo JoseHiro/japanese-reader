@@ -63,6 +63,8 @@ export default function App() {
   const [popup, setPopup] = useState<PopupState | null>(null);
   const [shownTr, setShownTr] = useState<Set<string>>(new Set());
   const [headings, setHeadings] = useState<Set<string>>(new Set());
+  const [clozePick, setClozePick] = useState<Record<number, number>>({});
+  const [readReveal, setReadReveal] = useState<Set<number>>(new Set());
   const readerRef = useRef<HTMLDivElement>(null);
 
   function toggleTranslation(key: string) {
@@ -109,16 +111,23 @@ export default function App() {
     }
   }
 
+  function resetQuiz() {
+    setClozePick({});
+    setReadReveal(new Set());
+  }
+
   function loadArticle(a: Article) {
     setArticle(a);
     setInput(a.text);
     setHeadings(new Set(a.headings ?? []));
+    resetQuiz();
     analyze(a.text, a.annotations, a.translations);
   }
 
   function readPaste() {
     setArticle(null);
     setHeadings(new Set());
+    resetQuiz();
     analyze(input, {});
   }
 
@@ -327,8 +336,84 @@ export default function App() {
         )}
       </div>
 
+      {article?.quiz && (
+        <section className="quiz">
+          <h2 className="quiz-title">クイズ</h2>
+
+          {article.quiz.cloze && article.quiz.cloze.length > 0 && (
+            <div className="quiz-block">
+              <span className="q-badge">穴埋め単語</span>
+              {article.quiz.cloze.map((q, qi) => {
+                const picked = clozePick[qi];
+                const answered = picked !== undefined;
+                return (
+                  <div className="quiz-card" key={qi}>
+                    <p className="cloze-sentence">
+                      {q.before}
+                      <span className="blank">
+                        {answered ? q.options[q.answer] : "＿＿"}
+                      </span>
+                      {q.after}
+                    </p>
+                    <div className="opts">
+                      {q.options.map((opt, oi) => {
+                        let cls = "opt";
+                        if (answered && oi === q.answer) cls += " correct";
+                        else if (answered && oi === picked) cls += " wrong";
+                        return (
+                          <button
+                            key={oi}
+                            className={cls}
+                            disabled={answered}
+                            onClick={() => setClozePick((p) => ({ ...p, [qi]: oi }))}
+                          >
+                            {opt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {answered && q.explanation && (
+                      <p className="explain">{q.explanation}</p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {article.quiz.reading && article.quiz.reading.length > 0 && (
+            <div className="quiz-block">
+              <span className="q-badge">読解</span>
+              {article.quiz.reading.map((q, qi) => {
+                const shown = readReveal.has(qi);
+                return (
+                  <div className="quiz-card" key={qi}>
+                    <p className="q-text">{q.question}</p>
+                    <button
+                      className="reveal-btn"
+                      aria-expanded={shown}
+                      onClick={() =>
+                        setReadReveal((s) => {
+                          const n = new Set(s);
+                          if (n.has(qi)) n.delete(qi);
+                          else n.add(qi);
+                          return n;
+                        })
+                      }
+                    >
+                      {shown ? "解答を隠す" : "解答を見る"}
+                    </button>
+                    {shown && <p className="model-answer">{q.answer}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
+
       <footer className="footer">
-        単語をクリックで詳細・文末の ▶ で読み上げ。色の濃い単語には解説が付いています。
+        単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
       </footer>
     </div>
   );
