@@ -37,6 +37,11 @@ export interface Article {
    * (including trailing 。). Shown on demand via the per-sentence 訳 button.
    */
   translations?: Record<string, string>;
+  /**
+   * Paragraph lines (exact text) that should render as section headings
+   * rather than body text.
+   */
+  headings?: string[];
 }
 
 export const ARTICLES: Article[] = [
@@ -215,6 +220,145 @@ export const ARTICLES: Article[] = [
         "Her name was given after the color of her fur.",
       "とても食いしんぼうで、いつも何か食べています。":
         "She's a real glutton and is always eating something.",
+    },
+  },
+  {
+    id: "growth",
+    title: "子どもたちの成長を見守れる",
+    subtitle: "足立つばめ幼稚園の先生インタビュー",
+    text: `この仕事のやりがいは、「子どもたちの成長が見える」ところです。年少クラスの幼いときから見ていた子が、年中、年長となり、卒園していくときにはいつもすごく感動します。「こんなことができるようになったんだな」とか「おむつをはいていたのに」とか、そういった成長を近くで感じられるという点で、とても魅力的な仕事だと思っています。
+また、普通の仕事よりも、「一年間の流れ」というのを意識することが多い仕事ではないでしょうか。学生のころみたいに長期休みがあり、この季節はこんな感じで、こういう行事があって、というのを、子どもたちに教えながら、自分自身も感じつつ仕事をしていきます。季節の移ろいや自然の変化も身近に感じますし、一年ごとに「今年もやりきった！」という気持ちになれるのもいいところだと思います。
+あと、足立つばめ幼稚園の特色としては、開園したのが1967年と、とても長く続いている幼稚園です。そうなると、この園を卒園した子が大人になり、結婚してお子さんができて、今度は自分が通っていた幼稚園にお子さんを通わせる、という方も多いです。また、年長のときに同じクラスだった卒園生同士で結婚して、今、お子さんを通わせている方もいます。そういう再会があるのも、この仕事の魅力ですね。
+子どもたちみんなが「今日は楽しかった」で帰れるように
+日々心がけているのは、「来たときと同じ状態で子どもを帰す」ということです。これは私が通っていた専修学校で教えられたことなのですが、登園してきた子どもがけがなどをせず、来たときと同じように元気な状態で帰宅できるように、ということです。もちろん、朝なにかがあり泣きながら登園してくる子どももいるので、そういう子は笑顔で帰れるといいですよね。最終的には、みんなが「今日は楽しかったな」という気持ちで帰れるようにしたいなと思っています。
+あとは、「正しい言葉」を使うこと、汚い言葉を使わないことを心がけています。流行の言葉などもあまり使わないようにしています。また、「正しいこと」「よくないこと」をきちんと教えることも大切にしています。子どもたちがなにかよくないことや危ないことをしていたとき、軽く「ダメだよ」と流してしまうと、エスカレートしてけがにつながることもあります。悪いことをしたときは「ダメだよ」と、その都度きちんと教えるようにしています。`,
+    headings: ["子どもたちみんなが「今日は楽しかった」で帰れるように"],
+    annotations: {
+      やりがい: {
+        reading: "やりがい",
+        pos: "名詞",
+        meaning: "sense of fulfillment; something worth doing",
+      },
+      成長: { reading: "せいちょう", pos: "名詞・する動詞", meaning: "growth; development" },
+      年少: {
+        reading: "ねんしょう",
+        pos: "名詞",
+        meaning: "youngest class (3-year-olds)",
+        note: "幼稚園のクラス分け。下から 年少→年中→年長。",
+      },
+      年中: { reading: "ねんちゅう", pos: "名詞", meaning: "middle class (4-year-olds)" },
+      年長: { reading: "ねんちょう", pos: "名詞", meaning: "oldest class (5-year-olds)" },
+      卒園: {
+        reading: "そつえん",
+        pos: "名詞・する動詞",
+        meaning: "graduating from kindergarten",
+        note: "「卒業」の幼稚園・保育園版。",
+      },
+      感動: {
+        reading: "かんどう",
+        pos: "名詞・する動詞",
+        meaning: "being deeply moved; being touched",
+      },
+      幼い: { reading: "おさない", pos: "形容詞", meaning: "very young; little" },
+      魅力的: { reading: "みりょくてき", pos: "形容動詞", meaning: "attractive; appealing" },
+      普通: { reading: "ふつう", pos: "名詞・形容動詞", meaning: "ordinary; normal; usual" },
+      意識: {
+        reading: "いしき",
+        pos: "名詞・する動詞",
+        meaning: "awareness; being conscious of",
+        note: "「〜を意識する」で「〜を強く気にかける」。",
+      },
+      行事: { reading: "ぎょうじ", pos: "名詞", meaning: "event; scheduled function" },
+      季節: { reading: "きせつ", pos: "名詞", meaning: "season" },
+      移ろい: {
+        reading: "うつろい",
+        pos: "名詞",
+        meaning: "change; transition (esp. of the seasons)",
+      },
+      身近: { reading: "みぢか", pos: "形容動詞", meaning: "close; familiar; near at hand" },
+      特色: { reading: "とくしょく", pos: "名詞", meaning: "distinctive feature; characteristic" },
+      開園: {
+        reading: "かいえん",
+        pos: "名詞・する動詞",
+        meaning: "opening (of a kindergarten / park)",
+      },
+      結婚: { reading: "けっこん", pos: "名詞・する動詞", meaning: "marriage; getting married" },
+      同士: {
+        reading: "どうし",
+        pos: "名詞（接尾的）",
+        meaning: "fellow —; one another (of the same kind)",
+        note: "「卒園生同士」で「卒園生どうし＝互いに卒園生」。",
+      },
+      再会: { reading: "さいかい", pos: "名詞・する動詞", meaning: "reunion; meeting again" },
+      魅力: { reading: "みりょく", pos: "名詞", meaning: "charm; appeal; attraction" },
+      心がける: {
+        reading: "こころがける",
+        pos: "動詞（下一段）",
+        meaning: "to keep in mind; to make a point of",
+      },
+      状態: { reading: "じょうたい", pos: "名詞", meaning: "state; condition" },
+      専修学校: {
+        reading: "せんしゅうがっこう",
+        pos: "名詞",
+        meaning: "vocational / specialized training school",
+      },
+      帰宅: { reading: "きたく", pos: "名詞・する動詞", meaning: "returning home" },
+      笑顔: { reading: "えがお", pos: "名詞", meaning: "smile; smiling face" },
+      最終的: { reading: "さいしゅうてき", pos: "形容動詞", meaning: "ultimate; in the end" },
+      言葉: { reading: "ことば", pos: "名詞", meaning: "word; language; speech" },
+      流行: {
+        reading: "りゅうこう",
+        pos: "名詞・する動詞",
+        meaning: "trend; fashion; what's popular",
+      },
+      大切: { reading: "たいせつ", pos: "形容動詞", meaning: "important; precious" },
+      危ない: { reading: "あぶない", pos: "形容詞", meaning: "dangerous; risky" },
+      都度: {
+        reading: "つど",
+        pos: "名詞",
+        meaning: "each time; every time",
+        note: "「その都度」で「そのたびごとに」。",
+      },
+    },
+    translations: {
+      "この仕事のやりがいは、「子どもたちの成長が見える」ところです。":
+        "The rewarding part of this job is that you can see the children grow.",
+      "年少クラスの幼いときから見ていた子が、年中、年長となり、卒園していくときにはいつもすごく感動します。":
+        "When a child I'd watched since the youngest (nensho) class moves up through the middle and oldest classes and then graduates, it always moves me deeply.",
+      "「こんなことができるようになったんだな」とか「おむつをはいていたのに」とか、そういった成長を近くで感じられるという点で、とても魅力的な仕事だと思っています。":
+        "Being able to feel that growth up close — thinking \"so they can do this now\" or \"and to think they were still in diapers\" — makes it a truly appealing job.",
+      "また、普通の仕事よりも、「一年間の流れ」というのを意識することが多い仕事ではないでしょうか。":
+        "Also, isn't this a job where, more than ordinary work, you're often conscious of \"the flow of the year\"?",
+      "学生のころみたいに長期休みがあり、この季節はこんな感じで、こういう行事があって、というのを、子どもたちに教えながら、自分自身も感じつつ仕事をしていきます。":
+        "Like in your student days there are long vacations, and I work while teaching the children — and feeling it myself — that this season feels a certain way and comes with certain events.",
+      "季節の移ろいや自然の変化も身近に感じますし、一年ごとに「今年もやりきった！」という気持ちになれるのもいいところだと思います。":
+        "I feel the changing seasons and shifts in nature up close, and it's nice that each year I get to feel \"I gave it my all again this year.\"",
+      "あと、足立つばめ幼稚園の特色としては、開園したのが1967年と、とても長く続いている幼稚園です。":
+        "As for what makes Adachi Tsubame Kindergarten distinctive, it opened in 1967 and has been running for a very long time.",
+      "そうなると、この園を卒園した子が大人になり、結婚してお子さんができて、今度は自分が通っていた幼稚園にお子さんを通わせる、という方も多いです。":
+        "As a result, many people who graduated from this kindergarten grow up, get married, have children, and then send their own children to the kindergarten they once attended.",
+      "また、年長のときに同じクラスだった卒園生同士で結婚して、今、お子さんを通わせている方もいます。":
+        "There are also people who married a fellow graduate who was in the same class in the oldest year, and now send their children here.",
+      "そういう再会があるのも、この仕事の魅力ですね。":
+        "Having those kinds of reunions is another appeal of this job.",
+      "日々心がけているのは、「来たときと同じ状態で子どもを帰す」ということです。":
+        "What I keep in mind every day is \"sending a child home in the same condition they came in.\"",
+      "これは私が通っていた専修学校で教えられたことなのですが、登園してきた子どもがけがなどをせず、来たときと同じように元気な状態で帰宅できるように、ということです。":
+        "This is something I was taught at the vocational school I attended: making sure a child who comes to kindergarten goes home without injuries, just as healthy as when they arrived.",
+      "もちろん、朝なにかがあり泣きながら登園してくる子どももいるので、そういう子は笑顔で帰れるといいですよね。":
+        "Of course, some children arrive in the morning crying because something happened, so it would be lovely if those children could go home smiling.",
+      "最終的には、みんなが「今日は楽しかったな」という気持ちで帰れるようにしたいなと思っています。":
+        "Ultimately, I want everyone to be able to go home feeling \"today was fun.\"",
+      "あとは、「正しい言葉」を使うこと、汚い言葉を使わないことを心がけています。":
+        "I also make a point of using \"correct language\" and not using coarse words.",
+      "流行の言葉などもあまり使わないようにしています。":
+        "I try not to use trendy slang too much either.",
+      "また、「正しいこと」「よくないこと」をきちんと教えることも大切にしています。":
+        "I also make sure to clearly teach what is \"right\" and what is \"not good.\"",
+      "子どもたちがなにかよくないことや危ないことをしていたとき、軽く「ダメだよ」と流してしまうと、エスカレートしてけがにつながることもあります。":
+        "When children are doing something bad or dangerous, brushing it off with a light \"no, don't\" can escalate and lead to injury.",
+      "悪いことをしたときは「ダメだよ」と、その都度きちんと教えるようにしています。":
+        "So when they do something wrong, I make sure to teach them properly, each and every time, with a firm \"no.\"",
     },
   },
 ];

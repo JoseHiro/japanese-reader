@@ -139,9 +139,12 @@ body {
   margin: 0 0 1.4em;
 }
 .para:last-child { margin-bottom: 0; }
-.para:first-child {
+.para.heading {
   font-size: 1.15em;
   font-weight: 500;
+  margin-top: 1.6em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--border);
 }
 
 .sentence { }

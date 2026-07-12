@@ -15,6 +15,7 @@ const SENTENCE_ENDERS = new Set(["。", "！", "？", "!", "?"]);
 function splitIntoSentences(tokens: Token[]): { tokens: Token[]; text: string }[] {
   const sentences: { tokens: Token[]; text: string }[] = [];
   let current: Token[] = [];
+  let quoteDepth = 0;
   const flush = () => {
     if (current.length) {
       sentences.push({ tokens: current, text: current.map((x) => x.surface).join("") });
@@ -23,7 +24,11 @@ function splitIntoSentences(tokens: Token[]): { tokens: Token[]; text: string }[
   };
   for (const t of tokens) {
     current.push(t);
-    if (SENTENCE_ENDERS.has(t.surface)) flush();
+    if (t.surface === "「" || t.surface === "『") quoteDepth++;
+    else if (t.surface === "」" || t.surface === "』") quoteDepth = Math.max(0, quoteDepth - 1);
+    // Only end a sentence on 。！？ when not inside quotes, so lines like
+    // 「今年もやりきった！」 stay in one sentence.
+    else if (quoteDepth === 0 && SENTENCE_ENDERS.has(t.surface)) flush();
   }
   flush();
   return sentences;
@@ -57,6 +62,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<PopupState | null>(null);
   const [shownTr, setShownTr] = useState<Set<string>>(new Set());
+  const [headings, setHeadings] = useState<Set<string>>(new Set());
   const readerRef = useRef<HTMLDivElement>(null);
 
   function toggleTranslation(key: string) {
@@ -106,11 +112,13 @@ export default function App() {
   function loadArticle(a: Article) {
     setArticle(a);
     setInput(a.text);
+    setHeadings(new Set(a.headings ?? []));
     analyze(a.text, a.annotations, a.translations);
   }
 
   function readPaste() {
     setArticle(null);
+    setHeadings(new Set());
     analyze(input, {});
   }
 
@@ -209,55 +217,61 @@ export default function App() {
       )}
 
       <div className="reader" ref={readerRef}>
-        {paragraphs.map((sents, pi) => (
-          <p className="para" key={pi}>
-            {sents.map((s, i) => {
-              const trKey = `${pi}:${i}`;
-              const trShown = shownTr.has(trKey);
-              return (
-                <span className="sentence" key={i}>
-                  {s.units.map((u, j) =>
-                    u.clickable ? (
-                      <span
-                        className={"word" + (u.annotation ? " annotated" : "")}
-                        key={j}
-                        onClick={(e) => openPopup(u, e.currentTarget)}
-                      >
-                        {renderTokens(u.tokens)}
-                      </span>
-                    ) : (
-                      <span key={j}>{renderTokens(u.tokens)}</span>
-                    ),
-                  )}
-                  <span className="sent-tools">
-                    <button
-                      className="speak-btn"
-                      title="読み上げ"
-                      aria-label="この文を読み上げる"
-                      onClick={() => speak(s.text)}
-                    >
-                      ▶
-                    </button>
-                    {s.translation && (
-                      <button
-                        className={"tr-btn" + (trShown ? " on" : "")}
-                        title="英訳"
-                        aria-label="この文の英訳を表示"
-                        aria-pressed={trShown}
-                        onClick={() => toggleTranslation(trKey)}
-                      >
-                        訳
-                      </button>
+        {paragraphs.map((sents, pi) => {
+          const paraText = sents.map((s) => s.text).join("");
+          const isHeading = headings.has(paraText);
+          return (
+            <p className={"para" + (isHeading ? " heading" : "")} key={pi}>
+              {sents.map((s, i) => {
+                const trKey = `${pi}:${i}`;
+                const trShown = shownTr.has(trKey);
+                return (
+                  <span className="sentence" key={i}>
+                    {s.units.map((u, j) =>
+                      u.clickable ? (
+                        <span
+                          className={"word" + (u.annotation ? " annotated" : "")}
+                          key={j}
+                          onClick={(e) => openPopup(u, e.currentTarget)}
+                        >
+                          {renderTokens(u.tokens)}
+                        </span>
+                      ) : (
+                        <span key={j}>{renderTokens(u.tokens)}</span>
+                      ),
                     )}
-                  </span>{" "}
-                  {s.translation && trShown && (
-                    <span className="translation">{s.translation}</span>
-                  )}
-                </span>
-              );
-            })}
-          </p>
-        ))}
+                    {!isHeading && (
+                      <span className="sent-tools">
+                        <button
+                          className="speak-btn"
+                          title="読み上げ"
+                          aria-label="この文を読み上げる"
+                          onClick={() => speak(s.text)}
+                        >
+                          ▶
+                        </button>
+                        {s.translation && (
+                          <button
+                            className={"tr-btn" + (trShown ? " on" : "")}
+                            title="英訳"
+                            aria-label="この文の英訳を表示"
+                            aria-pressed={trShown}
+                            onClick={() => toggleTranslation(trKey)}
+                          >
+                            訳
+                          </button>
+                        )}
+                      </span>
+                    )}{" "}
+                    {s.translation && trShown && (
+                      <span className="translation">{s.translation}</span>
+                    )}
+                  </span>
+                );
+              })}
+            </p>
+          );
+        })}
         {paragraphs.length === 0 && !loading && (
           <p className="hint">
             上の記事を選ぶか、文章を貼って「読む」を押すと、単語ごとに解析されます。
