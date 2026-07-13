@@ -217,7 +217,7 @@ export default function App() {
         if (!(e.target as HTMLElement).closest(".popup, .word")) setPopup(null);
       }}
     >
-      <aside className="sidebar">
+      <header className="site-header">
         <div className="brand">
           <span className="logo">読</span>
           <div>
@@ -225,6 +225,19 @@ export default function App() {
             <p>日本語リーダー</p>
           </div>
         </div>
+        <label className="toggle">
+          振り仮名
+          <input
+            type="checkbox"
+            checked={showFurigana}
+            onChange={(e) => setShowFurigana(e.target.checked)}
+          />
+          <span className="switch" aria-hidden />
+        </label>
+      </header>
+
+      <div className="layout">
+      <aside className="sidebar">
         <nav className="article-list">
           <span className="list-label">記事</span>
           {SORTED_ARTICLES.map((a, idx) => (
@@ -245,18 +258,6 @@ export default function App() {
       </aside>
 
       <main className="main">
-        <div className="topbar">
-          <label className="toggle">
-            振り仮名
-            <input
-              type="checkbox"
-              checked={showFurigana}
-              onChange={(e) => setShowFurigana(e.target.checked)}
-            />
-            <span className="switch" aria-hidden />
-          </label>
-        </div>
-
         {article && (
           <div className="article-head">
             <h2>{article.title}</h2>
@@ -478,6 +479,7 @@ export default function App() {
           単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
         </footer>
       </main>
+      </div>
     </div>
   );
 }
