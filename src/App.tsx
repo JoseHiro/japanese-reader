@@ -212,30 +212,33 @@ export default function App() {
 
   return (
     <div
-      className="app"
+      className="page"
       onClick={(e) => {
         if (!(e.target as HTMLElement).closest(".popup, .word")) setPopup(null);
       }}
     >
       <header className="site-header">
-        <div className="brand">
-          <span className="logo">読</span>
-          <div>
-            <h1>Yomu</h1>
-            <p>日本語リーダー</p>
+        <div className="header-inner">
+          <div className="brand">
+            <span className="logo">読</span>
+            <div>
+              <h1>Yomu</h1>
+              <p>日本語リーダー</p>
+            </div>
           </div>
+          <label className="toggle">
+            振り仮名
+            <input
+              type="checkbox"
+              checked={showFurigana}
+              onChange={(e) => setShowFurigana(e.target.checked)}
+            />
+            <span className="switch" aria-hidden />
+          </label>
         </div>
-        <label className="toggle">
-          振り仮名
-          <input
-            type="checkbox"
-            checked={showFurigana}
-            onChange={(e) => setShowFurigana(e.target.checked)}
-          />
-          <span className="switch" aria-hidden />
-        </label>
       </header>
 
+      <div className="app">
       <div className="layout">
       <aside className="sidebar">
         <nav className="article-list">
@@ -479,6 +482,7 @@ export default function App() {
           単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
         </footer>
       </main>
+      </div>
       </div>
     </div>
   );

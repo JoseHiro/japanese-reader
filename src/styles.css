@@ -28,14 +28,28 @@ body {
 }
 
 .site-header {
+  background: linear-gradient(120deg, #2b6cb0 0%, #4f46e5 55%, #7c3aed 100%);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 14px rgba(60, 40, 120, 0.18);
+}
+.header-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 0;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--border);
 }
+.site-header .logo { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.site-header h1 { margin: 0; font-size: 20px; font-weight: 600; color: #fff; }
+.site-header .brand p { margin: 0; font-size: 13px; color: rgba(255, 255, 255, 0.82); }
+.site-header .toggle { color: rgba(255, 255, 255, 0.95); }
+.site-header .switch { background: rgba(255, 255, 255, 0.35); }
+.site-header .toggle input:checked + .switch { background: #34d399; }
 
 .layout {
   display: flex;
@@ -47,7 +61,7 @@ body {
   width: 244px;
   flex: none;
   position: sticky;
-  top: 20px;
+  top: 92px;
 }
 .main { flex: 1; min-width: 0; }
 
@@ -82,6 +96,7 @@ body {
 
 @media (max-width: 760px) {
   .app { padding: 0 16px 56px; }
+  .header-inner { padding: 13px 16px; }
   .layout { flex-direction: column; gap: 18px; }
   .sidebar { width: 100%; position: static; }
 }
