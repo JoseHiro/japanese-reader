@@ -94,11 +94,80 @@ body {
 .ai-sub { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
 .ai-date { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
+/* Right-side in-page tab rail */
+.sidebar { order: 1; }
+.main { order: 2; }
+.tab-rail {
+  order: 3;
+  flex: none;
+  width: 150px;
+  position: sticky;
+  top: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+}
+.tab-btn:hover { border-color: var(--accent); }
+.tab-btn.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 500;
+}
+.tab-icon { display: inline-flex; flex: none; }
+.tab-icon svg { width: 18px; height: 18px; display: block; }
+.tab-label { flex: 1; text-align: left; }
+.tab-badge {
+  font-size: 10px; font-weight: 500; letter-spacing: .03em;
+  color: #fff; background: #1f9d57;
+  padding: 1px 6px; border-radius: 999px; text-transform: uppercase;
+}
+
+/* Word list tab */
+.wordlist { display: flex; flex-direction: column; }
+.wl-item {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.wl-main { display: flex; align-items: baseline; gap: 10px; flex: none; }
+.wl-word { font-size: 19px; }
+.wl-word.annotated { color: var(--accent); }
+.wl-reading { font-size: 13px; color: var(--text-muted); }
+.wl-meaning { font-size: 14px; color: var(--text); text-align: right; }
+
 @media (max-width: 760px) {
   .app { padding: 0 16px 56px; }
   .header-inner { padding: 13px 16px; }
   .layout { flex-direction: column; gap: 18px; }
+  .sidebar, .main, .tab-rail { order: 0; }
   .sidebar { width: 100%; position: static; }
+  .tab-rail {
+    width: 100%;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 2px;
+  }
+  .tab-btn { width: auto; flex: none; white-space: nowrap; }
+  .tab-label { flex: none; }
+  .wl-item { flex-direction: column; align-items: flex-start; gap: 3px; }
+  .wl-meaning { text-align: left; }
 }
 
 .header {

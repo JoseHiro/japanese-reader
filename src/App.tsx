@@ -2,7 +2,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import { ARTICLES, type Annotation, type Article } from "./content";
-import { lookupGlosses } from "./dictionary";
+import { lookupGlosses, loadDictionary } from "./dictionary";
+import { Furigana } from "./shared/Furigana";
+import { TabRail, type TabDef } from "./shared/TabRail";
+import {
+  IconArticle,
+  IconWordList,
+  IconVocabQuiz,
+  IconReadingQuiz,
+} from "./shared/icons";
 
 interface Sentence {
   units: Unit[];
@@ -55,36 +63,12 @@ interface PopupState {
   top: number;
 }
 
-// Renders an arbitrary Japanese string with furigana (used for quiz text,
-// which isn't part of the tokenized reader). Falls back to plain text until
-// the tokenizer is ready, and honors the global furigana toggle via `show`.
-function Furigana({ text, show }: { text: string; show: boolean }) {
-  const [tokens, setTokens] = useState<Token[] | null>(null);
-  useEffect(() => {
-    let alive = true;
-    loadTokenizer().then((tk) => {
-      if (alive) setTokens(toTokens(tk.tokenize(text)));
-    });
-    return () => {
-      alive = false;
-    };
-  }, [text]);
-  if (!tokens) return <>{text}</>;
-  return (
-    <>
-      {tokens.map((t, k) =>
-        show && t.hasKanji && t.reading ? (
-          <ruby key={k}>
-            {t.surface}
-            <rt>{t.reading}</rt>
-          </ruby>
-        ) : (
-          <span key={k}>{t.surface}</span>
-        ),
-      )}
-    </>
-  );
-}
+const TABS: TabDef[] = [
+  { id: "article", label: "記事", icon: <IconArticle /> },
+  { id: "wordlist", label: "単語リスト", icon: <IconWordList />, badge: "New" },
+  { id: "vocabQuiz", label: "単語クイズ", icon: <IconVocabQuiz /> },
+  { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
+];
 
 const SORTED_ARTICLES = [...ARTICLES].sort((a, b) =>
   (b.date ?? "").localeCompare(a.date ?? ""),
@@ -107,7 +91,44 @@ export default function App() {
   const [headings, setHeadings] = useState<Set<string>>(new Set());
   const [clozePick, setClozePick] = useState<Record<number, number>>({});
   const [readReveal, setReadReveal] = useState<Set<number>>(new Set());
+  const [activeTab, setActiveTab] = useState("article");
+  const [listGlosses, setListGlosses] = useState<Record<string, string[]>>({});
   const readerRef = useRef<HTMLDivElement>(null);
+
+  // Unique clickable words in the current article, for the word-list tab.
+  const uniqueWords = useMemo(() => {
+    const seen = new Set<string>();
+    const list: Unit[] = [];
+    for (const u of paragraphs.flat().flatMap((s) => s.units)) {
+      if (!u.clickable || seen.has(u.key)) continue;
+      seen.add(u.key);
+      list.push(u);
+    }
+    return list;
+  }, [paragraphs]);
+
+  // When the word-list tab is open, load the dictionary once and resolve
+  // glosses for words that don't have an authored annotation.
+  useEffect(() => {
+    if (activeTab !== "wordlist") return;
+    let alive = true;
+    loadDictionary()
+      .then((dict) => {
+        if (!alive) return;
+        const m: Record<string, string[]> = {};
+        for (const u of uniqueWords) {
+          if (u.annotation) continue;
+          const r = unitReading(u);
+          const g = dict[u.key] ?? dict[u.surface] ?? (r ? dict[r] : undefined);
+          if (g) m[u.key] = g;
+        }
+        setListGlosses(m);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [activeTab, uniqueWords]);
 
   function toggleTranslation(key: string) {
     setShownTr((prev) => {
@@ -161,6 +182,8 @@ export default function App() {
   function loadArticle(a: Article) {
     setArticle(a);
     setHeadings(new Set(a.headings ?? []));
+    setActiveTab("article");
+    setListGlosses({});
     resetQuiz();
     analyze(a.text, a.annotations, a.translations);
   }
@@ -260,6 +283,10 @@ export default function App() {
         </nav>
       </aside>
 
+      {article && (
+        <TabRail tabs={TABS} active={activeTab} onChange={setActiveTab} />
+      )}
+
       <main className="main">
         {article && (
           <div className="article-head">
@@ -274,6 +301,7 @@ export default function App() {
           </div>
         )}
 
+      {activeTab === "article" && (
       <div className="reader" ref={readerRef}>
         {paragraphs.map((sents, pi) => {
           const paraText = sents.map((s) => s.text).join("");
@@ -389,12 +417,38 @@ export default function App() {
           </div>
         )}
       </div>
+      )}
 
-      {article?.quiz && (
+      {activeTab === "wordlist" && (
+        <div className="wordlist">
+          {uniqueWords.length === 0 ? (
+            <p className="hint">単語がありません。</p>
+          ) : (
+            uniqueWords.map((u, i) => {
+              const meaning = u.annotation
+                ? u.annotation.meaning
+                : listGlosses[u.key]?.join("; ") ?? "…";
+              return (
+                <div className="wl-item" key={i}>
+                  <div className="wl-main">
+                    <span className={"wl-word" + (u.annotation ? " annotated" : "")}>
+                      <Furigana text={u.surface} show={showFurigana} />
+                    </span>
+                    {unitReading(u) && (
+                      <span className="wl-reading">{unitReading(u)}</span>
+                    )}
+                  </div>
+                  <span className="wl-meaning">{meaning}</span>
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
+
+      {activeTab === "vocabQuiz" && (
         <section className="quiz">
-          <h2 className="quiz-title">クイズ</h2>
-
-          {article.quiz.cloze && article.quiz.cloze.length > 0 && (
+          {article?.quiz?.cloze && article.quiz.cloze.length > 0 ? (
             <div className="quiz-block">
               <span className="q-badge">穴埋め単語</span>
               {article.quiz.cloze.map((q, qi) => {
@@ -439,9 +493,15 @@ export default function App() {
                 );
               })}
             </div>
+          ) : (
+            <p className="hint">この記事にはまだ単語クイズがありません。</p>
           )}
+        </section>
+      )}
 
-          {article.quiz.reading && article.quiz.reading.length > 0 && (
+      {activeTab === "readingQuiz" && (
+        <section className="quiz">
+          {article?.quiz?.reading && article.quiz.reading.length > 0 ? (
             <div className="quiz-block">
               <span className="q-badge">読解</span>
               {article.quiz.reading.map((q, qi) => {
@@ -474,6 +534,8 @@ export default function App() {
                 );
               })}
             </div>
+          ) : (
+            <p className="hint">この記事にはまだ読解クイズがありません。</p>
           )}
         </section>
       )}
