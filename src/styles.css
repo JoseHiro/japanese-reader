@@ -22,9 +22,9 @@ body {
 }
 
 .app {
-  max-width: 1060px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px 64px;
+  padding: 0 24px 64px;
 }
 
 .site-header {
@@ -36,9 +36,9 @@ body {
   box-shadow: 0 2px 14px rgba(60, 40, 120, 0.18);
 }
 .header-inner {
-  max-width: 1060px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 15px 20px;
+  padding: 15px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -137,18 +137,53 @@ body {
 }
 
 /* Word list tab */
-.wordlist { display: flex; flex-direction: column; }
-.wl-item {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 16px;
-  padding: 11px 4px;
-  border-bottom: 1px solid var(--border);
+.wordlist { display: block; }
+.wl-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
 }
-.wl-main { display: flex; align-items: baseline; gap: 10px; flex: none; }
-.wl-word { font-size: 19px; }
-.wl-word.annotated { color: var(--accent); }
-.wl-reading { font-size: 13px; color: var(--text-muted); }
-.wl-meaning { font-size: 14px; color: var(--text); text-align: right; }
+.wl-search { flex: 1; max-width: 340px; }
+.wl-search input {
+  width: 100%;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+}
+.wl-search input:focus { outline: none; border-color: var(--accent); }
+.wl-count { font-size: 12px; color: var(--text-muted); flex: none; }
+
+.wl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+}
+.wl-table th, .wl-table td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: baseline;
+  overflow-wrap: anywhere;
+}
+.wl-table th {
+  font-size: 11px; font-weight: 500; letter-spacing: .05em;
+  color: var(--text-muted); text-transform: uppercase;
+  background: var(--surface);
+  position: sticky; top: 0;
+}
+.wl-th-word { width: 24%; }
+.wl-th-reading { width: 22%; }
+.wl-th-meaning { width: 54%; }
+.wl-table .wl-word { font-size: 14px; }
+.wl-table .wl-word.annotated { color: var(--accent); }
+.wl-table .wl-reading { color: var(--text-muted); font-size: 12px; }
+.wl-table .wl-meaning { color: var(--text); }
 
 @media (max-width: 760px) {
   .app { padding: 0 16px 56px; }
@@ -172,8 +207,14 @@ body {
     padding: 5px 7px;
   }
   .tab-btn.active { border-bottom-color: var(--accent); }
-  .wl-item { flex-direction: column; align-items: flex-start; gap: 3px; }
-  .wl-meaning { text-align: left; }
+  .wl-toolbar { flex-direction: column; align-items: stretch; gap: 8px; }
+  .wl-search { max-width: 100%; }
+  .wl-count { text-align: right; }
+  .wl-table { font-size: 12px; }
+  .wl-table th, .wl-table td { padding: 5px 8px; }
+  .wl-th-word { width: 30%; }
+  .wl-th-reading { width: 25%; }
+  .wl-th-meaning { width: 45%; }
 }
 
 .header {

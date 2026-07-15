@@ -93,7 +93,14 @@ export default function App() {
   const [readReveal, setReadReveal] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState("article");
   const [listGlosses, setListGlosses] = useState<Record<string, string[]>>({});
+  const [wordQuery, setWordQuery] = useState("");
   const readerRef = useRef<HTMLDivElement>(null);
+
+  function wordMeaning(u: Unit): string {
+    return u.annotation
+      ? u.annotation.meaning
+      : listGlosses[u.key]?.join("; ") ?? "";
+  }
 
   // Unique clickable words in the current article, for the word-list tab.
   const uniqueWords = useMemo(() => {
@@ -106,6 +113,22 @@ export default function App() {
     }
     return list;
   }, [paragraphs]);
+
+  const filteredWords = useMemo(() => {
+    const q = wordQuery.trim().toLowerCase();
+    if (!q) return uniqueWords;
+    return uniqueWords.filter((u) => {
+      const meaning = wordMeaning(u).toLowerCase();
+      return (
+        u.surface.includes(q) ||
+        u.key.includes(q) ||
+        unitReading(u).includes(q) ||
+        meaning.includes(q)
+      );
+    });
+    // wordMeaning depends on listGlosses; recompute when either changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uniqueWords, wordQuery, listGlosses]);
 
   // When the word-list tab is open, load the dictionary once and resolve
   // glosses for words that don't have an authored annotation.
@@ -184,6 +207,7 @@ export default function App() {
     setHeadings(new Set(a.headings ?? []));
     setActiveTab("article");
     setListGlosses({});
+    setWordQuery("");
     resetQuiz();
     analyze(a.text, a.annotations, a.translations);
   }
@@ -421,27 +445,45 @@ export default function App() {
 
       {activeTab === "wordlist" && (
         <div className="wordlist">
+          <div className="wl-toolbar">
+            <div className="wl-search">
+              <input
+                type="search"
+                value={wordQuery}
+                onChange={(e) => setWordQuery(e.target.value)}
+                placeholder="単語・読み・意味で検索…"
+                aria-label="単語を検索"
+              />
+            </div>
+            <span className="wl-count">
+              {filteredWords.length} / {uniqueWords.length} 語
+            </span>
+          </div>
           {uniqueWords.length === 0 ? (
             <p className="hint">単語がありません。</p>
+          ) : filteredWords.length === 0 ? (
+            <p className="hint">該当する単語がありません。</p>
           ) : (
-            uniqueWords.map((u, i) => {
-              const meaning = u.annotation
-                ? u.annotation.meaning
-                : listGlosses[u.key]?.join("; ") ?? "…";
-              return (
-                <div className="wl-item" key={i}>
-                  <div className="wl-main">
-                    <span className={"wl-word" + (u.annotation ? " annotated" : "")}>
+            <table className="wl-table">
+              <thead>
+                <tr>
+                  <th className="wl-th-word">単語</th>
+                  <th className="wl-th-reading">読み</th>
+                  <th className="wl-th-meaning">意味</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredWords.map((u, i) => (
+                  <tr key={i}>
+                    <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
                       <Furigana text={u.surface} show={showFurigana} />
-                    </span>
-                    {unitReading(u) && (
-                      <span className="wl-reading">{unitReading(u)}</span>
-                    )}
-                  </div>
-                  <span className="wl-meaning">{meaning}</span>
-                </div>
-              );
-            })
+                    </td>
+                    <td className="wl-reading">{unitReading(u)}</td>
+                    <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
         </div>
       )}
