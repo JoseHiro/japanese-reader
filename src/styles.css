@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --surface: #f7f7f5;
   --surface-2: #ffffff;
@@ -8,8 +9,34 @@
   --accent: #2b6cb0;
   --accent-bg: #e8f1fb;
   --radius: 12px;
+  --quiz-correct-bg: #e6f4ea;
+  --quiz-correct-border: #34a853;
+  --quiz-correct-text: #1e7e34;
+  --quiz-wrong-bg: #fdeaea;
+  --quiz-wrong-border: #e24b4a;
+  --quiz-wrong-text: #b02a2a;
+  --shadow-popup: 0 8px 28px rgba(0, 0, 0, 0.16);
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
     "Segoe UI", Roboto, sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --surface: #1a1d23;
+  --surface-2: #22262e;
+  --text: #e6e8ec;
+  --text-muted: #9aa0aa;
+  --border: #2e333c;
+  --accent: #6ea8ff;
+  --accent-bg: rgba(110, 168, 255, 0.14);
+  --quiz-correct-bg: rgba(52, 168, 83, 0.18);
+  --quiz-correct-border: #4caf6c;
+  --quiz-correct-text: #7ee0a1;
+  --quiz-wrong-bg: rgba(226, 75, 74, 0.18);
+  --quiz-wrong-border: #f16766;
+  --quiz-wrong-text: #ff9d9c;
+  --shadow-popup: 0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
 * { box-sizing: border-box; }
@@ -18,7 +45,6 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  color-scheme: light;
 }
 
 .app {
@@ -50,6 +76,24 @@ body {
 .site-header .toggle { color: rgba(255, 255, 255, 0.95); }
 .site-header .switch { background: rgba(255, 255, 255, 0.35); }
 .site-header .toggle input:checked + .switch { background: #34d399; }
+
+.header-tools { display: flex; align-items: center; gap: 14px; }
+.theme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition: background .15s, border-color .15s;
+}
+.theme-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.theme-btn svg { width: 17px; height: 17px; display: block; }
 
 .layout {
   display: flex;
@@ -401,7 +445,7 @@ ruby rt {
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .16);
+  box-shadow: var(--shadow-popup);
   overflow: hidden;
   font-size: 14px;
   line-height: 1.6;
@@ -493,10 +537,15 @@ ruby rt {
 .opts .opt:hover:not(:disabled) { border-color: var(--accent); }
 .opts .opt:disabled { cursor: default; }
 .opts .opt.correct {
-  background: #e6f4ea; border-color: #34a853; color: #1e7e34; font-weight: 500;
+  background: var(--quiz-correct-bg);
+  border-color: var(--quiz-correct-border);
+  color: var(--quiz-correct-text);
+  font-weight: 500;
 }
 .opts .opt.wrong {
-  background: #fdeaea; border-color: #e24b4a; color: #b02a2a;
+  background: var(--quiz-wrong-bg);
+  border-color: var(--quiz-wrong-border);
+  color: var(--quiz-wrong-text);
 }
 .q-text { margin: 0 0 12px; font-size: 16px; font-weight: 500; line-height: 1.7; }
 .reveal-btn {

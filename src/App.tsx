@@ -10,6 +10,8 @@ import {
   IconWordList,
   IconVocabQuiz,
   IconReadingQuiz,
+  IconSun,
+  IconMoon,
 } from "./shared/icons";
 
 interface Sentence {
@@ -79,8 +81,25 @@ function formatDate(d: string): string {
   return isNaN(dt.getTime()) ? d : dt.toLocaleDateString("ja-JP");
 }
 
+type Theme = "light" | "dark";
+
+function initialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  const saved = localStorage.getItem("yomu-theme");
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 export default function App() {
   const [article, setArticle] = useState<Article | null>(null);
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("yomu-theme", theme);
+  }, [theme]);
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -273,15 +292,26 @@ export default function App() {
               <p>日本語リーダー</p>
             </div>
           </div>
-          <label className="toggle">
-            振り仮名
-            <input
-              type="checkbox"
-              checked={showFurigana}
-              onChange={(e) => setShowFurigana(e.target.checked)}
-            />
-            <span className="switch" aria-hidden />
-          </label>
+          <div className="header-tools">
+            <label className="toggle">
+              振り仮名
+              <input
+                type="checkbox"
+                checked={showFurigana}
+                onChange={(e) => setShowFurigana(e.target.checked)}
+              />
+              <span className="switch" aria-hidden />
+            </label>
+            <button
+              className="theme-btn"
+              type="button"
+              aria-label={theme === "dark" ? "ライトモードに切り替え" : "ダークモードに切り替え"}
+              title={theme === "dark" ? "ライトモード" : "ダークモード"}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? <IconSun /> : <IconMoon />}
+            </button>
+          </div>
         </div>
       </header>
 
