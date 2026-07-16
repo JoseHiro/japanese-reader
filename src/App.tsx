@@ -316,7 +316,7 @@ export default function App() {
           <div className="article-head">
             <h2>{article.title}</h2>
             {article.subtitle && <p>{article.subtitle}</p>}
-            {counts.words > 0 && (
+            {activeTab === "article" && counts.words > 0 && (
               <span className="meta">
                 {counts.words} 語
                 {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
