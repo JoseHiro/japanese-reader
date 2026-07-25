@@ -19,6 +19,11 @@ export const USERS: User[] = [
     displayName: "Shaun",
     articleIds: ["growth", "mocha", "kindergarten"],
   },
+  {
+    id: "andy",
+    displayName: "Andy",
+    articleIds: [],
+  },
 ];
 
 export function articlesForUser(user: User): Article[] {
