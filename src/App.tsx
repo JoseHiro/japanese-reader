@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
-import { ARTICLES, type Annotation, type Article } from "./content";
+import type { Annotation, Article } from "./content";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
 import { TabRail, type TabDef } from "./shared/TabRail";
@@ -12,7 +12,10 @@ import {
   IconReadingQuiz,
   IconSun,
   IconMoon,
+  IconLogout,
 } from "./shared/icons";
+import { findUser, articlesForUser, type User } from "./users";
+import { SignIn } from "./SignIn";
 
 interface Sentence {
   units: Unit[];
@@ -72,9 +75,26 @@ const TABS: TabDef[] = [
   { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
 ];
 
-const SORTED_ARTICLES = [...ARTICLES].sort((a, b) =>
-  (b.date ?? "").localeCompare(a.date ?? ""),
-);
+function sortArticles(list: readonly Article[]): Article[] {
+  return [...list].sort((a, b) =>
+    (b.date ?? "").localeCompare(a.date ?? ""),
+  );
+}
+
+const USER_STORAGE_KEY = "yomu-user";
+
+function loadStoredUser(): User | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(USER_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as User;
+    // Prefer the current library definition (article list may have changed).
+    return findUser(parsed.id) ?? parsed;
+  } catch {
+    return null;
+  }
+}
 
 function formatDate(d: string): string {
   const dt = new Date(d);
@@ -93,6 +113,7 @@ function initialTheme(): Theme {
 }
 
 export default function App() {
+  const [user, setUser] = useState<User | null>(loadStoredUser);
   const [article, setArticle] = useState<Article | null>(null);
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
@@ -100,6 +121,22 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("yomu-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (user) localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  }, [user]);
+
+  const sortedArticles = useMemo(
+    () => sortArticles(user ? articlesForUser(user) : []),
+    [user],
+  );
+
+  function signOut() {
+    localStorage.removeItem(USER_STORAGE_KEY);
+    setUser(null);
+    setArticle(null);
+    setParagraphs([]);
+  }
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -231,11 +268,15 @@ export default function App() {
     analyze(a.text, a.annotations, a.translations);
   }
 
-  // Open the most recently added article on first load.
+  // Open the most recently added article whenever the user changes.
   useEffect(() => {
-    if (SORTED_ARTICLES[0]) loadArticle(SORTED_ARTICLES[0]);
+    if (sortedArticles[0]) loadArticle(sortedArticles[0]);
+    else {
+      setArticle(null);
+      setParagraphs([]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user?.id]);
 
   function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
@@ -276,6 +317,8 @@ export default function App() {
       ),
     );
 
+  if (!user) return <SignIn onSignIn={setUser} />;
+
   return (
     <div
       className="page"
@@ -311,6 +354,19 @@ export default function App() {
             >
               {theme === "dark" ? <IconSun /> : <IconMoon />}
             </button>
+            <div className="user-pill">
+              <span className="up-avatar">{user.displayName.slice(0, 1)}</span>
+              <span className="up-name">{user.displayName}</span>
+              <button
+                className="up-signout"
+                type="button"
+                aria-label="サインアウト"
+                title="サインアウト"
+                onClick={signOut}
+              >
+                <IconLogout />
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -320,7 +376,12 @@ export default function App() {
       <aside className="sidebar">
         <nav className="article-list">
           <span className="list-label">記事</span>
-          {SORTED_ARTICLES.map((a, idx) => (
+          {sortedArticles.length === 0 && (
+            <p className="empty-library">
+              {user.displayName} さんの記事はまだありません。
+            </p>
+          )}
+          {sortedArticles.map((a, idx) => (
             <button
               key={a.id}
               className={"article-item" + (article?.id === a.id ? " active" : "")}
