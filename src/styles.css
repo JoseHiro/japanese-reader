@@ -669,6 +669,180 @@ ruby rt {
   border-radius: 0 8px 8px 0;
 }
 
+/* Practice mode ------------------------------------------------------- */
+.pr-list { display: flex; flex-direction: column; gap: 12px; }
+.pr-lesson-card {
+  display: flex; flex-direction: column; gap: 6px;
+  text-align: left; width: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--border); border-radius: 12px;
+  background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+.pr-lesson-card:hover { border-color: var(--accent); }
+.pr-lesson-title { font-size: 17px; font-weight: 500; }
+.pr-lesson-goal { font-size: 14px; color: var(--text); line-height: 1.5; }
+.pr-lesson-meta { font-size: 12px; color: var(--text-muted); }
+
+.pr-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 14px;
+}
+.pr-mini {
+  padding: 5px 10px;
+  font-size: 13px;
+  background: none; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); cursor: pointer;
+}
+.pr-mini:hover { border-color: var(--accent); color: var(--accent); }
+.pr-progress { font-size: 13px; color: var(--text-muted); }
+.pr-badges { display: inline-flex; align-items: center; gap: 8px; }
+.pr-type {
+  font-size: 11px; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--accent-bg); color: var(--accent);
+}
+.pr-bookmark {
+  width: 28px; height: 28px;
+  border: none; background: none; cursor: pointer;
+  font-size: 20px; line-height: 1;
+  color: var(--text-muted);
+  padding: 0;
+}
+.pr-bookmark.on { color: #f0b400; }
+
+/* Lesson intro card */
+.pr-intro { padding: 4px 0 12px; }
+.pr-title { margin: 8px 0 20px; font-size: 24px; font-weight: 500; }
+.pr-intro-block { margin-bottom: 16px; }
+.pr-intro-label {
+  display: block; margin-bottom: 4px;
+  font-size: 12px; letter-spacing: .03em; color: var(--text-muted);
+}
+.pr-intro-block p { margin: 0; font-size: 15px; line-height: 1.7; }
+
+/* Exercise card */
+.pr-exercise { padding: 4px 0 12px; }
+.pr-prompt {
+  margin: 0 0 16px;
+  font-size: 22px; font-weight: 500; line-height: 1.6;
+}
+.pr-rules {
+  display: flex; flex-direction: column; gap: 8px;
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border-radius: 10px;
+}
+.pr-rule { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.pr-rule-label {
+  flex: none; min-width: 100px;
+  font-size: 12px; letter-spacing: .03em; color: var(--text-muted);
+}
+.pr-rule-items { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.pr-chip {
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text);
+}
+.pr-rule-avoid .pr-chip {
+  background: var(--quiz-wrong-bg);
+  color: var(--quiz-wrong-text);
+  border-color: var(--quiz-wrong-border);
+  text-decoration: line-through;
+}
+.pr-rule-grammar .pr-chip {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pr-hints {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  list-style: none;
+}
+.pr-hints li { margin: 4px 0; font-size: 14px; line-height: 1.6; }
+
+.pr-answers {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  background: var(--quiz-correct-bg);
+  border-left: 3px solid var(--quiz-correct-border);
+  border-radius: 0 8px 8px 0;
+}
+.pr-answers-label {
+  display: block; margin-bottom: 6px;
+  font-size: 12px; color: var(--quiz-correct-text); letter-spacing: .03em;
+}
+.pr-answers ul { margin: 0; padding-left: 20px; }
+.pr-answers li { font-size: 17px; line-height: 1.8; }
+
+.pr-dialogue { display: flex; flex-direction: column; gap: 8px; margin: 0 0 16px; }
+.pr-turn {
+  display: grid;
+  grid-template-columns: 88px 1fr auto;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  align-items: baseline;
+}
+.pr-turn-them { background: var(--surface); }
+.pr-turn-andy { background: var(--accent-bg); }
+.pr-turn-who {
+  font-size: 12px; color: var(--text-muted);
+  letter-spacing: .02em;
+}
+.pr-turn-text { font-size: 16px; line-height: 1.65; grid-column: 2; }
+.pr-turn-hint { font-size: 14px; color: var(--text-muted); grid-column: 2; }
+.pr-turn-hint.faded { grid-row: 1; font-size: 12px; }
+.pr-turn-andy .pr-turn-hint.faded { color: var(--text-muted); opacity: .7; }
+.pr-turn-num {
+  grid-column: 3;
+  font-size: 11px; color: var(--text-muted);
+  align-self: start;
+}
+
+.pr-note {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  font-size: 13px; line-height: 1.7;
+  background: var(--surface);
+  border-left: 3px solid var(--border-strong, var(--border));
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+}
+
+.pr-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+.pr-nav {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+.pr-nav:hover:not(:disabled) { border-color: var(--accent); }
+.pr-nav:disabled { opacity: .4; cursor: default; }
+.pr-reveal {
+  flex: 1;
+  padding: 10px 18px;
+  font-size: 15px; font-weight: 500;
+  border: none; border-radius: 10px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+.pr-reveal:hover { filter: brightness(1.06); }
+.pr-keys {
+  margin: 12px 0 0;
+  font-size: 11px; color: var(--text-muted); text-align: center;
+}
+
 .footer {
   margin-top: 22px;
   font-size: 13px;

@@ -16,6 +16,7 @@ import {
 } from "./shared/icons";
 import { findUser, articlesForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
+import { Practice } from "./Practice";
 
 interface Sentence {
   units: Unit[];
@@ -68,12 +69,23 @@ interface PopupState {
   top: number;
 }
 
-const TABS: TabDef[] = [
+const BASE_TABS: TabDef[] = [
   { id: "article", label: "記事", icon: <IconArticle /> },
   { id: "wordlist", label: "単語リスト", icon: <IconWordList />, badge: "New" },
   { id: "vocabQuiz", label: "単語クイズ", icon: <IconVocabQuiz /> },
   { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
 ];
+
+const PRACTICE_TAB: TabDef = {
+  id: "practice",
+  label: "練習",
+  icon: <IconVocabQuiz />,
+  badge: "New",
+};
+
+function tabsForUser(u: User): TabDef[] {
+  return u.id === "andy" ? [...BASE_TABS, PRACTICE_TAB] : BASE_TABS;
+}
 
 function sortArticles(list: readonly Article[]): Article[] {
   return [...list].sort((a, b) =>
@@ -268,6 +280,14 @@ export default function App() {
     analyze(a.text, a.annotations, a.translations);
   }
 
+  // For users with no articles (e.g. Andy today) but who have Practice
+  // available, jump straight to the Practice tab.
+  useEffect(() => {
+    if (user && sortedArticles.length === 0 && user.id === "andy") {
+      setActiveTab("practice");
+    }
+  }, [user, sortedArticles.length]);
+
   // Open the most recently added article whenever the user changes.
   useEffect(() => {
     if (sortedArticles[0]) loadArticle(sortedArticles[0]);
@@ -398,12 +418,12 @@ export default function App() {
         </nav>
       </aside>
 
-      {article && (
-        <TabRail tabs={TABS} active={activeTab} onChange={setActiveTab} />
+      {(article || user.id === "andy") && (
+        <TabRail tabs={tabsForUser(user)} active={activeTab} onChange={setActiveTab} />
       )}
 
       <main className="main">
-        {article && (
+        {article && activeTab !== "practice" && (
           <div className="article-head">
             <h2>{article.title}</h2>
             {article.subtitle && <p>{article.subtitle}</p>}
@@ -672,6 +692,8 @@ export default function App() {
           )}
         </section>
       )}
+
+      {activeTab === "practice" && <Practice user={user} />}
 
         <footer className="footer">
           単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
