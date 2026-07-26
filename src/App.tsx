@@ -14,7 +14,7 @@ import {
   IconMoon,
   IconLogout,
 } from "./shared/icons";
-import { findUser, articlesForUser, type User } from "./users";
+import { findUser, articlesForUser, lessonsForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 
@@ -142,6 +142,10 @@ export default function App() {
     () => sortArticles(user ? articlesForUser(user) : []),
     [user],
   );
+
+  const userLessons = useMemo(() => (user ? lessonsForUser(user) : []), [user]);
+  const isLessonMode = userLessons.length > 0;
+  const [openLessonId, setOpenLessonId] = useState<string | null>(null);
 
   function signOut() {
     localStorage.removeItem(USER_STORAGE_KEY);
@@ -280,16 +284,19 @@ export default function App() {
     analyze(a.text, a.annotations, a.translations);
   }
 
-  // For users with no articles (e.g. Andy today) but who have Practice
-  // available, jump straight to the Practice tab.
+  // Lesson-mode users (Andy today): jump straight to the Practice tab and
+  // pre-open the first lesson.
   useEffect(() => {
-    if (user && sortedArticles.length === 0 && user.id === "andy") {
+    if (isLessonMode) {
       setActiveTab("practice");
+      if (!openLessonId && userLessons[0]) setOpenLessonId(userLessons[0].id);
     }
-  }, [user, sortedArticles.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, isLessonMode]);
 
   // Open the most recently added article whenever the user changes.
   useEffect(() => {
+    if (isLessonMode) return; // lesson-mode users don't need an article
     if (sortedArticles[0]) loadArticle(sortedArticles[0]);
     else {
       setArticle(null);
@@ -394,31 +401,59 @@ export default function App() {
       <div className="app">
       <div className="layout">
       <aside className="sidebar">
-        <nav className="article-list">
-          <span className="list-label">記事</span>
-          {sortedArticles.length === 0 && (
-            <p className="empty-library">
-              {user.displayName} さんの記事はまだありません。
-            </p>
-          )}
-          {sortedArticles.map((a, idx) => (
-            <button
-              key={a.id}
-              className={"article-item" + (article?.id === a.id ? " active" : "")}
-              onClick={() => loadArticle(a)}
-            >
-              <span className="ai-title">
-                {a.title}
-                {idx === 0 && <span className="new-badge">New</span>}
-              </span>
-              {a.subtitle && <span className="ai-sub">{a.subtitle}</span>}
-              {a.date && <span className="ai-date">{formatDate(a.date)}</span>}
-            </button>
-          ))}
-        </nav>
+        {isLessonMode ? (
+          <nav className="article-list">
+            <span className="list-label">レッスン</span>
+            {userLessons.map((l, idx) => (
+              <button
+                key={l.id}
+                className={
+                  "article-item" + (openLessonId === l.id ? " active" : "")
+                }
+                onClick={() => {
+                  setActiveTab("practice");
+                  setOpenLessonId(l.id);
+                }}
+              >
+                <span className="ai-title">
+                  {l.title}
+                  {idx === 0 && <span className="new-badge">New</span>}
+                </span>
+                <span className="ai-sub">🎯 {l.goal}</span>
+                <span className="ai-date">
+                  {l.turns.filter((t) => t.speaker === "andy").length} 空欄
+                  {l.challenges && ` ・ チャレンジ ${l.challenges.length}`}
+                </span>
+              </button>
+            ))}
+          </nav>
+        ) : (
+          <nav className="article-list">
+            <span className="list-label">記事</span>
+            {sortedArticles.length === 0 && (
+              <p className="empty-library">
+                {user.displayName} さんの記事はまだありません。
+              </p>
+            )}
+            {sortedArticles.map((a, idx) => (
+              <button
+                key={a.id}
+                className={"article-item" + (article?.id === a.id ? " active" : "")}
+                onClick={() => loadArticle(a)}
+              >
+                <span className="ai-title">
+                  {a.title}
+                  {idx === 0 && <span className="new-badge">New</span>}
+                </span>
+                {a.subtitle && <span className="ai-sub">{a.subtitle}</span>}
+                {a.date && <span className="ai-date">{formatDate(a.date)}</span>}
+              </button>
+            ))}
+          </nav>
+        )}
       </aside>
 
-      {(article || user.id === "andy") && (
+      {!isLessonMode && article && (
         <TabRail tabs={tabsForUser(user)} active={activeTab} onChange={setActiveTab} />
       )}
 
@@ -693,7 +728,13 @@ export default function App() {
         </section>
       )}
 
-      {activeTab === "practice" && <Practice user={user} />}
+      {activeTab === "practice" && (
+        <Practice
+          user={user}
+          openLessonId={openLessonId}
+          onOpenLesson={setOpenLessonId}
+        />
+      )}
 
         <footer className="footer">
           単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。

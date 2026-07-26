@@ -1,5 +1,7 @@
 import { ARTICLES } from "./content";
 import type { Article } from "./content";
+import { LESSONS } from "./lessons";
+import type { Lesson } from "./lessons";
 
 // A user in the reader. Each user is scoped to their own set of articles;
 // other reader state (theme, furigana, quiz answers) stays global.
@@ -8,6 +10,8 @@ export interface User {
   displayName: string;
   /** Article ids from ARTICLES that this user can see. */
   articleIds: string[];
+  /** Lesson ids from LESSONS that this user can see. */
+  lessonIds?: string[];
 }
 
 // Predefined users. Adding a new one here (with the article ids they own)
@@ -23,6 +27,7 @@ export const USERS: User[] = [
     id: "andy",
     displayName: "Andy",
     articleIds: [],
+    lessonIds: ["delivery-redelivery"],
   },
 ];
 
@@ -31,6 +36,14 @@ export function articlesForUser(user: User): Article[] {
   return user.articleIds
     .map((id) => byId.get(id))
     .filter((a): a is Article => !!a);
+}
+
+export function lessonsForUser(user: User): Lesson[] {
+  if (!user.lessonIds?.length) return [];
+  const byId = new Map(LESSONS.map((l) => [l.id, l]));
+  return user.lessonIds
+    .map((id) => byId.get(id))
+    .filter((l): l is Lesson => !!l);
 }
 
 export function findUser(id: string): User | undefined {
