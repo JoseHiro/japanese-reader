@@ -64,6 +64,10 @@ export interface Lesson {
   id: string;
   title: string;
   titleEn?: string;
+  /** Short label for the sidebar (defaults to title). */
+  shortTitle?: string;
+  /** Short English label used in the sidebar parens. */
+  shortTitleEn?: string;
   situation: string;
   situationEn?: string;
   goal: string;
@@ -81,6 +85,8 @@ const deliveryRedelivery: Lesson = {
   id: "delivery-redelivery",
   title: "宅配便の再配達を電話で依頼する",
   titleEn: "Arrange a package redelivery over the phone",
+  shortTitle: "宅配便の再配達",
+  shortTitleEn: "Package redelivery",
   situation:
     "オートロック付きマンション（501号室）に住む Andy。ヤマト運輸から不在票が入っていた。電話で再配達を依頼する。",
   situationEn:
@@ -266,7 +272,295 @@ const deliveryRedelivery: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [deliveryRedelivery];
+const clinicSymptoms: Lesson = {
+  id: "clinic-symptoms",
+  title: "病院で症状を説明する（初診・複数症状）",
+  titleEn: "Explain your symptoms at a clinic (first visit, multiple symptoms)",
+  shortTitle: "病院で症状を説明",
+  shortTitleEn: "Explain symptoms at a clinic",
+  situation:
+    "Andy は数日前から複数の不調が続いており、初めて日本の病院に行く。受付・診察でこれまでの経緯・体質・服用中の薬・アレルギーを日本語で正確に伝える必要がある。",
+  situationEn:
+    "Andy has had several symptoms for a few days and is visiting a Japanese clinic for the first time. He needs to explain the timeline, his medical background, current medication, and allergies to reception and the doctor — in Japanese.",
+  goal: "複数の症状を時系列で整理し、既往症・薬・アレルギーとの関係を医師に伝え、質問に丁寧に答える。",
+  goalEn:
+    "Organize multiple symptoms in a timeline, explain how they relate to medical history / current medication / allergies, and politely answer the doctor's follow-ups.",
+  intent:
+    "N4 の「〜てから」「〜ようになる」「〜すぎる」「〜と思う」を復習しつつ、N3 の「〜わけではない」「〜おそれがある」を1〜2個ずつ混ぜる。「症状の言い換え」（じんましん→皮膚の変化）を訓練。",
+  intentEn:
+    "Review N4 patterns (〜てから, 〜ようになる, 〜すぎる, 〜と思う) while sprinkling in a couple of N3 stretches (〜わけではない, 〜おそれがある). The final challenge trains describing an unknown medical word another way.",
+  warmup: {
+    vocab: [
+      "症状",
+      "痛み",
+      "めまい",
+      "吐き気",
+      "鼻水",
+      "既往症",
+      "服用",
+      "副作用",
+      "アレルギー",
+    ],
+    grammar: [
+      "〜てから",
+      "〜ようになる",
+      "〜すぎる",
+      "〜みたい",
+      "〜と思うんですが",
+      "〜わけではない（N3）",
+    ],
+    tip: "医者には「実は…」「〜んですが」で切り出すと自然。数字と時系列を先に、主観（きつい・だるい）は後に。",
+  },
+  interlocutorLabel: "受付／医師",
+  turns: [
+    { speaker: "them", text: "（受付）おはようございます。今日はどうされましたか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b1",
+        intent: "初診の切り出し（数日前から複数症状がある）",
+        intentEn:
+          "Open the visit (first-time patient) and mention that you've had several symptoms for a few days.",
+        rules: [
+          { kind: "grammar", items: ["〜てから", "〜んですが"] },
+          {
+            kind: "message",
+            items: ["初めての受診", "数日前から", "症状の大まかな範囲（頭・お腹）"],
+            itemsEn: [
+              "first visit here",
+              "started a few days ago",
+              "rough area (head / stomach)",
+            ],
+          },
+        ],
+        samples: [
+          "実は今日が初めてなんですが、3日前から頭とお腹の調子が悪くて、診ていただきたいんです。",
+          "初診なんですが、数日前から頭痛と胃の痛みが続いていて、来ました。",
+        ],
+        teacherNote:
+          "「〜んですが」で背景を先に置き、依頼「診ていただきたい」につなぐ流れ。",
+      },
+    },
+    { speaker: "them", text: "（受付）初めてですね。保険証はお持ちですか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b2",
+        intent: "保険証はまだない。代わりに在留カードで自費で払えるか確認",
+        intentEn:
+          "You don't have a health insurance card yet. Ask if you can pay out of pocket using your residence card.",
+        rules: [
+          {
+            kind: "message",
+            items: ["保険証なし", "在留カードならある", "自費で払えるか確認"],
+            itemsEn: [
+              "no insurance card",
+              "have a residence card",
+              "confirm you can pay in full",
+            ],
+          },
+          { kind: "grammar", items: ["〜のですが", "〜ても大丈夫でしょうか"] },
+        ],
+        samples: [
+          "すみません、保険証はまだ作れていないんですが、在留カードならあります。今日は自費で払っても大丈夫でしょうか。",
+          "実は保険証がまだなんです。代わりに在留カードをお見せして、全額自費で払わせていただいてもよろしいですか。",
+        ],
+      },
+    },
+    { speaker: "them", text: "（受付）ありがとうございます。しばらくお待ちください。" },
+    { speaker: "them", text: "（医師）どんな症状ですか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b3",
+        intent: "症状を時系列で説明（月曜=頭痛 → 火曜=胃痛 → 今朝=吐き気）",
+        intentEn:
+          "Give the symptom timeline: Monday headache, Tuesday stomach pain, this morning nausea.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "月曜から頭痛",
+              "火曜から胃痛",
+              "今朝から吐き気",
+            ],
+            itemsEn: [
+              "headache since Monday",
+              "stomach pain since Tuesday",
+              "nausea since this morning",
+            ],
+          },
+          { kind: "grammar", items: ["〜てから", "〜ようになる"] },
+        ],
+        samples: [
+          "月曜から頭が痛くなって、火曜からは胃も痛くなりました。今朝からは吐き気もするようになりました。",
+          "実は月曜あたりから頭痛がしていて、次の日から胃の痛みも加わって、今朝からは吐き気がするようになったんです。",
+        ],
+        teacherNote:
+          "時系列を「〜から」で並べる基本。「〜ようになる」で新しい症状の出現を表す。",
+      },
+    },
+    { speaker: "them", text: "（医師）熱は測りましたか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b4",
+        intent: "昨晩は38.2°C、今朝37.4°C。熱は下がったが体はだるい",
+        intentEn:
+          "Last night 38.2°C, this morning 37.4°C. Fever's down but body still feels heavy.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "昨晩38.2°C",
+              "今朝37.4°C",
+              "下がったが体はだるい",
+            ],
+            itemsEn: [
+              "38.2°C last night",
+              "37.4°C this morning",
+              "down but body still feels sluggish",
+            ],
+          },
+          { kind: "grammar", items: ["〜すぎる", "〜みたい"] },
+        ],
+        samples: [
+          "昨日の夜は38.2度で、今朝計ったら37.4度でした。熱は少し下がったんですが、体がだるすぎて起き上がるのがつらいです。",
+          "昨晩は38度2分ありました。今朝は37度4分まで下がったみたいですが、体は相変わらずだるくて、動けない感じです。",
+        ],
+      },
+    },
+    { speaker: "them", text: "（医師）他に持病や、普段飲んでいる薬はありますか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b5",
+        intent: "花粉症の薬を毎日、時々胃薬。ただし服用中じゃない期間もある",
+        intentEn:
+          "You take hay-fever medication daily and sometimes a stomach medicine — but there are periods when you don't take either.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "花粉症の薬を毎日",
+              "時々胃薬",
+              "常に飲んでいるわけではない",
+            ],
+            itemsEn: [
+              "hay-fever medication daily",
+              "stomach medicine occasionally",
+              "not always taking them",
+            ],
+          },
+          {
+            kind: "grammar",
+            items: ["〜わけではない（N3）", "〜こともある"],
+          },
+        ],
+        samples: [
+          "花粉症の薬は毎日飲んでいます。胃薬は時々ですが、いつも飲んでいるわけではありません。今は花粉のシーズンだけなので、両方毎日というわけでもないです。",
+          "普段は花粉症の薬を飲んでいます。胃薬は調子が悪いときに飲むこともありますが、常用しているわけではありません。",
+        ],
+        teacherNote:
+          "「〜わけではない」は N3 で「（全部そうという）わけじゃない」の限定否定。ここで例外を含めた説明を練習。",
+      },
+    },
+    { speaker: "them", text: "（医師）アレルギーはありますか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b6",
+        intent: "ペニシリン系の薬にアレルギーがあり、以前じんましんが出た",
+        intentEn:
+          "You're allergic to penicillin-type medicines — you got hives once before.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "ペニシリン系にアレルギー",
+              "以前じんましんが出た",
+            ],
+            itemsEn: [
+              "allergic to penicillin-type drugs",
+              "got hives once before",
+            ],
+          },
+          { kind: "grammar", items: ["〜たことがある"] },
+        ],
+        samples: [
+          "ペニシリン系の薬にアレルギーがあります。子どものときに飲んで、じんましんが出たことがあります。",
+          "はい、ペニシリンにアレルギーがあります。以前一度、飲んだ後に全身にじんましんが出たことがあるので、避けていただけると助かります。",
+        ],
+      },
+    },
+    {
+      speaker: "them",
+      text: "（医師）分かりました。風邪と胃腸の疲れが重なっているみたいですね。薬を出します。",
+    },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b7",
+        intent: "薬の受け取り方と、副作用が出たときの対処を確認",
+        intentEn:
+          "Confirm where to pick up the medication and what to do if side effects appear.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "薬はどこで受け取るか",
+              "副作用が出たらどうするか",
+            ],
+            itemsEn: [
+              "where to pick up the medication",
+              "what to do if side effects show up",
+            ],
+          },
+          { kind: "grammar", items: ["〜たらいい", "〜おそれがある（N3）"] },
+        ],
+        samples: [
+          "ありがとうございます。薬はどちらで受け取ればいいでしょうか。あと、もし副作用が出るおそれがある場合、どうしたらいいですか。",
+          "はい、お薬はどこで受け取ればいいですか。それと、もし副作用のような症状が出たら、また来た方がいいですか。",
+        ],
+        teacherNote:
+          "「〜おそれがある」は「〜する可能性がある（悪いこと）」で医療・防災の場面で頻出。",
+      },
+    },
+  ],
+  challenges: [
+    {
+      id: "c1",
+      title: "「じんましん」が思い出せなかったら？",
+      titleEn: "What if you can't remember 'じんましん'?",
+      prompt:
+        "b6 で「じんましん」という言葉が出てこない設定。皮膚の変化を、この語を使わずに医師に説明して。",
+      promptEn:
+        "For b6, imagine you can't recall the word 'じんましん' (hives). Describe the skin reaction to the doctor without using that word.",
+      refBlankId: "b6",
+      rules: [{ kind: "avoid", items: ["じんましん"] }],
+      samples: [
+        "体に赤いブツブツがたくさん出て、すごくかゆくなりました。",
+        "皮膚に赤い斑点みたいなものが出て、かゆみもありました。",
+        "全身が赤くなって、腫れたような感じになったんです。",
+      ],
+    },
+    {
+      id: "c2",
+      title: "友達にカジュアルに報告",
+      titleEn: "Casual update to a friend",
+      prompt:
+        "①〜④の要旨を、友達に「体調悪くて病院行ってきた」と話す感じでカジュアルに言い直して。",
+      promptEn:
+        "Retell b1–b4 casually to a friend, as if saying 'I wasn't feeling great so I went to the clinic'.",
+      samples: [
+        "月曜から頭痛くて、火曜からはお腹も痛くなって、今朝は吐き気まで出たから、病院行ってきたんだ。",
+        "初診だったから受付でちょっと手間取ったけど、熱は昨日38度あって、今日は37度4分。体だるすぎて動けない。",
+      ],
+    },
+  ],
+};
+
+export const LESSONS: Lesson[] = [deliveryRedelivery, clinicSymptoms];
 
 export function findLesson(id: string): Lesson | undefined {
   return LESSONS.find((l) => l.id === id);

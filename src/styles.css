@@ -935,6 +935,19 @@ ruby rt {
 }
 .pr-challenge-title { font-size: 15px; font-weight: 500; }
 .pr-challenge-en { margin-top: 0 !important; }
+
+.pr-vocab .pr-vocab-star {
+  display: inline-block;
+  margin-right: 4px;
+  color: #f0b400;
+  font-size: 12px;
+  vertical-align: 1px;
+}
+.pr-vocab-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-muted); cursor: pointer;
+}
+.pr-vocab-toggle input { accent-color: var(--accent); }
 .pr-challenge-head .pr-bookmark { margin-left: auto; }
 .pr-challenge-prompt {
   margin: 0 0 10px;

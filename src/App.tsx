@@ -83,6 +83,11 @@ const PRACTICE_TAB: TabDef = {
   badge: "New",
 };
 
+const LESSON_TABS: TabDef[] = [
+  { id: "lesson", label: "レッスン", icon: <IconArticle /> },
+  { id: "vocab", label: "単語リスト", icon: <IconWordList /> },
+];
+
 function tabsForUser(u: User): TabDef[] {
   return u.id === "andy" ? [...BASE_TABS, PRACTICE_TAB] : BASE_TABS;
 }
@@ -146,6 +151,7 @@ export default function App() {
   const userLessons = useMemo(() => (user ? lessonsForUser(user) : []), [user]);
   const isLessonMode = userLessons.length > 0;
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
+  const [lessonTab, setLessonTab] = useState<string>("lesson");
 
   function signOut() {
     localStorage.removeItem(USER_STORAGE_KEY);
@@ -294,6 +300,12 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, isLessonMode]);
 
+  // Reset the lesson sub-tab back to the main lesson view whenever the
+  // opened lesson changes.
+  useEffect(() => {
+    setLessonTab("lesson");
+  }, [openLessonId]);
+
   // Open the most recently added article whenever the user changes.
   useEffect(() => {
     if (isLessonMode) return; // lesson-mode users don't need an article
@@ -416,10 +428,14 @@ export default function App() {
                 }}
               >
                 <span className="ai-title">
-                  {l.title}
+                  {l.shortTitle ?? l.title}
                   {idx === 0 && <span className="new-badge">New</span>}
                 </span>
-                <span className="ai-sub">🎯 {l.goal}</span>
+                {(l.shortTitleEn ?? l.titleEn) && (
+                  <span className="ai-sub">
+                    ({l.shortTitleEn ?? l.titleEn})
+                  </span>
+                )}
                 <span className="ai-date">
                   {l.turns.filter((t) => t.speaker === "andy").length} 空欄
                   {l.challenges && ` ・ チャレンジ ${l.challenges.length}`}
@@ -455,6 +471,9 @@ export default function App() {
 
       {!isLessonMode && article && (
         <TabRail tabs={tabsForUser(user)} active={activeTab} onChange={setActiveTab} />
+      )}
+      {isLessonMode && openLessonId && (
+        <TabRail tabs={LESSON_TABS} active={lessonTab} onChange={setLessonTab} />
       )}
 
       <main className="main">
@@ -733,6 +752,8 @@ export default function App() {
           user={user}
           openLessonId={openLessonId}
           onOpenLesson={setOpenLessonId}
+          showFurigana={showFurigana}
+          lessonTab={lessonTab}
         />
       )}
 
