@@ -61,19 +61,23 @@ function scrollToDrill(blankId: string) {
 
 function RuleChips({
   rules,
+  revealed,
 }: {
   rules?: {
     kind: keyof typeof RULE_LABEL;
     items: string[];
     itemsEn?: string[];
   }[];
+  /** When false, hide Japanese in message rules (to avoid spoiling the answer). */
+  revealed?: boolean;
 }) {
   if (!rules?.length) return null;
   return (
     <div className="pr-rules">
       {rules.map((r, i) => {
-        // Message rules with English: render as a bulleted checklist so
-        // the task requirements are obvious. Others stay compact chips.
+        // Message rules with English: render as a bulleted checklist. Japanese
+        // is hidden until the answer is revealed so it doesn't spoil the target
+        // sentence.
         if (r.kind === "message" && r.itemsEn?.length === r.items.length) {
           return (
             <div className={"pr-rule pr-rule-" + r.kind + " pr-rule-list"} key={i}>
@@ -83,8 +87,12 @@ function RuleChips({
               <ul className="pr-checklist">
                 {r.items.map((it, j) => (
                   <li key={j}>
-                    <span className="pr-check-ja"><J text={it} /></span>
-                    <span className="pr-check-en">{r.itemsEn![j]}</span>
+                    <span className="pr-check-en pr-check-en-primary">
+                      {r.itemsEn![j]}
+                    </span>
+                    {revealed && (
+                      <span className="pr-check-ja"><J text={it} /></span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -130,8 +138,16 @@ function DrillCard({
       <div className="pr-drill-head">
         <span className="pr-drill-num">{circled(number)}</span>
         <div className="pr-drill-title">
-          <span className="pr-drill-intent"><J text={blank.intent} /></span>
-          {blank.intentEn && <span className="pr-en">{blank.intentEn}</span>}
+          {blank.intentEn ? (
+            <>
+              <span className="pr-drill-intent-en">{blank.intentEn}</span>
+              {revealed && (
+                <span className="pr-en"><J text={blank.intent} /></span>
+              )}
+            </>
+          ) : (
+            <span className="pr-drill-intent"><J text={blank.intent} /></span>
+          )}
         </div>
         <button
           className={"pr-bookmark" + (bookmarked ? " on" : "")}
@@ -143,7 +159,7 @@ function DrillCard({
         </button>
       </div>
 
-      <RuleChips rules={blank.rules} />
+      <RuleChips rules={blank.rules} revealed={revealed} />
 
       <div className="pr-blank-controls">
         <button className="pr-reveal-sm" onClick={onToggle}>
@@ -188,8 +204,18 @@ function ChallengeCard({
       <div className="pr-challenge-head">
         <span className="pr-challenge-badge">チャレンジ</span>
         <div className="pr-drill-title">
-          <span className="pr-challenge-title"><J text={challenge.title} /></span>
-          {challenge.titleEn && <span className="pr-en">{challenge.titleEn}</span>}
+          {challenge.titleEn ? (
+            <>
+              <span className="pr-challenge-title pr-challenge-title-en">
+                {challenge.titleEn}
+              </span>
+              {revealed && (
+                <span className="pr-en"><J text={challenge.title} /></span>
+              )}
+            </>
+          ) : (
+            <span className="pr-challenge-title"><J text={challenge.title} /></span>
+          )}
         </div>
         <button
           className={"pr-bookmark" + (bookmarked ? " on" : "")}
@@ -200,9 +226,19 @@ function ChallengeCard({
           {bookmarked ? "★" : "☆"}
         </button>
       </div>
-      <p className="pr-challenge-prompt"><J text={challenge.prompt} /></p>
-      {challenge.promptEn && <p className="pr-en pr-challenge-en">{challenge.promptEn}</p>}
-      <RuleChips rules={challenge.rules} />
+      {challenge.promptEn ? (
+        <>
+          <p className="pr-challenge-prompt pr-challenge-prompt-en">
+            {challenge.promptEn}
+          </p>
+          {revealed && (
+            <p className="pr-en pr-challenge-en"><J text={challenge.prompt} /></p>
+          )}
+        </>
+      ) : (
+        <p className="pr-challenge-prompt"><J text={challenge.prompt} /></p>
+      )}
+      <RuleChips rules={challenge.rules} revealed={revealed} />
       <div className="pr-blank-controls">
         <button className="pr-reveal-sm" onClick={() => setRevealed((v) => !v)}>
           {revealed ? "解答例を隠す" : "解答例を表示"}
