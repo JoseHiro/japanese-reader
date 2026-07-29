@@ -61,23 +61,20 @@ function scrollToDrill(blankId: string) {
 
 function RuleChips({
   rules,
-  revealed,
 }: {
   rules?: {
     kind: keyof typeof RULE_LABEL;
     items: string[];
     itemsEn?: string[];
   }[];
-  /** When false, hide Japanese in message rules (to avoid spoiling the answer). */
-  revealed?: boolean;
 }) {
   if (!rules?.length) return null;
   return (
     <div className="pr-rules">
       {rules.map((r, i) => {
-        // Message rules with English: render as a bulleted checklist. Japanese
-        // is hidden until the answer is revealed so it doesn't spoil the target
-        // sentence.
+        // Message rules with English: render as a bulleted checklist.
+        // English is primary; Japanese stays visible below because those
+        // items are the vocabulary/pattern hints, not spoilers.
         if (r.kind === "message" && r.itemsEn?.length === r.items.length) {
           return (
             <div className={"pr-rule pr-rule-" + r.kind + " pr-rule-list"} key={i}>
@@ -90,9 +87,7 @@ function RuleChips({
                     <span className="pr-check-en pr-check-en-primary">
                       {r.itemsEn![j]}
                     </span>
-                    {revealed && (
-                      <span className="pr-check-ja"><J text={it} /></span>
-                    )}
+                    <span className="pr-check-ja"><J text={it} /></span>
                   </li>
                 ))}
               </ul>
@@ -159,7 +154,7 @@ function DrillCard({
         </button>
       </div>
 
-      <RuleChips rules={blank.rules} revealed={revealed} />
+      <RuleChips rules={blank.rules} />
 
       <div className="pr-blank-controls">
         <button className="pr-reveal-sm" onClick={onToggle}>
@@ -238,7 +233,7 @@ function ChallengeCard({
       ) : (
         <p className="pr-challenge-prompt"><J text={challenge.prompt} /></p>
       )}
-      <RuleChips rules={challenge.rules} revealed={revealed} />
+      <RuleChips rules={challenge.rules} />
       <div className="pr-blank-controls">
         <button className="pr-reveal-sm" onClick={() => setRevealed((v) => !v)}>
           {revealed ? "解答例を隠す" : "解答例を表示"}

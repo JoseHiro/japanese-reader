@@ -1000,15 +1000,13 @@ ruby rt {
   border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
 }
-.pr-check-ja { font-size: 14px; font-weight: 500; line-height: 1.5; }
+.pr-check-ja { font-size: 15px; font-weight: 500; line-height: 1.55; color: var(--text); }
 .pr-check-en {
   font-size: 12px; color: var(--text-muted); line-height: 1.4;
 }
-/* Primary English variant: same weight/size as the JA version so English
-   feels like the main instruction, not a caption. */
+/* English caption above the Japanese hint. */
 .pr-check-en-primary {
-  font-size: 14px; font-weight: 500; line-height: 1.5;
-  color: var(--text);
+  font-size: 12px; color: var(--text-muted); line-height: 1.4;
 }
 .pr-drill-intent-en {
   font-size: 15px; font-weight: 500; line-height: 1.5;
