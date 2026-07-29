@@ -87,3 +87,12 @@ export function IconLogout() {
     </svg>
   );
 }
+
+export function IconTranslate() {
+  return (
+    <svg {...base}>
+      <path d="M3 5h9M7 3v2c0 5-2 8-5 9M5 9c0 3 3 5 7 6" />
+      <path d="M14 20l4-9 4 9M15 17h6" />
+    </svg>
+  );
+}

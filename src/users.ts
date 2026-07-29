@@ -27,7 +27,7 @@ export const USERS: User[] = [
     id: "andy",
     displayName: "Andy",
     articleIds: [],
-    lessonIds: ["clinic-symptoms", "delivery-redelivery"],
+    lessonIds: ["salon-haircut", "clinic-symptoms", "delivery-redelivery"],
   },
 ];
 

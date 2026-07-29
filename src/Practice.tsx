@@ -59,6 +59,70 @@ function scrollToDrill(blankId: string) {
   setTimeout(() => el.classList.remove("pr-drill-flash"), 900);
 }
 
+function AnswerStack({
+  samples,
+  teacherNote,
+}: {
+  samples: string[];
+  teacherNote?: string;
+}) {
+  const [altShown, setAltShown] = useState(false);
+  const hasAlt = samples.length > 1;
+  return (
+    <div className="pr-drill-answers">
+      <button
+        type="button"
+        className={"pr-drill-main" + (hasAlt ? " pr-drill-main-clickable" : "")}
+        onClick={() => hasAlt && setAltShown((v) => !v)}
+        title={hasAlt ? (altShown ? "別解を隠す" : "クリックで別解を表示") : ""}
+      >
+        <J text={samples[0]} />
+        {hasAlt && (
+          <span className="pr-drill-more">
+            {altShown ? "▾ 別解を隠す" : `▸ 別解 ${samples.length - 1} 件`}
+          </span>
+        )}
+      </button>
+      {altShown &&
+        samples.slice(1).map((s, i) => (
+          <p key={i} className="pr-drill-main pr-drill-alt">
+            <J text={s} />
+          </p>
+        ))}
+      {teacherNote && (
+        <p className="pr-note">📚 先生メモ：<J text={teacherNote} /></p>
+      )}
+    </div>
+  );
+}
+
+function ChecklistItem({ en, ja }: { en: string; ja: string }) {
+  const [shown, setShown] = useState(false);
+  return (
+    <li
+      className={"pr-check-item" + (shown ? " open" : "")}
+      role="button"
+      tabIndex={0}
+      onClick={() => setShown((v) => !v)}
+      onKeyDown={(e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          setShown((v) => !v);
+        }
+      }}
+      title={shown ? "日本語ヒントを隠す" : "日本語ヒントを表示"}
+    >
+      <span className="pr-check-en pr-check-en-primary">{en}</span>
+      <span className="pr-check-hintbadge" aria-hidden>
+        {shown ? "▾" : "💡"}
+      </span>
+      {shown && (
+        <span className="pr-check-ja"><J text={ja} /></span>
+      )}
+    </li>
+  );
+}
+
 function RuleChips({
   rules,
 }: {
@@ -78,17 +142,14 @@ function RuleChips({
         if (r.kind === "message" && r.itemsEn?.length === r.items.length) {
           return (
             <div className={"pr-rule pr-rule-" + r.kind + " pr-rule-list"} key={i}>
-              <span className="pr-rule-label">
-                {RULE_ICON[r.kind]} {RULE_LABEL[r.kind]} · Must include
-              </span>
+              <span className="pr-rule-label">✅ Must include</span>
               <ul className="pr-checklist">
                 {r.items.map((it, j) => (
-                  <li key={j}>
-                    <span className="pr-check-en pr-check-en-primary">
-                      {r.itemsEn![j]}
-                    </span>
-                    <span className="pr-check-ja"><J text={it} /></span>
-                  </li>
+                  <ChecklistItem
+                    key={j}
+                    en={r.itemsEn![j]}
+                    ja={it}
+                  />
                 ))}
               </ul>
             </div>
@@ -163,22 +224,10 @@ function DrillCard({
       </div>
 
       {revealed && (
-        <div className="pr-drill-answers">
-          <p className="pr-drill-main"><J text={blank.samples[0]} /></p>
-          {blank.samples.length > 1 && (
-            <details className="pr-alt">
-              <summary>別解 {blank.samples.length - 1} 件</summary>
-              <ul>
-                {blank.samples.slice(1).map((s, i) => (
-                  <li key={i}><J text={s} /></li>
-                ))}
-              </ul>
-            </details>
-          )}
-          {blank.teacherNote && (
-            <p className="pr-note">📚 先生メモ：<J text={blank.teacherNote} /></p>
-          )}
-        </div>
+        <AnswerStack
+          samples={blank.samples}
+          teacherNote={blank.teacherNote}
+        />
       )}
     </div>
   );
@@ -363,7 +412,7 @@ function LessonVocab({ lesson }: { lesson: Lesson }) {
   const [words, setWords] = useState<LessonWord[] | null>(null);
   const [glosses, setGlosses] = useState<Record<string, string[]>>({});
   const [query, setQuery] = useState("");
-  const [starOnly, setStarOnly] = useState(false);
+  const [starOnly, setStarOnly] = useState(true);
   const [showBasic, setShowBasic] = useState(false);
   const show = useContext(FuriCtx);
 

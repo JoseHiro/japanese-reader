@@ -560,7 +560,288 @@ const clinicSymptoms: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [deliveryRedelivery, clinicSymptoms];
+const salonHaircut: Lesson = {
+  id: "salon-haircut",
+  title: "美容院で細かい要望を伝える",
+  titleEn: "Give specific requests at a salon",
+  shortTitle: "美容院で細かい要望",
+  shortTitleEn: "Salon requests",
+  situation:
+    "Andy は初めて行く美容院でカットをしてもらう。今週末の友達の結婚式に合わせて少しだけ雰囲気を変えたいが、「大幅には変えたくない」「レイヤーは今回なし」「追加のトリートメントも見送り」など、細かい希望と丁寧な断りを伝える必要がある。",
+  situationEn:
+    "Andy is at a new salon for a haircut. A friend's wedding is this weekend, so he wants a small refresh — but with specific asks: keep the overall shape, no layers today, skip the extra treatment. He needs to voice detailed requests and decline suggestions politely.",
+  goal: "自分の希望を具体的に伝えつつ、美容師の提案を丁寧に断ったり調整したりする。",
+  goalEn:
+    "Voice specific preferences and politely decline / adjust the stylist's suggestions.",
+  intent:
+    "N4 の「〜くらい」「〜すぎない」「〜てもらえますか」を軸に、N3 の「〜すぎない程度に」「〜のもいいですが」「〜ぎみに」「〜おそれがある」を1〜2個ずつ足す。「柔らかく断る／要望を絞り込む」表現の集中訓練。",
+  intentEn:
+    "Anchor on N4 patterns (〜くらい, 〜すぎない, 〜てもらえますか) and layer in N3 stretches (〜すぎない程度に, 〜のもいいですが, 〜ぎみに, 〜おそれがある). Focused drill on softening a 'no' and narrowing down what you want.",
+  warmup: {
+    vocab: [
+      "カット",
+      "前髪",
+      "毛先",
+      "サイド",
+      "トップ",
+      "髪質",
+      "揃える",
+      "短め",
+      "長め",
+      "軽く",
+      "自然",
+      "レイヤー",
+    ],
+    grammar: [
+      "〜くらい",
+      "〜すぎない程度に（N3）",
+      "〜のもいいですが（N3）",
+      "〜ぎみに（N3）",
+      "もう少し〜",
+      "〜てもらえますか",
+      "〜おそれがある（N3）",
+    ],
+    tip: "美容院は「〜たいんですが」「〜てもらえますか」でやわらかく。写真を見せる場合は「参考にしたい写真があるんですが…」の一言があると自然。",
+  },
+  interlocutorLabel: "美容師",
+  turns: [
+    { speaker: "them", text: "いらっしゃいませ。今日はどうされますか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b1",
+        intent: "カット希望。全体は大きく変えたくないけど、少しだけ雰囲気を変えたい",
+        intentEn:
+          "Open with a haircut request: keep the overall look mostly the same but freshen it up a little.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "カットをお願いしたい",
+              "全体は大きく変えたくない",
+              "少しだけ雰囲気を変えたい",
+            ],
+            itemsEn: [
+              "want a haircut",
+              "don't want a big change overall",
+              "just a small refresh",
+            ],
+          },
+          { kind: "grammar", items: ["〜たいんですが", "あまり〜たくない"] },
+        ],
+        samples: [
+          "カットをお願いしたいんですが、全体はあまり変えたくなくて、少しだけ雰囲気を変えられたらと思っています。",
+          "今日はカットでお願いします。大きくは変えたくないんですが、ちょっとだけ変化を付けてもらえるとうれしいです。",
+        ],
+        teacherNote:
+          "「変えたくない＋少しだけ変化」を1文で組み立てる練習。「〜てもらえるとうれしい」も柔らかい依頼。",
+      },
+    },
+    { speaker: "them", text: "かしこまりました。長さはどれくらいにしましょうか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b2",
+        intent: "サイドは短め（ツーブロック寄り）、トップは動きが出るように少し長め",
+        intentEn:
+          "Sides short (undercut-ish), top a bit longer so it can have some movement.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "サイドは短め",
+              "ツーブロック寄り",
+              "トップは少し長め",
+              "動きが出るように",
+            ],
+            itemsEn: [
+              "sides shorter",
+              "undercut style",
+              "keep the top a bit longer",
+              "so it has some movement",
+            ],
+          },
+          { kind: "grammar", items: ["〜くらい", "〜ように"] },
+        ],
+        samples: [
+          "サイドは短めで、ツーブロックくらいでお願いします。トップは動きが出るように、少し長めに残してもらえますか。",
+          "サイドは思い切って短くしてもらって、ツーブロック寄りにしたいです。トップは動かせるくらいの長さを残しておきたいです。",
+        ],
+      },
+    },
+    { speaker: "them", text: "前髪はどうされますか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b3",
+        intent: "前髪はアップバング寄りに、量を少し軽くしたい（自然な感じで）",
+        intentEn:
+          "Bangs pushed up (up-bang) and thinned out a bit — going for a natural finish.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "前髪はアップバング寄り",
+              "量を少し軽く",
+              "自然な感じで",
+            ],
+            itemsEn: [
+              "bangs up-bang style",
+              "thin them out a bit",
+              "keep it looking natural",
+            ],
+          },
+          { kind: "grammar", items: ["〜ぎみに（N3）", "〜すぎない程度に"] },
+        ],
+        samples: [
+          "前髪はアップバングぎみにしたいです。ただ、量が多く見えすぎない程度に、少し軽くしてもらえますか。",
+          "前髪はアップバング寄りで、あまり重く見えないように軽くしてほしいです。全体的に自然な感じでお願いします。",
+        ],
+        teacherNote:
+          "「〜ぎみに」は N3 で「少し〜の方向に」の意味。「〜すぎない程度に」で量の加減を伝える練習。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "レイヤーはどうしますか？入れると動きが出て、若く見えますよ。",
+    },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b4",
+        intent: "提案は素敵だけど今回はレイヤーなしで、次回試したい（丁寧に断る）",
+        intentEn:
+          "The idea sounds great, but skip the layers this time — you'd rather try it next visit.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "提案はいいと思う",
+              "今回はレイヤーなし",
+              "次回試したい",
+            ],
+            itemsEn: [
+              "the suggestion sounds nice",
+              "skip layers this time",
+              "would like to try it next time",
+            ],
+          },
+          {
+            kind: "grammar",
+            items: ["〜のもいいですが（N3）", "〜てもらえますか"],
+          },
+        ],
+        samples: [
+          "うーん、レイヤーを入れるのもいいですが、今回はまずベースを整えるだけにしてもらえますか。次回、雰囲気に慣れたら試してみたいです。",
+          "レイヤーも気になるんですが、今日はワンレングスに近い感じでお願いします。またその次に相談させてください。",
+        ],
+        teacherNote:
+          "「〜のもいいですが、〜」は N3 で柔らかく断る定番。「今回は〜」で範囲を限定する言い方。",
+      },
+    },
+    { speaker: "them", text: "仕上げにトリートメントもいかがですか？" },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b5",
+        intent: "予算オーバーになりそうなので今回は見送り、次回ぜひ試したい",
+        intentEn:
+          "Might blow the budget today — skip this time, but you'd love to try it next visit.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "予算オーバーになりそう",
+              "今回は見送り",
+              "次回ぜひ試したい",
+            ],
+            itemsEn: [
+              "might go over budget",
+              "skip today",
+              "would love to try next time",
+            ],
+          },
+          {
+            kind: "grammar",
+            items: ["〜おそれがある（N3）", "〜ておく"],
+          },
+        ],
+        samples: [
+          "気になるんですが、今日は予算オーバーになるおそれがあるので、次回にしておこうかなと思います。次はぜひお願いします。",
+          "ぜひ試したいんですけど、今回はちょっと予算的に厳しくて…次回のお楽しみにさせてください。",
+        ],
+        teacherNote:
+          "「〜おそれがある」で控えめに理由を出しつつ、「次回」を提示して関係を保つ言い方。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "ありがとうございました。次回のご予約は？",
+    },
+    {
+      speaker: "andy",
+      blank: {
+        id: "b6",
+        intent: "次回は月末の週末か平日夜がいい。候補が複数あるので合わせやすい方で",
+        intentEn:
+          "Next appointment: end of the month, weekend or a weekday evening — you have several options so pick what works.",
+        rules: [
+          {
+            kind: "message",
+            items: [
+              "月末あたり",
+              "週末か平日の夜",
+              "候補が複数あるので合わせやすい方で",
+            ],
+            itemsEn: [
+              "around end of the month",
+              "weekend or a weekday evening",
+              "several options — pick what works",
+            ],
+          },
+          { kind: "grammar", items: ["〜だと助かる", "〜ていただけますか"] },
+        ],
+        samples: [
+          "月末あたりで予約したいです。週末か、平日の夜がいくつか候補としてあるので、空いている時間に合わせていただけると助かります。",
+          "月末の週末か、平日の夜だとうれしいです。複数候補あるので、そちらの都合のいい日にちで大丈夫です。",
+        ],
+      },
+    },
+  ],
+  challenges: [
+    {
+      id: "c1",
+      title: "「レイヤー」が思い出せなかったら？",
+      titleEn: "What if you can't remember 'レイヤー'?",
+      prompt:
+        "b4 で「レイヤー」という言葉が出てこない設定。髪の量・重さ・動きの言い方で言い換えて、断ってみて。",
+      promptEn:
+        "For b4, imagine you can't recall the word 'レイヤー' (layers). Describe the effect using words for hair volume, weight, or movement — and still decline politely.",
+      refBlankId: "b4",
+      rules: [{ kind: "avoid", items: ["レイヤー"] }],
+      samples: [
+        "毛先に動きを出すような入れ方も気になるんですが、今回はワンレングスのままでお願いします。",
+        "重さを削って軽く見せるやり方もいいんですけど、今日は全体の長さをそろえてもらう方向で。",
+        "髪の量を段階的に減らす感じですよね？次回試してみたいです。今回はストレートにお願いします。",
+      ],
+    },
+    {
+      id: "c2",
+      title: "友達に切ってもらう時のカジュアル版",
+      titleEn: "Casual version — a friend's cutting your hair",
+      prompt:
+        "①〜③を、大学の友達に「サイド刈って、トップ残して、前髪はアップバング」と頼む感じでカジュアルに言い直して。",
+      promptEn:
+        "Redo b1–b3 casually — you're asking a college friend to give you an undercut with the top left long and up-bang bangs.",
+      samples: [
+        "サイドはガッツリ短くしていいから、トップだけ残して。前髪はアップバングにしたい。",
+        "全体はあんまり変えたくないけど、サイド刈って、トップ長めに残しといて。前髪は上げる感じで軽くして。",
+      ],
+    },
+  ],
+};
+
+export const LESSONS: Lesson[] = [deliveryRedelivery, clinicSymptoms, salonHaircut];
 
 export function findLesson(id: string): Lesson | undefined {
   return LESSONS.find((l) => l.id === id);

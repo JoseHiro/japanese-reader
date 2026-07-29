@@ -13,10 +13,12 @@ import {
   IconSun,
   IconMoon,
   IconLogout,
+  IconTranslate,
 } from "./shared/icons";
 import { findUser, articlesForUser, lessonsForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
+import { ArticleTranslate } from "./ArticleTranslate";
 
 interface Sentence {
   units: Unit[];
@@ -71,7 +73,8 @@ interface PopupState {
 
 const BASE_TABS: TabDef[] = [
   { id: "article", label: "記事", icon: <IconArticle /> },
-  { id: "wordlist", label: "単語リスト", icon: <IconWordList />, badge: "New" },
+  { id: "wordlist", label: "単語リスト", icon: <IconWordList /> },
+  { id: "translate", label: "翻訳練習", icon: <IconTranslate />, badge: "New" },
   { id: "vocabQuiz", label: "単語クイズ", icon: <IconVocabQuiz /> },
   { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
 ];
@@ -745,6 +748,10 @@ export default function App() {
             <p className="hint">この記事にはまだ読解クイズがありません。</p>
           )}
         </section>
+      )}
+
+      {activeTab === "translate" && (
+        <ArticleTranslate paragraphs={paragraphs} showFurigana={showFurigana} />
       )}
 
       {activeTab === "practice" && (
