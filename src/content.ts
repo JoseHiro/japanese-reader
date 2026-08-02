@@ -452,4 +452,359 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    id: "professions-daily",
+    title: "身近な職業",
+    subtitle: "生活を支える人たち",
+    date: "2026-08-02",
+    text: `私たちの生活は、いろいろな仕事の人に支えられています。今日はその中で、毎日どこかで出会う職業を紹介します。
+
+まず、病院で働く人たちです。体の具合が悪くなったら、まず医師に診てもらいます。医師の中でも、風邪やお腹の痛みなど体の中の病気を診るのは内科医、手術で病気やけがを治すのは外科医です。子ども専門の医師は小児科医と呼ばれます。医師のそばで患者さんの世話をするのが看護師です。診察が終わったら、薬局に行きます。そこで薬を出してくれるのが薬剤師です。
+
+次に、学校です。学校で勉強を教えてくれる人を先生といいます。小さい子どもをみる保育士も、広い意味では先生の一種です。保育士は、保育園で1歳から5歳ぐらいの子どもと一緒に過ごし、生活の仕方を教えます。
+
+町のお店にも、たくさんの仕事があります。コンビニやスーパーの店員は、レジや商品の並べ直しをしています。髪を切りたくなったら、美容師のいる美容室に行きます。朝ごはんのパンは、パン屋さんが毎朝早く起きて作ってくれています。
+
+最後に、町で見かける人たちです。警察官は、町の安全を守る仕事をしています。火事が起きたら、消防車で消防士がやってきます。ネットで買った荷物は配達員が家まで運んでくれて、手紙やはがきは郵便屋さんが届けてくれます。こうしてみると、私たちの一日は、本当にたくさんの職業に支えられていますね。`,
+    annotations: {
+      職業: {
+        reading: "しょくぎょう",
+        pos: "名詞",
+        meaning: "occupation; profession",
+        note: "「仕事」より少し硬い言葉。履歴書やアンケートでよく使う。",
+      },
+      支える: {
+        reading: "ささえる",
+        pos: "動詞（下一段）",
+        meaning: "to support; to hold up",
+        note: "物理的にも比喩的にも使う。「家族を支える」「経済を支える」など。",
+      },
+      医師: {
+        reading: "いし",
+        pos: "名詞",
+        meaning: "doctor; physician",
+        note: "病気やけがの人を診て、治す仕事。会話では「お医者さん」の方が多い。",
+        examples: [
+          { ja: "姉は大学病院で医師として働いています。", en: "My older sister works as a doctor at a university hospital." },
+        ],
+      },
+      診る: {
+        reading: "みる",
+        pos: "動詞（上一段）",
+        meaning: "to examine (a patient)",
+        note: "「見る」と同じ発音だが、医師が患者を診察する時はこちらの漢字を使う。",
+      },
+      内科医: {
+        reading: "ないかい",
+        pos: "名詞",
+        meaning: "internist; internal medicine doctor",
+        note: "風邪やお腹の痛みなど、体の中の病気を診る医師。手術はしない。",
+        examples: [
+          { ja: "熱が下がらないので、内科医に診てもらった。", en: "My fever wouldn't go down, so I had an internist see me." },
+        ],
+      },
+      外科医: {
+        reading: "げかい",
+        pos: "名詞",
+        meaning: "surgeon",
+        note: "手術で病気やけがを治す医師。",
+        examples: [
+          { ja: "その病気は外科医の手術が必要です。", en: "That illness needs surgery from a surgeon." },
+        ],
+      },
+      小児科医: {
+        reading: "しょうにかい",
+        pos: "名詞",
+        meaning: "pediatrician",
+        note: "子ども専門の医師。「小児科」は病院の科の名前。",
+        examples: [
+          { ja: "息子が熱を出したので、小児科医に連れて行った。", en: "My son had a fever, so I took him to the pediatrician." },
+        ],
+      },
+      手術: {
+        reading: "しゅじゅつ",
+        pos: "名詞・する動詞",
+        meaning: "surgery; operation",
+      },
+      看護師: {
+        reading: "かんごし",
+        pos: "名詞",
+        meaning: "nurse",
+        note: "医師のそばで、患者さんの世話や治療の補助をする人。以前は「看護婦（女性）」「看護士（男性）」と分けていたが、現在は男女とも「看護師」に統一されている。",
+        examples: [
+          { ja: "看護師さんが優しくて、安心しました。", en: "The nurse was kind, and it put me at ease." },
+        ],
+      },
+      患者: {
+        reading: "かんじゃ",
+        pos: "名詞",
+        meaning: "patient",
+      },
+      診察: {
+        reading: "しんさつ",
+        pos: "名詞・する動詞",
+        meaning: "medical examination; consultation",
+      },
+      薬局: {
+        reading: "やっきょく",
+        pos: "名詞",
+        meaning: "pharmacy",
+      },
+      薬剤師: {
+        reading: "やくざいし",
+        pos: "名詞",
+        meaning: "pharmacist",
+        note: "薬局で薬を出したり、飲み方を説明したりする人。国家資格が必要。",
+        examples: [
+          { ja: "薬剤師に薬の飲み方を教えてもらった。", en: "The pharmacist explained how to take the medicine." },
+        ],
+      },
+      先生: {
+        reading: "せんせい",
+        pos: "名詞",
+        meaning: "teacher; (also used for doctors, lawyers, etc.)",
+        note: "学校で勉強を教える人。日本語では医師・弁護士・政治家などにも「先生」と呼びかける。",
+      },
+      保育士: {
+        reading: "ほいくし",
+        pos: "名詞",
+        meaning: "nursery / preschool teacher",
+        note: "保育園で、小さい子どもの生活を見守り、世話をする人。国家資格が必要。",
+        examples: [
+          { ja: "妹は保育士として3歳児クラスを担当している。", en: "My little sister works as a nursery teacher in charge of the 3-year-olds' class." },
+        ],
+      },
+      保育園: {
+        reading: "ほいくえん",
+        pos: "名詞",
+        meaning: "daycare; nursery school",
+        note: "0歳から小学校に入る前までの子どもを預かる施設。「幼稚園」より預かる時間が長い。",
+      },
+      一種: {
+        reading: "いっしゅ",
+        pos: "名詞",
+        meaning: "a kind; a type",
+        note: "「〜の一種」で「〜の仲間の一つ」の意味。",
+      },
+      店員: {
+        reading: "てんいん",
+        pos: "名詞",
+        meaning: "shop clerk; store staff",
+        note: "お店で、お客さんの対応や商品の管理をする人。",
+        examples: [
+          { ja: "レジで店員に袋をもらった。", en: "I got a bag from the clerk at the register." },
+        ],
+      },
+      並べ直し: {
+        reading: "ならべなおし",
+        pos: "名詞",
+        meaning: "rearranging; restocking (on shelves)",
+        note: "「並べる」＋「〜直す（もう一度〜する）」。",
+      },
+      美容師: {
+        reading: "びようし",
+        pos: "名詞",
+        meaning: "hair stylist",
+        note: "美容室で、髪を切ったり染めたりパーマをかけたりする人。国家資格が必要。",
+        examples: [
+          { ja: "いつもの美容師に髪を短くしてもらった。", en: "I had my usual stylist cut my hair short." },
+        ],
+      },
+      美容室: {
+        reading: "びようしつ",
+        pos: "名詞",
+        meaning: "hair salon",
+        note: "「美容院（びよういん）」ともいう。",
+      },
+      "パン屋さん": {
+        reading: "パンやさん",
+        pos: "名詞",
+        meaning: "baker; bakery",
+        note: "パンを作って売る店、またはそこで働く人。朝が早い仕事として知られている。",
+        examples: [
+          { ja: "近所のパン屋さんは朝6時から開いている。", en: "The bakery in the neighborhood opens at 6 a.m." },
+        ],
+      },
+      警察官: {
+        reading: "けいさつかん",
+        pos: "名詞",
+        meaning: "police officer",
+        note: "町の安全を守り、事件や事故に対応する仕事。会話では「お巡（まわ）りさん」とも呼ばれる。",
+        examples: [
+          { ja: "道に迷ったので、警察官に道を聞いた。", en: "I got lost, so I asked a police officer for directions." },
+        ],
+      },
+      消防士: {
+        reading: "しょうぼうし",
+        pos: "名詞",
+        meaning: "firefighter",
+        note: "火事を消したり、けが人や病人を助けたりする仕事。命がけの仕事。",
+        examples: [
+          { ja: "消防士たちが火事から住民を助けた。", en: "The firefighters rescued the residents from the fire." },
+        ],
+      },
+      消防車: {
+        reading: "しょうぼうしゃ",
+        pos: "名詞",
+        meaning: "fire engine; fire truck",
+      },
+      配達員: {
+        reading: "はいたついん",
+        pos: "名詞",
+        meaning: "delivery person",
+        note: "荷物を注文者の家まで運ぶ仕事。宅配便やフードデリバリーなど。",
+        examples: [
+          { ja: "配達員が大きな荷物を玄関まで運んでくれた。", en: "The delivery person brought the big package all the way to the front door." },
+        ],
+      },
+      "郵便屋さん": {
+        reading: "ゆうびんやさん",
+        pos: "名詞",
+        meaning: "mail carrier",
+        note: "手紙やはがき、小包を家まで届けてくれる人。正式には「郵便配達員（ゆうびんはいたついん）」。",
+        examples: [
+          { ja: "毎朝10時ごろ、郵便屋さんが来ます。", en: "The mail carrier comes around 10 a.m. every morning." },
+        ],
+      },
+      "こうしてみると": {
+        reading: "こうしてみると",
+        pos: "表現",
+        meaning: "when you look at it this way; seen like this",
+        note: "何かを振り返って気づいたことを述べる時に使う。",
+      },
+    },
+    translations: {
+      "私たちの生活は、いろいろな仕事の人に支えられています。":
+        "Our daily lives are supported by people in all kinds of jobs.",
+      "今日はその中で、毎日どこかで出会う職業を紹介します。":
+        "Today I'll introduce some of the professions we run into somewhere every day.",
+      "まず、病院で働く人たちです。":
+        "First, the people who work at hospitals.",
+      "体の具合が悪くなったら、まず医師に診てもらいます。":
+        "When you don't feel well, the first thing you do is have a doctor examine you.",
+      "医師の中でも、風邪やお腹の痛みなど体の中の病気を診るのは内科医、手術で病気やけがを治すのは外科医です。":
+        "Among doctors, the ones who see internal illnesses like colds or stomachaches are internists, and the ones who treat illnesses and injuries with surgery are surgeons.",
+      "子ども専門の医師は小児科医と呼ばれます。":
+        "Doctors who specialize in children are called pediatricians.",
+      "医師のそばで患者さんの世話をするのが看護師です。":
+        "The one who takes care of patients alongside the doctor is the nurse.",
+      "診察が終わったら、薬局に行きます。":
+        "Once the exam is over, you go to the pharmacy.",
+      "そこで薬を出してくれるのが薬剤師です。":
+        "The person who fills your prescription there is the pharmacist.",
+      "次に、学校です。":
+        "Next, schools.",
+      "学校で勉強を教えてくれる人を先生といいます。":
+        "The people who teach you at school are called teachers (sensei).",
+      "小さい子どもをみる保育士も、広い意味では先生の一種です。":
+        "Nursery teachers, who look after little children, are in a broad sense also a kind of teacher.",
+      "保育士は、保育園で1歳から5歳ぐらいの子どもと一緒に過ごし、生活の仕方を教えます。":
+        "Nursery teachers spend the day with children aged about 1 to 5 at daycare, teaching them how to live and take care of themselves.",
+      "町のお店にも、たくさんの仕事があります。":
+        "There are lots of jobs in the shops around town too.",
+      "コンビニやスーパーの店員は、レジや商品の並べ直しをしています。":
+        "Convenience store and supermarket clerks work the register and restock the shelves.",
+      "髪を切りたくなったら、美容師のいる美容室に行きます。":
+        "When you want a haircut, you go to a salon where a hair stylist works.",
+      "朝ごはんのパンは、パン屋さんが毎朝早く起きて作ってくれています。":
+        "The bread for your breakfast is made by the baker, who gets up early every morning.",
+      "最後に、町で見かける人たちです。":
+        "Lastly, the people you see around town.",
+      "警察官は、町の安全を守る仕事をしています。":
+        "Police officers do the job of keeping the town safe.",
+      "火事が起きたら、消防車で消防士がやってきます。":
+        "When a fire breaks out, firefighters come in fire trucks.",
+      "ネットで買った荷物は配達員が家まで運んでくれて、手紙やはがきは郵便屋さんが届けてくれます。":
+        "Packages you buy online are brought to your door by delivery drivers, and letters and postcards are delivered by the mail carrier.",
+      "こうしてみると、私たちの一日は、本当にたくさんの職業に支えられていますね。":
+        "Seen this way, our day really is supported by a great many professions, isn't it.",
+    },
+    quiz: {
+      cloze: [
+        {
+          before: "髪を切ってくれるのは、",
+          after: "です。",
+          options: ["美容師", "医師", "大工", "駅員"],
+          answer: 0,
+          explanation: "「美容師」は美容室で髪を切ったり染めたりする人です。",
+        },
+        {
+          before: "火事が起きた時にやってくるのは、",
+          after: "です。",
+          options: ["警察官", "消防士", "配達員", "郵便屋さん"],
+          answer: 1,
+          explanation: "「消防士」は火を消したり、人を助けたりする仕事です。警察官は事件や事故を担当します。",
+        },
+        {
+          before: "病院で医師のそばで患者さんの世話をするのが、",
+          after: "です。",
+          options: ["薬剤師", "看護師", "小児科医", "保育士"],
+          answer: 1,
+          explanation: "「看護師」は病院で患者さんに一番近い場所で働きます。",
+        },
+        {
+          before: "薬局で薬を出してくれるのは、",
+          after: "です。",
+          options: ["医師", "看護師", "薬剤師", "内科医"],
+          answer: 2,
+          explanation: "「薬剤師」は薬局で薬を出し、飲み方も説明してくれます。",
+        },
+        {
+          before: "手術で病気やけがを治すのは、",
+          after: "です。",
+          options: ["内科医", "外科医", "小児科医", "看護師"],
+          answer: 1,
+          explanation: "「外科医」は手術を担当します。内科医は薬などで治療する医師です。",
+        },
+        {
+          before: "子ども専門の医師を、",
+          after: "といいます。",
+          options: ["内科医", "外科医", "小児科医", "眼科医"],
+          answer: 2,
+          explanation: "「小児科医」は子どもの病気を診る医師です。",
+        },
+        {
+          before: "手紙やはがきを届けてくれるのは、",
+          after: "です。",
+          options: ["配達員", "郵便屋さん", "警察官", "消防士"],
+          answer: 1,
+          explanation: "「郵便屋さん」（郵便配達員）は郵便を担当します。「配達員」は荷物一般を運ぶ、もっと広い言葉です。",
+        },
+        {
+          before: "保育園で小さい子どもと過ごし、生活の仕方を教える人を、",
+          after: "といいます。",
+          options: ["先生", "保育士", "看護師", "小児科医"],
+          answer: 1,
+          explanation: "「保育士」は保育園で乳幼児の世話をする専門職。国家資格が必要です。",
+        },
+      ],
+      reading: [
+        {
+          question: "内科医と外科医は、どんな違いがありますか？",
+          answer:
+            "内科医は、風邪やお腹の痛みなど、体の中の病気を診る医師です。一方、外科医は、手術で病気やけがを治す医師です。同じ「医師」でも、内科医は主に薬などで治療し、外科医は手術で治療する点が違います。",
+        },
+        {
+          question: "看護師はどんな仕事ですか？",
+          answer:
+            "看護師は、病院で医師のそばで働き、患者さんの世話をする人です。たとえば、注射をしたり、薬を渡したり、患者さんの体調を確認したりします。医師の指示を受けて動くことが多いですが、患者さんに一番近い場所で働く、大切な仕事です。",
+        },
+        {
+          question: "美容師はどんな仕事ですか？",
+          answer:
+            "美容師は、美容室で髪を切ったり、染めたり、パーマをかけたりする人です。お客さんの希望を聞いて、その人に合うヘアスタイルを作ります。日本で美容師になるには、専門学校で勉強して、国家試験に合格しなければなりません。",
+        },
+        {
+          question: "警察官はどんな仕事ですか？",
+          answer:
+            "警察官は、町の安全を守る仕事をしています。たとえば、道でパトロールをしたり、事故や事件があった時に現場へ行ったりします。また、道に迷った人に道を教えたり、落し物を預かったりもします。生活の中で困った時に、まず頼りになる存在です。",
+        },
+        {
+          question: "配達員と郵便屋さんは何が違いますか？",
+          answer:
+            "配達員は、荷物を家まで運ぶ人の全体を指す広い言葉で、宅配便やフードデリバリーの人もふくまれます。一方、郵便屋さんは手紙やはがきなど、郵便を専門に配る人です。正式には「郵便配達員」といいます。",
+        },
+      ],
+    },
+  },
 ];
