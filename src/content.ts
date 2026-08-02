@@ -650,4 +650,354 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    id: "professions-transport",
+    title: "移動を支える人たち",
+    subtitle: "町と空で働く仕事",
+    date: "2026-08-03",
+    text: `私たちが毎日どこかへ行けるのは、乗り物を運転したり、案内したりしてくれる人たちのおかげです。今回は、町の中や空の上で「移動」を支えている職業を紹介します。
+
+まず、道の上を走る車の運転手です。運転手といっても、乗せるものや目的によって仕事が違います。バスの運転手は、決まった時間に決まった道を走り、たくさんのお客さんを一度に運びます。タクシーの運転手は、お客さんが行きたい場所まで、一人か少人数を運ぶ仕事です。トラックの運転手は、人ではなく荷物を、遠くの町や工場まで運びます。長い距離を一人で走ることも多く、体力が必要な仕事です。
+
+次に、電車で移動するときに出会う人たちです。駅で切符を確認したり、お客さんに道を案内したりしてくれるのが駅員です。乗り換えが分からなかったり、忘れ物をしたりしたら、駅員に相談すればすぐに助けてくれます。電車に乗ってからも、車内には車掌がいます。車掌は、電車の中で放送をしたり、切符を確認したり、安全に走れるように運転士と協力したりする仕事です。
+
+最後に、空を飛ぶ飛行機に関わる人たちです。飛行機を操縦するのはパイロットです。何百人ものお客さんの命を預かる、責任の重い仕事で、なるためには長い訓練が必要です。飛行機の中でお客さんの世話をするのが客室乗務員、または「CA」と呼ばれる人たちです。飲み物を配ったり、安全のための説明をしたり、体調が悪くなった人を助けたりします。そして、飛行機に乗る前に空港のカウンターでチェックインなどを担当するのがグランドスタッフです。地上（グランド）で働くから、この名前で呼ばれています。
+
+こうして考えてみると、私たちが「行きたい所へ行ける」という当たり前のことは、本当にたくさんの人の仕事に支えられているんですね。`,
+    annotations: {
+      移動: {
+        reading: "いどう",
+        pos: "名詞・する動詞",
+        meaning: "movement; travel; getting around",
+        note: "場所を変わって動くこと。「引っ越し」より広い意味で、日常の通勤・旅行にも使う。",
+      },
+      乗り物: {
+        reading: "のりもの",
+        pos: "名詞",
+        meaning: "vehicle; ride",
+        note: "人や物を運ぶために乗る物の総称。車、電車、飛行機、船など。",
+      },
+      案内: {
+        reading: "あんない",
+        pos: "名詞・する動詞",
+        meaning: "guidance; showing (someone) around",
+        note: "相手が分からないことを教えたり、目的地まで連れて行ったりすること。",
+        examples: [
+          { ja: "駅員さんに改札まで案内してもらった。", en: "The station attendant showed me the way to the ticket gate." },
+        ],
+      },
+      運転手: {
+        reading: "うんてんしゅ",
+        pos: "名詞",
+        meaning: "driver",
+        note: "車やバス、トラックなどを運転する仕事の人。",
+        examples: [
+          { ja: "バスの運転手さんに次の停留所を聞いた。", en: "I asked the bus driver about the next stop." },
+        ],
+      },
+      "バスの運転手": {
+        reading: "バスのうんてんしゅ",
+        pos: "名詞",
+        meaning: "bus driver",
+        note: "決まった時間に、決まった道（ルート）を走り、たくさんの人を一度に運ぶ仕事。",
+      },
+      "タクシーの運転手": {
+        reading: "タクシーのうんてんしゅ",
+        pos: "名詞",
+        meaning: "taxi driver",
+        note: "お客さんの行きたい場所まで、一人か少人数を運ぶ仕事。料金は走った距離や時間で決まる。",
+      },
+      "トラックの運転手": {
+        reading: "トラックのうんてんしゅ",
+        pos: "名詞",
+        meaning: "truck driver",
+        note: "人ではなく、荷物を遠くの町や工場まで運ぶ仕事。長距離を一人で走ることが多い。",
+      },
+      距離: {
+        reading: "きょり",
+        pos: "名詞",
+        meaning: "distance",
+        note: "二つの場所の間の長さ。「距離が長い／短い」の形でよく使う。",
+      },
+      体力: {
+        reading: "たいりょく",
+        pos: "名詞",
+        meaning: "physical strength; stamina",
+        note: "疲れずに体を動かし続けられる力。「体力がある／ない」の形で使う。",
+      },
+      駅員: {
+        reading: "えきいん",
+        pos: "名詞",
+        meaning: "station attendant / staff",
+        note: "駅の中で働く人。切符の確認、道案内、忘れ物の対応など、駅を利用する人を助ける仕事。",
+        examples: [
+          { ja: "乗り換えが分からなくて、駅員さんに聞いた。", en: "I didn't know how to transfer, so I asked a station attendant." },
+        ],
+      },
+      切符: {
+        reading: "きっぷ",
+        pos: "名詞",
+        meaning: "ticket",
+        note: "電車やバスなどに乗るために買う紙のチケット。今はICカード（Suica、PASMOなど）を使う人も多い。",
+      },
+      乗り換え: {
+        reading: "のりかえ",
+        pos: "名詞・する動詞",
+        meaning: "transfer (between trains/buses)",
+        note: "一つの電車やバスから、別のに乗り移ること。",
+        examples: [
+          { ja: "東京駅で新幹線に乗り換えます。", en: "I'll transfer to the Shinkansen at Tokyo Station." },
+        ],
+      },
+      車内: {
+        reading: "しゃない",
+        pos: "名詞",
+        meaning: "inside a train / vehicle",
+        note: "反対は「車外（しゃがい）」。「車内放送」で電車の中の放送のこと。",
+      },
+      車掌: {
+        reading: "しゃしょう",
+        pos: "名詞",
+        meaning: "train conductor",
+        note: "電車の中で働く人。放送、切符の確認、ドアの開閉、安全確認などを担当する。運転士とペアで働く。",
+        examples: [
+          { ja: "車掌さんの放送で、次の駅を知った。", en: "I learned the next station from the conductor's announcement." },
+        ],
+      },
+      放送: {
+        reading: "ほうそう",
+        pos: "名詞・する動詞",
+        meaning: "broadcast; (P.A.) announcement",
+      },
+      運転士: {
+        reading: "うんてんし",
+        pos: "名詞",
+        meaning: "operator (of a train); train driver",
+        note: "電車や新幹線を運転する人。バスやタクシーの「運転手」とは漢字が違う。",
+      },
+      操縦: {
+        reading: "そうじゅう",
+        pos: "名詞・する動詞",
+        meaning: "piloting; operating (a machine)",
+        note: "飛行機や船、大型の機械を動かすこと。「運転」より専門的な言葉。",
+      },
+      パイロット: {
+        reading: "パイロット",
+        pos: "名詞",
+        meaning: "pilot",
+        note: "飛行機を操縦する人。国家資格が必要で、なるためには長い訓練を受ける必要がある。",
+        examples: [
+          { ja: "兄はパイロットになる夢を持っている。", en: "My older brother has a dream of becoming a pilot." },
+        ],
+      },
+      命: {
+        reading: "いのち",
+        pos: "名詞",
+        meaning: "life",
+        note: "生きている力。「命を守る」「命を預かる」など重い場面でよく使う。",
+      },
+      預かる: {
+        reading: "あずかる",
+        pos: "動詞（五段）",
+        meaning: "to look after; to keep in trust",
+        note: "相手の大切な物や人を、代わりに守ること。反対は「預ける（あずける）」。",
+      },
+      責任: {
+        reading: "せきにん",
+        pos: "名詞",
+        meaning: "responsibility",
+        note: "しなければならないこと、間違えたら自分のせいになる立場。「責任が重い」でよく使う。",
+      },
+      訓練: {
+        reading: "くんれん",
+        pos: "名詞・する動詞",
+        meaning: "training; drill",
+        note: "上手にできるようになるまで、何度も練習すること。",
+      },
+      客室乗務員: {
+        reading: "きゃくしつじょうむいん",
+        pos: "名詞",
+        meaning: "flight attendant; cabin crew",
+        note: "飛行機の中でお客さんの世話や安全確認をする人。「キャビンアテンダント」「CA」とも呼ばれる。",
+        examples: [
+          { ja: "CAさんが水を持ってきてくれた。", en: "The flight attendant brought me some water." },
+        ],
+      },
+      体調: {
+        reading: "たいちょう",
+        pos: "名詞",
+        meaning: "physical condition; how one feels",
+        note: "「体調が良い／悪い」の形でよく使う。",
+      },
+      空港: {
+        reading: "くうこう",
+        pos: "名詞",
+        meaning: "airport",
+      },
+      グランドスタッフ: {
+        reading: "グランドスタッフ",
+        pos: "名詞",
+        meaning: "airport ground staff",
+        note: "空港のカウンターで、チェックイン、荷物預かり、搭乗案内などを担当する人。「地上（グランド）で働くスタッフ」から。",
+        examples: [
+          { ja: "グランドスタッフに搭乗券を渡した。", en: "I handed my boarding pass to the ground staff." },
+        ],
+      },
+      地上: {
+        reading: "ちじょう",
+        pos: "名詞",
+        meaning: "the ground; on land",
+        note: "地面の上。反対は「地下（ちか）」「空中（くうちゅう）」。",
+      },
+    },
+    translations: {
+      "私たちが毎日どこかへ行けるのは、乗り物を運転したり、案内したりしてくれる人たちのおかげです。":
+        "The reason we can go somewhere every day is thanks to the people who drive vehicles and guide us.",
+      "今回は、町の中や空の上で「移動」を支えている職業を紹介します。":
+        "This time I'll introduce the professions that support movement — around town and up in the sky.",
+      "まず、道の上を走る車の運転手です。":
+        "First, drivers of vehicles that run on the roads.",
+      "運転手といっても、乗せるものや目的によって仕事が違います。":
+        "Even if we call them all \"drivers,\" the job differs depending on what they carry and their purpose.",
+      "バスの運転手は、決まった時間に決まった道を走り、たくさんのお客さんを一度に運びます。":
+        "Bus drivers follow a set schedule and a set route, and move many passengers at once.",
+      "タクシーの運転手は、お客さんが行きたい場所まで、一人か少人数を運ぶ仕事です。":
+        "Taxi drivers take one passenger — or a small group — to wherever they want to go.",
+      "トラックの運転手は、人ではなく荷物を、遠くの町や工場まで運びます。":
+        "Truck drivers carry cargo, not people, out to distant towns and factories.",
+      "長い距離を一人で走ることも多く、体力が必要な仕事です。":
+        "They often drive long distances alone, so it's a job that requires stamina.",
+      "次に、電車で移動するときに出会う人たちです。":
+        "Next, the people you meet when getting around by train.",
+      "駅で切符を確認したり、お客さんに道を案内したりしてくれるのが駅員です。":
+        "The ones who check tickets and give directions at the station are station attendants.",
+      "乗り換えが分からなかったり、忘れ物をしたりしたら、駅員に相談すればすぐに助けてくれます。":
+        "If you don't know how to transfer, or you leave something behind, the station attendant will help you right away.",
+      "電車に乗ってからも、車内には車掌がいます。":
+        "Once you board the train, there's a conductor on board too.",
+      "車掌は、電車の中で放送をしたり、切符を確認したり、安全に走れるように運転士と協力したりする仕事です。":
+        "The conductor's job is to make announcements, check tickets, and work with the train driver to keep the train running safely.",
+      "最後に、空を飛ぶ飛行機に関わる人たちです。":
+        "Lastly, the people involved with airplanes that fly through the sky.",
+      "飛行機を操縦するのはパイロットです。":
+        "The one who pilots the airplane is the pilot.",
+      "何百人ものお客さんの命を預かる、責任の重い仕事で、なるためには長い訓練が必要です。":
+        "It's a heavy responsibility, holding hundreds of passengers' lives in your hands, and becoming one takes long training.",
+      "飛行機の中でお客さんの世話をするのが客室乗務員、または「CA」と呼ばれる人たちです。":
+        "The ones who look after passengers on the plane are called cabin attendants, or \"CAs.\"",
+      "飲み物を配ったり、安全のための説明をしたり、体調が悪くなった人を助けたりします。":
+        "They pass out drinks, give safety announcements, and help passengers who feel unwell.",
+      "そして、飛行機に乗る前に空港のカウンターでチェックインなどを担当するのがグランドスタッフです。":
+        "And the ones who handle check-in and other counter work at the airport before you board are the ground staff.",
+      "地上（グランド）で働くから、この名前で呼ばれています。":
+        "They're called that because they work on the ground (\"grand\").",
+      "こうして考えてみると、私たちが「行きたい所へ行ける」という当たり前のことは、本当にたくさんの人の仕事に支えられているんですね。":
+        "When you think about it this way, the everyday fact that we can \"go where we want to go\" really is supported by so many people's work.",
+    },
+    quiz: {
+      cloze: [
+        {
+          before: "飛行機を操縦するのは、",
+          after: "です。",
+          options: ["パイロット", "CA", "グランドスタッフ", "車掌"],
+          answer: 0,
+          explanation: "「パイロット」は飛行機を操縦する専門の仕事です。",
+        },
+        {
+          before: "電車の中で放送をしたり、切符を確認したりするのは、",
+          after: "です。",
+          options: ["駅員", "車掌", "運転士", "CA"],
+          answer: 1,
+          explanation: "「車掌」は電車の中で働きます。駅員は駅の中で働くので場所が違います。",
+        },
+        {
+          before: "荷物を遠くの工場まで運ぶのは、",
+          after: "です。",
+          options: ["バスの運転手", "タクシーの運転手", "トラックの運転手", "配達員"],
+          answer: 2,
+          explanation: "「トラックの運転手」は人ではなく荷物を運びます。長距離を走ることが多い仕事です。",
+        },
+        {
+          before: "飛行機の中でお客さんの世話をする人を、",
+          after: "、または「CA」といいます。",
+          options: ["パイロット", "駅員", "客室乗務員", "グランドスタッフ"],
+          answer: 2,
+          explanation: "「客室乗務員」は英語で cabin attendant。略して「CA」とも呼ばれます。",
+        },
+        {
+          before: "空港のカウンターでチェックインを担当するのは、",
+          after: "です。",
+          options: ["パイロット", "CA", "駅員", "グランドスタッフ"],
+          answer: 3,
+          explanation: "「グランドスタッフ」は地上（グランド）で働く空港スタッフです。",
+        },
+        {
+          before: "駅で切符を確認したり、道を案内したりするのは、",
+          after: "です。",
+          options: ["車掌", "駅員", "運転士", "パイロット"],
+          answer: 1,
+          explanation: "「駅員」は駅の中で乗客を助ける仕事です。",
+        },
+        {
+          before: "決まった時間に決まった道を走り、たくさんの人を一度に運ぶのは、",
+          after: "です。",
+          options: ["タクシーの運転手", "バスの運転手", "トラックの運転手", "パイロット"],
+          answer: 1,
+          explanation: "「バスの運転手」はルートと時刻表に沿って走ります。",
+        },
+        {
+          before: "お客さんが行きたい場所まで、一人か少人数を運ぶのは、",
+          after: "です。",
+          options: ["バスの運転手", "タクシーの運転手", "トラックの運転手", "配達員"],
+          answer: 1,
+          explanation: "「タクシーの運転手」は決まったルートではなく、お客さんの目的地まで運びます。",
+        },
+      ],
+      reading: [
+        {
+          question: "パイロットはどんな仕事ですか？",
+          answer:
+            "パイロットは、飛行機を操縦する仕事です。空港を飛び立ってから、目的地の空港に着くまで、天気や機械の状態に注意しながら、安全に飛ぶことが求められます。何百人ものお客さんの命を預かるので、責任がとても重く、なるためには長い間、専門の訓練を受ける必要があります。",
+        },
+        {
+          question: "客室乗務員（CA）はどんな仕事ですか？",
+          answer:
+            "客室乗務員は、飛行機の中でお客さんの世話をする仕事です。たとえば、飲み物や食事を配ったり、安全のための説明をしたり、体調が悪くなったお客さんを助けたりします。長い時間の飛行では、お客さんが快適に過ごせるように気を配る、大切な仕事です。",
+        },
+        {
+          question: "駅員と車掌の違いは何ですか？",
+          answer:
+            "駅員は、駅の中で働く人で、切符の確認、道案内、忘れ物の対応などをします。一方、車掌は、電車の中で働く人で、車内放送、切符の確認、電車の安全を守るために運転士と協力するのが仕事です。同じ「電車に関わる仕事」でも、働く場所が違います。",
+        },
+        {
+          question: "トラックの運転手はどんな仕事ですか？",
+          answer:
+            "トラックの運転手は、人ではなく荷物を、遠くの町や工場まで運ぶ仕事です。長い距離を一人で運転することが多く、夜通し走ることもあります。体力と集中力が必要で、私たちの生活に必要な食べ物や品物を届けてくれる、とても大切な仕事です。",
+        },
+        {
+          question:
+            "空港に着いてから飛行機に乗るまで、どんな職業の人に会いますか？順を追って説明してください。",
+          answer:
+            "まず空港に着いたら、グランドスタッフのカウンターでチェックインをして、荷物を預けます。次に、保安検査場で警備員に手荷物や体の検査をしてもらいます。搭乗口に着くと、またグランドスタッフが搭乗券を確認してくれます。飛行機に乗ると、客室乗務員が席まで案内してくれます。そして、飛行機を安全に飛ばしてくれるのが、パイロットです。目的地に着くまで、たくさんの職業の人に支えられて移動していることが分かります。",
+        },
+        {
+          question: "もし駅員がいなかったら、駅ではどんなことに困ると思いますか？",
+          answer:
+            "もし駅員がいなかったら、まず切符の買い方や乗り換えが分からない人が、誰にも相談できなくなります。また、電車が遅れた時の案内や、けが人・急病人が出た時の対応もできなくなり、駅の中が混乱してしまうでしょう。特に、初めてその駅を使う人や外国からの観光客にとっては、とても不便で不安な場所になってしまうと思います。",
+        },
+        {
+          question:
+            "バスの運転手とタクシーの運転手は、どんなところが似ていて、どんなところが違いますか？",
+          answer:
+            "似ているところは、どちらも車を運転してお客さんを目的地まで運ぶ仕事という点です。違うところは、まず走り方です。バスの運転手は、決まった時間に決まった道を走り、一度にたくさんの人を運びます。タクシーの運転手は、一人か少人数のお客さんを、その人が行きたい場所まで運びます。また、料金の決め方も違います。バスは距離に関係なく決まった料金、タクシーは走った距離や時間で料金が変わります。",
+        },
+        {
+          question:
+            "パイロットになるために大切なことは何だと思いますか？自分の考えを話してください。",
+          answer:
+            "パイロットになるためには、まず健康な体と良い視力が必要だと思います。また、飛行機を安全に飛ばすために、機械や天気について深く勉強しなければなりません。それから、何百人もの命を預かる仕事なので、責任感の強さも大切です。緊急事態が起きた時に、あわてずに冷静に判断できる力も必要でしょう。長い訓練に耐える強い意志も大事だと思います。",
+        },
+      ],
+    },
+  },
 ];
