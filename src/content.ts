@@ -74,185 +74,6 @@ export interface Article {
 
 export const ARTICLES: Article[] = [
   {
-    id: "kindergarten",
-    title: "子どもたちと過ごす日々",
-    subtitle: "幼稚園の先生の一日",
-    date: "2026-07-09",
-    text: `出勤は大体8時より少し前です。大体8時半から子どもたちが登園してくるので、朝の支度を手伝ったり、声をかけたりします。9時半過ぎにクラスの全員がそろうので、そこからトイレや手洗いなどをうながし、10時前後から一斉の活動が始まります。出欠を取ったり、その日のお当番を決めたりした後、図画工作などの「製作」やプール、体操などの主活動に入ります。12時から給食の準備が始まり、13時ごろまで給食の時間です。午後は天気がよければ外で、悪ければ室内で子どもたちと遊びます。13時半から帰りの準備が始まり、子どもたちに絵本や紙芝居を読んで、13時45分には子どもたちは降園となります。ただ、通園バスに乗って帰る子と保護者がお迎えに来る子たちの時間がバラバラなので、全員帰るのは大体14時45分です。全員が降園するまでは子どもたちと室内で遊んだりして過ごし、預かり保育の子は昼間とは別の先生が担当しますので、そこで交代になります。
-子どもたちが帰った後は、園舎や部屋の掃除をして、その日の日誌を書きます。16時ぐらいに終礼があり、終わったら同じ学年の先生と打ち合わせや準備をして、17時15分に退勤します。
-土日祝日と、夏休み、春休み、冬休みなどの長期休みは幼稚園も基本的にはお休みですが、預かり保育を希望するご家庭もあるので、先生たちは交代で出勤します。`,
-    annotations: {
-      出勤: {
-        reading: "しゅっきん",
-        pos: "名詞・する動詞",
-        meaning: "going to work; reporting for work",
-        note: "「出（で）」+「勤（つとめ）」。会社や職場に行くこと。反対は「退勤」。",
-        examples: [{ ja: "毎朝8時に出勤する。", en: "I go to work at 8 every morning." }],
-      },
-      登園: {
-        reading: "とうえん",
-        pos: "名詞・する動詞",
-        meaning: "(of a child) arriving at nursery school / kindergarten",
-        note: "園児が幼稚園・保育園に来ること。帰るときは「降園（こうえん）」。",
-      },
-      支度: {
-        reading: "したく",
-        pos: "名詞・する動詞",
-        meaning: "preparation; getting ready",
-        note: "「準備」とほぼ同じだが、身の回りのことに使うことが多い（食事の支度、出かける支度）。",
-      },
-      手伝う: {
-        reading: "てつだう",
-        pos: "動詞（五段）",
-        meaning: "to help; to assist",
-        examples: [{ ja: "母の料理を手伝う。", en: "I help my mother cook." }],
-      },
-      一斉: {
-        reading: "いっせい",
-        pos: "名詞・副詞的",
-        meaning: "all at once; all together; simultaneous",
-        note: "「一斉に」の形で「みんな同時に」の意味。",
-      },
-      出欠: {
-        reading: "しゅっけつ",
-        pos: "名詞",
-        meaning: "attendance (presence or absence)",
-        note: "「出席」と「欠席」を合わせた語。「出欠を取る」で出席確認をすること。",
-      },
-      当番: {
-        reading: "とうばん",
-        pos: "名詞",
-        meaning: "being on duty; person whose turn it is",
-        note: "順番で回ってくる係。「お当番」と丁寧に言うことも多い。",
-      },
-      製作: {
-        reading: "せいさく",
-        pos: "名詞・する動詞",
-        meaning: "making; production (here: arts and crafts)",
-        note: "物を作ること。幼稚園では工作・お絵かきなどの活動を指す。",
-      },
-      体操: { reading: "たいそう", pos: "名詞・する動詞", meaning: "exercises; gymnastics" },
-      給食: {
-        reading: "きゅうしょく",
-        pos: "名詞",
-        meaning: "school lunch (provided meal)",
-        note: "学校や園でみんなに出される食事。",
-      },
-      準備: { reading: "じゅんび", pos: "名詞・する動詞", meaning: "preparation; getting ready" },
-      紙芝居: {
-        reading: "かみしばい",
-        pos: "名詞",
-        meaning: "kamishibai; picture-story show",
-        note: "絵を1枚ずつ見せながら語る、紙の芝居。日本の伝統的な語り物。",
-      },
-      降園: {
-        reading: "こうえん",
-        pos: "名詞・する動詞",
-        meaning: "leaving nursery school / kindergarten (to go home)",
-        note: "園児が帰ること。来るときは「登園」。",
-      },
-      保護者: {
-        reading: "ほごしゃ",
-        pos: "名詞",
-        meaning: "guardian; parent",
-        note: "子どもを保護する人（親など）。学校からのお知らせでよく使う丁寧な語。",
-      },
-      園舎: { reading: "えんしゃ", pos: "名詞", meaning: "the nursery / kindergarten building" },
-      掃除: { reading: "そうじ", pos: "名詞・する動詞", meaning: "cleaning" },
-      日誌: {
-        reading: "にっし",
-        pos: "名詞",
-        meaning: "daily log; journal",
-        note: "その日の出来事を記録するノート。「日記」より公的・業務的な語。",
-      },
-      終礼: {
-        reading: "しゅうれい",
-        pos: "名詞",
-        meaning: "end-of-day meeting",
-        note: "一日の終わりの短い集まり。朝は「朝礼（ちょうれい）」。",
-      },
-      退勤: { reading: "たいきん", pos: "名詞・する動詞", meaning: "leaving work; clocking out" },
-      幼稚園: { reading: "ようちえん", pos: "名詞", meaning: "kindergarten" },
-      預かり保育: {
-        reading: "あずかりほいく",
-        pos: "名詞",
-        meaning: "extended childcare (outside regular hours)",
-        note: "通常の保育時間の前後に、希望者の子どもを預かる保育。",
-      },
-      担当: {
-        reading: "たんとう",
-        pos: "名詞・する動詞",
-        meaning: "being in charge of; taking care of",
-      },
-    },
-    translations: {
-      "出勤は大体8時より少し前です。": "I usually get to work a little before 8.",
-      "大体8時半から子どもたちが登園してくるので、朝の支度を手伝ったり、声をかけたりします。":
-        "The children start arriving around 8:30, so I help them get ready in the morning and greet them.",
-      "9時半過ぎにクラスの全員がそろうので、そこからトイレや手洗いなどをうながし、10時前後から一斉の活動が始まります。":
-        "By a little after 9:30 the whole class has gathered, so from there I get them to use the toilet and wash their hands, and around 10 the group activities begin.",
-      "出欠を取ったり、その日のお当番を決めたりした後、図画工作などの「製作」やプール、体操などの主活動に入ります。":
-        "After taking attendance and deciding the day's helpers, we move into the main activities, such as arts and crafts (\"seisaku\"), swimming, and exercises.",
-      "12時から給食の準備が始まり、13時ごろまで給食の時間です。":
-        "Lunch preparation starts at 12, and lunchtime lasts until around 1.",
-      "午後は天気がよければ外で、悪ければ室内で子どもたちと遊びます。":
-        "In the afternoon, if the weather is nice we play outside with the children, and if not, indoors.",
-      "13時半から帰りの準備が始まり、子どもたちに絵本や紙芝居を読んで、13時45分には子どもたちは降園となります。":
-        "Preparation for going home starts at 1:30; we read the children picture books and kamishibai, and at 1:45 they head home.",
-      "ただ、通園バスに乗って帰る子と保護者がお迎えに来る子たちの時間がバラバラなので、全員帰るのは大体14時45分です。":
-        "However, since the times differ for children who take the bus and those whose guardians come to pick them up, everyone is gone by about 2:45.",
-      "全員が降園するまでは子どもたちと室内で遊んだりして過ごし、預かり保育の子は昼間とは別の先生が担当しますので、そこで交代になります。":
-        "Until everyone has left, I spend the time playing indoors with the children, and since a different teacher takes charge of the extended-care kids, we switch over at that point.",
-      "子どもたちが帰った後は、園舎や部屋の掃除をして、その日の日誌を書きます。":
-        "After the children go home, I clean the building and the rooms and write the day's log.",
-      "16時ぐらいに終礼があり、終わったら同じ学年の先生と打ち合わせや準備をして、17時15分に退勤します。":
-        "Around 4 there's an end-of-day meeting, and afterward I plan and prepare with the teachers in the same grade, then leave work at 5:15.",
-      "土日祝日と、夏休み、春休み、冬休みなどの長期休みは幼稚園も基本的にはお休みですが、預かり保育を希望するご家庭もあるので、先生たちは交代で出勤します。":
-        "The kindergarten is basically closed on weekends, holidays, and long breaks like summer, spring, and winter vacation, but since some families want extended childcare, the teachers take turns coming in to work.",
-    },
-  },
-  {
-    id: "mocha",
-    title: "モカの紹介",
-    subtitle: "コーヒー色の猫",
-    date: "2026-07-10",
-    text: `モカはコーヒー豆の色によく似ている猫です。名前はその毛の色から付けられました。とても食いしんぼうで、いつも何か食べています。`,
-    annotations: {
-      モカ: {
-        reading: "もか",
-        pos: "名詞（固有名詞）",
-        meaning: "Mocha (the cat's name)",
-        note: "コーヒーの一種「モカ」から。毛の色がコーヒー豆に似ていることが由来。",
-      },
-      コーヒー豆: { reading: "コーヒーまめ", pos: "名詞", meaning: "coffee bean(s)" },
-      似る: {
-        reading: "にる",
-        pos: "動詞（上一段）",
-        meaning: "to resemble; to look like",
-        note: "「〜に似ている」の形でよく使う。ここでは「色に似ている」。",
-      },
-      付ける: {
-        reading: "つける",
-        pos: "動詞（下一段）",
-        meaning: "to attach; (here) to give (a name)",
-        note: "「名前をつける」で「名づける」という意味の決まった言い方。",
-      },
-      食いしんぼう: {
-        reading: "くいしんぼう",
-        pos: "名詞",
-        meaning: "glutton; someone who loves eating",
-      },
-    },
-    translations: {
-      "モカはコーヒー豆の色によく似ている猫です。":
-        "Mocha is a cat whose color closely resembles that of coffee beans.",
-      "名前はその毛の色から付けられました。":
-        "Her name was given after the color of her fur.",
-      "とても食いしんぼうで、いつも何か食べています。":
-        "She's a real glutton and is always eating something.",
-    },
-  },
-  {
     id: "growth",
     title: "子どもたちの成長を見守れる",
     subtitle: "足立つばめ幼稚園の先生インタビュー",
@@ -803,6 +624,28 @@ export const ARTICLES: Article[] = [
           question: "配達員と郵便屋さんは何が違いますか？",
           answer:
             "配達員は、荷物を家まで運ぶ人の全体を指す広い言葉で、宅配便やフードデリバリーの人もふくまれます。一方、郵便屋さんは手紙やはがきなど、郵便を専門に配る人です。正式には「郵便配達員」といいます。",
+        },
+        {
+          question:
+            "熱が出て病院に行くとき、どんな職業の人に、どんな順番で会いますか？順を追って説明してください。",
+          answer:
+            "まず病院に着いたら、受付の人に診察券や保険証を出します。次に、名前を呼ばれて、医師（内科医）に体の様子を話し、診察してもらいます。必要があれば、看護師が熱を測ったり、注射をしたりします。診察が終わったら、会計をして、処方箋をもらいます。最後に、薬局に行き、薬剤師に処方箋を渡して、薬をもらいます。薬剤師が薬の飲み方も説明してくれます。",
+        },
+        {
+          question: "もし町に警察官も消防士もいなかったら、どんなことが起きると思いますか？",
+          answer:
+            "警察官がいなければ、事件や事故が起きた時に、対応してくれる人がいなくなります。町の安全が守られず、みんなが安心して生活できなくなるでしょう。また、消防士がいなければ、火事が起きた時に火を消す人がいなくなり、家や町が全部燃えてしまう危険があります。さらに、けが人や病人を運ぶ救急車も消防署から出るので、命が助からないこともあるかもしれません。この二つの職業は、私たちの安全な生活のためになくてはならない仕事だと言えます。",
+        },
+        {
+          question: "医師と看護師の仕事は、どんなところが似ていて、どんなところが違いますか？",
+          answer:
+            "似ているところは、どちらも病院で働き、患者さんの健康を守るために協力している点です。違うところは、まず役割です。医師は病気の診断をしたり、治療の方針を決めたりするのが主な仕事で、看護師は医師の指示を受けて、患者さんの世話や治療の補助をします。また、なるための道も違います。医師になるには医学部で6年間勉強する必要がありますが、看護師は看護学校などで3〜4年勉強します。どちらも国家資格が必要な、大切な仕事です。",
+        },
+        {
+          question:
+            "「先生」という言葉は、学校の先生だけでなく、医師や弁護士にも使います。なぜだと思いますか？",
+          answer:
+            "「先生」は、専門的な知識を持っていて、人に教えたり助けたりする人への敬意を表す言葉だからだと考えられます。学校の先生は勉強を教え、医師は病気の治し方を、弁護士は法律のことを教えたり助けたりします。つまり、自分より知識や経験が上で、頼りになる相手に対して、尊敬の気持ちを込めて「先生」と呼ぶのだと思います。政治家や作家など、他の職業にも同じ理由で使われます。",
         },
       ],
     },
