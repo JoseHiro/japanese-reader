@@ -5,6 +5,7 @@ import type { Annotation, Article } from "./content";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
 import { TabRail, type TabDef } from "./shared/TabRail";
+import { CONTENT_POS, isBasicWord, isTrivialToken } from "./shared/vocabFilter";
 import {
   IconArticle,
   IconWordList,
@@ -175,6 +176,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("article");
   const [listGlosses, setListGlosses] = useState<Record<string, string[]>>({});
   const [wordQuery, setWordQuery] = useState("");
+  const [showBasic, setShowBasic] = useState(false);
   const readerRef = useRef<HTMLDivElement>(null);
 
   function wordMeaning(u: Unit): string {
@@ -195,10 +197,26 @@ export default function App() {
     return list;
   }, [paragraphs]);
 
+  // Words visible before the search filter is applied. Annotated
+  // (hand-authored) words always show; other tokens are hidden when they
+  // are N5-ish basics or non-content POS, unless the user opts in.
+  const visibleWords = useMemo(() => {
+    return uniqueWords.filter((u) => {
+      if (u.annotation) return true;
+      // Grammatical fragments (numbers, single kana, aux stems) never
+      // belong in a study list, even when "基本語も表示" is on.
+      if (isTrivialToken(u.surface, u.key, u.pos)) return false;
+      if (showBasic) return true;
+      if (!CONTENT_POS.has(u.pos)) return false;
+      if (isBasicWord(u.key, u.surface)) return false;
+      return true;
+    });
+  }, [uniqueWords, showBasic]);
+
   const filteredWords = useMemo(() => {
     const q = wordQuery.trim().toLowerCase();
-    if (!q) return uniqueWords;
-    return uniqueWords.filter((u) => {
+    if (!q) return visibleWords;
+    return visibleWords.filter((u) => {
       const meaning = wordMeaning(u).toLowerCase();
       return (
         u.surface.includes(q) ||
@@ -209,7 +227,7 @@ export default function App() {
     });
     // wordMeaning depends on listGlosses; recompute when either changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uniqueWords, wordQuery, listGlosses]);
+  }, [visibleWords, wordQuery, listGlosses]);
 
   // When the word-list tab is open, load the dictionary once and resolve
   // glosses for words that don't have an authored annotation.
@@ -623,11 +641,19 @@ export default function App() {
                 aria-label="単語を検索"
               />
             </div>
+            <label className="pr-vocab-toggle">
+              <input
+                type="checkbox"
+                checked={showBasic}
+                onChange={(e) => setShowBasic(e.target.checked)}
+              />
+              基本語も表示
+            </label>
             <span className="wl-count">
-              {filteredWords.length} / {uniqueWords.length} 語
+              {filteredWords.length} / {visibleWords.length} 語
             </span>
           </div>
-          {uniqueWords.length === 0 ? (
+          {visibleWords.length === 0 ? (
             <p className="hint">単語がありません。</p>
           ) : filteredWords.length === 0 ? (
             <p className="hint">該当する単語がありません。</p>
@@ -644,7 +670,7 @@ export default function App() {
                 {filteredWords.map((u, i) => (
                   <tr key={i}>
                     <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
-                      <Furigana text={u.surface} show={showFurigana} />
+                      <Furigana text={u.key || u.surface} show={showFurigana} />
                     </td>
                     <td className="wl-reading">{unitReading(u)}</td>
                     <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
