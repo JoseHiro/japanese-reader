@@ -15,6 +15,8 @@ import {
   IconMoon,
   IconLogout,
   IconTranslate,
+  IconChevronLeft,
+  IconChevronRight,
 } from "./shared/icons";
 import { findUser, articlesForUser, lessonsForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
@@ -177,6 +179,32 @@ export default function App() {
   const [listGlosses, setListGlosses] = useState<Record<string, string[]>>({});
   const [wordQuery, setWordQuery] = useState("");
   const [showBasic, setShowBasic] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("yomu-sidebar-collapsed") === "1";
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "yomu-sidebar-collapsed",
+      sidebarCollapsed ? "1" : "0",
+    );
+  }, [sidebarCollapsed]);
+
+  // Auto-collapse the sidebar when the viewport gets narrow enough that
+  // the article column would be squeezed. Manual expand still works;
+  // widening past the breakpoint doesn't force it open again (respecting
+  // whatever state the user left it in).
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 1024px)");
+    const handle = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) setSidebarCollapsed(true);
+    };
+    handle(mq);
+    mq.addEventListener("change", handle);
+    return () => mq.removeEventListener("change", handle);
+  }, []);
   const readerRef = useRef<HTMLDivElement>(null);
 
   function wordMeaning(u: Unit): string {
@@ -432,9 +460,18 @@ export default function App() {
       </header>
 
       <div className="app">
-      <div className="layout">
-      <aside className="sidebar">
-        {isLessonMode ? (
+      <div className={"layout" + (sidebarCollapsed ? " sidebar-collapsed" : "")}>
+      <aside className={"sidebar" + (sidebarCollapsed ? " collapsed" : "")}>
+        <button
+          className="sidebar-toggle"
+          onClick={() => setSidebarCollapsed((v) => !v)}
+          title={sidebarCollapsed ? "サイドバーを開く" : "サイドバーを閉じる"}
+          aria-label={sidebarCollapsed ? "サイドバーを開く" : "サイドバーを閉じる"}
+          aria-expanded={!sidebarCollapsed}
+        >
+          {sidebarCollapsed ? <IconChevronRight /> : <IconChevronLeft />}
+        </button>
+        {!sidebarCollapsed && (isLessonMode ? (
           <nav className="article-list">
             <span className="list-label">レッスン</span>
             {userLessons.map((l, idx) => (
@@ -487,7 +524,7 @@ export default function App() {
               </button>
             ))}
           </nav>
-        )}
+        ))}
       </aside>
 
       {!isLessonMode && article && (

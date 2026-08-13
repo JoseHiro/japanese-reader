@@ -88,6 +88,22 @@ export function IconLogout() {
   );
 }
 
+export function IconChevronLeft() {
+  return (
+    <svg {...base}>
+      <path d="M15 6l-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function IconChevronRight() {
+  return (
+    <svg {...base}>
+      <path d="M9 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export function IconTranslate() {
   return (
     <svg {...base}>
