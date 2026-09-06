@@ -1,0 +1,1792 @@
+{
+  "1": {
+    "title": "日本の地理",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "Noun{で／から}できる",
+        "meaning_en": "～でできる = be made of; be made out of ～からできる = be made from",
+        "explanation": "{～で／から}できる means \"to be made of/from/out of.\" から indicates that the material(s) from which something is made is not immediately obvious. できる is used in generic statements while できている is used when describing something specific.",
+        "pattern_form": "N{で／から} {できる／できている}"
+      },
+      {
+        "n": 2,
+        "title": "Adjective-stem＋さ",
+        "meaning_en": "-ness; -ty",
+        "explanation": "The suffix さ is attached to the stem of an i-adjective or a na-adjective to form a noun.",
+        "pattern_form": "{A-stem／ANa}＋さ： ひろい＋さ； さむい＋さ； 元気＋さ； 便利＋さ (Exception: いい  よさ)"
+      },
+      {
+        "n": 3,
+        "title": "{Nounの／Verb}ように",
+        "meaning_en": "like; as; as if",
+        "explanation": "ように is used when (1) X resembles Y, (2) when X is as Y shows, says, explains, etc., or (3) when X does something as shown/said/explained/etc. in/by Y.",
+        "pattern_form": "a. Nのように b. V-plainように"
+      },
+      {
+        "n": 4,
+        "title": "～は～で{有名だ／知られている}",
+        "meaning_en": "X is famous for Y; X is known because Y",
+        "explanation": "Either a noun or a sentence (S＋こと) occurs before で to state what X is famous for or the reason that X is famous.",
+        "pattern_form": "a. ～はNで{有名だ／知られている}b. ～はSことで{有名だ／知られている}：Type 2c"
+      },
+      {
+        "n": 5,
+        "title": "Verb-masu; i-Adjective-stem＋く",
+        "meaning_en": "and",
+        "explanation": "The masu stem of a verb and the stem of an i-adjective＋く indicate that the sentence is continuing. That is, they function like the English sentence connector \"and.\" This use is generally restricted to written language. In spoken language the te-form of a verb or an i-adjective is commonly used.",
+        "pattern_form": "a. V-masu、～ b. A-stem＋く、～"
+      },
+      {
+        "n": 6,
+        "title": "Verb-non-pastこと{が／も}ある",
+        "meaning_en": "There are times when ～; sometimes",
+        "explanation": "V-plain.non-pastことがある is used when something occurs (or someone does something) occasionally. も implies that something else may also occur. Note: This phrase should not be confused with the phrase V-plain.pastことがある (e.g. 日本に行ったことがある), which implies one has or has not done something before.",
+        "pattern_form": "V-plain.non-pastこと{が／も}ある"
+      },
+      {
+        "n": 7,
+        "title": "{Noun1／Question-word～か／～かどうか}はNoun2に{よって違う／よる}",
+        "meaning_en": "～によって違う = differ depending on ～ による = depend on ～",
+        "explanation": "This structure is used to indicate that something differs depending on the situation, location, time, etc.",
+        "pattern_form": "{QW～か／～かどうか／N1}はN2に{よって違う／よる}"
+      },
+      {
+        "n": 8,
+        "title": "Verb-masu始める",
+        "meaning_en": "begin to; begin V-ing",
+        "explanation": "始める in this use is an auxiliary verb meaning \"begin to V.\"",
+        "pattern_form": "V-masu始める"
+      },
+      {
+        "n": 9,
+        "title": "Noun1＋Particle＋の＋Noun2",
+        "meaning_en": "",
+        "explanation": "In some situations, A in AのB is a noun with a particle such as へ, で, と, から, and まで. が, を and に never occur in this position. Note that の cannot be omitted in this case because it indicates that the preceding noun phrase and particle modifies the following noun phrase. Without の, the noun phrase with the particle is interpreted as an adverbial phrase modifying the predicate in the clause. (Compare Ex. 3 with 先生とミーティングに行けない.)",
+        "pattern_form": "N1＋Prt＋の＋N2"
+      },
+      {
+        "n": 10,
+        "title": "～はSentenceと言われている",
+        "meaning_en": "～ is said to be ～; It is said that ～",
+        "explanation": "This structure is used to introduce something commonly said about something or someone.",
+        "pattern_form": "～はS-plainと言われている"
+      },
+      {
+        "n": 11,
+        "title": "～と言えば",
+        "meaning_en": "Speaking of ～",
+        "explanation": "～と言えば, which literally means \"if you say that ～,\" is used to present, as the topic, something or someone that has just been mentioned by the hearer or the speaker.",
+        "pattern_form": "Xと言えば (X is usually a noun or noun phrase.)"
+      },
+      {
+        "n": 12,
+        "title": "～とか(～とか)",
+        "meaning_en": "things/places/etc. like ～; and; or",
+        "explanation": "とか is used to list examples non-exhaustively. It is similar to や in meaning when the examples listed are nouns. Unlike や, however, とか can also be preceded by verb phrases (Ex.3). When two or more items are listed, とか after the final item is optional when it is followed by a particle (Ex.1) and mandatory otherwise (Ex.2). (Note that や does not occur after the final item.) In S1とかS2とかする, the final とか is not optional.",
+        "pattern_form": "a. N1とかN2(とか) b. S1-plainとかS2-plainとか{する／できる}"
+      },
+      {
+        "n": 13,
+        "title": "～というのは{Nounのこと／Nounということ／Sentenceということ／Sentenceという意味}だ",
+        "meaning_en": "X means ～; The meaning of X is ～; What X means is ～",
+        "explanation": "The structure ～というのは～だ is used to provide the meaning or definition of a word or phrase.",
+        "pattern_form": "a. ～というのは{Nのこと／Nということ}だb. ～というのはSことだ：Type 2cc. ～というのは{Sということ／Sという意味}だ：Type 1"
+      },
+      {
+        "n": 14,
+        "title": "～だけ{でなく(て)／じゃなく(て)}、～も",
+        "meaning_en": "not only ～, but also ～",
+        "explanation": "The sentence structures ～だけでなく、～も, etc. express the idea \"not only X, but also Y.\" Particles に, へ, で, と or から may appear before も.",
+        "pattern_form": "a. N1だけでなく、N2(Prt)もb. Sだけでなく、N(Prt)も：Type 2c"
+      },
+      {
+        "n": 15,
+        "title": "Nounって",
+        "meaning_en": "Speaking of ～; As for ～",
+        "explanation": "って is a colloquial topic marker. It often appears in questions. In written language, は can be used.",
+        "pattern_form": "Nって"
+      },
+      {
+        "n": 16,
+        "title": "～って{いう／聞く／書く／etc.}",
+        "meaning_en": "(tell, hear, say, etc.) that ～ N1っていうN2 = N2 called N1",
+        "explanation": "って is the informal colloquial form of the quotative marker と. って commonly occurs with verbs like 言う, 聞く, 書く and 呼ぶ. (何がないって？ in the second sentence above is the abbreviated form of 何がないって言ったの？)",
+        "pattern_form": "a. Sって{言う／聞く／書く}b. Nって{言う／書く／呼ぶ}c. N1っていうN2"
+      }
+    ]
+  },
+  "2": {
+    "title": "日本語のスピーチスタイル",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～なければ{いけない／ならない}；～なくては{いけない／ならない}",
+        "meaning_en": "have to; must; should",
+        "explanation": "These patterns express the idea of obligation. Although the two patterns are interchangeable, there is a subtle difference between ならない and いけない. That is, ならない is commonly used when the speaker states his/her sense of obligation while いけない is commonly used when the sense of obligation is directed toward the hearer (i.e., when the speaker wants to impose a certain obligation on the hearer).The following contracted forms are used in casual conversation: なければならない  なきゃならない  なきゃなんない なくてはならない  なくちゃならない  なくちゃなんない ならない／なんない in sentence-final position may be omitted, as seen in Ex.5.",
+        "pattern_form": "a. V-nai{なければ／なくては}{いけない／ならない}：行か{なければ／なくては}{いけない／ならない} b. A-nai{なければ／なくては}{いけない／ならない}：安く{なければ／なくては}{いけない／ならない} c. ANa/No/Nで{なければ／なくては}{いけない／ならない}：簡単で{なければ／なくては}{いけない／ならない} d. Nで{なければ／なくては}{いけない／ならない}：本で{なければ／なくては}{いけない／ならない}"
+      },
+      {
+        "n": 2,
+        "title": "～など",
+        "meaning_en": "N1やN2など = N1, N2, and others; N1, N2, etc.; N1 and N2 among others N1やN2などのN3 = N3 such as N1 and N2; N3 like N1 and N2 N1やN2など、N3 = N3 such as N1 and N2; N3 like N1 and N2",
+        "explanation": "など indicates that the given list is not exhaustive. When more than one item is listed, や is commonly used to connect them.",
+        "pattern_form": "N1やN2など({は／も／が／を／に／の／etc.}) (N1 and N2 can be words or phrases. (See the sentences above.))"
+      },
+      {
+        "n": 3,
+        "title": "～は～の一つだ",
+        "meaning_en": "X is one of the ～",
+        "explanation": "This structure is used to describe X while indicating that X is not the only example, object, person, etc.",
+        "pattern_form": "NはNPの{一つ／一人}だ。"
+      },
+      {
+        "n": 4,
+        "title": "Nounにとって",
+        "meaning_en": "for; to",
+        "explanation": "Xにとって means \"to X; for X\" in a context where something (or someone) is important to X, or is necessary, useful, good, difficult, etc. for X. X is often a person, a geographic unit or an organization.",
+        "pattern_form": "Nにとって"
+      },
+      {
+        "n": 5,
+        "title": "Nounの代わりに",
+        "meaning_en": "in place of; instead of; to make up for",
+        "explanation": "の代わりに is used to present something/someone that is replacing or has replaced something/someone. When the context is clear, Nounの can be omitted, as seen in Ex. 2.",
+        "pattern_form": "Nの代わりに"
+      },
+      {
+        "n": 6,
+        "title": "～ため(に) 【purpose】",
+        "meaning_en": "in order to; to; for the purpose of; for; for the sake of",
+        "explanation": "When ため(に) is preceded by a noun or the non-past form of a verb, it indicates either purpose or reason/cause. (See 文法ノート7) In different contexts Nounのため(に) also indicates benefit, as seen below: 父は家族のためにいっしょうけんめい働いている。 A：これは何の辞書ですか？B：外国人のための漢字の辞書です。",
+        "pattern_form": "a. Nのため(に) b. V-plain.non-pastため(に) c. {その／この}ため(に)d. N1のためのN2 e. V-plain.non-pastためのN f. {その／この}ためのN"
+      },
+      {
+        "n": 7,
+        "title": "～ため(に) 【reason; cause】",
+        "meaning_en": "because; due to",
+        "explanation": "When ため(に) is preceded by an i-adjective or a na-adjective or the past form of a verb, it indicates reason or cause. When it is preceded by the non-past form of a verb or a noun, it means either reason/cause or purpose. (See 文法ノート6) The meaning is determined from the context. When ため(に) means reason/cause, it can be replaced by ～から or ～ので, which are less formal than ～ために.",
+        "pattern_form": "a. Type 2bb. DemA: {この／その／あの}ため(に)"
+      },
+      {
+        "n": 8,
+        "title": "AかBか",
+        "meaning_en": "either A or B; whether A or B",
+        "explanation": "The phrase AかBか is used to present alternatives. When Bか is followed by a case particle (e.g., が, を, へ, に, で, と), the second か is usually dropped. (See 文型 b.)",
+        "pattern_form": "a. ～か～か: Type 3b. N1かN2+Prt: 本か雑誌が(ある); パンかご飯を(食べる); 九州か四国へ(行く); 友達か家族と(旅行に行く)"
+      },
+      {
+        "n": 9,
+        "title": "～{でしょ(う)／だろ(う)}",
+        "meaning_en": "tag question (e.g., isn't it?; wasn't it?; aren't they?; is he?; are they?)",
+        "explanation": "でしょう and だろう with rising intonation are used to elicit the hearer's confirmation. でしょう is the polite version of だろう. In casual conversation, male speakers use だろう and female speakers use でしょう. In more casual situations, the final う tends to drop. Note: でしょう and だろう with falling intonation indicates conjecture.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 10,
+        "title": "Nounが見られる",
+        "meaning_en": "(something) is observed; (one) can observe/see",
+        "explanation": "見られる is the passive form of 見る and means \"be observed.\" 見られる can also be interpreted as the potential form of 見る, in which case it means \"can observe/see.\"",
+        "pattern_form": "Nが見られる"
+      },
+      {
+        "n": 11,
+        "title": "Verbようになる",
+        "meaning_en": "come to (be able to) V; not V now; not V anymore",
+        "explanation": "ようになる indicates a gradual change over a certain period of time; it means that someone (or something) comes to the point where he/she does (or can do) something or does not (or cannot) do something. V-なくなる is synonymous with V-ないようになる. The difference is that the latter implies a more gradual change. Compare the following sentences: タバコが吸える場所が少なくなってきたので、だんだんタバコを吸わないようになった。 友達ががん(cancer)で死んでから、タバコを吸わなくなった。",
+        "pattern_form": "V-plain.not-pastようになる(V is often the potential form.): 話すようになる; 話さないようになる; 話せるようになる"
+      },
+      {
+        "n": 12,
+        "title": "また(～も)",
+        "meaning_en": "also; as well; additionally; in addition; moreover",
+        "explanation": "In addition to the meaning \"again,\" また expresses the meaning \"also\" or \"additionally.\" Compare the following examples. again; once again 同じ漢字をまた間違えた。 じゃ、また明日。 also; additionally この本は面白く、また、勉強にもなる。 たばこは自分の体に悪いし、また、周りの人の体にも悪い。 また meaning \"again\" can be used in spoken language.",
+        "pattern_form": "また、S。"
+      },
+      {
+        "n": 13,
+        "title": "～必要{がある／はない}",
+        "meaning_en": "a. V必要がある = it is necessary to V; must V; have to Vb. V必要はない = it is not necessary to V; there is no need to V; don't have to V",
+        "explanation": "This phrase is used to indicate the neccessity of doing something. は is common with a negative ending.",
+        "pattern_form": "V-plain.non-past必要{がある／はない}"
+      },
+      {
+        "n": 14,
+        "title": "～場合(は／には)",
+        "meaning_en": "if; when; in case",
+        "explanation": "場合 is a noun meaning \"case; occasion; situation,\" but with a modifier it forms an adverbial phrase/clause meaning \"when; if; in case.\" 時 can be used in place of 場合, as seen in the following examples: 雨の{場合／時}は、ピクニックはしません。 分からない{場合／時}は、言って下さい。 However, 場合 cannot replace 時 when 時 refers to a specific time and does not mean \"case; occasion; situation,\" as shown in the examples below: 私が行った{時／場合}には、ミーティングが始まっていた。",
+        "pattern_form": "a. Type 2bb. DemA + 場合: {この／その／あの}場合"
+      },
+      {
+        "n": 15,
+        "title": "A{では／じゃ}なく(て)B",
+        "meaning_en": "not A, but B",
+        "explanation": "This structure is used to indicate that a certain piece of information is wrong and, following that, to present the correct information. ではなく(て) is used in written language and じゃなく(て) is used in spoken language.",
+        "pattern_form": "a. N1{では／じゃ}なく(て)N2 b. Phrase1{では／じゃ}なく(て)Phrase2"
+      },
+      {
+        "n": 16,
+        "title": "{何／いく}+Counter+か",
+        "meaning_en": "some",
+        "explanation": "何 (or いく) followed by a counter and か becomes a quantifier meaning \"some.\" Exs. 何人か some (people); 何枚か some (sheets of paper); 何冊か some (books); いくつか some (apples, cups, etc.); いく人か some (people)Except for いくつ and いく人, いく is not commonly used in modern Japanese. 何 cannot be used with つ. Compare the meaning of Q-word+か. Exs. 誰か someone; 何か something; いつか sometime; どこか somewhere",
+        "pattern_form": "{何／いく}+Counter+か"
+      }
+    ]
+  },
+  "3": {
+    "title": "日本のテクノロジー",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～他に(も); ～他(に)は",
+        "meaning_en": "～他に(も) = in addition to ~; besides～他(に)は(～ない) = (not ~) except for ~; (not ~) other than ~",
+        "explanation": "Nの他に(も) is an adverbial phrase meaning \"in addition to N.\" Verbs, adjectives, and demonstrative adjectives can also precede 他に(も) to mean \"in addition to V-ing,\" \"in addition to being Adj.\" or \"in addition to this/that.\" ～他(に)は also means \"in addition to.\" In some contexts, the phrase can mean \"except for; other than.\"",
+        "pattern_form": "a. Type 2b b. {この／その／あの}他に(も)"
+      },
+      {
+        "n": 2,
+        "title": "(～と)同じ{ぐらい／くらい}",
+        "meaning_en": "about as ~ as; about the same ~ as ~",
+        "explanation": "The particle ぐらい／くらい \"approximately\" often occurs with 同じ to mean \"about the same.\" Review the pattern \"Number + (Counter +) ぐらい／くらい.\" A：ここからシカゴまでどのぐらいかかりますか。 B：車で5時間ぐらいです。",
+        "pattern_form": "a. Nと同じ{ぐらい／くらい} b. N1と同じ{ぐらい／くらい}のN2"
+      },
+      {
+        "n": 3,
+        "title": "Noun+型",
+        "meaning_en": "style; type; pattern; make; model; design",
+        "explanation": "型 is a suffix meaning \"style, type, model, etc.\" It is commonly used to describe the shape, type, model, or newness of an object. The preceding elements are mostly nouns, but some adjectival kanji characters can also precede 型 (e.g. 大, 新, 薄).",
+        "pattern_form": "a. N+型だ b. N1+型(の)N2"
+      },
+      {
+        "n": 4,
+        "title": "それに",
+        "meaning_en": "in addition; moreover; furthermore; what's more; on top of that; and",
+        "explanation": "それに is used to add an item or to make an additional statement.",
+        "pattern_form": "a. N1{、／と／に}N2、それにN3：大阪、京都、それに、奈良にも行ったb. S1。それに、S2。：日本の夏はとても暑い。それに、湿度(humidity)も高い。c. S1し、それに、S2。：日本の夏はとても暑し、それに、湿度も高い。"
+      },
+      {
+        "n": 5,
+        "title": "～(の)なら",
+        "meaning_en": "Nなら = would; could~ Sなら = if (it's the case that) ~; if (it's true that) ~",
+        "explanation": "なら is used when the speaker supposes that something is the case or is true and makes a statement, suggestions, etc. based on that supposition. の occurs before なら when the supposition is based on what the speaker has heard from someone or learned from the situation. (Review のだ.) トムが行く(の)なら、私も行きます。(If (it's true that) Tom is going (to the party), I'll go, too.) Nなら means \"if it is N; N would/could ~.\" 明日なら大丈夫です。((a) If it's tomorrow, I can make it. (b) Tomorrow would be all right.) 日本語なら読めます。((a) If it's Japanese, I can read it. (b) I could read Japanese.) In \"S1ならS2\" the action/event in S1 does not have to take place before that in S2. あの人が来る(の)なら、私は帰ります。(If (it's true that) that person is coming (as you say), I'm leaving (now before he comes).) Note that the use of たら, as in S1たらS2, must be distinguised from that of なら. When たら is used, S1 must be completed before S2, as shown in the following example: 友達が迎えに来たら、私は帰ります。(If/When my friend comes to pick me up, I will leave.) Thus, in the following example, たら is not acceptable. 本を{読む(の)なら／×読んだら}、電気をつけなさい。(If you're going to read a book, turn on the light.)",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 6,
+        "title": "～として",
+        "meaning_en": "as; in the capacity of",
+        "explanation": "として is used to indicate the role, capacity or occupation of someone for the function of characteristics of something.",
+        "pattern_form": "Nとして"
+      },
+      {
+        "n": 7,
+        "title": "Verb-non-pastことになっている",
+        "meaning_en": "be supposed to ~; It is a rule that ~; It's been decided that ~",
+        "explanation": "V-plain.non-pastことになっている means that something has been decided and the result of that decision is still in effect. It is often used to introduce rules and customs, as well as one's schedule.Cf. ことにしている：The speaker (or the subject of the sentence) makes it a rule to do something. 毎日、新しい漢字を五つ覚えることにしている。",
+        "pattern_form": "V-plain.non-pastことになっている：{行く／行かない}ことになっている"
+      },
+      {
+        "n": 8,
+        "title": "～をしている；～をしたNoun",
+        "meaning_en": "have",
+        "explanation": "This pattern is used to describe a feature of someone or something, focusing on a certain part or attribute of the person or thing. N1はAdj+N2をしている is synonymous with N1はN2がAdj. ゾウは長い鼻をしている。= ゾウは鼻が長い。(Elephants have long trunks.) When the phrase modifies a noun, した is commonly used instead of している (Exs. 3 and 4).",
+        "pattern_form": "a. N1は{A/ANaな}+N2をしている：ローラは{大きい／きれいな}目をしているb. {A/ANaな}+N2をしたN1：{大きい／きれいな}目をした人"
+      },
+      {
+        "n": 9,
+        "title": "～てくる；～ていく",
+        "meaning_en": "V-teくる = have V-ed; begin to; become; grow V-teいく = go on V-ing; continue; become; grow",
+        "explanation": "V-teくる and V-teいく indicate the temporal or spatial direction of an action from the speaker's viewpoint. V-teくる is used when an action appears to be directed toward the speaker, and V-teいく is used when it appears to be directed away from the speaker. V-teくる often indicates that an action or process began in the past and is continuing in the present, or that something has begun to take place, as seen in the following examples: 4年間日本語を勉強してきました。(I have studied Japanese for four years.) 日本語の文法が面白くなってきました。(I'm beginning to find Japanese grammar interesting.) V-teいく, on the other hand, often express an action or state that will continue from the present into the future. 今学期は1週間に10ずつ新しい漢字を勉強していきます。(This term we are going to study ten new kanji a week.) これからすずしくなっていくでしょう。(It will grow cooler from now on.) In other uses, くる and いく following V-te maintain their original meanings, i.e. \"to come\" and \"to go.\" 図書館で本を借りて来る。(I'll go to the library to borrow some books (and will come back).) 買い物する前に、銀行でお金をおろして行く。(Before shopping, I'll get some cash from the bank (and then go shopping).)",
+        "pattern_form": "V-teくる／いく"
+      },
+      {
+        "n": 10,
+        "title": "Verb-non-pastことになった",
+        "meaning_en": "It was/has been decided that ~; It turns out that ~",
+        "explanation": "V-non-pastことになった means that a situation has changed due to some external force (e.g., a decision made by someone other than the speaker). It indiciates either that the speaker (or the subject of the sentence) did not actively make the decision or that he/she is viewing the decision from the standpoint of an outsider.Note that ことにした indicates that the speaker or the subject made a decision to do something: 日本に留学することにしました。",
+        "pattern_form": "V-non-past.plainことになった：{行く／行かない}ことになった"
+      },
+      {
+        "n": 11,
+        "title": "～ように{頼む／言う}",
+        "meaning_en": "～(てくれる)ように頼む = to ask someone to V ～ように言う = to tell someone to V",
+        "explanation": "ように頼む／言う is used to quote a request or command indirectly. In an affirmative request ように頼む is often used with てくれる, as in 来てくれるように頼む. (cf. negative request: ～ないように頼む)",
+        "pattern_form": "a. V-non-past.plainように頼む／言う Direct Quote: 先生は学生に「漢字を覚えなさい」と言いました。 Indirect Quote: 先生は学生に漢字を覚えるように言いました。 b. V-teくれるように頼む Direct Quote: 私は友達に「ノートを見せてください」と頼みました。 Indirect Quote: 私は友達にノートを見せてくれるように頼みました。 c. V-naiないように頼む／言う Direct Quote: 私はよく両親に「弟をいじめてはいけません」と言われます。 Indirect Quote: 私はよく両親に弟をいじめないように言われます。"
+      },
+      {
+        "n": 12,
+        "title": "～て{くれる／くれない／もらえる／もらえない}？",
+        "meaning_en": "Will you ~?; Can you ~?; Could you ~?",
+        "explanation": "V-teくれる, etc. with rising intonation is used to make requests in casual conversation.",
+        "pattern_form": "V-te{くれる／くれない／もらえる／もらえない}？"
+      },
+      {
+        "n": 13,
+        "title": "Verb-non-pastようにする",
+        "meaning_en": "make an effort to do ~; make an effort so that ~; try (one's best) to do~; try one's best so that ~",
+        "explanation": "V-plain.non-pastようにする indicates one's conscious effort to do something for some purpose. Here, one makes an effort at every opportunity to do something to the degree that he or she can, but sometimes fails. Thus, ようにする is often used for habitual actions. Note that this phrase differs from Vことにする, which indicates one's decision to do something and the action can be either a single or a habitual one.",
+        "pattern_form": "V-plain.non-pastようにする：{食べる／食べない}ようにする"
+      },
+      {
+        "n": 14,
+        "title": "～かな(あ)",
+        "meaning_en": "I wonder ~",
+        "explanation": "かな(あ) is a sentence-final particle which indicates that the sentence is a self-addressed question or a question addressed to the speaker's in-group member(s). It is used only in casual language.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 15,
+        "title": "なるべく",
+        "meaning_en": "as much/often as possible; as ~ as possible",
+        "explanation": "なるべく with or without an adverb modifies the following verb phrase and adds the meaning \"as (much) as possible.\" When there is no specific adverb after なるべく, it is usually interpreted as \"as much as ~\" or \"as often as~.\"",
+        "pattern_form": ""
+      },
+      {
+        "n": 16,
+        "title": "～ようとした{が／けれど／ら}",
+        "meaning_en": "V-volとした{が／けれど} = tried to ~ but; was going to ~ butV-volとしたら = when ~ was going to ~",
+        "explanation": "V-volとした, the past form of V-volとする (to try to do~), is used in situations where someone had made and attempt to do something but failed (Ex. 1), where someone was going to do something but didn't (Ex. 2), or where something happened when someone was going to do something (Exs. 3 and 4).",
+        "pattern_form": "V-volとした{が／けれど／ら}：行こうとした{が／けれど／ら}；食べようとした{が／けれど／ら}"
+      }
+    ]
+  },
+  "4": {
+    "title": "日本のスポーツ",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "毎～のように",
+        "meaning_en": "almost every ~",
+        "explanation": "The literal meaning of this phrase is \"like every ~,\" but it is used to mean \"almost every ~.\"",
+        "pattern_form": "毎 + Xのように (X = time word)：毎{週／月／年／回}のように"
+      },
+      {
+        "n": 2,
+        "title": "Sentenceと{考えられている／思われている}",
+        "meaning_en": "It is considered that ~; It is believed that ~",
+        "explanation": "Sと考えられている and Sと思われている are used to introduce a generally-accepted opinion regarding some matter. 考えられている usually indicates an opinion arrived at through logic, and 思われている usually indicates an opinion derived from intuition. Note that Sと考えられる and Sと思われる indicate the speaker's/writer's opinion.",
+        "pattern_form": "S-plainと{考えられている／思われている}"
+      },
+      {
+        "n": 3,
+        "title": "～など(は)／～なんて",
+        "meaning_en": "things/people/etc. like ~",
+        "explanation": "(1) Sentenceなど(は) is an abbreviated form of Sなどということは, which means \"things like S.\" (2) Nounなど(は) is a shortened form of Nounなどという{もの／人／etc.}は, which means \"things/people/etc. like N.\" なんて is a colloquial version of など(は). (3) When S is a quotation, Sなどと is an abbreviated form of Sなどということを (Ex.5).",
+        "pattern_form": "a. Type 1b. N{など(は)／なんて}：子供{など(は)／なんて}"
+      },
+      {
+        "n": 4,
+        "title": "まず",
+        "meaning_en": "first of all; first; to begin with; before everything",
+        "explanation": "まず is an adverb which means \"first of all.\"",
+        "pattern_form": ""
+      },
+      {
+        "n": 5,
+        "title": "Verb-masu合う",
+        "meaning_en": "V (to/for) each other; V with",
+        "explanation": "合う, when combined with another verb, forms a compound verb, adding the meaning \"to each other.\"",
+        "pattern_form": "V-masu合う：話し合う; 見せ合う; 助け合う; 信じ合う"
+      },
+      {
+        "n": 6,
+        "title": "Verb-non-pastように",
+        "meaning_en": "so that ~; in such a way that ~",
+        "explanation": "(1) This construction is used to state either a purpose or the way in which something is to be done. In XようにY, X represents a state or event which is beyond the control of the subject of Y. The verb form before ように is often a potential form or a negative form. (2) In the similar construction XためにY, X represents an action which can be controlled by the subject of Y, which XようにY implies that a certain consequence (X) will arise as the result of an action (Y). Thus, in the following example, ように cannot be used. 新しい車を買う{ために／×ように}、お金をためています。 In the next example, both ために and ように can be used because the subject of the main clause (i.e., the teacher) is different from that of the subordinate clause (i.e., students), and therefore, he/she cannot necessarily control the action of the subordinate clause. 学生が勉強する{ために／ように}、先生は毎日宿題を出します。",
+        "pattern_form": "V-plain.non-pastように：分かるように; 読めるように; 遅れないように"
+      },
+      {
+        "n": 7,
+        "title": "あるNoun",
+        "meaning_en": "a; a certain; some; some(one/thing)",
+        "explanation": "あるX is used when the speaker has a specific X in mind, but he/she does not need to or want to be specific. In the above sentence, for example, ある選手 refers to a baseball player and the ある indicates that the speaker has a specific player in mind. In Exs. 1, 2, and 3, ある日 refers to a specific day, ある有名人 refers to a specific person and ある所 refers to an imaginary place in a folk tale, respectively.",
+        "pattern_form": "あるN：ある人; ある町; ある年"
+      },
+      {
+        "n": 8,
+        "title": "Sentence{の／ん}{ではないだろうか／ではないでしょうか／じゃないかな}",
+        "meaning_en": "I think that ~; Isn't it that ~?",
+        "explanation": "This ending indicates the speaker's conjecture and is used to express an opinion in an indecisive fashion. Although the negative form ではない is used, the is no negative meaning. のではない{だろう／でしょう}か are used only in written language, and のではないだろうか is the more formal form. ん{ではないでしょう／じゃないかな} are used only in spoken language. んじゃないかな is more casual.",
+        "pattern_form": "Type 2a"
+      },
+      {
+        "n": 9,
+        "title": "～ず(に)",
+        "meaning_en": "without V-ing; instead of V-ing",
+        "explanation": "ずに is synonymous with ないで when ないで means \"without doing something\" or \"instead of doing something.\" に is sometimes omitted.",
+        "pattern_form": "V-naiずに：行かずに; 食べずに (Exception: する  せずに)"
+      },
+      {
+        "n": 10,
+        "title": "{そう／こう／ああ}いうNoun",
+        "meaning_en": "that/this kind of; such",
+        "explanation": "(1) When そういう, こういう and ああいう refer to something/someone the speaker sees or perceives, they are used for something/someone close to the hearer, close to the speaker, and away from both the speaker and the hearer, respectively. (2) These phrases are also used to refer to something/someone the speaker or the hearer has just mentioned. Specifically, そういう is used when the speaker has just mentioned something/someone (Ex. 1 and 2). こういう is used when the speaker has just stated something factual about something/someone (Ex. 3). And, ああいう is used when the information the speaker or the hearer has just mentioned is known to both (Ex. 4).",
+        "pattern_form": "{そう／こう／ああ}いうN"
+      },
+      {
+        "n": 11,
+        "title": "Sentenceと言える{だろう／でしょう}",
+        "meaning_en": "It probably can be said that ~; It is probably all right to say that ~",
+        "explanation": "This pattern is used when the speaker is quite certain that his/her statement is correct but wants to soften the statement so as not to appear too assertive. This is a formal expression.",
+        "pattern_form": "S-plainと言えるだろう"
+      },
+      {
+        "n": 12,
+        "title": "XはY(という)ことなの{である／だ}",
+        "meaning_en": "X is Y; X means that Y",
+        "explanation": "This structure is used to indicate what X is or what X means. なのだ makes the statement more emphatic. である is a formal form of だ.",
+        "pattern_form": "a. Type 1b. Nのことなのである：日本人のことなのである"
+      },
+      {
+        "n": 13,
+        "title": "～ん{だけど／ですが}",
+        "meaning_en": "but (in English, null in most situations) (see p.126 言語ノート6「が and けれども」.)",
+        "explanation": "Sんだけど／ですが is used as a preliminary remark by the speaker to inform the hearer of the speaker's desire, the current situation, etc. before (a) asking a question related to that desire/situation, (b) asking for an opinion or for advice, or (c) making a request. This phrase can also be used to extend an invitation or an offer. When making a request, the request is often unstated, as shown below. もらったメールを間違って消してしまったんですが、(もう一度送ってもらえませんか。)(I mistakenly deleted the email you'd sent me. (Could you resend it to me?)) んだけど is more casual than んですが.",
+        "pattern_form": "Type 2a"
+      },
+      {
+        "n": 14,
+        "title": "それで",
+        "meaning_en": "because of that; so; that's why; for that reason",
+        "explanation": "それで is a sentence-initial conjugation. It precedes a fact, conclusion, decision, etc. In \"S1。それで、S2,\" S1 is the cause/reason for the information stated in S2. それで cannot be used when S2 is the speaker's judgement, request, or command. In this situation, だから should be used, as shown in the following examples: トムは明日試験がある。{だから／×それで}、今日のパーティーには来ないと思う。 明日は大事な文法を教えます。{だから／×それで}、休まないでください。 Note that だから can be used in situations where それで is used.",
+        "pattern_form": "S1。それで、S2。"
+      },
+      {
+        "n": 15,
+        "title": "Question Word ～ても",
+        "meaning_en": "no matter what/who/when/where/how",
+        "explanation": "When ても is used with a Question Word, the phrase means \"no matter\" or \"without regard to.\"",
+        "pattern_form": "a. QW (Prt) + (V/A)-teも：何を見ても; いつ聞いても; どんなに／いくら頑張っても; どんなに／いくら暑くても b. QW (Prt) + (ANa/N) + でも：どんなに／いくら不便でも; 誰が先生でも"
+      },
+      {
+        "n": 16,
+        "title": "～うちに",
+        "meaning_en": "while ~ still; ～ないうちに = before (something happens)",
+        "explanation": "(ない)うちに is used when someone does something before a situation or state changes, 間に is used in similar situations, but it cannot be used with the negative forms of verbs, as seen below: 忘れない{うちに／×間に}今日習ったことを復習した。 Another difference between the two phrases is that うちに always implies that it is not possible, easy or a good idea to do something after the time specified by the うちに clause. However, this is not always the case with 間に. Thus, if it is not a problem for the speaker to go to Japan after finishing his Japanese class, 間に should be used as shown below: 日本語の勉強をしている間に日本に行ってみたい。",
+        "pattern_form": "a. V-plain.nonpastうちに：{覚えている／時間がある／雨が降らない／忘れない}うちに b. A-plain.nonpastうちに：{暖かい／若い}うちに c. ANaなうちに：元気なうちに d. Nのうちに：{子供の／大学生の／休みの}うちに (N cannot be an event or action noun, such as 試合、試験、勉強、and 買い物.)"
+      },
+      {
+        "n": 17,
+        "title": "できれば；できたら",
+        "meaning_en": "if possible; if you don't mind; if it's all right",
+        "explanation": "The phrase literally means \"if possible.\" It is also used when the speaker asks a favor of someone in a less direct way. できれば is slightly more formal than できたら.",
+        "pattern_form": ""
+      },
+      {
+        "n": 18,
+        "title": "～たばかり",
+        "meaning_en": "have just V-ed",
+        "explanation": "V-plain.pastばかり indicates that someone has just done something or something has just happened. The noun-modification form is ばかりの.",
+        "pattern_form": "a. V-plain.pastばかりだ：食べたばかりだ; 読んだばかりだ b. V-plain.pastばかりのN：買ったばかりの自転車; 生まれたばかりの子猫"
+      }
+    ]
+  },
+  "5": {
+    "title": "日本の食べ物",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "Number+Counter当たり",
+        "meaning_en": "per ~; each ~; a ~; for a ~",
+        "explanation": "当たり is used with 一 (or 1) and a counter to mean \"per.\" Sometimes numbers other than one are used, as in Ex. 3.",
+        "pattern_form": "a. Number+Counter当たりNumber+Counter：1時間当たり10ドル b. Number+Counter当たりのN：一人当たりのコスト"
+      },
+      {
+        "n": 2,
+        "title": "SentenceのはXの方だ",
+        "meaning_en": "It is X that S.",
+        "explanation": "The structure SのはXの方だ is used to emphasize that it is X that makes the proposition in S true.",
+        "pattern_form": "Type 2a"
+      },
+      {
+        "n": 3,
+        "title": "Number(+Counter)({ぐらい／くらい})は；Noun(だけ)は",
+        "meaning_en": "at least",
+        "explanation": "When the particle は follows a quantifier (i.e., a word of quantity such as 3本 and 少し), it adds the meaning \"at least.\" だけは and ぐらいは or (くらいは) after a noun have the same meaning.",
+        "pattern_form": "a. Number(+Counter)は b. Nだけは c. N{ぐらい／くらい}は"
+      },
+      {
+        "n": 4,
+        "title": "Nounをはじめ",
+        "meaning_en": "beginning with ~; starting with; including",
+        "explanation": "Nounをはじめ is used to present a primary example when mentioning a group of things or people.",
+        "pattern_form": "Nをはじめ"
+      },
+      {
+        "n": 5,
+        "title": "～以上／～以下",
+        "meaning_en": "以上 = more than; or more 以下 = less than; or less",
+        "explanation": "X以上 and X以下 mean \"equal to or more than X\" and \"equal to or less than X,\" respectively. A Number+Counter or a demonostrative pronoun such as これ and それ commonly occurs before 以上 and 以下. When the topic is academic grades, grade symbols such as C and B can be used (e.g., C以上).",
+        "pattern_form": "a. Number(+Counter)以上／以下：3年生以上; 1万円以下; 4以上 b. Demonstrative pronoun以上／以下：これ以上; それ以下"
+      },
+      {
+        "n": 6,
+        "title": "NounさえVerbば",
+        "meaning_en": "if ~ only ~; if ~ just ~; as long as",
+        "explanation": "Noun さえ with a verb conditional form is used when the condition presented in the clause is the only condition to make the statement in the main clause true. さえ replaces the particles が and を in this structure; however, when other particles occur with さえ here, they do no drop, as shown in the following examples. お金がさえあれば; 友達とさえ話せれば",
+        "pattern_form": "NさえV-cond：お金さえあれば; お酒さえ飲まなければ"
+      },
+      {
+        "n": 7,
+        "title": "ついに",
+        "meaning_en": "at last; finally; in the end; after all",
+        "explanation": "The adverb ついに indicates that something happens or something expected doesn't happen, after waiting for it, longing for it, expecting it to happen, making an effort to make it happen, or after struggling/suffering in a hard situation, for a long time.",
+        "pattern_form": ""
+      },
+      {
+        "n": 8,
+        "title": "{Noun/no-Adjective}化(する)",
+        "meaning_en": "～化する = -ize; make; become; change to ～化 = -ization; making ~; becoming ~; changing to ~",
+        "explanation": "The suffix 化 is affixed to nouns and no-adjectives and adds the meaning \"-ization,\" as in \"mechanization\" and \"digitization.\"",
+        "pattern_form": "a. N+化：日本化; 専門化; 機械化(mechanization); カタカナ化 b. ANo+化：一般化; 最適化(optimization)"
+      },
+      {
+        "n": 9,
+        "title": "ところが",
+        "meaning_en": "however; but; nevertheless",
+        "explanation": "ところが is a sentence-initial conjunction used when something takes place which is unexpected from the preceding context. The sentence after ところが represents an event or action the speaker cannot control, as shown in the following examples: 友達が電話をしてと言ったから、電話をした。ところが、友達は家にいなかった。 友達が電話をしてと言った。{でも／×ところが}私は電話しなかった。",
+        "pattern_form": "S1。ところが、S2。"
+      },
+      {
+        "n": 10,
+        "title": "～に違いない",
+        "meaning_en": "must; I'm sure/certain that ~; It is certain that ~; I'm certain that ~; be sure to V",
+        "explanation": "This structure indicates that the speaker is certain that something is true or is the case. It is used primarily in written language.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 11,
+        "title": "～をもとに(して)",
+        "meaning_en": "based on",
+        "explanation": "をもとにして is a compound particle meaning \"based on.\" して here is optional. The noun-modification form is をもとにした.",
+        "pattern_form": "a. Nをもとに(して) b. N1をもとにしたN2"
+      },
+      {
+        "n": 12,
+        "title": "Nounと{同じで／違って}",
+        "meaning_en": "Nと同じで = just like N Nと違って = unlike N; different from N",
+        "explanation": "The comparison phrases と同じで and と違って mean \"just like ~\" and \"unlike ~,\" respectively. Note that the particle と is used when X and Y are in a reciprocal relationship, as seen in the following examples: XはYと{同じだ／違う／似ている}。(X is {the same as/different from/similar to} Y.) XはYと{結婚した／けんかした／話し合った／別れた}。(X {married/had a fight with/discussed something with/separated from} Y.)",
+        "pattern_form": "Nと{同じで／違って}"
+      },
+      {
+        "n": 13,
+        "title": "Nounらしい",
+        "meaning_en": "so much like ~; typical of ~; typical ~; -like",
+        "explanation": "In addition to the meaning \"seem,\" Nらしい means that something/someone is representative of N. XはNらしい often conveys the idea that X has the positive characteristics of N. ビリーは言うことがかわいくて子供らしい。 この町は昔の城下町(castle town)らしい雰囲気(atmosphere)が残っている。 らしい is an i-adjective. Thus, the noun-modification form and the adverbial form are らしい and らしく, respectively.",
+        "pattern_form": "Nらしい：男らしい; 日本らしい"
+      },
+      {
+        "n": 14,
+        "title": "Noun+的",
+        "meaning_en": "-ic; -ive; -al; -like",
+        "explanation": "The suffix 的 is attached to nouns in order to change them to na-adjectives. When these adjectives modify nouns, な is sometimes omitted (Ex. 5).",
+        "pattern_form": "N+的：アメリカ的; 文学的; 書き言葉的; 一般的"
+      },
+      {
+        "n": 15,
+        "title": "Sentenceたらいいのに(なあ)",
+        "meaning_en": "I wish; I hope",
+        "explanation": "たらいいのに(なあ) is used to express the speaker's wish, which, in this structure, is usually counterfactual. なあ makes the wish more emotive. Verbs are commonly in the potential form and refer to the speaker's action.",
+        "pattern_form": "S-plain.pastらいいのに(なあ)"
+      },
+      {
+        "n": 16,
+        "title": "ほとんど",
+        "meaning_en": "ほとんど = almost all; most of (it/the time/etc.) ほとんど～ない = hardly (ever); rarely; almost no (thing) ほとんどのN = almost all N; most of N",
+        "explanation": "ほとんど means \"almost all; most of.\" Thus, it is used only when the amount of something is the issue. Note that ほとんど cannot be used in the following examples: Tom almost drowned.  トムはもうちょっとでおぼれるところだった。(×トムはほとんどおぼれた。) I'd almost fogotten the appointment.  もう少しで約束を忘れるところだった。(×私はほとんど約束を忘れた。)",
+        "pattern_form": "a. ほとんどV b. ほとんどのN"
+      },
+      {
+        "n": 17,
+        "title": "～(ような)気がする",
+        "meaning_en": "I feel that ~; have a feeling that ~; have the impression that ~; it seems to me that ~",
+        "explanation": "ような気がする indicates that the speaker is not certain about something, but has a feeling that it's true. ような can be dropped without a change in meaning.",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 18,
+        "title": "Verbところ",
+        "meaning_en": "V-non-pastところ = (when) ~ is about to V V-teいるところ = (when) ~ is V-ing; (while) ~ is V-ing; (when) ~ is in the midst of V-ing V-pastところ = (after) ~ have just V-ed",
+        "explanation": "When used with verbs, ところ indicates a point in time. Depending on the tense of the preceding verb, it can be (a) the moment just before that action begins, (b) a moment in the midst of the action, or (c) the moment just after the action finishes. When the particle に follows ところ, the ところ clause is a time clause (Exs. 2 and 3). When the ところ clause is the object or subject of such verbs as 見る and 撮る, ところ indicates the scene in which the action takes place (Exs. 4 and 5).",
+        "pattern_form": "a. V-non-pastところ：見るところ; 話すところ b. V-teいるところ：食べているところ; 考えているところ c. V-pastところ：食べたところ; できたところ"
+      }
+    ]
+  },
+  "6": {
+    "title": "日本人と宗教",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～に気がつく",
+        "meaning_en": "notice (that ~); realize that ~",
+        "explanation": "～に気がつく can be preceded by nouns or sentences, and means \"to notice N\" or \"realize/notice that S.\" The first sentence in 本文 above is an example of Sことに気がつく, and the second sentence is an example of Nに気がつく. Note that the こと in the two sentences are different. The first こと is a nominalizer meaning \"that,\" and the second こと is a noun meaning \"thing.\" (See p.150, 言語ノート7「もの and こと」.)",
+        "pattern_form": "a. Nに気がつくb. Sことに気がつく：Type 2c"
+      },
+      {
+        "n": 2,
+        "title": "Verb-non-pastように(と){願う／祈る}",
+        "meaning_en": "～ように(と)願う = hope that ~ ～ように(と)祈る = pray that ~",
+        "explanation": "Sように(と) is used with verbs such as 願う \"hope\" and 祈る \"pray,\" and expresses the speaker's hope or desire that what is stated in the sentence will become reality.",
+        "pattern_form": "V-non-past.plainように(と){願う／祈る}"
+      },
+      {
+        "n": 3,
+        "title": "NounもVerbば、NounもVerb",
+        "meaning_en": "some do ~ and others do ~; do ~ and ~ among other things; sometimes ~ and sometimes ~; there are times when ~ and times when ~; ~ and also ~; ~ and ~ as well",
+        "explanation": "This sentence structure is used to present some members in a group, things in a category, actions someone takes, characteristics of something/someone, etc., among others. Although the form of the verb here is conditional, the meaning is not conditional in this usage. The structure \"N1もV-plainし、N2もV\" is similar in meaning. 寿司が好きな人もいるし、嫌いな人もいる。(=Ex. 1) この教科書は、会話も練習できるし、文化も学べます。(=Ex. 2)",
+        "pattern_form": "N1もV-cond、N2もV"
+      },
+      {
+        "n": 4,
+        "title": "～のだろうか",
+        "meaning_en": "I wonder ~",
+        "explanation": "Sentenceの{だろう／でしょう}か is a self-addressed question. The question can be either a yes-no question or a wh-question.",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 5,
+        "title": "{そんな／こんな／あんな}Noun",
+        "meaning_en": "そんな／あんな = that kind of ~; ~ like that こんな = this kind of ~; ~ like this",
+        "explanation": "そんな, こんな, and あんな are synonymous with そういう, こういう, and ああいう, respectively. (see L4 文法ノート10) そんな, こんな, etc. are slightly more colloquial than そういう, こういう, etc.",
+        "pattern_form": "{そんな／こんな／あんな}N：そんな映画; こんな問題; あんなシャツ"
+      },
+      {
+        "n": 6,
+        "title": "それぞれ",
+        "meaning_en": "each; one's own; in one's own way",
+        "explanation": "それぞれ is used to focus on each individual or thing in a group of people or things, and means \"each (one of them).\" In some contexts a more natural interpretation may be \"one's own\" rather than \"each one's.\" (Ex. 3)",
+        "pattern_form": "a. それぞれPredicate：それぞれ自分の経験を話す; それぞれおいしいb. それぞれのN：それぞれの国; それぞれの考え"
+      },
+      {
+        "n": 7,
+        "title": "～らしい",
+        "meaning_en": "seem; apparently; I heard that ~; it looks like",
+        "explanation": "The auxiliary i-adjective らしい is used to express the speaker's conjecture based on what he/she has learned through an information source or his/her own observation.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 8,
+        "title": "Verb-masu続ける",
+        "meaning_en": "continue to; continue V-ing; go on V-ing; keep (on) V-ing; all the way; all the time",
+        "explanation": "V-masu続ける means \"continue doing something.\" This phrase is used when the subject continues doing something volitionally.",
+        "pattern_form": "V-masu続ける"
+      },
+      {
+        "n": 9,
+        "title": "～ばかり",
+        "meaning_en": "nothing but ~; always; all the time",
+        "explanation": "ばかり is used to express the idea that someone does one thing all the time and does nothing else, or that someone chooses just one thing among others when doing something, as shown in the following examples: 政夫はマンガばかり読んでいる。(a. Masao does nothing but read comics. (=All Masao does is read comics.) b. Masao rads only comics. (=When Masao reads, he reads nothing but comics.)) アンは日本語の勉強ばかりしている(a. Ann does nothing but study Japanese. (=All Ann does is study Japanese.) b. Ann studies only Japanese. (=When Ann studies, she studies nothing but Japanese.)) ばっかり is more colloquial than ばかり.",
+        "pattern_form": "a. N(Prt)ばかりV：アニメばかり見る; 美代子とばかり踊る b. VNばかりする：勉強ばかりする c. V-teばかりいる：遊んでばかりいる"
+      },
+      {
+        "n": 10,
+        "title": "真(っ)+i-Adjective-stem/Noun",
+        "meaning_en": "very; pure; totally; right; mid-",
+        "explanation": "The prefix 真+Adjective indicates that the degree of something is very high or is at the highest level. The prefix 真+Noun indicates the center of a space or time span. The English translation of 真 varies according to the word which follows it. A glottal stop (っ) precedes the sounds [k], [s], and [sh].Exceptions are: 赤  真っ赤; 青  真っ青; 北  真北; 昼間  真っ昼間",
+        "pattern_form": "a. 真(っ)+A-stem: 真新しい; 真っ暗; 真っ白 b. 真(っ)+N: 真上; 真夏; 真冬; 真東; 真南; 真向かい; 真横; 真っ先"
+      },
+      {
+        "n": 11,
+        "title": "～わけだ",
+        "meaning_en": "The reason is that ~; It means that ~; That's why; No wonder ~; Naturally",
+        "explanation": "わけだ is used in the following situations: (a) when the speaker provides the reason for a previous statement (本文 and Ex.1); (b) when the speaker reaches a logical conclusion from what he/she has learned from the hearer or has discovered (Ex.2); (c) when the speaker understands the reason for what he/she has learned from the hearer or what he/she has discovered (Exs. 3~5).",
+        "pattern_form": "Type 2a"
+      },
+      {
+        "n": 12,
+        "title": "Nounでよければ",
+        "meaning_en": "if ~ is all right; if ~ works; if ~ is acceptable; if you don't mind",
+        "explanation": "Xでよければ presents a condition for doing something. It is also used when the speaker politely offers something to the hearer.",
+        "pattern_form": "Nでよければ"
+      },
+      {
+        "n": 13,
+        "title": "結構",
+        "meaning_en": "fairly; pretty; rather; quite",
+        "explanation": "The adverb 結構 indicates that the speaker feels that the degree/level/amount/etc. of something is not high, but is higher than average.",
+        "pattern_form": "a. 結構{A/ANa+Da}：結構おいしい; 結構不便だb. 結構Verb Phrase：結構上手に書く; 結構誰とでも話す; 結構昔からある"
+      },
+      {
+        "n": 14,
+        "title": "なかなかAdjective",
+        "meaning_en": "quite; fairly; pretty; considerably",
+        "explanation": "The adverb なかなか is synonymous with 結構. The major difference is that なかなか is not usually used with adjectives and adverbs with negative meanings, such as つまらない \"boring\" and 不便だ \"inconvenient.\" Note that なかなか also indicates that the speaker is impressed by the way something/someone is or the way someone does something.",
+        "pattern_form": "a. なかなか{A/ANa+Da}：なかなか広い; なかなかきれいだ b. なかなかAdv：なかなか上手に"
+      },
+      {
+        "n": 15,
+        "title": "そう言えば",
+        "meaning_en": "That reminds me; Now I remember; indeed",
+        "explanation": "The conjunctive phrase そう言えば is used when the speaker is reminded of something by the hearer's remark or the speaker's own remark.",
+        "pattern_form": "そう言えば、S。"
+      },
+      {
+        "n": 16,
+        "title": "～ということ",
+        "meaning_en": "that; V-ing",
+        "explanation": "ということ changes a sentence into a noun clause, but does not add any meaning. Sということ can be marked by が, を, etc. Sということ is usually used in written language.",
+        "pattern_form": "S-plainということ"
+      },
+      {
+        "n": 17,
+        "title": "～は～となっている",
+        "meaning_en": "happen to be; It turns out that ~; It's been decided that ~; The rule is that ~",
+        "explanation": "となっている indicates that what is stated in the preceding sentence is something beyond the speaker's control. The preceding statements are often findings or matters decided by others. The structure of the sentence before となっている is \"AはB.\" Note that だ does not occur after B.",
+        "pattern_form": "AはBとなっている (B is a noun or a noun equivalent, which includes \"Number+Counter\" and \"N+Prt.\")"
+      }
+    ]
+  },
+  "7": {
+    "title": "日本のポップカルチャー",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "Sentence。{では／それでは／じゃ}、Sentence。",
+        "meaning_en": "If that's the case; If so; In that case; Then; Well then",
+        "explanation": "では is an abbreviated form of それでは. それでは literally means \"if that is the case\" and それ refers to what is stated in the preceding sentence(s). それでは and では are usually used in the written language or formal spoken language. In ordinary or casual conversation, the contracted form of それじゃ or じゃ is used.",
+        "pattern_form": "S1。{では／それでは}、S2。"
+      },
+      {
+        "n": 2,
+        "title": "その上",
+        "meaning_en": "on top of that; in addition (to that); what's more; besides; moreover",
+        "explanation": "その上 is used when the speaker wants to emphasize an additional piece of information. S2 usually contains the particle も or まで.",
+        "pattern_form": "S1。その上、S2。"
+      },
+      {
+        "n": 3,
+        "title": "Noun(Particle)さえ",
+        "meaning_en": "even",
+        "explanation": "さえ is an emphatic particle. In non-conditional clauses it means \"even.\" When さえ is used, the particle が never occurs, を usually does not occur, へ and the directional に are optional, and the other particles, including the locational に, で, と, and から, are mandatory.",
+        "pattern_form": "N(Prt)さえ：先生さえ; アメリカ(へ／に)さえ; 小学校からさえ"
+      },
+      {
+        "n": 4,
+        "title": "～向け",
+        "meaning_en": "for; made for; for the use of; directed to",
+        "explanation": "The suffix 向け adds the meaning \"made for; for the use of; directed toward.\" 向け is often affixed to nouns which refer to people, countries and organizations.",
+        "pattern_form": "a. N向けだ b. N向けにV c. N1向けのN2"
+      },
+      {
+        "n": 5,
+        "title": "～である",
+        "meaning_en": "be",
+        "explanation": "である is the formal plain form of だ and can be affixed to nouns as well as to stems of na-adjectives and no-adjectives. である is used in formal writing. In very formal speech the polite form であります may be used. Compare the following forms. である (formal plain affirmative) であります (formal polite affirmative) ではない (formal plain negative) ではありません (formal polite negative) である can occur before nouns in relative clauses while だ cannot. 田中先生は私の日本語の先生{だ／である}。 私の日本語の先生{である／の／×だ}田中先生 (Mr. Tanaka, who is my Japanese teacher) である can also occur in other situations where だ cannot be used. 彼はフランス人{である／null／×だ}{らしい／かもしれない／に違いない}。",
+        "pattern_form": "a. Affirmative: である／であった b. Negative: ではない／ではなかった c. {N／ANa／ANo}{である／であった／ではない／ではなかった}N"
+      },
+      {
+        "n": 6,
+        "title": "Verb-masu出す",
+        "meaning_en": "V out; begin to V; start to V; begin V-ing; start V-ing",
+        "explanation": "V-masu出す has two meanings: Someone makes something available/accessible which hasn't existed or hasn't been available or accessible.Exs. 生み出す (to create); 見つけ出す (to find out); 掘り出す (to dig up/out) Someone begins something or something begins:Exs. 笑い出す (to start laughing); 動き出す (to begin to move) V出す differs from V始める in that V出す is used for abrupt and non-volitional actions while V始める is used for both volitional and non-volitional actions but not for actions which begin abruptly, as the following examples show: 和男は急に{怒り出した／??怒り始めた}。(Kazuo suddenly began to get angry.) 田中さんを待っていないで、{食べ始めましょう／×食べ出しましょう}。(Let's start eating without waiting for Mr. Tanaka.)",
+        "pattern_form": "V-masu出す"
+      },
+      {
+        "n": 7,
+        "title": "～ない～は{ない／いない}",
+        "meaning_en": "V-naiないNは{ない／いない} = There is no N which/who does not V",
+        "explanation": "This construction is used to create sentences containing double negatives VないNは(い)ない is equivalent to \"all Ns V.\"",
+        "pattern_form": "V-naiないNは{ない／いない}：読めない漢字はない; 分からない人はいない"
+      },
+      {
+        "n": 8,
+        "title": "XはYに当たる；Yに当たるX",
+        "meaning_en": "XはYに当たる = X corresponds to Y; X is equivalent to Y; X is equal to Y Yに当たるZはXだ = the Z which is equivalent to Y is X; the Z which corresponds to Y is X",
+        "explanation": "に当たる in this context means \"be equivalent to; correspond to.\" It is often used to contrast words/phrases in two languages or organizations/professional titles in two countries.",
+        "pattern_form": "N1はN2に当たる"
+      },
+      {
+        "n": 9,
+        "title": "Sentence(という)ことになる",
+        "meaning_en": "end up (with); mean that ~; cause",
+        "explanation": "Sentence(という)ことになる is usually preceded by a topic phrase (Ex. 1), a conditional clause (Ex. 3), or a reason clause (Ex. 2), and indicates that the (non-)action, event or situation stated in the preceding phrase/clause leads to a logical conclusion or a certain situation.",
+        "pattern_form": "Type 1, Type 2c or Type 3 (Any forms are acceptable.)"
+      },
+      {
+        "n": 10,
+        "title": "～(という)傾向が{ある／見られる}",
+        "meaning_en": "have a tendency to; have an inclination to; there is a tendency to; tend to",
+        "explanation": "This construction is used when someone or something has a tendency to do something. It is commonly used in written language and formal speech. という is optional.",
+        "pattern_form": "a. {V/A}-plain.non-past(という)傾向がある b. ANaな傾向がある c. Nの傾向がある"
+      },
+      {
+        "n": 11,
+        "title": "(もし)Sentenceとしたら、",
+        "meaning_en": "Suppose ~; If ~; If you were to ~; If ~ was/were ~; If ~ V-ed; If ~ did not V",
+        "explanation": "Sとする means \"to assume/suppose that S.\" Thus, Sとしたら literally means \"if I/we/you suppose that S.\" This construction is usually used to present a hypothetical situation. It can also be used for an actual situation (see Ex. 3), in which case the speaker is presenting the situation as if it were hypothetical in order to indicate something indirectly. もし here is optional. It emphasizes that the speaker is presenting the situation as a hypothetical one.",
+        "pattern_form": "S-plain.non-pastとしたら"
+      },
+      {
+        "n": 12,
+        "title": "Nounが～する",
+        "meaning_en": "Note: There is no general structure or phrase in English which is equivalent to this construction. In English the equivalent ideas are expressed using adjectives or verbs (and sometimes verb plus adverb).",
+        "explanation": "This construction with onomatopoetic phrases is used to describe one's physiological/psychological state or the way something feels or looks.",
+        "pattern_form": "Nが[onomatopoeia]する"
+      },
+      {
+        "n": 13,
+        "title": "～くせに",
+        "meaning_en": "although ~; in spite of the fact that ~; and yet ~",
+        "explanation": "The conjunction くせに is used when something commonly expected from information in the subordinate clause (i.e., the くせに phrase/clause) does not happen or is not the case. In most situations, くせに expresses the speaker's anger, frustration or disagreement. The emotion is not directed toward the speaker himself/herself, but toward the hearer or a third person. When くせに is used, the subject of the main clause and that of the subordinate clause must be the same. Thus, くせに cannot be used in the following sentence: メアリーはまだ学生{なのに／×のくせに}、両親は彼女に高い車を買ってやった。",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 14,
+        "title": "話し言葉の縮約形(contracted forms)",
+        "meaning_en": "",
+        "explanation": "In casual conversation contracted forms are commonly used.",
+        "pattern_form": "a. ～てる = ～ている (～てます = ～ています); ～てた = ～ていた b. ～じゃ = では c. ～なくちゃ = ～なくては(いけない／ならない); ～なきゃ = ～なければ(いけない／ならない) d. ～ちゃう = ～てしまう; ～ちゃった = ～てしまった e. ～とく = ～ておく; ～といた = ～ておいた f. ～たげる = ～てあげる; ～たげた = ～てあげた g. ～といたげる = ～ておいてあげる"
+      },
+      {
+        "n": 15,
+        "title": "～(という)わけ{ではない／じゃない}",
+        "meaning_en": "It's not that ~; It doesn't mean that ~; I don't mean that ~; It's not true that ~; It's not the case that ~",
+        "explanation": "(という)わけではない is used to deny a statement. The use of という does not change the statement's meaning.",
+        "pattern_form": "a. ～わけ{ではない／じゃない} {V/A}-plain(という)わけではない ANa{な／だった／じゃない／じゃなかった}わけではない N/ANo{という／だった／じゃない／じゃなかった}わけではない b. ～というわけ{ではない／じゃない}: Type 3"
+      }
+    ]
+  },
+  "8": {
+    "title": "日本の伝統芸能",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "NounはNoun{と／に}関係がある",
+        "meaning_en": "XはY{と／に}関係がある = X is related in some way to Y; X has something to do with Y",
+        "explanation": "This sentence pattern is used to show that X is related in some way to Y. The particle after the first noun can be either と or に. When this pattern is used in relative clauses, の is commonly used after 関係 in place of が. (In general, の often replaces the particle が in relative clause constructions.)",
+        "pattern_form": "a. N1はN2{と／に}関係がある b. N1{と／に}関係{が／の}あるN2"
+      },
+      {
+        "n": 2,
+        "title": "～(こと)によって",
+        "meaning_en": "because; because of; due to; by V-ing; by means of; via; through; by",
+        "explanation": "によって indicates the cause, the means, or the agent in passive sentences.",
+        "pattern_form": "a. Nによって b. ～ことによって：Type 2c"
+      },
+      {
+        "n": 3,
+        "title": "すると",
+        "meaning_en": "then",
+        "explanation": "すると connects two sentences, S1 and S2, in the following situations: (1) The action in S1 causes what is said in S2. (Exs. 1 and 2) (2) The action in S1 leads to the discovery of what is said in S2. (Ex. 3) (3) From the information implied in S1, the speaker confirms that S2 is the case. (Ex. 4)",
+        "pattern_form": "S1。すると、S2。"
+      },
+      {
+        "n": 4,
+        "title": "～通り(に)",
+        "meaning_en": "the way; as; exactly like; following; according to",
+        "explanation": "When 通り is modified by a verb or a noun, it means \"the way; as someone does; as something indicates.\" 通り can also be used as a suffix, in which case 通り is directly affixed to nouns and the pronunciation changes to どおり.",
+        "pattern_form": "a. V-plain通り(に)：言う通り(に); 聞いた通り(に); 教えてもらった通り(に); 思った通り(に) b. Nの通りに：約束の通り(に); 説明の通り(に); 計画の通り(に) c. N通り(に)：約束通り(に); 説明通り(に); 計画通り(に)"
+      },
+      {
+        "n": 5,
+        "title": "～ば～ほど",
+        "meaning_en": "The (more) ~, the (more) ~",
+        "explanation": "This structure is used when the more something happens or is in some state, the more another thing happens or is in some state.",
+        "pattern_form": "a. {V／A}-cond {V／A}-plainほど (When V is a suru-verb, the second VN is usually omitted.)：食べれば食べるほど; 勉強すれば(勉強)するほど; 安ければ安いほど b. ANaならANaほど：便利なら便利なほど c. {ANa／NP}であれば({ANa／NP})あるほど：便利であれば(便利で)あるほど; いい学生であれば(いい学生で)あるほど"
+      },
+      {
+        "n": 6,
+        "title": "さて",
+        "meaning_en": "well; now; well now",
+        "explanation": "さて always occurs at the beginning of a sentence and signals that (a) the speaker/writer is beginning a new topic (the new topic and the previous topic may be part of the same discourse), (b) the speaker/writer is going to ask a question about the information just provided, or (c) the speaker is leaving. さて is not used in casual situations.",
+        "pattern_form": "(S1。) さて、S2。"
+      },
+      {
+        "n": 7,
+        "title": "Nounを中心{と／に}する",
+        "meaning_en": "(centering) around; focusing on; mainly; with N as the center/focus/leader/etc.",
+        "explanation": "Nを中心{と／に}する literally means \"to make N the center.\" This phrase is usually used in two forms: (a) Nを中心{と／に}(して) to modify verbs, and (b) Nを中心{と／に}した to modify nouns. The phrase indicates that something takes place around N or with N as the center/focus, or that someone does something focusing on N.",
+        "pattern_form": "a. Nを中心{と／に}(して) b. N1を中心{と／に}したN2 (=N1中心のN2)"
+      },
+      {
+        "n": 8,
+        "title": "逆～",
+        "meaning_en": "逆だ = be opposite; the other way 逆にV = in the opposite direction; the other way; the wrong way; contrary to one's expectation; contrary to one's intention; conversely 逆のN = opposite N; the reverse of N",
+        "explanation": "逆 is used to indicate that X's way of doing something is the opposite of Y's way of doing it, or that the way X is or the way X happens is the opposite of the way Y is or the way Y happens. In different contexts, 逆 indicates that X's way of doing something, the way X is or the way X happens is the opposite of the way which is common, expected or intended.",
+        "pattern_form": "a. Xは逆だ b. 逆にV c. 逆のN"
+      },
+      {
+        "n": 9,
+        "title": "～はず",
+        "meaning_en": "should; I expected that ~; I believe that ~",
+        "explanation": "The dependent noun はず indicates that the speaker/writer or someone he/she empathizes with (e.g., the main character in a story) believes or expects that what is stated before はず is true based on his/her knowledge or memory at the moment of speech or at the time of the event stated in the main clause. The negative form can be either ～ないはずだ or ～はずがない. However, the sense of negation is stronger in はずがない. When Sはずだ modifies a noun, の must be used between はず and the noun.",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 10,
+        "title": "～点",
+        "meaning_en": "point; aspect; standpoint; viewpoint; respect S(という)点が = the fact that ~ N{という／の}点で(は) = in terms of ~; with regard to ~; with respect to ~ S(という)点で = in that ~",
+        "explanation": "点 is used to mean \"point\" (in the sense of a single fact, idea or opinion in an argument, discussion, etc.), \"aspect,\" or \"viewpoint/standpoint.\"",
+        "pattern_form": "a. S+という点：Type 1 b. S+点：Type 2c c. DemA点：その点 d. N{という／の}点"
+      },
+      {
+        "n": 11,
+        "title": "ますます",
+        "meaning_en": "more and more; -er and -er; increasingly; even more; even -er; still more; still -er",
+        "explanation": "ますます occurs with verbs, the adverbial forms of adjectives and adverbs. It indicates that something happens to an even greater (or lesser) degree than before. ますます is not used for future controllable actions, as seen below: {もっともっと／×ますます}頑張って下さい。 漢字を{もっともっと／×ますます}勉強します。",
+        "pattern_form": "a. ますます(～)V：ますます減る; ますます雪が降る; ますます興味がなくす b. ますますA-stemくなる：ますます寒くなる c. ますますANaになる：ますます元気になる d. ますますAdv：ますますゆっくり"
+      },
+      {
+        "n": 12,
+        "title": "Verb-masu直す",
+        "meaning_en": "again; re-V",
+        "explanation": "直す、when attached to the masu-stems of verbs, creates compound verbs with the meaning \"again; re-.\"",
+        "pattern_form": "V-masu直す：書き直す; 読み直す; 考え直す"
+      },
+      {
+        "n": 13,
+        "title": "～ことは～(が／けれど)",
+        "meaning_en": "It is certainly true that ~, but; indeed ~, but; do V~, but; ~ IS/ARE/WAS/etc. ~, but",
+        "explanation": "This structure is used when the speaker/writer admits that a proposition is true but wants to qualify the proposition with an additional remark.",
+        "pattern_form": "a. {V/A}-plain.affことは{V/A}-plain.aff：行くことは{行く／行った}が; 行ったことは行ったが; 安いことは{安い／安かった}が; 安かったことは安かったが b. ANa{な／だった}ことはANa{だ／だった}が：便利なことは便利{だ／だった}が; 便利だったことは便利だったが c. NPはNP{だ／だった}が：いい人はいい人{だ／だった}が d. NP{だった}ことはNP{だ／だった}が：いい人だったことはいい人だったが"
+      },
+      {
+        "n": 14,
+        "title": "おかげ; せい",
+        "meaning_en": "because; due to",
+        "explanation": "Both おかげ and せい are dependent nouns indicating cause. The former is used when the cause brings about a desirable result, and the latter when the cause brings about an unwanted result.",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 15,
+        "title": "どんどん",
+        "meaning_en": "at a fast pace; one after another; keep V-ing vigorously; with no hesitation; with no delay",
+        "explanation": "どんどん expresses the idea that something proceeds from one stage to another or continues to happen at a fast pace with no delay, or that someone keeps doing something with no hesitation. In some situations, both ますます and どんどん can be used. For example, ますます can be used in place of どんどん in Exs. 1, 2 and 3, although ますます does not convey the idea that something happens at a fast pace. Thus, ますます cannot replace どんどん in Ex. 2, where the point of the sentence is the fact that the ice in Greenland is melting at a fast pace. ますます cannot be used in Ex. 4, either, because this is a future controllable action. (see 文法ノート11 above)",
+        "pattern_form": "どんどんV"
+      },
+      {
+        "n": 16,
+        "title": "～たびに",
+        "meaning_en": "every time; each time; on every ~; whenever",
+        "explanation": "たびに expresses the idea that each time someone does something, something else takes place. When たびに is modified by a noun, the noun refers to an action (e.g., 旅行, 計算(calculation)), event (e.g., お祭り, テスト), or a certain time (e.g., クリスマス, 休み).",
+        "pattern_form": "a. V-plain.non-pastたびに b. Nのたびに"
+      },
+      {
+        "n": 17,
+        "title": "とうとう",
+        "meaning_en": "finally; at (long) last; eventually; in the end; after all",
+        "explanation": "とうとう indicates that an expected situation has occurred after an extended period of time. The adverb ついに is similar to とうとう and can be used in place of とうとう. ついに is more formal. (See L5 文法ノート7)",
+        "pattern_form": "とうとうV"
+      }
+    ]
+  },
+  "9": {
+    "title": "日本の教育",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～ても～なくても",
+        "meaning_en": "whether ~ or not",
+        "explanation": "XてもXなくても means \"whether X or not.\"",
+        "pattern_form": "a. V-teもV-naiなくても b. A-teもA-naiなくても c. {ANa/ANo/N}でも{ANa/ANo/N}{じゃ／で}なくても"
+      },
+      {
+        "n": 2,
+        "title": "前者は～、後者は～。",
+        "meaning_en": "The former ~ and the latter ~",
+        "explanation": "This sentence structure is used to refer separately to the two things, people, etc. mentioned in the previous sentence.",
+        "pattern_form": "前者は(～) {V-te/A-te/ANaで/Nで}、後者は～"
+      },
+      {
+        "n": 3,
+        "title": "～といったNoun",
+        "meaning_en": "like; such as",
+        "explanation": "といったX is used to present examples of X. X is always a noun or a noun phrase. Nouns, phrases or sentences can precede といった. When nouns precede といった, usually two or more nouns are presented, but when sentences or phrases precede といった, usually only one sentence or phrase is presented. などのN and のようなN are similar to といったN, but they are usually precede by nouns or noun phrases, not by sentences.",
+        "pattern_form": "a. N1{や／、}N2({や／、}N3～)といった{N/NP} b. S1-plain(、S2-plain、～)といった{N/NP} c. Phrase1(、Phrase2、～)といった{N/NP}"
+      },
+      {
+        "n": 4,
+        "title": "一方(で)、; Sentence一方(で)",
+        "meaning_en": "a. S1。一方、S2。= on the other hand b. S1一方(で)、S2。= while; when; at the same time; on the other hand",
+        "explanation": "The conjunction 一方 is used to present two contrastive situations or two concurrent states, events or actions. 一方 can be used either as a sentence-initial conjunction or a sentence-final conjunction. In the latter case, で may follow 一方. 一方 is usually used in written language.",
+        "pattern_form": "a. S1。一方、S2。 b. S1一方(で)、S2。：Type 2c c. VNの一方(で)：増加(increase)の一方(で)"
+      },
+      {
+        "n": 5,
+        "title": "あるいは",
+        "meaning_en": "or; either ~ or ~",
+        "explanation": "あるいは is used to connect alternatives. It is usually used in formal speech or written language.",
+        "pattern_form": "a. N1(、N2、～)、あるいはN：日本、韓国、あるいは中国 b. S1か、あるいは、S2か：Type 3"
+      },
+      {
+        "n": 6,
+        "title": "なかなか～ない",
+        "meaning_en": "not easily; not readily; difficult to ~; slow to; to refuse to",
+        "explanation": "なかなか with the negative form of a verb means \"not easily\" or \"not readily.\" Usually, it is used when something desirable doesn't happen easily or when something that is supposed to happen doesn't happen. Compare the following sentences: このドアはなかなか開かない。(in situations where you want to open the door) このドアは{簡単には／×なかなか}開かないようにした。(in situations where you do not want the door to open easily)",
+        "pattern_form": "なかなかV-naiない"
+      },
+      {
+        "n": 7,
+        "title": "つまり",
+        "meaning_en": "That is (to say); in other words; namely; (That) means; You mean ~?",
+        "explanation": "つまり is used to rephrase or restate what has just been mentioned or stated.",
+        "pattern_form": "a. N1/NP1、つまり、N2/NP2 b. N/NP(というの)は、つまり～{だ／(という)ことだ}"
+      },
+      {
+        "n": 8,
+        "title": "そこで",
+        "meaning_en": "because of that; therefore; so",
+        "explanation": "そこで is used to indicate an action (to be) taken because of the situation presented in the previous sentence. それで (see L4 文法ノート14) can be used in place of そこで; however, そこで can replace それで only when the action in S2 is controllable, as shown below: 日本のアニメを日本語で見たいと思った。{そこで／それで}、日本語を勉強することにした。 昨日とても天気が悪くて、寒かった。{それで／×そこで}、試合を見に来た人が少なかった。",
+        "pattern_form": "S1、そこで、S2。"
+      },
+      {
+        "n": 9,
+        "title": "～以外{のNoun／に}",
+        "meaning_en": "but; except; other than; besides",
+        "explanation": "X以外のY means \"Y excluding X.\" のY is often omitted (Ex.1). X以外に means \"besides X.\" に is sometimes omitted (Ex. 4).",
+        "pattern_form": "a. {N1/DemP}以外のN2：日本人以外の人; これ以外の問題 b. {N/DemP}以外に：スポーツ以外に; それ以外に"
+      },
+      {
+        "n": 10,
+        "title": "決して～ない",
+        "meaning_en": "never; by no means; not ~ at all; not ~ in the least; definitely not",
+        "explanation": "決して with negative endings of verbs, adjectives, etc. expresses strong negation of an idea, situation, possibility, etc. or strong prohibition.",
+        "pattern_form": "a. 決してV-nai{ない／なかった}; 決してV-masu{ません／ませんでした} b. 決してA-nai{ない／なかった／ありません／ありませんでした} c. 決して{ANa/ANo/N}{では／じゃ}{ない／なかった／ありません／ありませんでした}"
+      },
+      {
+        "n": 11,
+        "title": "Sentenceという理由で",
+        "meaning_en": "because",
+        "explanation": "という理由で (lit. for the reason that ~) is used to present the reason for a state, event, or action stated in the main clause. This phrase is usually used in the written language.",
+        "pattern_form": "S-plainという理由で"
+      },
+      {
+        "n": 12,
+        "title": "～ら",
+        "meaning_en": "these; those; they; -s; and others",
+        "explanation": "The plural marker ら is often used with demonstrative pronouns and certain personal pronouns. Person pronouns with ら are not used in situations where politeness must be shown.",
+        "pattern_form": "a. Demonstrative pronounら：これら; それら; あれら (These can be used in polite speech.) b. Personal pronounら：彼ら; 彼女ら; 僕ら; 君ら"
+      },
+      {
+        "n": 13,
+        "title": "～に対して",
+        "meaning_en": "whereas; on the other hand; in contrast",
+        "explanation": "に対して is used when contrasting two actions, states, situations, etc. (see L10 文法ノート14 for other uses of に対して.)",
+        "pattern_form": "a. Nに対して b. Sのに対して：Type 2a"
+      },
+      {
+        "n": 14,
+        "title": "～限り",
+        "meaning_en": "as long as; as far as; while; until; unless; as much as (one can)",
+        "explanation": "X限り is used when something is the case or is true as long as the condition X holds true. 限り is also used to indicate the extent to which one can do something or one knows something (e.g., as far as one can; as far as one knows).",
+        "pattern_form": "a. V-plain限り：いる限り; 見た限り; やめない限り; できる限り b. Nで{ある／ない}限り：人間である限り; 子供でない限り c. ANoで{ある／ない}限り：本当である限り; 本当ではない限り (The use of i-/na-adjectives here is very limited.)"
+      },
+      {
+        "n": 15,
+        "title": "～にもかかわらず",
+        "meaning_en": "in spite of (the fact that ~); despite (the fact that ~); although; though; nevertheless",
+        "explanation": "XにもかかわらずY means \"Y in spite of (the fact that) X.\" This sentence construction is used when Y is the case even though Y is usually not expected from X.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 16,
+        "title": "せっかく",
+        "meaning_en": "with effort; at great pain; take the trouble to do~; ~, which is a rare occasion/event/etc.",
+        "explanation": "せっかく is used in the following situations: when the speaker/writer does something with a lot of effort or at great pain and therefore he/she wants to make use of it; or, in spite of the effort pain, he/she cannot make use of it; when a given opportunity is a rare one and therefore he/she wants to make use of it; or, in spite of this opportunity, he/she cannot make use of it. せっかく often appears with のだから or のに. せっかく with の can also modify nouns.",
+        "pattern_form": "a. せっかくV{のだから／のに} b. せっかくのN c. せっかく{ですが／ですけど／だけど／etc.} d. せっかく{です／だ}から"
+      },
+      {
+        "n": 17,
+        "title": "～{と／って}言っても",
+        "meaning_en": "although ~ say/said that ~; even though ~ say/said that ~",
+        "explanation": "と言っても is used when clarifying what has just been said in order to avoid misunderstanding. って is used in place of と in casual conversation or writing.",
+        "pattern_form": "Type 1"
+      },
+      {
+        "n": 18,
+        "title": "思うように～ない",
+        "meaning_en": "not ~ as one wishes",
+        "explanation": "This phrase means that something is not in accord with the speaker's/writer's (or the subject's) wish or desire. The verb potential form is usually used in this structure.",
+        "pattern_form": ""
+      }
+    ]
+  },
+  "10": {
+    "title": "日本の便利な店",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～ほど～",
+        "meaning_en": "to the extent that ~; so~ that~ (almost) ~; not as ~ as N; to (this/that) degree; (this/that) much",
+        "explanation": "The particle ほど is used to express the degree of a state. When a sentence precedes ほど, the element just before ほど is a verb.",
+        "pattern_form": "a. V-plain.non-pastほど：死ぬほど; 寝られないほど; 驚くほど b. Nほど：スミスさんほど; 日本語ほど c. DemPほど：これほど; それほど; あれほど"
+      },
+      {
+        "n": 2,
+        "title": "Sentenceという。",
+        "meaning_en": "It is said that ~; They say that ~",
+        "explanation": "という indicates that what is said in the preceding sentence is not firsthand information.",
+        "pattern_form": "S-plainという"
+      },
+      {
+        "n": 3,
+        "title": "Nounに合わせて; Noun1に合ったNoun2",
+        "meaning_en": "Nに合わせて = making ~ suitable for N; according to N N1に合ったN2 = N2 suitable for N1",
+        "explanation": "The literal meaning of Xに合わせて is \"fitting/matching/adjusting something to X.\" It is often used to mean \"making something suitable for X\" or \"according to X.\" The noun-modification form is Xに合った.",
+        "pattern_form": "a. Nに合わせて：学生のレベルに合わせて b. N1に合ったN2：学生のレベルに合ったカリキュラム"
+      },
+      {
+        "n": 4,
+        "title": "まるで～よう{に／な／だ}",
+        "meaning_en": "as if ~ (were/-ed); just like",
+        "explanation": "This structure is used to introduce a simile, i.e., to describe a thing, person, action, etc. by comparing it with a similar thing, person, action, etc. まるで is an emphatic marker.",
+        "pattern_form": "a. まるでV-plainように：まるで{知っている／知らない／知っていた／知らなかった}ように b. まるでN{の／じゃない／だった／じゃなかった}ように：まるで子供{の／じゃない／だった／じゃなかった}ように c. Noun-modification form: ～ようなN d. Sentence-ending form: ～ようだ"
+      },
+      {
+        "n": 5,
+        "title": "言うまでもない; ～は言うまでもなく、～も",
+        "meaning_en": "Needless to say; It goes without saying that ~; It is obvious that ~; not to mention ~; let alone ~",
+        "explanation": "This phrase is used when the speaker mentions something obvious or something assumed to be known to the hearer. It is commonly used in written language.",
+        "pattern_form": "a. (Xは)言うまでもなく、S。：言うまでもなく、夏は暑い; 東京は言うまでもなく、人が多い b. S{こと／の}は言うまでもない。：地震が怖いのは、言うまでもない c. N1は言うまでもなくN2も"
+      },
+      {
+        "n": 6,
+        "title": "Nounまで(も)～",
+        "meaning_en": "even; to even",
+        "explanation": "まで(も) is used to present something which is considered to be beyond one's expectation or imagination.",
+        "pattern_form": "a. Nまで(も)：話すロボットまで(も)ある b. N1からN2まで(も)：ラップからクラシック音楽まで(も) c. N1だけでなくN2まで(も)：子供だけでなく大人まで(も)"
+      },
+      {
+        "n": 7,
+        "title": "Noun1でもNoun2でも",
+        "meaning_en": "including X and Y; whether (it is) X or Y",
+        "explanation": "XでもYでも is used to provide examples for the statement in the sentence. This structure implies that there are also things other than the examples which make the statement true. Note that XもYも (both X and Y) does not carry such an implication.",
+        "pattern_form": "N1でもN2でも；漢字でもカタカナでも; 子供でも大人でも"
+      },
+      {
+        "n": 8,
+        "title": "したがって",
+        "meaning_en": "therefore; accordingly; consequently; as a result; so",
+        "explanation": "したがって indicates that the following statement is a/the logical consequence of what is stated in the preceding sentence. It is usually used in written language.",
+        "pattern_form": "S1(reason/cause)。したがって、S2(consequence)。"
+      },
+      {
+        "n": 9,
+        "title": "～(という)のは事実だ",
+        "meaning_en": "It is {true/a fact} that ~",
+        "explanation": "S(という)のは事実だ is used when the speaker wants to claim that something is true or is a fact, or when he/she admits that something is true or is a fact. The presence of という does not change the meaning.",
+        "pattern_form": "a. ～というのは事実だ：Type 1 b. ～のは事実だ：Type 2a"
+      },
+      {
+        "n": 10,
+        "title": "Nounという点から考えると",
+        "meaning_en": "to view from the standpoint of ~; from the perspective of ~",
+        "explanation": "という点から考えると is used to indicate someone's view from the standpoint of X. Examples of X include business, environment, education, etc.",
+        "pattern_form": "Nという点から考えると：環境という点から考えると; 健康という点から考えると"
+      },
+      {
+        "n": 11,
+        "title": "Sentence上に",
+        "meaning_en": "in addition to ~; besides ~; not only ~ but also; moreover; ~ as well",
+        "explanation": "The conjunction 上に introduces additional information emphatically.",
+        "pattern_form": "Type 2b"
+      },
+      {
+        "n": 12,
+        "title": "～ことに",
+        "meaning_en": "It is ~ that ~; I am/We are ~ that ~; To my ~",
+        "explanation": "ことに is used to express the speaker's feeling or subjective judgement about what is said in the main clause. ことに can only be used with a limited set of words.",
+        "pattern_form": "A-plain.non-pastことに：悲しいことに; 嬉しいことに; 面白いことに ANaなことに；残念なことに(to one's regret); 幸せなことに V-plainことに；驚いたことに(to one's surprise); 腹の立つことに(what makes me angry is that ~)"
+      },
+      {
+        "n": 13,
+        "title": "Sentence1。だが、Sentence2。",
+        "meaning_en": "but; however",
+        "explanation": "だが is a disjunctive conjunction. The preceding sentence (S1) and the following sentence (S2) present contrastive statements or opposing ideas. Note that でも, けれど and けど are colloquial. けれども, しかしながら, だが and が are used primarily in written language. しかし can be used in both written and spoken language.",
+        "pattern_form": "S1。だが、S2。"
+      },
+      {
+        "n": 14,
+        "title": "Nounに対して",
+        "meaning_en": "toward; for; in; with regard to",
+        "explanation": "The compound particle に対して is used to mark something to/toward/about which one does something, or mark someone to/toward whom one does something or owes something. In different contexts, に対して is used to mark something one has an interest in. に対する is a noun-modification form. (The に対して introduced here should not be confused with に対して in L9 文法ノート13, which is used to contrast two actions, states, situations, etc.)",
+        "pattern_form": "a. Nに対して b. N1に対するN2"
+      },
+      {
+        "n": 15,
+        "title": "Verb-non-pastこと(は)ない",
+        "meaning_en": "don't have to ~; don't need to ~; It's not necessary to ~; There is no need to ~",
+        "explanation": "～することはない means \"there is no need to do ~.\" In casual conversation は may drop.",
+        "pattern_form": "V-plain.non-pastことはない"
+      },
+      {
+        "n": 16,
+        "title": "～かというと",
+        "meaning_en": "どちらかというと = if anything; rather; if I have to decide {どうして／なぜ}かというと = The reason is (that ~); because {いつ／だれ／etc.}かというと = to tell you when/who/etc. ~ (it is ~)",
+        "explanation": "Question Word + かというと literally means \"if I were to tell you who/what/when/etc.\" In general this phrase is used to emphasize the information which follows or to delay providing the information in order to keep the hearer in suspense or to stall while recalling it. どちらかというと is a set phrase meaning \"if anything; rather.\" {どうして／なぜ}かというと requires that the sentence end with から {だ／です／etc.}.",
+        "pattern_form": "QWかというと：{だれ／どこ／どちら／いつ／どうして／etc.}かというと"
+      },
+      {
+        "n": 17,
+        "title": "それなら",
+        "meaning_en": "then; in that case; if so",
+        "explanation": "それなら literally means \"if that's the case.\" それ meaning \"that\" refers to the speaker's previous statement or the statement which was just made by the hearer.",
+        "pattern_form": ""
+      }
+    ]
+  },
+  "11": {
+    "title": "日本の歴史",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "少なくない",
+        "meaning_en": "many; much; plenty of; not a few",
+        "explanation": "少なくない is a double negative meaning \"many; much\" and is commonly used in written language.Note that 少なくない cannot modify nouns. ×この国では少なくない人が英語を話す。",
+        "pattern_form": "N{は／が／も}少なくない：外国人は少なくない; 本屋が少なくない"
+      },
+      {
+        "n": 2,
+        "title": "Nounを通して",
+        "meaning_en": "through; via",
+        "explanation": "を通して indicates a medium (x) through which someone does something or something happens. X can be things, people, activities, or actions.",
+        "pattern_form": "Nを通して"
+      },
+      {
+        "n": 3,
+        "title": "Noun1からNoun2にかけて",
+        "meaning_en": "from X to Y",
+        "explanation": "XからYにかけて indicates a span of time or space and is used primarily in written language.",
+        "pattern_form": "N1からN2にかけて：東京から大阪にかけて; 1900年から1950年にかけて"
+      },
+      {
+        "n": 4,
+        "title": "Nounで言うと",
+        "meaning_en": "in terms of; in; according to; from the viewpoint of",
+        "explanation": "で言うと is used to restate something according to a different system or framework (e.g., a calendar, a measurement system, a language, a country's history).",
+        "pattern_form": "Nで言うと：日本の習慣で言うと; キログラムで言うと; メートルで言うと"
+      },
+      {
+        "n": 5,
+        "title": "各+Noun",
+        "meaning_en": "each ~; various",
+        "explanation": "A prefix which adds the meaning \"each; various.\" When the referent of the noun after 各 is not known, it means \"various.\"",
+        "pattern_form": "各N"
+      },
+      {
+        "n": 6,
+        "title": "XばかりでなくY(も)",
+        "meaning_en": "not only X but also Y",
+        "explanation": "This structure is similar to XだけでなくY(も) and means \"not only X but also Y.\" It is usually used in written language.",
+        "pattern_form": "a. Sばかりでなく：Type 2c b. N1(Prt)+ばかりでなくN2(Prt)+(も)"
+      },
+      {
+        "n": 7,
+        "title": "Noun+風",
+        "meaning_en": "~ style; ~ type; look like",
+        "explanation": "風 is a suffix and is added to nouns to make no-adjectives. X風 means \"X style/type\" or \"look like X.\"",
+        "pattern_form": "a. N風だ：このドレスは着物風だ。 b. N1風のN2：カウボーイ風の帽子"
+      },
+      {
+        "n": 8,
+        "title": "Nounと共に",
+        "meaning_en": "with; along with; as",
+        "explanation": "Nと共に indicates that someone does something or that something happens with N.",
+        "pattern_form": "Nと共に"
+      },
+      {
+        "n": 9,
+        "title": "～ずつ",
+        "meaning_en": "per/a; at a time; each; (little) by (little)",
+        "explanation": "The number/amount X+ずつ indicates that someone does something (or something happens) with X as the unit (e.g., the teacher teaches ten new kanji a week; the woman gave three chocolates to each child; the students came for their interviews two at a time).",
+        "pattern_form": "a. {Number(+Counter)}ずつ：二つずつ b. Non-specific amount expression+ずつ：ちょっとずつ; いくらかずつ"
+      },
+      {
+        "n": 10,
+        "title": "Noun1からNoun2に至るまで",
+        "meaning_en": "from X all the way through Y; from X even to Y",
+        "explanation": "This construction indicates a span of time or space and emphasizes the size of that span at the same time. It can also be used for other than spatial or temporal spans, as shown in Ex. 3. It is used in written language.",
+        "pattern_form": "N1からN2に至るまで：北海道から沖縄に至るまで; 2月から3月に至るまで"
+      },
+      {
+        "n": 11,
+        "title": "Noun+同士",
+        "meaning_en": "each other; between; among; together; with",
+        "explanation": "X同士 indicates that Xs do something together, that Xs do something to/for/against each other, or that someone puts Xs together in some way.",
+        "pattern_form": "a. N同士{が／で／を}：友達同士{が／で}集まる; ユーザー同士を結びつける(to unite) b. N1同士のN2：日本のメーカー同士の競争"
+      },
+      {
+        "n": 12,
+        "title": "Verbべき",
+        "meaning_en": "should; ought to",
+        "explanation": "The auxiliary べき expresses the speaker's strong judgment that one should do something. The form of する before べき can be either す or する (i.e., すべき or するべき).",
+        "pattern_form": "a. V-plain.non-past.affべき{だ／じゃない／ではない／だった／じゃなかった／ではなかった}：行くべき{だ／じゃない／だった／じゃなかった} (Exception: する+べき  すべき) b. VべきN：取るべき授業; 今日中にす(る)べきこと"
+      },
+      {
+        "n": 13,
+        "title": "Nounからすると",
+        "meaning_en": "judging from ~",
+        "explanation": "からすると introduces the source or basis for the speaker's conjecture or judgment. The information can be of any sort, including visual information (e.g., a shape, a color, a mannerism) and verbal information (e.g., an explanation, a conversation, a report).",
+        "pattern_form": "Nからすると：顔色(complexion)からすると; 話し方からすると"
+      },
+      {
+        "n": 14,
+        "title": "Verbぬ",
+        "meaning_en": "not",
+        "explanation": "ぬ is a verb negative ending in classical Japanese and is equivalent to ない in meaning and form. For example, 言わぬ is equivalent to 言わない. In modern Japanese, it often appears in set phrases.",
+        "pattern_form": "V-naiぬ a. ru-verbs：食べぬ; 起きぬ b. u-verbs：飲まぬ; 会わぬ c. irr.verbs：来る  来ぬ; する  せぬ"
+      },
+      {
+        "n": 15,
+        "title": "Nounの上で; Noun上(で)",
+        "meaning_en": "in terms of; from the viewpoint of ~; as far as ~ is concerned; according to ~",
+        "explanation": "Nの上で and N上 indicate that the speaker's statement refers only to N. The phrase is commonly used in written language.",
+        "pattern_form": "a. Nの上で：記録(record)の上で; 書類(document)の上で b. N1の上でN2：記録の上での問題 c. N上：記録上; 書類上 d. N1上のN2：記録上の問題"
+      },
+      {
+        "n": 16,
+        "title": "Nounと並んで",
+        "meaning_en": "as well as; just like",
+        "explanation": "と並んで is used when introducing one or more examples to be compared to the subject of the sentence. It is used primarily in written language.",
+        "pattern_form": "Nと並んで"
+      },
+      {
+        "n": 17,
+        "title": "おそらく～(だろう)",
+        "meaning_en": "probably",
+        "explanation": "おそらく means \"probably\" and usually occurs with the conjecture auxiliaries だろう or でしょう.",
+        "pattern_form": "おそらく～だろう：Type 3"
+      },
+      {
+        "n": 18,
+        "title": "まったく",
+        "meaning_en": "まったく(in affirmative sentences) = totally; utterly; entirely; completely; extremely; absolutely; really まったく～ない = not ~ at all; not ~ in the least まったく～(という)わけではない = It's not that ~ totally/completely/extremely/etc. ~",
+        "explanation": "まったく is used for emphasis in affirmative sentences. It is often used to express the speaker's emotion. In negative sentences まったく indicates complete negation. It is used with verbs (often potential verbs) and i-adjectives in negative sentences. まったく～(という)わけではない indicates partial negation.",
+        "pattern_form": "a. まったく{V/A/ANa/ANo/(の)N}：まったく{腹が立つ(to be angry)／感心する(to be impressed)／驚いた／あきらめた}; まったく{すごい／えらい／すばらしい}; まったく{だめだ／不思議だ}; まったく(の)うそだ; まったく(の)間違いだ; まったく(の)誤解(misunderstanding)だ b. まったく～ない：まったく{出来ない／分からない／読めない}; まったく面白くない c. まったく～(という)わけではない：まったくあきらめた(という)わけではない; まったく安い(という)わけではない; まったくだめ{な／だという}わけではない; まったく(の)うそ(だ)(という)わけではない"
+      }
+    ]
+  },
+  "12": {
+    "title": "日本の伝統工芸",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "いったいQuestion word",
+        "meaning_en": "(what, who, where, how, etc.) on earth",
+        "explanation": "いったい is an intensifier used with questions. It usually occurs immediately preceding the question word, but it may appear in other locations before the question word, as seen in Ex. 2.",
+        "pattern_form": "いったいQW"
+      },
+      {
+        "n": 2,
+        "title": "Sentenceとされている",
+        "meaning_en": "it is thought/believed/considered that ~; ~ is considered/believed to ~",
+        "explanation": "とされている is used to introduce a commonly-accepted idea or belief.",
+        "pattern_form": "S-plainとされている"
+      },
+      {
+        "n": 3,
+        "title": "第一(の／に)",
+        "meaning_en": "first; first of all; to begin with; the first; the primary",
+        "explanation": "第一 modifies either verbs with に or nouns with or without の, and means \"first.\" It is also used as a predicate with だ or です.",
+        "pattern_form": "a. 第一にV：第一に考えられることは; 第一に挙げられる例は b. 第一のN：第一の問題; 第一の原因; 第一の注意すべき点 c. 第一N：第一条件(term); 第一印象(impression) d. Nが第一だ：安全が第一だ; 練習が第一だ"
+      },
+      {
+        "n": 4,
+        "title": "Nounに{関する／関して}",
+        "meaning_en": "with regard to; regarding; concerning; about; on; related to",
+        "explanation": "に関する literally means \"related to,\" but it is also used to mean \"with regard to; concerning.\" に関する modifies nouns and に関して modifies verbs. について is similar in meaning to に関して, but is less formal and is used in both written and spoken language.",
+        "pattern_form": "a. N1に関するN2：日本の教育に関する問題 b. Nに関してV：家康の政治(politics)に関してディスカッションをする c. Nに関してはS：読み方に関しては色々あると言われている"
+      },
+      {
+        "n": 5,
+        "title": "考えられない",
+        "meaning_en": "unimaginable; unthinkable; inconceivable",
+        "explanation": "考えられない (lit. cannot think) is preceded by either nouns or sentences.",
+        "pattern_form": "a. N{は／なんて}考えられない b. S-plain{ということは／なんて}考えられない"
+      },
+      {
+        "n": 6,
+        "title": "生かす",
+        "meaning_en": "make the most of; make the best use of; use effectively; maintain",
+        "explanation": "生かす literally means \"to keep alive,\" but it is also used to mean \"to make the most of one's ability, skills, experience, etc.,\" \"to utilize to the fullest a special property of something,\" or \"to take advantage of an opportunity.\"",
+        "pattern_form": ""
+      },
+      {
+        "n": 7,
+        "title": "Sentenceことから",
+        "meaning_en": "because; from the fact that ~",
+        "explanation": "Sことから is used to express a reason.",
+        "pattern_form": "Type 2c"
+      },
+      {
+        "n": 8,
+        "title": "Nounなし",
+        "meaning_en": "without ~; with no ~",
+        "explanation": "Xなし means \"without X\" and is used with で to modify verbs, with の to modify nouns, and with だ to form a predicate.",
+        "pattern_form": "Nなし{で／の／だ}"
+      },
+      {
+        "n": 9,
+        "title": "こそ",
+        "meaning_en": "the very ~; It is that ~; in particular; precisely; definitely; for sure; only (when, by doing ~, etc.)",
+        "explanation": "こそ emphasizes the preceding word, phrase or clause. When こそ is used, the particles は, が and を are usually dropped.",
+        "pattern_form": "a. Nこそ：今度こそ; これこそ b. V-teこそ：(日本語で)話してこそ"
+      },
+      {
+        "n": 10,
+        "title": "Verb-masu込む",
+        "meaning_en": "in; into; deeply; heavily; thoroughly; completely",
+        "explanation": "The compound verb base 込む can mean the following: a. Taking or putting something/someone into something (Exs. 飲み込む; 取り込む; つめ込む; 押し込む) b. Getting into something (Exs. 入り込む; 乗り込む; 飛び込む; あがり込む) c. Being heavily involved in something (Exs. 考え込む; 話し込む; 寝込む) d. Doing something thoroughly or completely (Exs. 教え込む; 思い込む; 信じ込む)",
+        "pattern_form": "Verb-masu込む"
+      },
+      {
+        "n": 11,
+        "title": "～さ(あ)",
+        "meaning_en": "(you know)",
+        "explanation": "さ occurs after phrases, clauses or sentences in very casual conversation. One function is to catch the hearer's attention, but it is also used as a filler with no meaning.",
+        "pattern_form": "phrase/clause/sentenceさ"
+      },
+      {
+        "n": 12,
+        "title": "Nounでもある",
+        "meaning_en": "be also",
+        "explanation": "XはYでもある is used to introduce the second property of X when X has more than one property. Note that XもYだ is used when someone/something else is also Y. Compare the following sentences: 田中さんは先生だ。田中さんは画家でもある。 山田さんは先生だ。田中さんも先生だ。",
+        "pattern_form": "N/ANaでもある"
+      },
+      {
+        "n": 13,
+        "title": "ずっと",
+        "meaning_en": "all the time; all along; all the way; all through ~; throughout ~; ever (since); never (since)",
+        "explanation": "ずっと means that a state or action is ongoing, from one point in time to another point in time (often the moment of speech).",
+        "pattern_form": ""
+      },
+      {
+        "n": 14,
+        "title": "Number1, Number2 + Counter",
+        "meaning_en": "(two or three) days/times/etc.; (three, four) hours/cars/etc.",
+        "explanation": "Two successive numbers are used to indicate an approximate number or amount.",
+        "pattern_form": "Number1, Number2 + Counter【Number2 is the subsequent number.】： 2、3回; 3、4時間; 3、4日; 5、6枚; 5、6本"
+      },
+      {
+        "n": 15,
+        "title": "～まま",
+        "meaning_en": "Xままだ = remain the same as ~ Xまま(で)V = V with ~; V while ~; V as (it is); V without ~ Xままにする = leave ~ as (it is)",
+        "explanation": "まま indicates that the state of X remains unchanged or that someone does something without changing the current state of X.",
+        "pattern_form": "a. Nのまま：Tシャツのまま; 子供のまま b. DemAまま：このまま; そのまま; あのまま c. Aまま：冷たいまま d. ANaなまま：きれいなまま e. V-plain.pastまま：置いたまま; 作ったまま"
+      }
+    ]
+  },
+  "13": {
+    "title": "日本人と自然",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～代",
+        "meaning_en": "10/20/30/etc. + 代 = one's teens/twenties/thirties/etc. 1900/1910/1920/etc. + 年代 = 1900s/1910s/1920s/etc.",
+        "explanation": "The suffix 代 is used with ten or its multiples to describe someone's approximate age, or with ten or its multiples and 年 to refer to a certain decade.",
+        "pattern_form": "a. 10/20/30/etc. + 代 b. 1900/1910/1920/etc. + 年代"
+      },
+      {
+        "n": 2,
+        "title": "～(の)姿",
+        "meaning_en": "N姿 = in ~; wearing ~ Nの姿 = one's appearance; in ~; wearing ~ V-plain.non-past姿 = the way one V",
+        "explanation": "姿 means \"appearance; figure.\" It is used to describe someone's external appearance, i.e., someone's form or physical appearance; someone's appearance in certain clothing; or the way someone appears when he/she is doing something.",
+        "pattern_form": "a. N(の)姿：着物姿; 女性の姿 b. V-plain.non-past姿：歩く姿; 話している姿"
+      },
+      {
+        "n": 3,
+        "title": "Verbては、Verb",
+        "meaning_en": "V1 and V2 repeatedly/over and over again/many times/etc.",
+        "explanation": "The construction V-teはV is used when a set of actions is repeated over a period of time. V-teはV can be repeated, as seen in Ex. 3.",
+        "pattern_form": "V1-teは、V2"
+      },
+      {
+        "n": 4,
+        "title": "Verbたものだ",
+        "meaning_en": "used to ~; would",
+        "explanation": "V-plain.pastものだ is used to describe in a nostalgic fashion what someone did or what happened in the past.",
+        "pattern_form": "V-plain.pastものだ"
+      },
+      {
+        "n": 5,
+        "title": "だんだん",
+        "meaning_en": "gradually; little by little; bit by bit",
+        "explanation": "だんだん is used to indicate that a state changes gradually. Thus, it often occurs with ～ていく, てくる and ～くなる, ～になる, ～ようになる.",
+        "pattern_form": ""
+      },
+      {
+        "n": 6,
+        "title": "～につれて",
+        "meaning_en": "as ~; with ~",
+        "explanation": "Xにつれて indicates that something takes place as X occurs. X can be either a verb or the stem of a suru-verb (i.e., VN).",
+        "pattern_form": "a. V-non-past.affにつれて：文法が分かるにつれて b. Nにつれて：経済の発展につれて"
+      },
+      {
+        "n": 7,
+        "title": "Verb-masu上げる",
+        "meaning_en": "up; finish up V-ing",
+        "explanation": "Affixed to the masu-stems of verbs, 上げる forms compound verbs, adding meanings such as \"finish something up,\" \"upward,\" or \"to a great extent.\" The meaning is determined by the preceding verb.",
+        "pattern_form": "V-masu上げる：書き上げる; し上げる; 縛り上げる(to tie up); 磨き上げる(to polish); 読み上げる(to read aloud); 持ち上げる; 立ち上げる(to start/boot up)"
+      },
+      {
+        "n": 8,
+        "title": "Verb-masuがけに",
+        "meaning_en": "on one's way",
+        "explanation": "がけに with the masu-stems of motion verbs like 行く, 来る, and 帰る means \"on one's way.\"",
+        "pattern_form": "V-masuがけに(V=motion verbs)：行きがけに; 来がけに; 帰りがけに"
+      },
+      {
+        "n": 9,
+        "title": "～だけで",
+        "meaning_en": "just with ~; just by V-ing (is fine/enough/etc.); just N (is fine/enough/etc.)",
+        "explanation": "N/Vだけで is used to express the idea that just X or just doing X is fine or good enough or that one can do something just with X or by doing X.",
+        "pattern_form": "a. Nだけで：日本語だけで; 漢字の勉強だけで b. V1-plainだけでV2：(インターネットで)注文{する／した}だけで c. {V-plain.non-past/N}だけで{いい／十分(enough)だ／etc.}：ビデオを見るだけでいい; 英和辞典だけで十分だ"
+      },
+      {
+        "n": 10,
+        "title": "あまりに(も)",
+        "meaning_en": "too; excessively; so",
+        "explanation": "あまりに(も) indicates that the degree of something is excessively high. It is commonly used in formal language.",
+        "pattern_form": "a. あまりに(も){A/ANaだ}：あまりに(も)古い; あまりに(も)不自然だ b. あまりに(も){Adv/ANaに/A-stemく}：あまりに(も)ゆっくり; あまりに(も)簡単に; あまりに(も)速く"
+      },
+      {
+        "n": 11,
+        "title": "～には",
+        "meaning_en": "to; in order to; for; for the purpose of; when",
+        "explanation": "には indicates purpose in general statements (often stating the speaker's judgement about an action in terms of its effectiveness, convenience, necessity, etc.). には can also mean \"when\" (= ～時には). Verbs or nouns can precede には. Note that when ために is used, the predicate in the main clause describes an action. Compare the following examples: 漢字を覚えるにはフラッシュカード{が効果的だ[judgement]／×を使っている[action]} 漢字を覚えるためにフラッシュカード{を使っている／×が効果的だ} ためには can be used to indicate judgement, as shown below: 漢字を覚える{には／ためには}フラッシュカードが効果的だ。",
+        "pattern_form": "a. V-plain.non-past.affには：見るには; 話すには b. Nには(N:the stems of suru-verbs (i.e., VN) or the direct object of する)：旅行には; 仕事には"
+      },
+      {
+        "n": 12,
+        "title": "だいたい",
+        "meaning_en": "だいたいV = mostly V; nearly V; almost V だいたいのN = most N; almost all N; approximate N; rough N だいたいNumber/Amount = approximately Number/Amount",
+        "explanation": "だいたい means \"most; almost; nearly (all); approximate.\" The meaning changes depending on what だいたい modifies, as seen in 英訳.",
+        "pattern_form": "a. だいたいV b. だいたいのN c. だいたいNumber/Amount"
+      },
+      {
+        "n": 13,
+        "title": "Nounに{おける／おいて}",
+        "meaning_en": "in; at; on; during",
+        "explanation": "The compound particle における indicates the place or time of an action, event or state. The pre-verbal form is において. Both are used only in formal language.",
+        "pattern_form": "a. N1におけるN2：日本における生活 b. NにおいてV：日本において生活する"
+      },
+      {
+        "n": 14,
+        "title": "～もまた",
+        "meaning_en": "as well; also; too",
+        "explanation": "In this usage もまた means the same as も; however, it is more emphatic and formal than も. また has several meanings, but in this use また is synonymous with も.",
+        "pattern_form": ""
+      },
+      {
+        "n": 15,
+        "title": "なんだ",
+        "meaning_en": "Oh!",
+        "explanation": "The literal meaning of なんだ is \"What is X?\" However, it can also be used as an interjection to express the speaker's slight surprise.",
+        "pattern_form": ""
+      },
+      {
+        "n": 16,
+        "title": "ほら",
+        "meaning_en": "Look!; See?; Come on!",
+        "explanation": "The interjection ほら is used to draw the hearer's attention to something.",
+        "pattern_form": ""
+      }
+    ]
+  },
+  "14": {
+    "title": "日本の政治",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "～を除いて",
+        "meaning_en": "except (for) ~; with the exception of ~; but ~",
+        "explanation": "除く means \"to remove; get rid of.\" を除いて is used as a compound particle meaning \"except.\"",
+        "pattern_form": "a. Nを除いて b. N1を除くN2"
+      },
+      {
+        "n": 2,
+        "title": "すなわち",
+        "meaning_en": "that is; i.e.; namely",
+        "explanation": "すなわち is used to rephrase something that has just been mentioned.",
+        "pattern_form": "NP1/S1、すなわちNP2/S2：日本で一番大きい町、すなわち東京"
+      },
+      {
+        "n": 3,
+        "title": "一応",
+        "meaning_en": "for the time being; for now; tentatively; although not perfectly; sort of; just in case",
+        "explanation": "一応 is used when an action/state is tentative or not quite complete, perfect or satisfactory. It is also used when an action is taken as a precaution.",
+        "pattern_form": ""
+      },
+      {
+        "n": 4,
+        "title": "左右する",
+        "meaning_en": "influence; govern",
+        "explanation": "左右する means \"to influence\" or \"to govern.\" It is commonly used in written language.",
+        "pattern_form": "N1はN2を左右する"
+      },
+      {
+        "n": 5,
+        "title": "Noun1、Noun2共(に)",
+        "meaning_en": "Both X and Y",
+        "explanation": "N1、N2共(に) means \"both N1 and N2.\" The colloquial form is N1もN2も.",
+        "pattern_form": "N1、N2共に：九州、四国共に; 男女とも(に)"
+      },
+      {
+        "n": 6,
+        "title": "(期間の表現)に入る",
+        "meaning_en": "N(time period)に入る = N sets in; N begins N(time period)に{入り／入って(から)} = since N began; after N began",
+        "explanation": "Nに入る literally means \"enter N,\" but when N is a noun indicating a time period, the phrase means \"N begins.\" The most common form is Nに入り or Nに入って(から), meaning \"since/after N began.\"",
+        "pattern_form": "N(time period)に{入る／入り／入って(から)}"
+      },
+      {
+        "n": 7,
+        "title": "～を問題にする; ～が問題にされる; ～が問題になる",
+        "meaning_en": "Xを問題にする = to bring X up as an issue; to address the issue/question of X; to question X; to call X into question Xが問題に{される／なる} = X becomes an issue; X is brought up as an issue; X is questioned; X is called into question",
+        "explanation": "Xを問題にする means \"to bring X up as an issue\" or \"to question X.\" This phrase is often used in the passive form Xが問題にされる. Xが問題になる is also common. The meaning is the same as that of the passive version.",
+        "pattern_form": "a. N/NPを問題にする b. N/NPが問題に{される／なる}"
+      },
+      {
+        "n": 8,
+        "title": "未だに",
+        "meaning_en": "still; (not ~) yet",
+        "explanation": "未だに indicates that someone or something is in the same state as he/she/it was some time ago. 未だ(に) is used primarily in written language. In spoken language まだ is used.",
+        "pattern_form": ""
+      },
+      {
+        "n": 9,
+        "title": "いかに～か",
+        "meaning_en": "how; how much; in what way",
+        "explanation": "This structure occurs as an embedded interrogative sentence, where いかに means \"how (much)\" or \"in what way.\" いかに is commonly used in written language.",
+        "pattern_form": "Type 3"
+      },
+      {
+        "n": 10,
+        "title": "しかしながら",
+        "meaning_en": "however; but",
+        "explanation": "しかしながら is a disjunctive conjunction and appears only in sentence-initial position. It is a highly formal expression and is usually used in written language.",
+        "pattern_form": "S1。しかしながら、S2。"
+      },
+      {
+        "n": 11,
+        "title": "かなり",
+        "meaning_en": "considerably; rather; quite; fairly; pretty; quite a lot",
+        "explanation": "かなり indicates that the degree of something is not extremely high but is higher than average.",
+        "pattern_form": ""
+      },
+      {
+        "n": 12,
+        "title": "Verb{れる／られる}",
+        "meaning_en": "",
+        "explanation": "Passive forms of verbs are used to indicate politeness when the speaker refers to the actions of the hearer or someone to whom the speaker wants to show deference. However, this use of passive forms does not indicate as high a level of politeness as おV-masuになる or special honorific verbs like いらっしゃる and 召し上がる. Note that the polite form of the auxiliary verb いる is not いられる, but おられる (see 文型 d). The auxiliary verb おられる is less polite that いらっしゃる.",
+        "pattern_form": "a. う-verbs：V-nai + れる：書かれる; 話される; 使われる; 飲まれる b. る-verbs：V-masu + られる：起きられる; 寝られる c. Irr.verbs：される; 来られる d. V-teいる：V-teおられる：住んでおられる; 持っておられる; 知っておられる"
+      },
+      {
+        "n": 13,
+        "title": "Noun次第",
+        "meaning_en": "N次第だ = depend on ~ N次第で = depending on ~",
+        "explanation": "When 次第 is affixed to nouns, it means \"depend on.\"",
+        "pattern_form": "N次第{だ／で}：成績次第{だ／で}; 大学次第{だ／で}"
+      },
+      {
+        "n": 14,
+        "title": "～とは限らない",
+        "meaning_en": "not necessarily ~; not always; it's not necessarily the case that ~",
+        "explanation": "Xとは限らない means \"it's not necessarily the case that X.\" だ before とは is optional as shown in 文型.",
+        "pattern_form": "Type 1/Type 3 (Both forms are acceptable.)"
+      },
+      {
+        "n": 15,
+        "title": "ちゃんと; きちんと",
+        "meaning_en": "neatly; tidily; properly; adequately; in good order; regularly; without fail",
+        "explanation": "ちゃんと and きちんと both indicate that someone does something neatly, properly, regularly or without fail (i.e., in the way it is supposed to be done). ちゃんと is more colloquial than きちんと.",
+        "pattern_form": ""
+      }
+    ]
+  },
+  "15": {
+    "title": "世界と私の国の未来",
+    "grammar": [
+      {
+        "n": 1,
+        "title": "少なくとも～は",
+        "meaning_en": "at (the) least; to say the least",
+        "explanation": "少なくとも means \"at least.\" It can be used with a noun or a number (optionally followed by a counter). When 少なくとも is used with a noun, は often follows the noun (or the particle after the noun), indicating that the noun is under focus. When は follows a number (+ a counter), it emphasizes the number.",
+        "pattern_form": "a. 少なくともNumber(+Counter)：少なくとも20ぐらいの国; 少なくとも3時間は b. 少なくともN：少なくとも家族(は)"
+      },
+      {
+        "n": 2,
+        "title": "～もVerbば、～もVerb",
+        "meaning_en": "some do ~ and others do ~; do ~ and ~ among other things; sometimes ~ and sometimes ~; there are times when ~ and times when ~; ~ and also ~; ~ and ~ as well",
+        "explanation": "This structure is used to present actions or states (usually two) as examples of possible or past actions/states. In many cases the actions/states are contrastive ones.",
+        "pattern_form": "a. N1もV-condば、N2もV (See L.6 文法ノート③) b. A-stemくもV-condば、～も：面白くもなれば、つまらなくもなる c. ANa{に／で}もV-condば、～も：上手にもなれば、下手にもなる; 安全でもあれば、便利でもある d. V1-masuもすれば、V2-masuもする：読みもすれば、書きもする"
+      },
+      {
+        "n": 3,
+        "title": "～のうち(で)",
+        "meaning_en": "in; of; among",
+        "explanation": "Xのうち(で) is used to indicate the total entity (X) when presenting a part or portion of X.",
+        "pattern_form": "Nのうち(で)"
+      },
+      {
+        "n": 4,
+        "title": "後(の)Noun",
+        "meaning_en": "the remaining ~; the remainder of ~; the rest of ~",
+        "explanation": "後の, when followed by a number (+ counter) or a noun, means \"the remaining\" or \"the rest of.\" Here, の after 後 is optional. This use of 後 should be distinguised from 後 in the following example, where 後 means \"~more.\" In this use, の cannot occur after 後. このプロジェクトには{後三人／×後の三人}必要だ。(We need three more people for this project.)",
+        "pattern_form": "a. 後(の)Number(+Counter)：後(の)一人; 後(の)3台 b. 後のN：後の人たち; 後の車"
+      },
+      {
+        "n": 5,
+        "title": "何より(も)",
+        "meaning_en": "before everything; above all; first of all; more than anything else; the most ~",
+        "explanation": "何より(も) means \"before everything\" or \"than anything else,\" depending on the context.",
+        "pattern_form": ""
+      },
+      {
+        "n": 6,
+        "title": "～に従って",
+        "meaning_en": "in accordance with ~; complying with ~; following ~",
+        "explanation": "に従って literally means \"following.\" In some contexts, it means \"in accordance with.\"",
+        "pattern_form": "Nに従って：スケジュールに従って; 規則に従って"
+      },
+      {
+        "n": 7,
+        "title": "たった(の)Number(+Counter)",
+        "meaning_en": "only",
+        "explanation": "たった(の) is used to emphasize the small amount or number of something.",
+        "pattern_form": "たった(の)Number(+Counter)：たった(の)三人; たった(の)15"
+      },
+      {
+        "n": 8,
+        "title": "～て{しかたがない／しようがない／しょうがない}",
+        "meaning_en": "cannot help V-ing; cannot stop feeling ~; so ~; unbearably ~",
+        "explanation": "てしかたがない, てしようがない, etc. literally mean that a situation is such or is occurring and there is no way to escape it. The phrases are used to indicate that the speaker is unable to control his psychological/physiological reactions or bear a sensation or an external situation. しかたがない and しようがない are interchangeable. しょうがない is colloquial. This use is different from the following example, where しかたがない means \"it cannot be helped; there's nothing one can do.\" お金がないのだから、留学できないのはしかたがない。来年まで待とう。",
+        "pattern_form": "a. {V/A}-teしかたがない, etc.：咳が出てしかたがない; 喉が渇いてしかたがない; 寒くてしようがない; 欲しくてしょうがない b. ANaでしかたがない, etc.：心配でしかたがない; 退屈(boring)でしかたがない"
+      },
+      {
+        "n": 9,
+        "title": "～以来",
+        "meaning_en": "since",
+        "explanation": "以来 means \"since.\" It is used with V-te or VN referring to an action in the past, or with N indicating a specific time in the past.",
+        "pattern_form": "a. V-te以来：21世紀に入って以来 b. VN/N以来：終戦以来; 結婚以来; 入学以来; 留学以来 c. それ／あれ以来"
+      },
+      {
+        "n": 10,
+        "title": "何から何まで",
+        "meaning_en": "anything and everything; all; all kinds",
+        "explanation": "何から何まで means \"all.\" It is more emphatic than 全部, すべて or みんな. 何から何まで can be used with 全部, すべて or みんな.",
+        "pattern_form": ""
+      },
+      {
+        "n": 11,
+        "title": "かえって",
+        "meaning_en": "on the contrary; rather",
+        "explanation": "かえって is used when an opposite result comes about, contrary to one's expectation.",
+        "pattern_form": ""
+      },
+      {
+        "n": 12,
+        "title": "～と同時に",
+        "meaning_en": "as soon as; the moment; at the same time; also; as well",
+        "explanation": "と同時に means that something takes place at the same time as other actions or events, or that something is the case while something else is also the case.",
+        "pattern_form": "a. {V/A}-plain.non-pastと同時に：{考える／考えない／考えている}と同時に; 難しいと同時に b. {ANa/N}{である／じゃない／ではない}と同時に：大切{である／じゃない／ではない}と同時に; 問題{である／じゃない／ではない}と同時に c. VN/Nと同時に：終戦と同時に; 叫び声と同時に"
+      },
+      {
+        "n": 13,
+        "title": "Sentenceっけ",
+        "meaning_en": "",
+        "explanation": "っけ is a question marker. It is used only in very casual conversation. Note that after the non-past forms of verbs, adjectives and ～ない, んだ must be used before っけ, as seen in 文型.",
+        "pattern_form": "a. {V/A}-plain.non-pastんだっけ：行くんだっけ; 大きいんだっけ b. {V/A}-plain.past(んだ)っけ：行った(んだ)っけ; 大きかった(んだ)っけ c. {ANa/N/QW}(なん)だっけ：上手(なん)だっけ; 学生(なん)だっけ; いつ(なん)だっけ d. {ANa/N}じゃないんだっけ：上手じゃないんだっけ; 学生じゃないんだっけ e. {ANa/N/QW}だった(んだ)っけ：上手だった(んだ)っけ; 学生だった(んだ)っけ; いつだった(んだ)っけ f. {ANa/N}じゃなかった(んだ)っけ：上手じゃなかった(んだ)っけ; 学生じゃなかった(んだ)っけ"
+      }
+    ]
+  }
+}
