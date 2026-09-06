@@ -38,3 +38,8 @@ npm run preview  # ビルド結果を確認
 
 次の段階: JMdict による英語の語義、文単位の英訳（Claude API）、単語帳・SRS。
 詳細は [DESIGN.md](DESIGN.md)。
+
+## 記事を追加する
+
+本文・注釈・翻訳・クイズの作り方と、忘れがちなユーザー割り当ての手順は
+[docs/adding-articles.md](docs/adding-articles.md) を参照。
