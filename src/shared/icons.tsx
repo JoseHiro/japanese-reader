@@ -104,11 +104,59 @@ export function IconChevronRight() {
   );
 }
 
+export function IconHelp() {
+  return (
+    <svg {...base}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5" />
+      <circle cx="12" cy="16.5" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function IconTranslate() {
   return (
     <svg {...base}>
       <path d="M3 5h9M7 3v2c0 5-2 8-5 9M5 9c0 3 3 5 7 6" />
       <path d="M14 20l4-9 4 9M15 17h6" />
+    </svg>
+  );
+}
+
+// Two rows of chunks with arrows suggesting rearrangement — used for the
+// sentence-rearrangement grammar quiz tab.
+export function IconGrammarQuiz() {
+  return (
+    <svg {...base}>
+      <rect x="3" y="5" width="6" height="4" rx="1" />
+      <rect x="11" y="5" width="4" height="4" rx="1" />
+      <rect x="17" y="5" width="4" height="4" rx="1" />
+      <rect x="3" y="15" width="4" height="4" rx="1" />
+      <rect x="9" y="15" width="6" height="4" rx="1" />
+      <rect x="17" y="15" width="4" height="4" rx="1" />
+      <path d="M8 11l2 3M18 11l-2 3" />
+    </svg>
+  );
+}
+
+// Stack of index cards — used for the vocabulary flashcard tab.
+export function IconFlashcards() {
+  return (
+    <svg {...base}>
+      <rect x="6" y="4" width="14" height="10" rx="2" />
+      <rect x="4" y="8" width="14" height="10" rx="2" />
+      <path d="M8 13h6" />
+    </svg>
+  );
+}
+
+// Book with a bookmark ribbon — used for the grammar reference tab.
+export function IconGrammarBook() {
+  return (
+    <svg {...base}>
+      <path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z" />
+      <path d="M4 17a3 3 0 0 1 3-3h11" />
+      <path d="M14 4v6l2-1.5L18 10V4" />
     </svg>
   );
 }

@@ -17,11 +17,18 @@ import {
   IconTranslate,
   IconChevronLeft,
   IconChevronRight,
+  IconHelp,
+  IconGrammarQuiz,
+  IconFlashcards,
+  IconGrammarBook,
 } from "./shared/icons";
-import { findUser, articlesForUser, lessonsForUser, type User } from "./users";
+import { findUser, articlesForUser, lessonsForUser, vocabForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
+import { GrammarQuiz } from "./GrammarQuiz";
+import { Flashcards } from "./Flashcards";
+import { GrammarReference } from "./GrammarReference";
 
 interface Sentence {
   units: Unit[];
@@ -89,13 +96,47 @@ const PRACTICE_TAB: TabDef = {
   badge: "New",
 };
 
+// Tabs added for a user who has a Tobira grammar assignment and/or a
+// vocabulary pool set on their profile (currently just Artem).
+const GRAMMAR_QUIZ_TAB: TabDef = {
+  id: "grammarQuiz",
+  label: "文法クイズ",
+  icon: <IconGrammarQuiz />,
+  badge: "New",
+};
+const FLASHCARDS_TAB: TabDef = {
+  id: "flashcards",
+  label: "単語練習",
+  icon: <IconFlashcards />,
+  badge: "New",
+};
+const GRAMMAR_REF_TAB: TabDef = {
+  id: "grammarRef",
+  label: "文法帳",
+  icon: <IconGrammarBook />,
+  badge: "New",
+};
+
 const LESSON_TABS: TabDef[] = [
   { id: "lesson", label: "レッスン", icon: <IconArticle /> },
   { id: "vocab", label: "単語リスト", icon: <IconWordList /> },
 ];
 
 function tabsForUser(u: User): TabDef[] {
-  return u.id === "andy" ? [...BASE_TABS, PRACTICE_TAB] : BASE_TABS;
+  if (u.id === "andy") return [...BASE_TABS, PRACTICE_TAB];
+  // Reorder for users whose main weakness is EN→JP production (翻訳練習 up
+  // front) and add the flashcard / rearrange / reference tabs.
+  const tabs: TabDef[] = [
+    BASE_TABS[0], // 記事
+    BASE_TABS[1], // 単語リスト
+    BASE_TABS[2], // 翻訳練習
+    BASE_TABS[3], // 単語クイズ
+  ];
+  if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_QUIZ_TAB);
+  tabs.push(BASE_TABS[4]); // 読解クイズ
+  if (u.vocabPoolId) tabs.push(FLASHCARDS_TAB);
+  if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_REF_TAB);
+  return tabs;
 }
 
 function sortArticles(list: readonly Article[]): Article[] {
@@ -175,10 +216,13 @@ export default function App() {
   const [headings, setHeadings] = useState<Set<string>>(new Set());
   const [clozePick, setClozePick] = useState<Record<number, number>>({});
   const [readReveal, setReadReveal] = useState<Set<number>>(new Set());
+  const [hintReveal, setHintReveal] = useState<Set<number>>(new Set());
   const [activeTab, setActiveTab] = useState("article");
   const [listGlosses, setListGlosses] = useState<Record<string, string[]>>({});
   const [wordQuery, setWordQuery] = useState("");
   const [showBasic, setShowBasic] = useState(false);
+  const [showArticleRef, setShowArticleRef] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("yomu-sidebar-collapsed") === "1";
@@ -190,6 +234,26 @@ export default function App() {
       sidebarCollapsed ? "1" : "0",
     );
   }, [sidebarCollapsed]);
+
+  // Close the article reference overlay when the user hits Escape.
+  useEffect(() => {
+    if (!showArticleRef) return;
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowArticleRef(false);
+    };
+    window.addEventListener("keydown", handle);
+    return () => window.removeEventListener("keydown", handle);
+  }, [showArticleRef]);
+
+  // Same Escape shortcut for the help popover.
+  useEffect(() => {
+    if (!helpOpen) return;
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setHelpOpen(false);
+    };
+    window.addEventListener("keydown", handle);
+    return () => window.removeEventListener("keydown", handle);
+  }, [helpOpen]);
 
   // Auto-collapse the sidebar when the viewport gets narrow enough that
   // the article column would be squeezed. Manual expand still works;
@@ -527,7 +591,7 @@ export default function App() {
         ))}
       </aside>
 
-      {!isLessonMode && article && (
+      {!isLessonMode && (article || user.vocabPoolId || user.tobiraCurrent !== undefined) && (
         <TabRail tabs={tabsForUser(user)} active={activeTab} onChange={setActiveTab} />
       )}
       {isLessonMode && openLessonId && (
@@ -721,6 +785,17 @@ export default function App() {
 
       {activeTab === "vocabQuiz" && (
         <section className="quiz">
+          {article && article.quiz?.cloze && article.quiz.cloze.length > 0 && (
+            <div className="quiz-toolbar">
+              <button
+                className="ref-toggle-btn"
+                onClick={() => setShowArticleRef(true)}
+                title="記事を横に開いて参照する"
+              >
+                📖 記事を見ながら答える
+              </button>
+            </div>
+          )}
           {article?.quiz?.cloze && article.quiz.cloze.length > 0 ? (
             <div className="quiz-block">
               <span className="q-badge">穴埋め単語</span>
@@ -774,30 +849,70 @@ export default function App() {
 
       {activeTab === "readingQuiz" && (
         <section className="quiz">
+          {article && article.quiz?.reading && article.quiz.reading.length > 0 && (
+            <div className="quiz-toolbar">
+              <button
+                className="ref-toggle-btn"
+                onClick={() => setShowArticleRef(true)}
+                title="記事を横に開いて参照する"
+              >
+                📖 記事を見ながら答える
+              </button>
+            </div>
+          )}
           {article?.quiz?.reading && article.quiz.reading.length > 0 ? (
             <div className="quiz-block">
               <span className="q-badge">読解</span>
               {article.quiz.reading.map((q, qi) => {
                 const shown = readReveal.has(qi);
+                const hintShown = hintReveal.has(qi);
+                const hasHints = q.hints && q.hints.length > 0;
                 return (
                   <div className="quiz-card" key={qi}>
                     <p className="q-text">
                       <Furigana text={q.question} show={showFurigana} />
                     </p>
-                    <button
-                      className="reveal-btn"
-                      aria-expanded={shown}
-                      onClick={() =>
-                        setReadReveal((s) => {
-                          const n = new Set(s);
-                          if (n.has(qi)) n.delete(qi);
-                          else n.add(qi);
-                          return n;
-                        })
-                      }
-                    >
-                      {shown ? "解答を隠す" : "解答を見る"}
-                    </button>
+                    <div className="quiz-actions">
+                      {hasHints && (
+                        <button
+                          className="hint-btn"
+                          aria-expanded={hintShown}
+                          onClick={() =>
+                            setHintReveal((s) => {
+                              const n = new Set(s);
+                              if (n.has(qi)) n.delete(qi);
+                              else n.add(qi);
+                              return n;
+                            })
+                          }
+                        >
+                          {hintShown ? "▾ ヒントを隠す" : "💡 使う単語のヒント"}
+                        </button>
+                      )}
+                      <button
+                        className="reveal-btn"
+                        aria-expanded={shown}
+                        onClick={() =>
+                          setReadReveal((s) => {
+                            const n = new Set(s);
+                            if (n.has(qi)) n.delete(qi);
+                            else n.add(qi);
+                            return n;
+                          })
+                        }
+                      >
+                        {shown ? "解答を隠す" : "解答を見る"}
+                      </button>
+                    </div>
+                    {hasHints && hintShown && (
+                      <div className="hint-chips" role="list">
+                        {q.hints!.map((h, hi) => (
+                          <span className="hint-chip" role="listitem" key={hi}>
+                            <Furigana text={h} show={showFurigana} />
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     {shown && (
                       <p className="model-answer">
                         <Furigana text={q.answer} show={showFurigana} />
@@ -817,6 +932,38 @@ export default function App() {
         <ArticleTranslate paragraphs={paragraphs} showFurigana={showFurigana} />
       )}
 
+      {activeTab === "grammarQuiz" && (
+        <section className="quiz">
+          {article && article.quiz?.rearrange && article.quiz.rearrange.length > 0 && (
+            <div className="quiz-toolbar">
+              <button
+                className="ref-toggle-btn"
+                onClick={() => setShowArticleRef(true)}
+                title="記事を横に開いて参照する"
+              >
+                📖 記事を見ながら答える
+              </button>
+            </div>
+          )}
+          <GrammarQuiz
+            questions={article?.quiz?.rearrange ?? []}
+            showFurigana={showFurigana}
+          />
+        </section>
+      )}
+
+      {activeTab === "flashcards" && (
+        <section className="quiz">
+          <Flashcards pool={vocabForUser(user)} showFurigana={showFurigana} />
+        </section>
+      )}
+
+      {activeTab === "grammarRef" && (
+        <section className="quiz">
+          <GrammarReference currentLesson={user.tobiraCurrent} />
+        </section>
+      )}
+
       {activeTab === "practice" && (
         <Practice
           user={user}
@@ -831,6 +978,195 @@ export default function App() {
           単語をクリックで詳細・文末の ▶ で読み上げ・訳。色の濃い単語には解説、記事にはクイズが付きます。
         </footer>
       </main>
+
+      <button
+        className="help-fab"
+        onClick={() => setHelpOpen(true)}
+        aria-label="Help / interface guide"
+        title="Help / interface guide"
+      >
+        <IconHelp />
+      </button>
+
+      {helpOpen && (
+        <>
+          <div
+            className="help-backdrop"
+            onClick={() => setHelpOpen(false)}
+            aria-hidden
+          />
+          <aside
+            className="help-panel"
+            role="dialog"
+            aria-label="Interface guide"
+          >
+            <div className="help-head">
+              <strong>Interface guide</strong>
+              <button
+                className="ref-close"
+                onClick={() => setHelpOpen(false)}
+                aria-label="Close help"
+              >
+                ×
+              </button>
+            </div>
+            <div className="help-body">
+              <section>
+                <h4>Top bar</h4>
+                <dl>
+                  <dt>振り仮名</dt>
+                  <dd>Toggle furigana (kana readings above kanji).</dd>
+                  <dt>☀ / ☾</dt>
+                  <dd>Switch between light and dark theme.</dd>
+                  <dt>Your name → arrow</dt>
+                  <dd>Sign out and switch users.</dd>
+                </dl>
+              </section>
+
+              <section>
+                <h4>Left column</h4>
+                <dl>
+                  <dt>記事 list</dt>
+                  <dd>Your library of articles. Click one to open it.</dd>
+                  <dt>‹ / › on the edge</dt>
+                  <dd>
+                    Collapse or expand the article list. Auto-collapses on
+                    narrow windows so the article gets more room.
+                  </dd>
+                </dl>
+              </section>
+
+              <section>
+                <h4>Right tab rail</h4>
+                <dl>
+                  <dt>記事</dt>
+                  <dd>Read the article. Every meaningful word is clickable.</dd>
+                  <dt>単語リスト</dt>
+                  <dd>
+                    All meaningful vocabulary. Hidden by default: N5 basics,
+                    numbers, particles. Toggle "基本語も表示" to see them.
+                  </dd>
+                  <dt>翻訳練習</dt>
+                  <dd>Sentence-by-sentence translation practice.</dd>
+                  <dt>単語クイズ</dt>
+                  <dd>Fill-in-the-blank vocabulary quiz (4 choices).</dd>
+                  <dt>文法クイズ</dt>
+                  <dd>
+                    Sentence rearrangement. Pick chunks in order; expand
+                    the 文法 button to see the Tobira explanation.
+                  </dd>
+                  <dt>読解クイズ</dt>
+                  <dd>
+                    Reading comprehension questions with a click-to-reveal
+                    model answer.
+                  </dd>
+                  <dt>単語練習</dt>
+                  <dd>
+                    English → Japanese flashcards from your monthly vocab
+                    pool. Self-grade each card with ◯ / △ / ×, then retry
+                    just the ones you missed.
+                  </dd>
+                  <dt>文法帳</dt>
+                  <dd>
+                    Browsable reference of every grammar point in Tobira,
+                    with search across all 15 chapters.
+                  </dd>
+                </dl>
+              </section>
+
+              <section>
+                <h4>While reading</h4>
+                <dl>
+                  <dt>Click a word</dt>
+                  <dd>
+                    Pop up its meaning, reading, and examples. Words shown in
+                    a stronger color have hand-written notes; the rest fall
+                    back to the built-in dictionary.
+                  </dd>
+                  <dt>▶ at end of a sentence</dt>
+                  <dd>Read the sentence out loud.</dd>
+                  <dt>訳 at end of a sentence</dt>
+                  <dd>Show the English translation for that sentence.</dd>
+                </dl>
+              </section>
+
+              <section>
+                <h4>On quiz tabs</h4>
+                <dl>
+                  <dt>📖 記事を見ながら答える</dt>
+                  <dd>
+                    Slide the article in from the left so you can look at it
+                    while you answer. On a wide screen the quiz stays fully
+                    interactive; on a narrow screen it opens as a modal —
+                    close via ×, click outside, or the Esc key.
+                  </dd>
+                </dl>
+              </section>
+            </div>
+          </aside>
+        </>
+      )}
+
+      {showArticleRef && article && (
+        <>
+          <div
+            className="ref-backdrop"
+            onClick={() => setShowArticleRef(false)}
+            aria-hidden
+          />
+          <aside
+            className="article-ref"
+            role="dialog"
+            aria-label={`${article.title} — 参照`}
+          >
+            <div className="ref-head">
+              <div className="ref-title">
+                <span className="ref-label">📖 参照中</span>
+                <strong>{article.title}</strong>
+              </div>
+              <button
+                className="ref-close"
+                onClick={() => setShowArticleRef(false)}
+                aria-label="記事を閉じる"
+              >
+                ×
+              </button>
+            </div>
+            <div className="ref-body">
+              {paragraphs.map((sents, pi) => {
+                const paraText = sents.map((s) => s.text).join("");
+                const isHeading = headings.has(paraText);
+                return (
+                  <p className={"para" + (isHeading ? " heading" : "")} key={pi}>
+                    {sents.map((s, i) => (
+                      <span className="sentence" key={i}>
+                        {s.units.map((u, j) =>
+                          u.clickable ? (
+                            <span
+                              className={
+                                "word" + (u.annotation ? " annotated" : "")
+                              }
+                              key={j}
+                              onClick={(e) => openPopup(u, e.currentTarget)}
+                            >
+                              {renderTokens(u.tokens)}
+                            </span>
+                          ) : (
+                            <span key={j}>{renderTokens(u.tokens)}</span>
+                          ),
+                        )}
+                      </span>
+                    ))}
+                  </p>
+                );
+              })}
+              {paragraphs.length === 0 && (
+                <p className="hint">記事を先に開いてください。</p>
+              )}
+            </div>
+          </aside>
+        </>
+      )}
       </div>
       </div>
     </div>
