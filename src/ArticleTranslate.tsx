@@ -68,11 +68,29 @@ function TranslateCard({
 export function ArticleTranslate({
   paragraphs,
   showFurigana,
+  curated,
 }: {
   paragraphs: Paragraph[];
   showFurigana: boolean;
+  /**
+   * Optional curated set (article's `translationPractice`) — the exact
+   * Japanese sentences to include, in the order they should appear.
+   * When set, only sentences whose text is in this list are shown; when
+   * absent, every translated sentence in the article is shown.
+   */
+  curated?: readonly string[];
 }) {
-  const sentences = paragraphs.flat().filter((s) => s.translation);
+  const translated = paragraphs.flat().filter((s) => s.translation);
+  const sentences = (() => {
+    if (!curated || curated.length === 0) return translated;
+    const byText = new Map(translated.map((s) => [s.text, s]));
+    const picks: Sentence[] = [];
+    for (const text of curated) {
+      const s = byText.get(text);
+      if (s) picks.push(s);
+    }
+    return picks;
+  })();
   if (paragraphs.length === 0) {
     return <p className="hint">左の記事を選ぶと、翻訳練習ができます。</p>;
   }

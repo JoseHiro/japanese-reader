@@ -29,6 +29,7 @@ import { ArticleTranslate } from "./ArticleTranslate";
 import { GrammarQuiz } from "./GrammarQuiz";
 import { Flashcards } from "./Flashcards";
 import { GrammarReference } from "./GrammarReference";
+import { parseHash, formatArticleHash, formatLessonHash } from "./route";
 
 interface Sentence {
   units: Unit[];
@@ -205,6 +206,10 @@ export default function App() {
     setUser(null);
     setArticle(null);
     setParagraphs([]);
+    if (typeof window !== "undefined" && window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    wroteInitialHashRef.current = false;
   }
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
@@ -393,10 +398,10 @@ export default function App() {
     setReadReveal(new Set());
   }
 
-  function loadArticle(a: Article) {
+  function loadArticle(a: Article, tab: string = "article") {
     setArticle(a);
     setHeadings(new Set(a.headings ?? []));
-    setActiveTab("article");
+    setActiveTab(tab);
     setListGlosses({});
     setWordQuery("");
     resetQuiz();
@@ -404,31 +409,102 @@ export default function App() {
   }
 
   // Lesson-mode users (Andy today): jump straight to the Practice tab and
-  // pre-open the first lesson.
+  // pre-open the first lesson (or the one referenced by the URL hash on
+  // first load). Reads the URL directly each time so StrictMode's double
+  // effect-invocation stays a no-op.
   useEffect(() => {
-    if (isLessonMode) {
-      setActiveTab("practice");
-      if (!openLessonId && userLessons[0]) setOpenLessonId(userLessons[0].id);
+    if (!isLessonMode) return;
+    const r = parseHash();
+    const target =
+      r.kind === "lesson"
+        ? userLessons.find((l) => l.id === r.lessonId)
+        : undefined;
+    setActiveTab("practice");
+    if (target) {
+      setOpenLessonId(target.id);
+      if (r.lessonTab) setLessonTab(r.lessonTab);
+    } else if (!openLessonId && userLessons[0]) {
+      setOpenLessonId(userLessons[0].id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, isLessonMode]);
 
-  // Reset the lesson sub-tab back to the main lesson view whenever the
-  // opened lesson changes.
+  // Switching to a different lesson resets the sub-tab back to the main
+  // lesson view. Detect real openLessonId transitions via a ref so the
+  // initial null→id set on mount doesn't clobber a URL-provided sub-tab.
+  const prevLessonIdRef = useRef<string | null>(null);
   useEffect(() => {
-    setLessonTab("lesson");
+    if (prevLessonIdRef.current !== null && prevLessonIdRef.current !== openLessonId) {
+      setLessonTab("lesson");
+    }
+    prevLessonIdRef.current = openLessonId;
   }, [openLessonId]);
 
-  // Open the most recently added article whenever the user changes.
+  // Open the article referenced by the URL hash if it belongs to this
+  // user's library, otherwise fall back to the newest one. Runs on user
+  // change and reads the URL directly so StrictMode's double-invoke
+  // stays idempotent.
   useEffect(() => {
-    if (isLessonMode) return; // lesson-mode users don't need an article
-    if (sortedArticles[0]) loadArticle(sortedArticles[0]);
+    if (isLessonMode) return;
+    const r = parseHash();
+    const target =
+      r.kind === "article"
+        ? sortedArticles.find((a) => a.id === r.articleId)
+        : undefined;
+    if (target) loadArticle(target, r.articleTab ?? "article");
+    else if (sortedArticles[0]) loadArticle(sortedArticles[0]);
     else {
       setArticle(null);
       setParagraphs([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
+
+  // Mirror (article, tab) or (lesson, sub-tab) into the URL hash. First
+  // write uses replaceState so we don't push an extra history entry on
+  // load; subsequent writes push so back/forward navigate between views.
+  const wroteInitialHashRef = useRef(false);
+  useEffect(() => {
+    if (!user) return;
+    let hash = "";
+    if (isLessonMode && openLessonId) {
+      hash = formatLessonHash(openLessonId, lessonTab);
+    } else if (article) {
+      hash = formatArticleHash(article.id, activeTab);
+    }
+    if (!hash) return;
+    if (window.location.hash === hash) return;
+    if (!wroteInitialHashRef.current) {
+      window.history.replaceState(null, "", hash);
+      wroteInitialHashRef.current = true;
+    } else {
+      window.history.pushState(null, "", hash);
+    }
+  }, [user, isLessonMode, article?.id, activeTab, openLessonId, lessonTab]);
+
+  // Browser back/forward: parse the new hash and reconcile state. Writes
+  // via history.replaceState/pushState above don't fire hashchange, so
+  // this only runs for real user navigation.
+  useEffect(() => {
+    function handle() {
+      const r = parseHash();
+      if (r.kind === "article" && r.articleId) {
+        const target = sortedArticles.find((a) => a.id === r.articleId);
+        if (target) {
+          if (article?.id !== target.id) loadArticle(target, r.articleTab ?? "article");
+          else if (r.articleTab && r.articleTab !== activeTab) setActiveTab(r.articleTab);
+        }
+      } else if (r.kind === "lesson" && r.lessonId) {
+        if (userLessons.some((l) => l.id === r.lessonId)) {
+          if (openLessonId !== r.lessonId) setOpenLessonId(r.lessonId);
+          if (r.lessonTab && r.lessonTab !== lessonTab) setLessonTab(r.lessonTab);
+        }
+      }
+    }
+    window.addEventListener("hashchange", handle);
+    return () => window.removeEventListener("hashchange", handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedArticles, userLessons, article?.id, activeTab, openLessonId, lessonTab]);
 
   function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
@@ -929,7 +1005,11 @@ export default function App() {
       )}
 
       {activeTab === "translate" && (
-        <ArticleTranslate paragraphs={paragraphs} showFurigana={showFurigana} />
+        <ArticleTranslate
+          paragraphs={paragraphs}
+          showFurigana={showFurigana}
+          curated={article?.translationPractice}
+        />
       )}
 
       {activeTab === "grammarQuiz" && (

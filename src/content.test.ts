@@ -47,6 +47,15 @@ describe("ARTICLES structural invariants", () => {
       }
     }
   });
+
+  it("every translationPractice sentence has a matching translation entry", () => {
+    for (const a of ARTICLES) {
+      if (!a.translationPractice) continue;
+      const translations = a.translations ?? {};
+      const missing = a.translationPractice.filter((s) => !(s in translations));
+      expect(missing, `${a.id} unmatched: ${missing.join(" | ")}`).toEqual([]);
+    }
+  });
 });
 
 describe("Marugame Seimen article", () => {
