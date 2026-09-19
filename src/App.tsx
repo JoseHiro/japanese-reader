@@ -148,6 +148,10 @@ function sortArticles(list: readonly Article[]): Article[] {
 
 const USER_STORAGE_KEY = "yomu-user";
 
+function wordDoneStorageKey(userId: string, articleId: string): string {
+  return `yomu-wordlist-done:${userId}:${articleId}`;
+}
+
 function loadStoredUser(): User | null {
   if (typeof window === "undefined") return null;
   try {
@@ -232,6 +236,10 @@ export default function App() {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("yomu-sidebar-collapsed") === "1";
   });
+  // Words the learner has marked as "覚えた" in the 単語リスト tab. Scoped
+  // to the current (user, article) pair and persisted in localStorage so
+  // progress carries across sessions.
+  const [wordDone, setWordDone] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     localStorage.setItem(
@@ -239,6 +247,36 @@ export default function App() {
       sidebarCollapsed ? "1" : "0",
     );
   }, [sidebarCollapsed]);
+
+  // Load / clear the per-article "completed word" set whenever the open
+  // article or signed-in user changes.
+  useEffect(() => {
+    if (!user || !article) {
+      setWordDone(new Set());
+      return;
+    }
+    try {
+      const raw = localStorage.getItem(wordDoneStorageKey(user.id, article.id));
+      const arr = raw ? (JSON.parse(raw) as string[]) : [];
+      setWordDone(new Set(arr));
+    } catch {
+      setWordDone(new Set());
+    }
+  }, [user?.id, article?.id]);
+
+  function toggleWordDone(key: string) {
+    if (!user || !article) return;
+    const storeKey = wordDoneStorageKey(user.id, article.id);
+    setWordDone((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      try {
+        localStorage.setItem(storeKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }
 
   // Close the article reference overlay when the user hits Escape.
   useEffect(() => {
@@ -828,6 +866,11 @@ export default function App() {
             </label>
             <span className="wl-count">
               {filteredWords.length} / {visibleWords.length} 語
+              {visibleWords.length > 0 && (
+                <>
+                  {" ・ "}完了 {visibleWords.filter((u) => wordDone.has(u.key)).length}
+                </>
+              )}
             </span>
           </div>
           {visibleWords.length === 0 ? (
@@ -838,21 +881,38 @@ export default function App() {
             <table className="wl-table">
               <thead>
                 <tr>
+                  <th className="wl-th-done" aria-label="完了" />
                   <th className="wl-th-word">単語</th>
                   <th className="wl-th-reading">読み</th>
                   <th className="wl-th-meaning">意味</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredWords.map((u, i) => (
-                  <tr key={i}>
-                    <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
-                      <Furigana text={u.key || u.surface} show={showFurigana} />
-                    </td>
-                    <td className="wl-reading">{unitReading(u)}</td>
-                    <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
-                  </tr>
-                ))}
+                {filteredWords.map((u, i) => {
+                  const done = wordDone.has(u.key);
+                  return (
+                    <tr key={i} className={done ? "done" : ""}>
+                      <td className="wl-done-cell">
+                        <label className="wl-check">
+                          <input
+                            type="checkbox"
+                            checked={done}
+                            onChange={() => toggleWordDone(u.key)}
+                            aria-label={done ? "未完了に戻す" : "完了にする"}
+                          />
+                          <span className="wl-check-mark" aria-hidden>
+                            ✓
+                          </span>
+                        </label>
+                      </td>
+                      <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
+                        <Furigana text={u.key || u.surface} show={showFurigana} />
+                      </td>
+                      <td className="wl-reading">{unitReading(u)}</td>
+                      <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
