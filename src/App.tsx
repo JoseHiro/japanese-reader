@@ -125,16 +125,16 @@ const LESSON_TABS: TabDef[] = [
 
 function tabsForUser(u: User): TabDef[] {
   if (u.id === "andy") return [...BASE_TABS, PRACTICE_TAB];
-  // Reorder for users whose main weakness is EN→JP production (翻訳練習 up
-  // front) and add the flashcard / rearrange / reference tabs.
+  // 翻訳練習 sits after 読解クイズ so learners see comprehension checks
+  // before production practice.
   const tabs: TabDef[] = [
     BASE_TABS[0], // 記事
     BASE_TABS[1], // 単語リスト
-    BASE_TABS[2], // 翻訳練習
     BASE_TABS[3], // 単語クイズ
   ];
   if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_QUIZ_TAB);
   tabs.push(BASE_TABS[4]); // 読解クイズ
+  tabs.push(BASE_TABS[2]); // 翻訳練習
   if (u.vocabPoolId) tabs.push(FLASHCARDS_TAB);
   if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_REF_TAB);
   return tabs;
