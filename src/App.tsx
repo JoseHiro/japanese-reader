@@ -148,8 +148,8 @@ function sortArticles(list: readonly Article[]): Article[] {
 
 const USER_STORAGE_KEY = "yomu-user";
 
-function wordDoneStorageKey(userId: string, articleId: string): string {
-  return `yomu-wordlist-done:${userId}:${articleId}`;
+function vocabQuizDoneStorageKey(userId: string, articleId: string): string {
+  return `yomu-quiz-done:${userId}:${articleId}:vocab`;
 }
 
 function loadStoredUser(): User | null {
@@ -236,10 +236,9 @@ export default function App() {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("yomu-sidebar-collapsed") === "1";
   });
-  // Words the learner has marked as "覚えた" in the 単語リスト tab. Scoped
-  // to the current (user, article) pair and persisted in localStorage so
-  // progress carries across sessions.
-  const [wordDone, setWordDone] = useState<Set<string>>(new Set());
+  // Per-(user, article) flag: has the vocab-quiz tab been completed at
+  // least once? Persisted so the tab keeps its ✓ across sessions.
+  const [vocabQuizDone, setVocabQuizDone] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(
@@ -248,35 +247,34 @@ export default function App() {
     );
   }, [sidebarCollapsed]);
 
-  // Load / clear the per-article "completed word" set whenever the open
-  // article or signed-in user changes.
+  // Load the vocab-quiz completion flag for the current (user, article).
   useEffect(() => {
     if (!user || !article) {
-      setWordDone(new Set());
+      setVocabQuizDone(false);
       return;
     }
     try {
-      const raw = localStorage.getItem(wordDoneStorageKey(user.id, article.id));
-      const arr = raw ? (JSON.parse(raw) as string[]) : [];
-      setWordDone(new Set(arr));
+      setVocabQuizDone(
+        localStorage.getItem(vocabQuizDoneStorageKey(user.id, article.id)) === "1",
+      );
     } catch {
-      setWordDone(new Set());
+      setVocabQuizDone(false);
     }
   }, [user?.id, article?.id]);
 
-  function toggleWordDone(key: string) {
+  // Mark the vocab quiz done the moment every cloze question has been
+  // answered in this session, and persist so the ✓ survives reloads.
+  const clozeTotal = article?.quiz?.cloze?.length ?? 0;
+  const clozeAnswered = Object.keys(clozePick).length;
+  useEffect(() => {
     if (!user || !article) return;
-    const storeKey = wordDoneStorageKey(user.id, article.id);
-    setWordDone((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      try {
-        localStorage.setItem(storeKey, JSON.stringify([...next]));
-      } catch {}
-      return next;
-    });
-  }
+    if (clozeTotal === 0 || clozeAnswered < clozeTotal) return;
+    if (vocabQuizDone) return;
+    setVocabQuizDone(true);
+    try {
+      localStorage.setItem(vocabQuizDoneStorageKey(user.id, article.id), "1");
+    } catch {}
+  }, [user?.id, article?.id, clozeTotal, clozeAnswered, vocabQuizDone]);
 
   // Close the article reference overlay when the user hits Escape.
   useEffect(() => {
@@ -706,7 +704,13 @@ export default function App() {
       </aside>
 
       {!isLessonMode && (article || user.vocabPoolId || user.tobiraCurrent !== undefined) && (
-        <TabRail tabs={tabsForUser(user)} active={activeTab} onChange={setActiveTab} />
+        <TabRail
+          tabs={tabsForUser(user).map((t) =>
+            t.id === "vocabQuiz" && vocabQuizDone ? { ...t, done: true } : t,
+          )}
+          active={activeTab}
+          onChange={setActiveTab}
+        />
       )}
       {isLessonMode && openLessonId && (
         <TabRail tabs={LESSON_TABS} active={lessonTab} onChange={setLessonTab} />
@@ -866,11 +870,6 @@ export default function App() {
             </label>
             <span className="wl-count">
               {filteredWords.length} / {visibleWords.length} 語
-              {visibleWords.length > 0 && (
-                <>
-                  {" ・ "}完了 {visibleWords.filter((u) => wordDone.has(u.key)).length}
-                </>
-              )}
             </span>
           </div>
           {visibleWords.length === 0 ? (
@@ -881,38 +880,21 @@ export default function App() {
             <table className="wl-table">
               <thead>
                 <tr>
-                  <th className="wl-th-done" aria-label="完了" />
                   <th className="wl-th-word">単語</th>
                   <th className="wl-th-reading">読み</th>
                   <th className="wl-th-meaning">意味</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredWords.map((u, i) => {
-                  const done = wordDone.has(u.key);
-                  return (
-                    <tr key={i} className={done ? "done" : ""}>
-                      <td className="wl-done-cell">
-                        <label className="wl-check">
-                          <input
-                            type="checkbox"
-                            checked={done}
-                            onChange={() => toggleWordDone(u.key)}
-                            aria-label={done ? "未完了に戻す" : "完了にする"}
-                          />
-                          <span className="wl-check-mark" aria-hidden>
-                            ✓
-                          </span>
-                        </label>
-                      </td>
-                      <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
-                        <Furigana text={u.key || u.surface} show={showFurigana} />
-                      </td>
-                      <td className="wl-reading">{unitReading(u)}</td>
-                      <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
-                    </tr>
-                  );
-                })}
+                {filteredWords.map((u, i) => (
+                  <tr key={i}>
+                    <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
+                      <Furigana text={u.key || u.surface} show={showFurigana} />
+                    </td>
+                    <td className="wl-reading">{unitReading(u)}</td>
+                    <td className="wl-meaning">{wordMeaning(u) || "—"}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           )}

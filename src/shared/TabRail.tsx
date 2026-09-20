@@ -5,6 +5,8 @@ export interface TabDef {
   label: string;
   icon: ReactNode;
   badge?: string;
+  /** Show a small ✓ next to the label to mark this tab as completed. */
+  done?: boolean;
 }
 
 // Reusable in-page tab rail (vertical on desktop, horizontal on mobile).
@@ -28,6 +30,11 @@ export function TabRail({
         >
           <span className="tab-icon">{t.icon}</span>
           <span className="tab-label">{t.label}</span>
+          {t.done && (
+            <span className="tab-done" aria-label="完了" title="完了">
+              ✓
+            </span>
+          )}
           {t.badge && <span className="tab-badge">{t.badge}</span>}
         </button>
       ))}
