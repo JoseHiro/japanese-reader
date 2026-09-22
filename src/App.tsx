@@ -4,7 +4,7 @@ import { buildUnits, type Unit } from "./units";
 import type { Annotation, Article } from "./content";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
-import { TabRail, type TabDef } from "./shared/TabRail";
+import { TabRail, type TabDef, type TabGroup } from "./shared/TabRail";
 import { CONTENT_POS, isBasicWord, isTrivialToken } from "./shared/vocabFilter";
 import {
   IconArticle,
@@ -85,7 +85,7 @@ interface PopupState {
 const BASE_TABS: TabDef[] = [
   { id: "article", label: "記事", icon: <IconArticle /> },
   { id: "wordlist", label: "単語リスト", icon: <IconWordList /> },
-  { id: "translate", label: "翻訳練習", icon: <IconTranslate />, badge: "New" },
+  { id: "translate", label: "翻訳練習", icon: <IconTranslate /> },
   { id: "vocabQuiz", label: "単語クイズ", icon: <IconVocabQuiz /> },
   { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
 ];
@@ -94,7 +94,6 @@ const PRACTICE_TAB: TabDef = {
   id: "practice",
   label: "練習",
   icon: <IconVocabQuiz />,
-  badge: "New",
 };
 
 // Tabs added for a user who has a Tobira grammar assignment and/or a
@@ -103,19 +102,16 @@ const GRAMMAR_QUIZ_TAB: TabDef = {
   id: "grammarQuiz",
   label: "文法クイズ",
   icon: <IconGrammarQuiz />,
-  badge: "New",
 };
 const FLASHCARDS_TAB: TabDef = {
   id: "flashcards",
   label: "単語練習",
   icon: <IconFlashcards />,
-  badge: "New",
 };
 const GRAMMAR_REF_TAB: TabDef = {
   id: "grammarRef",
   label: "文法帳",
   icon: <IconGrammarBook />,
-  badge: "New",
 };
 
 const LESSON_TABS: TabDef[] = [
@@ -123,21 +119,36 @@ const LESSON_TABS: TabDef[] = [
   { id: "vocab", label: "単語リスト", icon: <IconWordList /> },
 ];
 
-function tabsForUser(u: User): TabDef[] {
-  if (u.id === "andy") return [...BASE_TABS, PRACTICE_TAB];
-  // 翻訳練習 sits after 読解クイズ so learners see comprehension checks
-  // before production practice.
-  const tabs: TabDef[] = [
+function tabGroupsForUser(u: User): TabGroup[] {
+  if (u.id === "andy") {
+    // Lesson-mode users don't render this rail (the app falls back to
+    // LESSON_TABS), but return something sensible just in case.
+    return [{ id: "main", tabs: [...BASE_TABS, PRACTICE_TAB] }];
+  }
+  // Main / reference tabs — the things a learner does most often when
+  // just visiting an article. 文法帳 sits with them since it is browsed,
+  // not practiced.
+  const main: TabDef[] = [
     BASE_TABS[0], // 記事
     BASE_TABS[1], // 単語リスト
+  ];
+  if (u.tobiraCurrent !== undefined) main.push(GRAMMAR_REF_TAB); // 文法帳
+
+  // Practice tabs — grouped and collapsible so the rail can shrink when
+  // the learner is just reading. 翻訳練習 sits after 読解クイズ so
+  // comprehension precedes production.
+  const practice: TabDef[] = [
     BASE_TABS[3], // 単語クイズ
   ];
-  if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_QUIZ_TAB);
-  tabs.push(BASE_TABS[4]); // 読解クイズ
-  tabs.push(BASE_TABS[2]); // 翻訳練習
-  if (u.vocabPoolId) tabs.push(FLASHCARDS_TAB);
-  if (u.tobiraCurrent !== undefined) tabs.push(GRAMMAR_REF_TAB);
-  return tabs;
+  if (u.tobiraCurrent !== undefined) practice.push(GRAMMAR_QUIZ_TAB);
+  practice.push(BASE_TABS[4]); // 読解クイズ
+  practice.push(BASE_TABS[2]); // 翻訳練習
+  if (u.vocabPoolId) practice.push(FLASHCARDS_TAB);
+
+  return [
+    { id: "main", tabs: main },
+    { id: "practice", label: "練習", collapsible: true, tabs: practice },
+  ];
 }
 
 function sortArticles(list: readonly Article[]): Article[] {
@@ -781,7 +792,7 @@ export default function App() {
         {!sidebarCollapsed && (isLessonMode ? (
           <nav className="article-list">
             <span className="list-label">レッスン</span>
-            {userLessons.map((l, idx) => (
+            {userLessons.map((l) => (
               <button
                 key={l.id}
                 className={
@@ -794,7 +805,6 @@ export default function App() {
               >
                 <span className="ai-title">
                   {l.shortTitle ?? l.title}
-                  {idx === 0 && <span className="new-badge">New</span>}
                 </span>
                 {(l.shortTitleEn ?? l.titleEn) && (
                   <span className="ai-sub">
@@ -816,7 +826,7 @@ export default function App() {
                 {user.displayName} さんの記事はまだありません。
               </p>
             )}
-            {sortedArticles.map((a, idx) => (
+            {sortedArticles.map((a) => (
               <button
                 key={a.id}
                 className={"article-item" + (article?.id === a.id ? " active" : "")}
@@ -824,7 +834,6 @@ export default function App() {
               >
                 <span className="ai-title">
                   {a.title}
-                  {idx === 0 && <span className="new-badge">New</span>}
                 </span>
                 {a.subtitle && <span className="ai-sub">{a.subtitle}</span>}
                 {a.date && <span className="ai-date">{formatDate(a.date)}</span>}
@@ -836,15 +845,22 @@ export default function App() {
 
       {!isLessonMode && (article || user.vocabPoolId || user.tobiraCurrent !== undefined) && (
         <TabRail
-          tabs={tabsForUser(user).map((t) =>
-            isTabDone(t.id) ? { ...t, done: true } : t,
-          )}
+          groups={tabGroupsForUser(user).map((g) => ({
+            ...g,
+            tabs: g.tabs.map((t) =>
+              isTabDone(t.id) ? { ...t, done: true } : t,
+            ),
+          }))}
           active={activeTab}
           onChange={setActiveTab}
         />
       )}
       {isLessonMode && openLessonId && (
-        <TabRail tabs={LESSON_TABS} active={lessonTab} onChange={setLessonTab} />
+        <TabRail
+          groups={[{ id: "lesson", tabs: LESSON_TABS }]}
+          active={lessonTab}
+          onChange={setLessonTab}
+        />
       )}
 
       <main className="main">
