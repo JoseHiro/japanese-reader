@@ -267,6 +267,8 @@ body {
 .quiz-toolbar {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 .ref-toggle-btn {
@@ -283,6 +285,31 @@ body {
   transition: border-color .15s ease, color .15s ease;
 }
 .ref-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+.review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  border: 1px solid #e0a63a;
+  border-radius: 999px;
+  background: rgba(224, 166, 58, 0.08);
+  color: #d99522;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.review-btn:hover { background: rgba(224, 166, 58, 0.16); }
+.review-btn.on {
+  background: #e0a63a;
+  color: #fff;
+  border-color: #e0a63a;
+}
+.review-empty {
+  padding: 24px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
 
 /* Article reference overlay — slides in from the left over the layout,
    so the quiz stays put and the article is available for reference. */

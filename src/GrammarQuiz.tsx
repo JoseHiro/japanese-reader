@@ -38,8 +38,11 @@ function QuestionCard({
   q: RearrangeQuestion;
   index: number;
   showFurigana: boolean;
-  /** Fired exactly once, the first time this card becomes complete. */
-  onFirstComplete?: () => void;
+  /**
+   * Fired exactly once, the first time this card becomes complete.
+   * `correct` is true iff the picked order equals the canonical [0..n-1].
+   */
+  onFirstComplete?: (correct: boolean) => void;
 }) {
   const shuffledIdx = useMemo(
     () => shuffledOrder(q.chunks.length, index + 1),
@@ -61,7 +64,8 @@ function QuestionCard({
     setPicked(next);
     if (next.length === q.chunks.length && !firedRef.current) {
       firedRef.current = true;
-      onFirstComplete?.();
+      const correct = next.every((v, k) => v === k);
+      onFirstComplete?.(correct);
     }
   }
   function unpick(i: number) {
@@ -69,6 +73,9 @@ function QuestionCard({
   }
   function reset() {
     setPicked([]);
+    // Let onFirstComplete fire again after a retry so the caller can
+    // update its correct/wrong tally.
+    firedRef.current = false;
   }
 
   return (
@@ -162,11 +169,20 @@ export function GrammarQuiz({
   questions,
   showFurigana,
   onAllComplete,
+  onResult,
+  badgeLabel,
 }: {
   questions: RearrangeQuestion[];
   showFurigana: boolean;
   /** Fired once when every question has been completed at least once. */
   onAllComplete?: () => void;
+  /**
+   * Fired the first time each card is completed. `index` is that card's
+   * position in the `questions` array — the caller is responsible for
+   * mapping it back to any original id when the array has been filtered.
+   */
+  onResult?: (index: number, correct: boolean) => void;
+  badgeLabel?: string;
 }) {
   const completedRef = useRef<Set<number>>(new Set());
   const firedAllRef = useRef(false);
@@ -175,14 +191,15 @@ export function GrammarQuiz({
   }
   return (
     <div className="quiz-block">
-      <span className="q-badge">並び替え</span>
+      <span className="q-badge">{badgeLabel ?? "並び替え"}</span>
       {questions.map((q, i) => (
         <QuestionCard
           key={i}
           q={q}
           index={i}
           showFurigana={showFurigana}
-          onFirstComplete={() => {
+          onFirstComplete={(correct) => {
+            onResult?.(i, correct);
             completedRef.current.add(i);
             if (
               !firedAllRef.current &&

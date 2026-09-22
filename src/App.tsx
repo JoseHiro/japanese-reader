@@ -162,6 +162,13 @@ function userDoneKey(userId: string): string {
 function legacyVocabDoneKey(userId: string, articleId: string): string {
   return `yomu-quiz-done:${userId}:${articleId}:vocab`;
 }
+function missedKey(
+  userId: string,
+  articleId: string,
+  kind: "cloze" | "rearrange",
+): string {
+  return `yomu-quiz-missed:${userId}:${articleId}:${kind}`;
+}
 
 function loadStoredUser(): User | null {
   if (typeof window === "undefined") return null;
@@ -253,6 +260,13 @@ export default function App() {
   const [articleTabDone, setArticleTabDone] = useState<Set<string>>(new Set());
   // Per-user set of completed practice tab ids (currently only flashcards).
   const [userTabDone, setUserTabDone] = useState<Set<string>>(new Set());
+  // Per-(user, article) indices of missed questions in the objective
+  // quizzes, so the learner can review just what they got wrong.
+  const [clozeMissed, setClozeMissed] = useState<Set<number>>(new Set());
+  const [rearrangeMissed, setRearrangeMissed] = useState<Set<number>>(new Set());
+  // Session-only: are we currently showing just the missed set?
+  const [clozeReview, setClozeReview] = useState(false);
+  const [rearrangeReview, setRearrangeReview] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(
@@ -293,6 +307,61 @@ export default function App() {
       setArticleTabDone(new Set());
     }
   }, [user?.id, article?.id]);
+
+  // Load / clear the missed-question sets on user or article change and
+  // drop any lingering "review-only" mode from the previous article.
+  useEffect(() => {
+    if (!user || !article) {
+      setClozeMissed(new Set());
+      setRearrangeMissed(new Set());
+      setClozeReview(false);
+      setRearrangeReview(false);
+      return;
+    }
+    const load = (kind: "cloze" | "rearrange"): Set<number> => {
+      try {
+        const raw = localStorage.getItem(missedKey(user.id, article.id, kind));
+        return new Set(raw ? (JSON.parse(raw) as number[]) : []);
+      } catch {
+        return new Set();
+      }
+    };
+    setClozeMissed(load("cloze"));
+    setRearrangeMissed(load("rearrange"));
+    setClozeReview(false);
+    setRearrangeReview(false);
+  }, [user?.id, article?.id]);
+
+  function updateMissed(
+    kind: "cloze" | "rearrange",
+    index: number,
+    correct: boolean,
+  ) {
+    if (!user || !article) return;
+    const setter = kind === "cloze" ? setClozeMissed : setRearrangeMissed;
+    const storageKey = missedKey(user.id, article.id, kind);
+    setter((prev) => {
+      const has = prev.has(index);
+      if (correct === !has) return prev; // no change needed
+      const next = new Set(prev);
+      if (correct) next.delete(index);
+      else next.add(index);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }
+
+  function enterClozeReview() {
+    // Clear picks on the missed questions so the learner can re-answer.
+    setClozePick((prev) => {
+      const next = { ...prev };
+      for (const idx of clozeMissed) delete next[idx];
+      return next;
+    });
+    setClozeReview(true);
+  }
 
   function isTabDone(tabId: string): boolean {
     return USER_SCOPED_DONE_TABS.has(tabId)
@@ -974,53 +1043,90 @@ export default function App() {
               >
                 📖 記事を見ながら答える
               </button>
+              {(clozeMissed.size > 0 || clozeReview) && (
+                <button
+                  className={"review-btn" + (clozeReview ? " on" : "")}
+                  onClick={() =>
+                    clozeReview ? setClozeReview(false) : enterClozeReview()
+                  }
+                >
+                  {clozeReview
+                    ? "全問に戻す"
+                    : `🔁 間違い ${clozeMissed.size} 問だけ復習`}
+                </button>
+              )}
             </div>
           )}
           {article?.quiz?.cloze && article.quiz.cloze.length > 0 ? (
-            <div className="quiz-block">
-              <span className="q-badge">穴埋め単語</span>
-              {article.quiz.cloze.map((q, qi) => {
-                const picked = clozePick[qi];
-                const answered = picked !== undefined;
+            (() => {
+              const visible = article.quiz.cloze
+                .map((q, qi) => ({ q, qi }))
+                .filter(({ qi }) => !clozeReview || clozeMissed.has(qi));
+              if (clozeReview && visible.length === 0) {
                 return (
-                  <div className="quiz-card" key={qi}>
-                    <p className="cloze-sentence">
-                      <Furigana text={q.before} show={showFurigana} />
-                      <span className="blank">
-                        {answered ? (
-                          <Furigana text={q.options[q.answer]} show={showFurigana} />
-                        ) : (
-                          "＿＿"
-                        )}
-                      </span>
-                      <Furigana text={q.after} show={showFurigana} />
-                    </p>
-                    <div className="opts">
-                      {q.options.map((opt, oi) => {
-                        let cls = "opt";
-                        if (answered && oi === q.answer) cls += " correct";
-                        else if (answered && oi === picked) cls += " wrong";
-                        return (
-                          <button
-                            key={oi}
-                            className={cls}
-                            disabled={answered}
-                            onClick={() => setClozePick((p) => ({ ...p, [qi]: oi }))}
-                          >
-                            <Furigana text={opt} show={showFurigana} />
-                          </button>
-                        );
-                      })}
-                    </div>
-                    {answered && q.explanation && (
-                      <p className="explain">
-                        <Furigana text={q.explanation} show={showFurigana} />
-                      </p>
-                    )}
-                  </div>
+                  <p className="hint review-empty">
+                    🎉 復習すべき間違いはありません。「全問に戻す」で通常表示に切り替えられます。
+                  </p>
                 );
-              })}
-            </div>
+              }
+              return (
+                <div className="quiz-block">
+                  <span className="q-badge">
+                    {clozeReview ? "復習 (間違い直し)" : "穴埋め単語"}
+                  </span>
+                  {visible.map(({ q, qi }) => {
+                    const picked = clozePick[qi];
+                    const answered = picked !== undefined;
+                    return (
+                      <div className="quiz-card" key={qi}>
+                        <p className="cloze-sentence">
+                          <Furigana text={q.before} show={showFurigana} />
+                          <span className="blank">
+                            {answered ? (
+                              <Furigana text={q.options[q.answer]} show={showFurigana} />
+                            ) : (
+                              "＿＿"
+                            )}
+                          </span>
+                          <Furigana text={q.after} show={showFurigana} />
+                        </p>
+                        <div className="opts">
+                          {q.options.map((opt, oi) => {
+                            let cls = "opt";
+                            if (answered && oi === q.answer) cls += " correct";
+                            else if (answered && oi === picked) cls += " wrong";
+                            // Review mode lets learners keep retrying until
+                            // they land on the correct answer; normal mode
+                            // locks the choice after the first pick.
+                            const locked = clozeReview
+                              ? answered && picked === q.answer
+                              : answered;
+                            return (
+                              <button
+                                key={oi}
+                                className={cls}
+                                disabled={locked}
+                                onClick={() => {
+                                  setClozePick((p) => ({ ...p, [qi]: oi }));
+                                  updateMissed("cloze", qi, oi === q.answer);
+                                }}
+                              >
+                                <Furigana text={opt} show={showFurigana} />
+                              </button>
+                            );
+                          })}
+                        </div>
+                        {answered && q.explanation && (
+                          <p className="explain">
+                            <Furigana text={q.explanation} show={showFurigana} />
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()
           ) : (
             <p className="hint">この記事にはまだ単語クイズがありません。</p>
           )}
@@ -1136,26 +1242,62 @@ export default function App() {
         </section>
       )}
 
-      {activeTab === "grammarQuiz" && (
-        <section className="quiz">
-          {article && article.quiz?.rearrange && article.quiz.rearrange.length > 0 && (
-            <div className="quiz-toolbar">
-              <button
-                className="ref-toggle-btn"
-                onClick={() => setShowArticleRef(true)}
-                title="記事を横に開いて参照する"
-              >
-                📖 記事を見ながら答える
-              </button>
-            </div>
-          )}
-          <GrammarQuiz
-            questions={article?.quiz?.rearrange ?? []}
-            showFurigana={showFurigana}
-            onAllComplete={() => markTabDone("grammarQuiz", true)}
-          />
-        </section>
-      )}
+      {activeTab === "grammarQuiz" && (() => {
+        const allRearrange = article?.quiz?.rearrange ?? [];
+        const visibleIndices = rearrangeReview
+          ? allRearrange.map((_, i) => i).filter((i) => rearrangeMissed.has(i))
+          : allRearrange.map((_, i) => i);
+        const visible = visibleIndices.map((i) => allRearrange[i]);
+        return (
+          <section className="quiz">
+            {allRearrange.length > 0 && (
+              <div className="quiz-toolbar">
+                <button
+                  className="ref-toggle-btn"
+                  onClick={() => setShowArticleRef(true)}
+                  title="記事を横に開いて参照する"
+                >
+                  📖 記事を見ながら答える
+                </button>
+                {(rearrangeMissed.size > 0 || rearrangeReview) && (
+                  <button
+                    className={"review-btn" + (rearrangeReview ? " on" : "")}
+                    onClick={() => setRearrangeReview((v) => !v)}
+                  >
+                    {rearrangeReview
+                      ? "全問に戻す"
+                      : `🔁 間違い ${rearrangeMissed.size} 問だけ復習`}
+                  </button>
+                )}
+              </div>
+            )}
+            {rearrangeReview && visible.length === 0 ? (
+              <p className="hint review-empty">
+                🎉 復習すべき間違いはありません。「全問に戻す」で通常表示に切り替えられます。
+              </p>
+            ) : (
+              <GrammarQuiz
+                // key change forces card state to reset on review toggle
+                key={rearrangeReview ? "review" : "normal"}
+                questions={visible}
+                showFurigana={showFurigana}
+                onAllComplete={
+                  rearrangeReview
+                    ? undefined
+                    : () => markTabDone("grammarQuiz", true)
+                }
+                onResult={(posIdx, correct) => {
+                  const original = visibleIndices[posIdx];
+                  if (original !== undefined) {
+                    updateMissed("rearrange", original, correct);
+                  }
+                }}
+                badgeLabel={rearrangeReview ? "復習 (間違い直し)" : undefined}
+              />
+            )}
+          </section>
+        );
+      })()}
 
       {activeTab === "flashcards" && (
         <section className="quiz">
