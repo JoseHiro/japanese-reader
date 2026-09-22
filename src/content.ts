@@ -2275,22 +2275,27 @@ export const ARTICLES: Article[] = [
       rearrange: [
         {
           translation: "As long as I had a racket, I could keep hitting all day.",
-          chunks: ["ラケット", "さえあれば", "一日中", "打っていられた"],
+          chunks: ["ラケット", "さえ", "あれば", "一日中", "打って", "いられた"],
           grammarKey: "tobira-5-6",
         },
         {
           translation: "Unlike other sports, tennis did not tire him at all.",
-          chunks: ["他のスポーツ", "と違って", "テニスは", "全然", "疲れなかった"],
+          chunks: [
+            "他の", "スポーツ", "と", "違って", "テニス", "は", "全然", "疲れなかった",
+          ],
           grammarKey: "tobira-5-12",
         },
         {
           translation: "He gradually got used to life in America.",
-          chunks: ["アメリカでの", "生活に", "だんだん", "慣れていった"],
+          chunks: ["アメリカ", "での", "生活", "に", "だんだん", "慣れて", "いった"],
           grammarKey: "tobira-3-9",
         },
         {
           translation: "It can be said that his success was not just a temporary boom.",
-          chunks: ["彼の成功は", "単なる一時のブーム", "ではなかったと", "言えるでしょう"],
+          chunks: [
+            "彼の", "成功", "は", "単なる", "一時", "の", "ブーム",
+            "では", "なかった", "と", "言える", "でしょう",
+          ],
           grammarKey: "tobira-4-11",
         },
       ],
