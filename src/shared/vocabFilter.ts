@@ -66,7 +66,25 @@ export const BASIC_WORDS = new Set<string>([
   "後", "前", "上", "下", "中", "外", "右", "左", "間", "隣", "横", "側",
   // very common misc
   "はい", "いいえ", "ええ", "うん", "そう",
+  // countries / nationalities the learner already knows
+  "日本", "日本人", "英語", "外国", "外国人", "世界", "海外",
 ]);
+
+// True if the surface is written entirely in katakana. Nearly always a
+// loanword the learner already knows (テニス, ラケット, アメリカ,
+// ホームシック, etc.), so keep them out of the study list even when
+// they carry an authored annotation for the popup.
+const KATAKANA_ONLY_RE = /^[ァ-ヴー・]+$/;
+export function isKatakanaOnly(surface: string): boolean {
+  return KATAKANA_ONLY_RE.test(surface);
+}
+
+// True if the surface is only Latin letters / digits (e.g. "US",
+// "2014", "URL"). Not Japanese vocabulary — hide from the study list.
+const LATIN_ONLY_RE = /^[A-Za-z0-9]+$/;
+export function isLatinOnly(surface: string): boolean {
+  return LATIN_ONLY_RE.test(surface);
+}
 
 /** True if a token's base or surface is in the N5-ish basic list. */
 export function isBasicWord(key: string, surface: string): boolean {

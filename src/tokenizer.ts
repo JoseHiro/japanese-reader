@@ -93,11 +93,16 @@ export function toTokens(features: IpadicFeatures[]): Token[] {
     const hasKanji = containsKanji(f.surface_form);
     const reading =
       f.reading && f.reading !== "*" ? katakanaToHiragana(f.reading) : "";
+    // Fold in kuromoji's pos_detail_1 so downstream filters can see
+    // 固有名詞 (proper nouns like 大坂, 錦織) even though f.pos is just
+    // 名詞. Keep the top-level pos first so existing consumers still work.
+    const detail = f.pos_detail_1 && f.pos_detail_1 !== "*" ? f.pos_detail_1 : "";
+    const pos = detail ? `${f.pos}・${detail}` : f.pos;
     return {
       surface: f.surface_form,
       reading,
       base: f.basic_form && f.basic_form !== "*" ? f.basic_form : f.surface_form,
-      pos: f.pos,
+      pos,
       clickable: CONTENT_POS.has(f.pos),
       hasKanji,
     };

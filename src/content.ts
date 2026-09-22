@@ -1920,9 +1920,15 @@ export const ARTICLES: Article[] = [
     ],
     annotations: {
       錦織圭: {
-        reading: "にしこり けい",
+        reading: "にしこりけい",
         pos: "固有名詞",
         meaning: "Nishikori Kei (Japanese tennis player, b. 1989)",
+      },
+      錦織: {
+        reading: "にしこり",
+        pos: "固有名詞",
+        meaning: "Nishikori (surname)",
+        note: "本人の公式な読みは「にしこり」。「にしきおり」ではない。",
       },
       選手: { reading: "せんしゅ", pos: "名詞", meaning: "athlete; player" },
       ランキング: { pos: "名詞", meaning: "ranking" },

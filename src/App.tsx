@@ -5,7 +5,13 @@ import type { Annotation, Article } from "./content";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
 import { TabRail, type TabDef, type TabGroup } from "./shared/TabRail";
-import { CONTENT_POS, isBasicWord, isTrivialToken } from "./shared/vocabFilter";
+import {
+  CONTENT_POS,
+  isBasicWord,
+  isKatakanaOnly,
+  isLatinOnly,
+  isTrivialToken,
+} from "./shared/vocabFilter";
 import {
   IconArticle,
   IconWordList,
@@ -477,10 +483,17 @@ export default function App() {
   // are N5-ish basics or non-content POS, unless the user opts in.
   const visibleWords = useMemo(() => {
     return uniqueWords.filter((u) => {
-      if (u.annotation) return true;
       // Grammatical fragments (numbers, single kana, aux stems) never
       // belong in a study list, even when "基本語も表示" is on.
       if (isTrivialToken(u.surface, u.key, u.pos)) return false;
+      // Proper nouns (people, places, product names) and pure-katakana
+      // surfaces are almost always names or English loanwords the learner
+      // already knows; drop them from the list even when an annotation is
+      // present. The annotation still drives the popup / furigana fix.
+      if (u.pos.includes("固有名詞")) return false;
+      if (isLatinOnly(u.surface)) return false;
+      if (!showBasic && isKatakanaOnly(u.surface)) return false;
+      if (u.annotation) return true;
       if (showBasic) return true;
       if (!CONTENT_POS.has(u.pos)) return false;
       if (isBasicWord(u.key, u.surface)) return false;
@@ -723,6 +736,27 @@ export default function App() {
       ),
     );
 
+  // Render a unit's tokens, preferring the annotation's reading as one
+  // whole ruby span when the annotation key exactly matches the surface.
+  // This lets authored entries fix cases where kuromoji misreads a name
+  // or compound (e.g. 錦織 → にしきおり; correct: にしこり).
+  const renderUnit = (u: Unit) => {
+    if (
+      showFurigana &&
+      u.annotation?.reading &&
+      u.key === u.surface &&
+      /[一-鿿]/.test(u.surface)
+    ) {
+      return (
+        <ruby>
+          {u.surface}
+          <rt>{u.annotation.reading}</rt>
+        </ruby>
+      );
+    }
+    return renderTokens(u.tokens);
+  };
+
   if (!user) return <SignIn onSignIn={setUser} />;
 
   return (
@@ -931,10 +965,10 @@ export default function App() {
                           key={j}
                           onClick={(e) => openPopup(u, e.currentTarget)}
                         >
-                          {renderTokens(u.tokens)}
+                          {renderUnit(u)}
                         </span>
                       ) : (
-                        <span key={j}>{renderTokens(u.tokens)}</span>
+                        <span key={j}>{renderUnit(u)}</span>
                       ),
                     )}
                     {!isHeading && (
@@ -1505,10 +1539,10 @@ export default function App() {
                               key={j}
                               onClick={(e) => openPopup(u, e.currentTarget)}
                             >
-                              {renderTokens(u.tokens)}
+                              {renderUnit(u)}
                             </span>
                           ) : (
-                            <span key={j}>{renderTokens(u.tokens)}</span>
+                            <span key={j}>{renderUnit(u)}</span>
                           ),
                         )}
                       </span>
