@@ -887,6 +887,28 @@ export default function App() {
                 {isTabDone(activeTab) ? "✓ 完了" : "完了にする"}
               </button>
             )}
+            {activeTab === "vocabQuiz" &&
+              (clozeMissed.size > 0 || clozeReview) && (
+                <button
+                  className={"review-btn review-btn-sm" + (clozeReview ? " on" : "")}
+                  onClick={() =>
+                    clozeReview ? setClozeReview(false) : enterClozeReview()
+                  }
+                >
+                  {clozeReview ? "全問に戻す" : `🔁 間違い ${clozeMissed.size} 問`}
+                </button>
+              )}
+            {activeTab === "grammarQuiz" &&
+              (rearrangeMissed.size > 0 || rearrangeReview) && (
+                <button
+                  className={"review-btn review-btn-sm" + (rearrangeReview ? " on" : "")}
+                  onClick={() => setRearrangeReview((v) => !v)}
+                >
+                  {rearrangeReview
+                    ? "全問に戻す"
+                    : `🔁 間違い ${rearrangeMissed.size} 問`}
+                </button>
+              )}
           </div>
         )}
 
@@ -1070,20 +1092,8 @@ export default function App() {
                 onClick={() => setShowArticleRef(true)}
                 title="記事を横に開いて参照する"
               >
-                📖 記事を見ながら答える
+                📖 記事を見る
               </button>
-              {(clozeMissed.size > 0 || clozeReview) && (
-                <button
-                  className={"review-btn" + (clozeReview ? " on" : "")}
-                  onClick={() =>
-                    clozeReview ? setClozeReview(false) : enterClozeReview()
-                  }
-                >
-                  {clozeReview
-                    ? "全問に戻す"
-                    : `🔁 間違い ${clozeMissed.size} 問だけ復習`}
-                </button>
-              )}
             </div>
           )}
           {article?.quiz?.cloze && article.quiz.cloze.length > 0 ? (
@@ -1171,7 +1181,7 @@ export default function App() {
                 onClick={() => setShowArticleRef(true)}
                 title="記事を横に開いて参照する"
               >
-                📖 記事を見ながら答える
+                📖 記事を見る
               </button>
             </div>
           )}
@@ -1201,7 +1211,7 @@ export default function App() {
                             })
                           }
                         >
-                          {hintShown ? "▾ ヒントを隠す" : "💡 使う単語のヒント"}
+                          {hintShown ? "▾ 単語ヒント" : "💡 単語ヒント"}
                         </button>
                       )}
                       <button
@@ -1216,7 +1226,7 @@ export default function App() {
                           })
                         }
                       >
-                        {shown ? "解答を隠す" : "解答を見る"}
+                        {shown ? "隠す" : "回答"}
                       </button>
                     </div>
                     {hasHints && hintShown && (
@@ -1266,18 +1276,8 @@ export default function App() {
                   onClick={() => setShowArticleRef(true)}
                   title="記事を横に開いて参照する"
                 >
-                  📖 記事を見ながら答える
+                  📖 記事を見る
                 </button>
-                {(rearrangeMissed.size > 0 || rearrangeReview) && (
-                  <button
-                    className={"review-btn" + (rearrangeReview ? " on" : "")}
-                    onClick={() => setRearrangeReview((v) => !v)}
-                  >
-                    {rearrangeReview
-                      ? "全問に戻す"
-                      : `🔁 間違い ${rearrangeMissed.size} 問だけ復習`}
-                  </button>
-                )}
               </div>
             )}
             {rearrangeReview && visible.length === 0 ? (
@@ -1449,7 +1449,7 @@ export default function App() {
               <section>
                 <h4>On quiz tabs</h4>
                 <dl>
-                  <dt>📖 記事を見ながら答える</dt>
+                  <dt>📖 記事を見る</dt>
                   <dd>
                     Slide the article in from the left so you can look at it
                     while you answer. On a wide screen the quiz stays fully

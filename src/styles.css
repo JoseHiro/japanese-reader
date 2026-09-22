@@ -304,6 +304,13 @@ body {
   color: #fff;
   border-color: #e0a63a;
 }
+/* Header-slot variant: matches the .done-toggle size so both buttons
+   sit consistently next to the article title. */
+.review-btn.review-btn-sm {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+}
 .review-empty {
   padding: 24px;
   text-align: center;
@@ -672,8 +679,10 @@ body {
     border-bottom: none;
     border-right: 1px solid var(--border);
     align-self: center;
-    height: 100%;
+    height: auto;
+    white-space: nowrap;
   }
+  .tab-group-label { white-space: nowrap; }
   .tab-btn {
     width: auto;
     flex: none;
@@ -769,7 +778,8 @@ body {
 .article-head h2 { margin: 0; font-size: 22px; font-weight: 500; }
 .article-head p { margin: 2px 0 0; font-size: 14px; color: var(--text-muted); }
 .article-head .meta { display: block; margin-top: 6px; font-size: 13px; color: var(--text-muted); }
-.article-head .done-toggle { flex: none; margin-top: 6px; }
+.article-head .done-toggle,
+.article-head .review-btn { flex: none; margin-top: 6px; }
 
 .input {
   width: 100%;
