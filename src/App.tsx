@@ -866,13 +866,26 @@ export default function App() {
       <main className="main">
         {article && activeTab !== "practice" && (
           <div className="article-head">
-            <h2>{article.title}</h2>
-            {article.subtitle && <p>{article.subtitle}</p>}
-            {activeTab === "article" && counts.words > 0 && (
-              <span className="meta">
-                {counts.words} 語
-                {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
-              </span>
+            <div className="ah-titles">
+              <h2>{article.title}</h2>
+              {article.subtitle && <p>{article.subtitle}</p>}
+              {activeTab === "article" && counts.words > 0 && (
+                <span className="meta">
+                  {counts.words} 語
+                  {counts.annotated > 0 && ` ・ 注釈 ${counts.annotated}`}
+                </span>
+              )}
+            </div>
+            {(activeTab === "readingQuiz" ||
+              activeTab === "translate" ||
+              activeTab === "flashcards") && (
+              <button
+                className={"done-toggle" + (isTabDone(activeTab) ? " done" : "")}
+                onClick={() => toggleTabDone(activeTab)}
+                aria-pressed={isTabDone(activeTab)}
+              >
+                {isTabDone(activeTab) ? "✓ 完了" : "完了にする"}
+              </button>
             )}
           </div>
         )}
@@ -1160,13 +1173,6 @@ export default function App() {
               >
                 📖 記事を見ながら答える
               </button>
-              <button
-                className={"done-toggle" + (isTabDone("readingQuiz") ? " done" : "")}
-                onClick={() => toggleTabDone("readingQuiz")}
-                aria-pressed={isTabDone("readingQuiz")}
-              >
-                {isTabDone("readingQuiz") ? "✓ 完了" : "完了にする"}
-              </button>
             </div>
           )}
           {article?.quiz?.reading && article.quiz.reading.length > 0 ? (
@@ -1238,24 +1244,11 @@ export default function App() {
       )}
 
       {activeTab === "translate" && (
-        <section className="quiz">
-          {paragraphs.length > 0 && (
-            <div className="quiz-toolbar">
-              <button
-                className={"done-toggle" + (isTabDone("translate") ? " done" : "")}
-                onClick={() => toggleTabDone("translate")}
-                aria-pressed={isTabDone("translate")}
-              >
-                {isTabDone("translate") ? "✓ 完了" : "完了にする"}
-              </button>
-            </div>
-          )}
-          <ArticleTranslate
-            paragraphs={paragraphs}
-            showFurigana={showFurigana}
-            curated={article?.translationPractice}
-          />
-        </section>
+        <ArticleTranslate
+          paragraphs={paragraphs}
+          showFurigana={showFurigana}
+          curated={article?.translationPractice}
+        />
       )}
 
       {activeTab === "grammarQuiz" && (() => {
@@ -1317,17 +1310,6 @@ export default function App() {
 
       {activeTab === "flashcards" && (
         <section className="quiz">
-          {vocabForUser(user).length > 0 && (
-            <div className="quiz-toolbar">
-              <button
-                className={"done-toggle" + (isTabDone("flashcards") ? " done" : "")}
-                onClick={() => toggleTabDone("flashcards")}
-                aria-pressed={isTabDone("flashcards")}
-              >
-                {isTabDone("flashcards") ? "✓ 完了" : "完了にする"}
-              </button>
-            </div>
-          )}
           <Flashcards pool={vocabForUser(user)} showFurigana={showFurigana} />
         </section>
       )}

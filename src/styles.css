@@ -759,10 +759,17 @@ body {
 
 .article-head {
   margin: 4px 0 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
+.article-head .ah-titles { flex: 1 1 auto; min-width: 0; }
 .article-head h2 { margin: 0; font-size: 22px; font-weight: 500; }
 .article-head p { margin: 2px 0 0; font-size: 14px; color: var(--text-muted); }
 .article-head .meta { display: block; margin-top: 6px; font-size: 13px; color: var(--text-muted); }
+.article-head .done-toggle { flex: none; margin-top: 6px; }
 
 .input {
   width: 100%;
