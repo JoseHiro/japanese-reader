@@ -148,7 +148,18 @@ function sortArticles(list: readonly Article[]): Article[] {
 
 const USER_STORAGE_KEY = "yomu-user";
 
-function vocabQuizDoneStorageKey(userId: string, articleId: string): string {
+// Tabs whose completion state is per user (no article context) rather than
+// per (user, article). Currently only 単語練習, which draws from a shared
+// vocab pool rather than the currently-open article.
+const USER_SCOPED_DONE_TABS = new Set(["flashcards"]);
+
+function articleDoneKey(userId: string, articleId: string): string {
+  return `yomu-tab-done:${userId}:article:${articleId}`;
+}
+function userDoneKey(userId: string): string {
+  return `yomu-tab-done:${userId}:user`;
+}
+function legacyVocabDoneKey(userId: string, articleId: string): string {
   return `yomu-quiz-done:${userId}:${articleId}:vocab`;
 }
 
@@ -236,9 +247,12 @@ export default function App() {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("yomu-sidebar-collapsed") === "1";
   });
-  // Per-(user, article) flag: has the vocab-quiz tab been completed at
-  // least once? Persisted so the tab keeps its ✓ across sessions.
-  const [vocabQuizDone, setVocabQuizDone] = useState(false);
+  // Per-(user, article) set of completed practice tab ids. Populated by
+  // objective auto-mark (vocabQuiz, grammarQuiz once all answered) and by
+  // the manual 完了 button (readingQuiz, translate).
+  const [articleTabDone, setArticleTabDone] = useState<Set<string>>(new Set());
+  // Per-user set of completed practice tab ids (currently only flashcards).
+  const [userTabDone, setUserTabDone] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     localStorage.setItem(
@@ -247,34 +261,82 @@ export default function App() {
     );
   }, [sidebarCollapsed]);
 
-  // Load the vocab-quiz completion flag for the current (user, article).
+  // Load user-scoped completion set on user change.
   useEffect(() => {
-    if (!user || !article) {
-      setVocabQuizDone(false);
+    if (!user) {
+      setUserTabDone(new Set());
       return;
     }
     try {
-      setVocabQuizDone(
-        localStorage.getItem(vocabQuizDoneStorageKey(user.id, article.id)) === "1",
-      );
+      const raw = localStorage.getItem(userDoneKey(user.id));
+      setUserTabDone(new Set(raw ? (JSON.parse(raw) as string[]) : []));
     } catch {
-      setVocabQuizDone(false);
+      setUserTabDone(new Set());
+    }
+  }, [user?.id]);
+
+  // Load article-scoped completion set on user/article change; migrate the
+  // legacy `yomu-quiz-done:<u>:<a>:vocab` flag into the new set.
+  useEffect(() => {
+    if (!user || !article) {
+      setArticleTabDone(new Set());
+      return;
+    }
+    try {
+      const raw = localStorage.getItem(articleDoneKey(user.id, article.id));
+      const set = new Set<string>(raw ? (JSON.parse(raw) as string[]) : []);
+      if (localStorage.getItem(legacyVocabDoneKey(user.id, article.id)) === "1") {
+        set.add("vocabQuiz");
+      }
+      setArticleTabDone(set);
+    } catch {
+      setArticleTabDone(new Set());
     }
   }, [user?.id, article?.id]);
 
-  // Mark the vocab quiz done the moment every cloze question has been
-  // answered in this session, and persist so the ✓ survives reloads.
+  function isTabDone(tabId: string): boolean {
+    return USER_SCOPED_DONE_TABS.has(tabId)
+      ? userTabDone.has(tabId)
+      : articleTabDone.has(tabId);
+  }
+
+  function markTabDone(tabId: string, done: boolean) {
+    if (!user) return;
+    const userScoped = USER_SCOPED_DONE_TABS.has(tabId);
+    if (!userScoped && !article) return;
+    const [setState, storageKey] = userScoped
+      ? [setUserTabDone, userDoneKey(user.id)]
+      : [setArticleTabDone, articleDoneKey(user.id, article!.id)];
+    setState((prev) => {
+      const has = prev.has(tabId);
+      if (has === done) return prev;
+      const next = new Set(prev);
+      if (done) next.add(tabId);
+      else next.delete(tabId);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }
+
+  function toggleTabDone(tabId: string) {
+    markTabDone(tabId, !isTabDone(tabId));
+  }
+
+  // Auto-mark 単語クイズ once every cloze question in the current article
+  // has been answered in this session.
   const clozeTotal = article?.quiz?.cloze?.length ?? 0;
   const clozeAnswered = Object.keys(clozePick).length;
   useEffect(() => {
     if (!user || !article) return;
     if (clozeTotal === 0 || clozeAnswered < clozeTotal) return;
-    if (vocabQuizDone) return;
-    setVocabQuizDone(true);
-    try {
-      localStorage.setItem(vocabQuizDoneStorageKey(user.id, article.id), "1");
-    } catch {}
-  }, [user?.id, article?.id, clozeTotal, clozeAnswered, vocabQuizDone]);
+    if (articleTabDone.has("vocabQuiz")) return;
+    markTabDone("vocabQuiz", true);
+    // markTabDone is stable enough for this loop; adding it as a dep would
+    // require a useCallback cascade for no gain.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, article?.id, clozeTotal, clozeAnswered, articleTabDone]);
 
   // Close the article reference overlay when the user hits Escape.
   useEffect(() => {
@@ -706,7 +768,7 @@ export default function App() {
       {!isLessonMode && (article || user.vocabPoolId || user.tobiraCurrent !== undefined) && (
         <TabRail
           tabs={tabsForUser(user).map((t) =>
-            t.id === "vocabQuiz" && vocabQuizDone ? { ...t, done: true } : t,
+            isTabDone(t.id) ? { ...t, done: true } : t,
           )}
           active={activeTab}
           onChange={setActiveTab}
@@ -976,6 +1038,13 @@ export default function App() {
               >
                 📖 記事を見ながら答える
               </button>
+              <button
+                className={"done-toggle" + (isTabDone("readingQuiz") ? " done" : "")}
+                onClick={() => toggleTabDone("readingQuiz")}
+                aria-pressed={isTabDone("readingQuiz")}
+              >
+                {isTabDone("readingQuiz") ? "✓ 完了" : "完了にする"}
+              </button>
             </div>
           )}
           {article?.quiz?.reading && article.quiz.reading.length > 0 ? (
@@ -1047,11 +1116,24 @@ export default function App() {
       )}
 
       {activeTab === "translate" && (
-        <ArticleTranslate
-          paragraphs={paragraphs}
-          showFurigana={showFurigana}
-          curated={article?.translationPractice}
-        />
+        <section className="quiz">
+          {paragraphs.length > 0 && (
+            <div className="quiz-toolbar">
+              <button
+                className={"done-toggle" + (isTabDone("translate") ? " done" : "")}
+                onClick={() => toggleTabDone("translate")}
+                aria-pressed={isTabDone("translate")}
+              >
+                {isTabDone("translate") ? "✓ 完了" : "完了にする"}
+              </button>
+            </div>
+          )}
+          <ArticleTranslate
+            paragraphs={paragraphs}
+            showFurigana={showFurigana}
+            curated={article?.translationPractice}
+          />
+        </section>
       )}
 
       {activeTab === "grammarQuiz" && (
@@ -1070,12 +1152,24 @@ export default function App() {
           <GrammarQuiz
             questions={article?.quiz?.rearrange ?? []}
             showFurigana={showFurigana}
+            onAllComplete={() => markTabDone("grammarQuiz", true)}
           />
         </section>
       )}
 
       {activeTab === "flashcards" && (
         <section className="quiz">
+          {vocabForUser(user).length > 0 && (
+            <div className="quiz-toolbar">
+              <button
+                className={"done-toggle" + (isTabDone("flashcards") ? " done" : "")}
+                onClick={() => toggleTabDone("flashcards")}
+                aria-pressed={isTabDone("flashcards")}
+              >
+                {isTabDone("flashcards") ? "✓ 完了" : "完了にする"}
+              </button>
+            </div>
+          )}
           <Flashcards pool={vocabForUser(user)} showFurigana={showFurigana} />
         </section>
       )}

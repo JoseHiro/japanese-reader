@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { RearrangeQuestion } from "./content";
 import { Furigana } from "./shared/Furigana";
 import { grammarByKey } from "./tobira";
@@ -33,10 +33,13 @@ function QuestionCard({
   q,
   index,
   showFurigana,
+  onFirstComplete,
 }: {
   q: RearrangeQuestion;
   index: number;
   showFurigana: boolean;
+  /** Fired exactly once, the first time this card becomes complete. */
+  onFirstComplete?: () => void;
 }) {
   const shuffledIdx = useMemo(
     () => shuffledOrder(q.chunks.length, index + 1),
@@ -45,6 +48,7 @@ function QuestionCard({
   // `picked` holds the original chunk indices in the order the learner picked them.
   const [picked, setPicked] = useState<number[]>([]);
   const [showGrammar, setShowGrammar] = useState(false);
+  const firedRef = useRef(false);
 
   const remaining = shuffledIdx.filter((i) => !picked.includes(i));
   const complete = picked.length === q.chunks.length;
@@ -53,7 +57,12 @@ function QuestionCard({
 
   function pick(i: number) {
     if (complete) return;
-    setPicked((p) => [...p, i]);
+    const next = [...picked, i];
+    setPicked(next);
+    if (next.length === q.chunks.length && !firedRef.current) {
+      firedRef.current = true;
+      onFirstComplete?.();
+    }
   }
   function unpick(i: number) {
     setPicked((p) => p.filter((x) => x !== i));
@@ -152,10 +161,15 @@ function QuestionCard({
 export function GrammarQuiz({
   questions,
   showFurigana,
+  onAllComplete,
 }: {
   questions: RearrangeQuestion[];
   showFurigana: boolean;
+  /** Fired once when every question has been completed at least once. */
+  onAllComplete?: () => void;
 }) {
+  const completedRef = useRef<Set<number>>(new Set());
+  const firedAllRef = useRef(false);
   if (!questions.length) {
     return <p className="hint">この記事にはまだ文法クイズがありません。</p>;
   }
@@ -163,7 +177,22 @@ export function GrammarQuiz({
     <div className="quiz-block">
       <span className="q-badge">並び替え</span>
       {questions.map((q, i) => (
-        <QuestionCard key={i} q={q} index={i} showFurigana={showFurigana} />
+        <QuestionCard
+          key={i}
+          q={q}
+          index={i}
+          showFurigana={showFurigana}
+          onFirstComplete={() => {
+            completedRef.current.add(i);
+            if (
+              !firedAllRef.current &&
+              completedRef.current.size >= questions.length
+            ) {
+              firedAllRef.current = true;
+              onAllComplete?.();
+            }
+          }}
+        />
       ))}
     </div>
   );
