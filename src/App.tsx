@@ -4,6 +4,7 @@ import { buildUnits, type Unit } from "./units";
 import type { Annotation, Article } from "./content";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
+import { ReadingOverridesProvider } from "./shared/readingOverrides";
 import { TabRail, type TabDef, type TabGroup } from "./shared/TabRail";
 import {
   CONTENT_POS,
@@ -757,9 +758,24 @@ export default function App() {
     return renderTokens(u.tokens);
   };
 
+  // Per-article map of surface → correct reading, sourced from any
+  // annotation whose key equals the surface and carries a `reading`.
+  // Threaded through <Furigana> via ReadingOverridesProvider so quiz
+  // sentences honor the authored reading (e.g. 錦織 → にしこり) instead
+  // of falling back to kuromoji's per-kanji reading.
+  const readingOverrides = useMemo(() => {
+    const out: Record<string, string> = {};
+    if (!article) return out;
+    for (const [key, ann] of Object.entries(article.annotations)) {
+      if (ann.reading) out[key] = ann.reading;
+    }
+    return out;
+  }, [article]);
+
   if (!user) return <SignIn onSignIn={setUser} />;
 
   return (
+    <ReadingOverridesProvider value={readingOverrides}>
     <div
       className="page"
       onClick={(e) => {
@@ -1560,5 +1576,6 @@ export default function App() {
       </div>
       </div>
     </div>
+    </ReadingOverridesProvider>
   );
 }
