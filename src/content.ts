@@ -1895,4 +1895,403 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    id: "nishikori-kei",
+    title: "錦織圭 — 島根から世界へ",
+    subtitle: "一人のテニス少年が日本を変えるまで",
+    date: "2026-10-05",
+    text: `「錦織圭」という選手を知っていますか。日本ではテニスと言えば、まずこの選手の名前が出るでしょう。世界ランキングで最高4位まで上がり、2014年のUSオープンでは、日本人男子として初めてグランドスラム決勝に進みました。今日は、島根県の小さな町から生まれた一人の若者の物語をご紹介します。
+錦織選手は1989年、島根県の松江市で生まれました。父親からラケットをもらったのは5歳の時のことです。少年時代の錦織は、他のスポーツと違って、テニスは全然疲れないと感じていたそうです。「ラケットさえあれば、一日中打っていられた」と本人は当時のことを振り返っています。8歳で全国大会に出るようになり、周りの人達は彼を「天才」と呼ぶようになりました。
+アメリカへ
+13歳の時、大きな決断をします。プロを目指して、たった一人でアメリカのフロリダに引っ越したのです。当時の錦織は英語が全然話せず、生活も日本と違って何もかも新しいことだらけでした。「はじめは寝る前にホームシックで泣くこともあった」と、後に語っています。しかし、コーチや周りの選手達に少しずつ支えられ、アメリカでの生活にもだんだん慣れていきました。
+2008年、18歳で出場したデルレイビーチ大会で優勝します。日本人男子選手としては、実に16年ぶりのツアー優勝でした。それからも成長は止まりません。速いサーブと正確なショットで、世界のトップ選手達と対等に戦えるようになりました。特に有名なのは、2014年のUSオープン準優勝です。錦織はグランドスラム決勝まで進み、世界中の日本人ファンに大きな感動を与えました。
+「錦織効果」
+錦織選手の成功のあと、日本のテニス人気は大きく変わりました。子どもがテニススクールに通うことが増え、大坂なおみ選手のような世界的な選手も生まれています。この現象は、単なる一時のブームではなかったと言えるでしょう。「僕がお世話になったコーチや家族、応援してくれた皆さんへの感謝を、次の世代に返したい」と、錦織はよくインタビューで答えています。彼のテニス物語は、まだ終わっていません。`,
+    headings: ["アメリカへ", "「錦織効果」"],
+    targetGrammar: [
+      "tobira-3-9",  // 〜ていく／〜てくる
+      "tobira-4-11", // 〜と言える(だろう／でしょう)
+      "tobira-5-6",  // Nさえ〜ば
+      "tobira-5-12", // Nと違って
+    ],
+    targetVocab: [
+      "選手", "若者", "物語", "違う", "全然", "感じ", "慣れる", "寝る",
+      "達", "速い", "僕", "お世話", "答える", "残る", "増える", "続く",
+    ],
+    annotations: {
+      錦織圭: {
+        reading: "にしこり けい",
+        pos: "固有名詞",
+        meaning: "Nishikori Kei (Japanese tennis player, b. 1989)",
+      },
+      選手: { reading: "せんしゅ", pos: "名詞", meaning: "athlete; player" },
+      ランキング: { pos: "名詞", meaning: "ranking" },
+      最高: {
+        reading: "さいこう",
+        pos: "名詞・形容動詞",
+        meaning: "the highest; the best",
+        note: "「最高4位」で「最高で4位まで到達した」の意味。",
+      },
+      決勝: { reading: "けっしょう", pos: "名詞", meaning: "the final (in a tournament)" },
+      グランドスラム: { pos: "名詞", meaning: "Grand Slam (four major tennis tournaments)" },
+      島根県: { reading: "しまねけん", pos: "固有名詞", meaning: "Shimane Prefecture (western Japan)" },
+      松江市: { reading: "まつえし", pos: "固有名詞", meaning: "Matsue City (capital of Shimane)" },
+      若者: { reading: "わかもの", pos: "名詞", meaning: "young person; youth" },
+      物語: {
+        reading: "ものがたり",
+        pos: "名詞",
+        meaning: "story; tale",
+        note: "「話」より少しかしこまった書き言葉。",
+      },
+      父親: { reading: "ちちおや", pos: "名詞", meaning: "father" },
+      ラケット: { pos: "名詞", meaning: "racket (tennis, badminton, etc.)" },
+      少年時代: {
+        reading: "しょうねんじだい",
+        pos: "名詞",
+        meaning: "boyhood; childhood (of a boy)",
+      },
+      と違って: {
+        reading: "とちがって",
+        pos: "文型",
+        meaning: "unlike ~; different from ~",
+        note: "「N と違って」で「N と対比して」。とびら L5-12。",
+      },
+      全然: {
+        reading: "ぜんぜん",
+        pos: "副詞",
+        meaning: "(not) at all",
+        note: "本来は否定と一緒に使う（例：全然疲れない）。",
+      },
+      疲れる: { reading: "つかれる", pos: "動詞（一段）", meaning: "to get tired" },
+      感じて: {
+        reading: "かんじて",
+        pos: "動詞",
+        meaning: "to feel; to sense (て形)",
+        note: "「感じる」のて形。「感じ」は名詞形で「印象」の意味。",
+      },
+      さえあれば: {
+        reading: "さえあれば",
+        pos: "文型",
+        meaning: "as long as ~ exists; if only ~",
+        note: "「N さえ V-ば」で「N が V-すれば、他は要らない」。とびら L5-6。",
+      },
+      一日中: { reading: "いちにちじゅう", pos: "副詞", meaning: "all day long" },
+      振り返って: {
+        reading: "ふりかえって",
+        pos: "動詞",
+        meaning: "to look back; to reflect on (て形)",
+      },
+      全国大会: {
+        reading: "ぜんこくたいかい",
+        pos: "名詞",
+        meaning: "national tournament",
+      },
+      天才: { reading: "てんさい", pos: "名詞", meaning: "genius" },
+      呼ぶ: { reading: "よぶ", pos: "動詞（五段）", meaning: "to call; to name" },
+      決断: {
+        reading: "けつだん",
+        pos: "名詞・する動詞",
+        meaning: "decision (a big, decisive choice)",
+      },
+      目指して: {
+        reading: "めざして",
+        pos: "動詞",
+        meaning: "aiming for; heading toward (て形)",
+      },
+      引っ越した: {
+        reading: "ひっこした",
+        pos: "動詞",
+        meaning: "to move (residence) (past)",
+      },
+      生活: { reading: "せいかつ", pos: "名詞・する動詞", meaning: "life; daily living" },
+      何もかも: {
+        reading: "なにもかも",
+        pos: "副詞",
+        meaning: "everything; every single thing",
+      },
+      寝る: { reading: "ねる", pos: "動詞（一段）", meaning: "to sleep; to go to bed" },
+      ホームシック: { pos: "名詞", meaning: "homesickness" },
+      語って: {
+        reading: "かたって",
+        pos: "動詞",
+        meaning: "to speak of; to relate (て形)",
+      },
+      コーチ: { pos: "名詞", meaning: "coach" },
+      達: {
+        reading: "たち",
+        pos: "接尾辞",
+        meaning: "plural suffix for people",
+        note: "「選手達」＝ athletes / players (plural)。",
+      },
+      支えられ: {
+        reading: "ささえられ",
+        pos: "動詞",
+        meaning: "to be supported (受け身)",
+      },
+      慣れていきました: {
+        reading: "なれていきました",
+        pos: "動詞",
+        meaning: "gradually got used to",
+        note: "「V-て いく」で「〜し続けて変化していく」。とびら L3-9。",
+      },
+      出場: {
+        reading: "しゅつじょう",
+        pos: "名詞・する動詞",
+        meaning: "participation (in a tournament)",
+      },
+      優勝: { reading: "ゆうしょう", pos: "名詞・する動詞", meaning: "winning the championship" },
+      実に: {
+        reading: "じつに",
+        pos: "副詞",
+        meaning: "really; in fact; indeed",
+        note: "驚きや強調を表す副詞。",
+      },
+      ぶり: {
+        pos: "接尾辞",
+        meaning: "for the first time in ~",
+        note: "「16年ぶり」＝ for the first time in 16 years.",
+      },
+      ツアー: { pos: "名詞", meaning: "(professional) tour" },
+      成長: { reading: "せいちょう", pos: "名詞・する動詞", meaning: "growth" },
+      止まりません: {
+        reading: "とまりません",
+        pos: "動詞",
+        meaning: "does not stop (丁寧・否定)",
+      },
+      速い: { reading: "はやい", pos: "形容詞", meaning: "fast; quick" },
+      正確: { reading: "せいかく", pos: "名詞・形容動詞", meaning: "accurate; precise" },
+      ショット: { pos: "名詞", meaning: "shot (tennis stroke)" },
+      対等: {
+        reading: "たいとう",
+        pos: "名詞・形容動詞",
+        meaning: "on equal terms; evenly matched",
+      },
+      準優勝: {
+        reading: "じゅんゆうしょう",
+        pos: "名詞・する動詞",
+        meaning: "second place; runner-up",
+      },
+      感動: { reading: "かんどう", pos: "名詞・する動詞", meaning: "deep emotion; being moved" },
+      与えました: {
+        reading: "あたえました",
+        pos: "動詞",
+        meaning: "gave (something abstract, like emotion) (past)",
+      },
+      効果: { reading: "こうか", pos: "名詞", meaning: "effect; impact" },
+      通う: { reading: "かよう", pos: "動詞（五段）", meaning: "to attend; to commute" },
+      増え: {
+        reading: "ふえ",
+        pos: "動詞",
+        meaning: "to increase (連用形)",
+      },
+      現象: { reading: "げんしょう", pos: "名詞", meaning: "phenomenon" },
+      単なる: {
+        reading: "たんなる",
+        pos: "連体詞",
+        meaning: "mere; nothing but",
+        note: "後ろに名詞が来て「単に〜だけ」の意味。",
+      },
+      一時: {
+        reading: "いちじ",
+        pos: "名詞",
+        meaning: "a moment; a temporary period",
+      },
+      ブーム: { pos: "名詞", meaning: "boom; fad" },
+      と言えるでしょう: {
+        reading: "といえるでしょう",
+        pos: "文型",
+        meaning: "it can (probably) be said that ~",
+        note: "「S と言えるだろう／でしょう」で控えめな断定。とびら L4-11。",
+      },
+      僕: {
+        reading: "ぼく",
+        pos: "代名詞",
+        meaning: "I (male, casual)",
+        note: "男性が自分を指す口語。「私」より砕けた響き。",
+      },
+      お世話になった: {
+        reading: "おせわになった",
+        pos: "文型",
+        meaning: "have been in someone's care",
+        note: "「お世話になる」は感謝を伝える定型表現。",
+      },
+      感謝: { reading: "かんしゃ", pos: "名詞・する動詞", meaning: "gratitude; thanks" },
+      世代: { reading: "せだい", pos: "名詞", meaning: "generation" },
+      返したい: {
+        reading: "かえしたい",
+        pos: "動詞",
+        meaning: "want to return (favor, gratitude)",
+      },
+      応援: {
+        reading: "おうえん",
+        pos: "名詞・する動詞",
+        meaning: "cheering on; supporting",
+      },
+      皆さん: { reading: "みなさん", pos: "名詞", meaning: "everyone (polite)" },
+      答えて: { reading: "こたえて", pos: "動詞", meaning: "to answer; to reply (て形)" },
+      インタビュー: { pos: "名詞", meaning: "interview" },
+    },
+    translations: {
+      "「錦織圭」という選手を知っていますか。":
+        "Do you know a player named \"Nishikori Kei\"?",
+      "日本ではテニスと言えば、まずこの選手の名前が出るでしょう。":
+        "In Japan, when it comes to tennis, this player's name is the first that comes up.",
+      "世界ランキングで最高4位まで上がり、2014年のUSオープンでは、日本人男子として初めてグランドスラム決勝に進みました。":
+        "He climbed as high as 4th in the world rankings, and at the 2014 US Open he became the first Japanese man to reach a Grand Slam final.",
+      "今日は、島根県の小さな町から生まれた一人の若者の物語をご紹介します。":
+        "Today I'd like to introduce the story of one young man born in a small town in Shimane Prefecture.",
+      "錦織選手は1989年、島根県の松江市で生まれました。":
+        "Nishikori was born in 1989, in Matsue City in Shimane Prefecture.",
+      "父親からラケットをもらったのは5歳の時のことです。":
+        "It was when he was five that he received a racket from his father.",
+      "少年時代の錦織は、他のスポーツと違って、テニスは全然疲れないと感じていたそうです。":
+        "As a boy, Nishikori reportedly felt that, unlike other sports, tennis didn't tire him out at all.",
+      "「ラケットさえあれば、一日中打っていられた」と本人は当時のことを振り返っています。":
+        "\"As long as I had a racket, I could keep hitting all day,\" he says, looking back on those years.",
+      "8歳で全国大会に出るようになり、周りの人達は彼を「天才」と呼ぶようになりました。":
+        "By age eight he was competing in national tournaments, and the people around him started calling him \"a genius.\"",
+      "13歳の時、大きな決断をします。":
+        "At thirteen, he made a big decision.",
+      "プロを目指して、たった一人でアメリカのフロリダに引っ越したのです。":
+        "He moved, all alone, to Florida in the United States, aiming to become a pro.",
+      "当時の錦織は英語が全然話せず、生活も日本と違って何もかも新しいことだらけでした。":
+        "At the time Nishikori couldn't speak English at all, and life was, unlike in Japan, full of new things all around.",
+      "「はじめは寝る前にホームシックで泣くこともあった」と、後に語っています。":
+        "\"At first there were nights when I cried from homesickness before falling asleep,\" he later said.",
+      "しかし、コーチや周りの選手達に少しずつ支えられ、アメリカでの生活にもだんだん慣れていきました。":
+        "But, supported little by little by his coaches and the other players around him, he gradually got used to life in America.",
+      "2008年、18歳で出場したデルレイビーチ大会で優勝します。":
+        "In 2008, at eighteen, he won the Delray Beach tournament he entered.",
+      "日本人男子選手としては、実に16年ぶりのツアー優勝でした。":
+        "For a Japanese male player, it was truly the first tour win in 16 years.",
+      "それからも成長は止まりません。":
+        "His growth did not stop there.",
+      "速いサーブと正確なショットで、世界のトップ選手達と対等に戦えるようになりました。":
+        "With a fast serve and accurate shots, he became able to compete on equal terms with the world's top players.",
+      "特に有名なのは、2014年のUSオープン準優勝です。":
+        "The most famous moment is his runner-up finish at the 2014 US Open.",
+      "錦織はグランドスラム決勝まで進み、世界中の日本人ファンに大きな感動を与えました。":
+        "Nishikori advanced all the way to a Grand Slam final and gave Japanese fans around the world a huge emotional lift.",
+      "錦織選手の成功のあと、日本のテニス人気は大きく変わりました。":
+        "After Nishikori's success, tennis's popularity in Japan changed dramatically.",
+      "子どもがテニススクールに通うことが増え、大坂なおみ選手のような世界的な選手も生まれています。":
+        "More children have started attending tennis schools, and world-class players like Osaka Naomi have emerged as well.",
+      "この現象は、単なる一時のブームではなかったと言えるでしょう。":
+        "It's probably fair to say that this phenomenon was more than just a temporary fad.",
+      "「僕がお世話になったコーチや家族、応援してくれた皆さんへの感謝を、次の世代に返したい」と、錦織はよくインタビューで答えています。":
+        "\"I want to return the gratitude I owe to the coaches and family who took care of me, and to everyone who cheered me on, to the next generation,\" Nishikori often says in interviews.",
+      "彼のテニス物語は、まだ終わっていません。":
+        "His tennis story is not over yet.",
+    },
+    quiz: {
+      cloze: [
+        {
+          before: "少年時代の錦織は、他のスポーツと違って、テニスは",
+          after: "疲れないと感じていたそうです。",
+          options: ["少し", "全然", "大変", "もう"],
+          answer: 1,
+          explanation:
+            "「全然〜ない」は「まったく〜ない」。「他のスポーツと違って」との対比で否定を強調する副詞が入る。",
+        },
+        {
+          before: "「ラケット",
+          after: "あれば、一日中打っていられた」と本人は振り返っています。",
+          options: ["だけ", "まで", "さえ", "ほど"],
+          answer: 2,
+          explanation:
+            "「N さえ V-ば」で「N があれば十分」を表す。とびら L5-6 の文型。",
+        },
+        {
+          before: "13歳の時、プロを目指して、たった一人でアメリカのフロリダに",
+          after: "のです。",
+          options: ["帰った", "戻った", "移した", "引っ越した"],
+          answer: 3,
+          explanation:
+            "住む場所を変えて移動することは「引っ越す」。「帰る」は元の場所へ戻ることなので合わない。",
+        },
+        {
+          before: "コーチや周りの選手達に少しずつ支えられ、アメリカでの生活にもだんだん",
+          after: "いきました。",
+          options: ["疲れて", "慣れて", "忘れて", "分かって"],
+          answer: 1,
+          explanation:
+            "「〜に慣れる」＝新しい環境に馴染む。「V-ていく」（とびら L3-9）と組み合わせて「だんだん慣れていく」。",
+        },
+        {
+          before: "この現象は、単なる一時のブームではなかったと",
+          after: "でしょう。",
+          options: ["言った", "言える", "言われた", "見える"],
+          answer: 1,
+          explanation:
+            "「S と言えるだろう／でしょう」（とびら L4-11）＝ 控えめに「〜と言うことができる」と結論づける。",
+        },
+        {
+          before: "「僕が",
+          after: "なったコーチや家族への感謝を、次の世代に返したい」。",
+          options: ["ご迷惑に", "大切に", "元気に", "お世話に"],
+          answer: 3,
+          explanation:
+            "「お世話になる」は「世話をしてもらう」＝感謝を伝える定型表現。",
+        },
+      ],
+      reading: [
+        {
+          question: "少年時代の錦織は、テニスに対してどんな感じを持っていましたか。",
+          answer:
+            "他のスポーツと違って、テニスは全然疲れないと感じていた。ラケットさえあれば一日中打っていられたと本人が振り返っている。",
+          hints: ["違って", "全然", "疲れる", "ラケット", "一日中", "感じる"],
+        },
+        {
+          question: "錦織は13歳の時にどんな決断をしましたか。それはどうしてですか。",
+          answer:
+            "プロ選手を目指して、たった一人でアメリカのフロリダに引っ越すという決断をした。日本にいるより、本場で練習した方が成長できると考えたから。",
+          hints: ["プロ", "目指す", "一人", "フロリダ", "引っ越す", "決断"],
+        },
+        {
+          question: "アメリカに引っ越したばかりの錦織は、どんな困ったことがありましたか。",
+          answer:
+            "英語が全然話せず、生活も日本と違って何もかも新しいことだらけだった。はじめは寝る前にホームシックで泣くこともあったと語っている。",
+          hints: ["英語", "全然", "生活", "違って", "寝る", "ホームシック"],
+        },
+        {
+          question: "2014年のUSオープンで、錦織はどんな結果を残しましたか。",
+          answer:
+            "グランドスラム決勝まで進み、日本人男子として初めてグランドスラムの決勝に進出した。準優勝という結果を残し、世界中の日本人ファンに大きな感動を与えた。",
+          hints: ["決勝", "日本人男子", "準優勝", "ファン", "感動"],
+        },
+        {
+          question: "「錦織効果」とは、どんな現象のことを言っていますか。",
+          answer:
+            "錦織の成功のあと、日本のテニス人気が大きく変わり、テニススクールに通う子どもが増え、大坂なおみ選手のような世界的な選手も生まれるようになった、という現象のこと。単なる一時のブームではなかったと言える。",
+          hints: ["成功", "人気", "テニススクール", "通う", "増える", "世界的", "現象"],
+        },
+      ],
+      rearrange: [
+        {
+          translation: "As long as I had a racket, I could keep hitting all day.",
+          chunks: ["ラケット", "さえあれば", "一日中", "打っていられた"],
+          grammarKey: "tobira-5-6",
+          hint: "「N さえ V-ば」で「N があれば十分」。",
+        },
+        {
+          translation: "Unlike other sports, tennis did not tire him at all.",
+          chunks: ["他のスポーツ", "と違って", "テニスは", "全然", "疲れなかった"],
+          grammarKey: "tobira-5-12",
+          hint: "「N と違って」で対比を表す。",
+        },
+        {
+          translation: "He gradually got used to life in America.",
+          chunks: ["アメリカでの", "生活に", "だんだん", "慣れていった"],
+          grammarKey: "tobira-3-9",
+          hint: "「V-ていく」で「〜し続けて変化する」。",
+        },
+        {
+          translation: "It can be said that his success was not just a temporary boom.",
+          chunks: ["彼の成功は", "単なる一時のブーム", "ではなかったと", "言えるでしょう"],
+          grammarKey: "tobira-4-11",
+          hint: "「S と言えるだろう／でしょう」で控えめな断定。",
+        },
+      ],
+    },
+  },
 ];

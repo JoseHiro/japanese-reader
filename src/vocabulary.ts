@@ -107,6 +107,23 @@ export const ARTEM_VOCAB: VocabItem[] = [
     month: "2026-09",
     tobiraLesson: 5,
   },
+
+  // --- October pool: new words for 錦織圭 article and general study ---
+  { word: "速い", reading: "はやい", meaningEn: "fast; quick", pos: "形容詞", month: "2026-10" },
+  { word: "食品", reading: "しょくひん", meaningEn: "food product; foodstuff", pos: "名詞", month: "2026-10" },
+  { word: "得る", reading: "える", meaningEn: "to obtain; to gain; to get", pos: "動詞（一段）", note: "「うる」とも読む。書き言葉寄り。", month: "2026-10" },
+  { word: "僕", reading: "ぼく", meaningEn: "I (male, casual)", pos: "代名詞", note: "男性が自分を指す口語。「私」より砕けた響き。", month: "2026-10" },
+  { word: "慣れる", reading: "なれる", meaningEn: "to get used to; to become accustomed", pos: "動詞（一段）", note: "「〜に慣れる」で「〜に馴染む」。", month: "2026-10" },
+  { word: "全然", reading: "ぜんぜん", meaningEn: "(not) at all; entirely", pos: "副詞", note: "本来は否定と一緒に使う（例：全然分からない）。口語では肯定でも「全然大丈夫」と使う。", month: "2026-10" },
+  { word: "感じ", reading: "かんじ", meaningEn: "feeling; impression; sense", pos: "名詞", note: "動詞「感じる」の名詞形。「〜感じ」で「〜という印象」。", month: "2026-10" },
+  { word: "間", reading: "あいだ", meaningEn: "between; interval; while", pos: "名詞", note: "時間・空間の両方に使う。「〜の間」で「〜の期間」。", month: "2026-10" },
+  { word: "過ぎる", reading: "すぎる", meaningEn: "to pass (of time); to exceed", pos: "動詞（一段）", note: "「時間が過ぎる」「〜すぎる」で「V-masu＋すぎる＝too much」も。", month: "2026-10" },
+  { word: "答える", reading: "こたえる", meaningEn: "to answer; to respond", pos: "動詞（一段）", note: "「〜に答える」。「返事する」に近いが、書き言葉寄り。", month: "2026-10" },
+  { word: "お世話", reading: "おせわ", meaningEn: "care; help; assistance", pos: "名詞", note: "「お世話になる」で「お世話をしてもらう」＝人にお礼を言う定型表現。", month: "2026-10" },
+  { word: "寝る", reading: "ねる", meaningEn: "to sleep; to go to bed", pos: "動詞（一段）", month: "2026-10" },
+  { word: "場合", reading: "ばあい", meaningEn: "case; occasion; situation", pos: "名詞", note: "「〜の場合」で「〜の時／〜の状況では」。", month: "2026-10" },
+  { word: "達", reading: "たち", meaningEn: "plural suffix (people)", pos: "接尾辞", note: "「私たち」「子供たち」「選手達」など人を表す名詞について複数を作る。", month: "2026-10" },
+  { word: "意味", reading: "いみ", meaningEn: "meaning; significance", pos: "名詞・する動詞", note: "「〜という意味」「〜を意味する」。", month: "2026-10" },
 ];
 
 const POOLS: Record<string, VocabItem[]> = {
