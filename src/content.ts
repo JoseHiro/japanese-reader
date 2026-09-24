@@ -1139,6 +1139,12 @@ export const ARTICLES: Article[] = [
         pos: "動詞（一段）",
         meaning: "to raise; to grow (crops, animals, children)",
       },
+      米: {
+        reading: "こめ",
+        pos: "名詞",
+        meaning: "rice (uncooked grain)",
+        note: "「べい」と読むと「アメリカ」の意味（例：日米）。ここでは「こめ」。",
+      },
       農家: {
         reading: "のうか",
         pos: "名詞",
