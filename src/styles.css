@@ -397,6 +397,8 @@ body {
 .ref-body .para { margin: 0 0 1.2em; }
 .ref-body .word { cursor: pointer; }
 .ref-body .word.annotated { color: var(--accent); text-decoration-color: var(--accent); }
+.ref-body .dlg-turn { margin: 0 0 12px; }
+.ref-body .dlg-avatar { width: 24px; height: 24px; }
 
 @keyframes ref-slide-in {
   from { transform: translateX(-100%); }
@@ -828,6 +830,52 @@ body {
   margin-top: 1.6em;
   padding-top: 1.2em;
   border-top: 1px solid var(--border);
+}
+
+/* Dialogue-script turns (speaker："...") get a chat-like layout: a
+   colored initial "avatar", the speaker's name, and the line in a
+   rounded bubble. --dlg-color is set per element from the speaker's
+   assigned color so the avatar/name/bubble-accent all match. */
+.dlg-turn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+.dlg-turn:last-child { margin-bottom: 0; }
+.dlg-avatar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--dlg-color);
+  color: #fff;
+  font-size: 0.55em;
+  font-weight: 600;
+  line-height: 1;
+}
+.dlg-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.dlg-name {
+  display: block;
+  margin: 0 0 4px 2px;
+  font-size: 0.6em;
+  font-weight: 600;
+  color: var(--dlg-color);
+}
+.dlg-bubble {
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--dlg-color);
+  border-radius: 0 var(--radius) var(--radius) var(--radius);
 }
 
 .sentence { }

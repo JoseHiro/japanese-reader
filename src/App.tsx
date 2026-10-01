@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import type { Annotation, Article } from "./content";
@@ -42,10 +42,35 @@ interface Sentence {
   units: Unit[];
   text: string;
   translation?: string;
+  /** Speaker label for dialogue-style lines (e.g. "レポーター："). */
+  speaker?: string;
 }
 type Paragraph = Sentence[];
 
 const SENTENCE_ENDERS = new Set(["。", "！", "？", "!", "?"]);
+
+// Dialogue-script convention: a line starting with "名前：" (fullwidth
+// colon, no spaces/punctuation in the name) is a speaker turn. Matched
+// narrowly so ordinary prose with a stray colon never misfires — every
+// existing article's body text has zero occurrences of this pattern
+// except authored dialogue scripts.
+const SPEAKER_LINE_RE = /^([^\s：:。！？]{1,12})：(.*)$/s;
+
+// A small, fixed color per speaker (cycled by first-seen order) so each
+// person's turns stay visually distinct and consistent across the
+// article without needing per-article color authoring.
+const SPEAKER_COLORS = [
+  "#4f7df3", // blue
+  "#2fa36b", // green
+  "#a855f7", // purple
+  "#e0666a", // rose
+  "#e0a63a", // amber
+  "#14b8a6", // teal
+];
+function speakerColor(speaker: string, order: Map<string, number>): string {
+  if (!order.has(speaker)) order.set(speaker, order.size);
+  return SPEAKER_COLORS[order.get(speaker)! % SPEAKER_COLORS.length];
+}
 
 function splitIntoSentences(tokens: Token[]): { tokens: Token[]; text: string }[] {
   const sentences: { tokens: Token[]; text: string }[] = [];
@@ -558,6 +583,13 @@ export default function App() {
     };
   }, [paragraphs]);
 
+  // Assigns each distinct dialogue speaker a stable color by first-seen
+  // order, so a given person's turns look the same throughout the article.
+  const speakerOrderRef = useRef<Map<string, number>>(new Map());
+  useMemo(() => {
+    speakerOrderRef.current = new Map();
+  }, [paragraphs]);
+
   async function analyze(
     text: string,
     annotations: Record<string, Annotation>,
@@ -569,13 +601,17 @@ export default function App() {
     try {
       const tokenizer = await loadTokenizer();
       const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-      const result: Paragraph[] = lines.map((line) =>
-        splitIntoSentences(toTokens(tokenizer.tokenize(line))).map((s) => ({
+      const result: Paragraph[] = lines.map((line) => {
+        const m = line.match(SPEAKER_LINE_RE);
+        const speaker = m?.[1];
+        const body = m ? m[2] : line;
+        return splitIntoSentences(toTokens(tokenizer.tokenize(body))).map((s) => ({
           units: buildUnits(s.tokens, annotations),
           text: s.text,
           translation: translations?.[s.text],
-        })),
-      );
+          speaker,
+        }));
+      });
       setParagraphs(result);
     } catch (e) {
       console.error("tokenize failed", e);
@@ -967,55 +1003,76 @@ export default function App() {
         {paragraphs.map((sents, pi) => {
           const paraText = sents.map((s) => s.text).join("");
           const isHeading = headings.has(paraText);
-          return (
-            <p className={"para" + (isHeading ? " heading" : "")} key={pi}>
-              {sents.map((s, i) => {
-                const trKey = `${pi}:${i}`;
-                const trShown = shownTr.has(trKey);
-                return (
-                  <span className="sentence" key={i}>
-                    {s.units.map((u, j) =>
-                      u.clickable ? (
-                        <span
-                          className={"word" + (u.annotation ? " annotated" : "")}
-                          key={j}
-                          onClick={(e) => openPopup(u, e.currentTarget)}
-                        >
-                          {renderUnit(u)}
-                        </span>
-                      ) : (
-                        <span key={j}>{renderUnit(u)}</span>
-                      ),
-                    )}
-                    {!isHeading && (
-                      <span className="sent-tools">
-                        <button
-                          className="speak-btn"
-                          title="読み上げ"
-                          aria-label="この文を読み上げる"
-                          onClick={() => speak(s.text)}
-                        >
-                          ▶
-                        </button>
-                        {s.translation && (
-                          <button
-                            className={"tr-btn" + (trShown ? " on" : "")}
-                            title="英訳"
-                            aria-label="この文の英訳を表示"
-                            aria-pressed={trShown}
-                            onClick={() => toggleTranslation(trKey)}
-                          >
-                            訳
-                          </button>
-                        )}
-                      </span>
-                    )}{" "}
-                    {s.translation && trShown && (
-                      <span className="translation">{s.translation}</span>
+          const speaker = sents[0]?.speaker;
+
+          const sentenceSpans = sents.map((s, i) => {
+            const trKey = `${pi}:${i}`;
+            const trShown = shownTr.has(trKey);
+            return (
+              <span className="sentence" key={i}>
+                {s.units.map((u, j) =>
+                  u.clickable ? (
+                    <span
+                      className={"word" + (u.annotation ? " annotated" : "")}
+                      key={j}
+                      onClick={(e) => openPopup(u, e.currentTarget)}
+                    >
+                      {renderUnit(u)}
+                    </span>
+                  ) : (
+                    <span key={j}>{renderUnit(u)}</span>
+                  ),
+                )}
+                {!isHeading && (
+                  <span className="sent-tools">
+                    <button
+                      className="speak-btn"
+                      title="読み上げ"
+                      aria-label="この文を読み上げる"
+                      onClick={() => speak(s.text)}
+                    >
+                      ▶
+                    </button>
+                    {s.translation && (
+                      <button
+                        className={"tr-btn" + (trShown ? " on" : "")}
+                        title="英訳"
+                        aria-label="この文の英訳を表示"
+                        aria-pressed={trShown}
+                        onClick={() => toggleTranslation(trKey)}
+                      >
+                        訳
+                      </button>
                     )}
                   </span>
-                );
-              })}
+                )}{" "}
+                {s.translation && trShown && (
+                  <span className="translation">{s.translation}</span>
+                )}
+              </span>
+            );
+          });
+
+          if (speaker) {
+            const color = speakerColor(speaker, speakerOrderRef.current);
+            return (
+              <div className="dlg-turn" key={pi} style={{ "--dlg-color": color } as CSSProperties}>
+                <span className="dlg-avatar" aria-hidden>
+                  {speaker.slice(0, 1)}
+                </span>
+                <div className="dlg-body">
+                  <span className="dlg-name">
+                    <Furigana text={speaker} show={showFurigana} />
+                  </span>
+                  <p className="dlg-bubble">{sentenceSpans}</p>
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <p className={"para" + (isHeading ? " heading" : "")} key={pi}>
+              {sentenceSpans}
             </p>
           );
         })}
@@ -1542,27 +1599,48 @@ export default function App() {
               {paragraphs.map((sents, pi) => {
                 const paraText = sents.map((s) => s.text).join("");
                 const isHeading = headings.has(paraText);
+                const speaker = sents[0]?.speaker;
+
+                const sentenceSpans = sents.map((s, i) => (
+                  <span className="sentence" key={i}>
+                    {s.units.map((u, j) =>
+                      u.clickable ? (
+                        <span
+                          className={
+                            "word" + (u.annotation ? " annotated" : "")
+                          }
+                          key={j}
+                          onClick={(e) => openPopup(u, e.currentTarget)}
+                        >
+                          {renderUnit(u)}
+                        </span>
+                      ) : (
+                        <span key={j}>{renderUnit(u)}</span>
+                      ),
+                    )}
+                  </span>
+                ));
+
+                if (speaker) {
+                  const color = speakerColor(speaker, speakerOrderRef.current);
+                  return (
+                    <div className="dlg-turn" key={pi} style={{ "--dlg-color": color } as CSSProperties}>
+                      <span className="dlg-avatar" aria-hidden>
+                        {speaker.slice(0, 1)}
+                      </span>
+                      <div className="dlg-body">
+                        <span className="dlg-name">
+                          <Furigana text={speaker} show={showFurigana} />
+                        </span>
+                        <p className="dlg-bubble">{sentenceSpans}</p>
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
                   <p className={"para" + (isHeading ? " heading" : "")} key={pi}>
-                    {sents.map((s, i) => (
-                      <span className="sentence" key={i}>
-                        {s.units.map((u, j) =>
-                          u.clickable ? (
-                            <span
-                              className={
-                                "word" + (u.annotation ? " annotated" : "")
-                              }
-                              key={j}
-                              onClick={(e) => openPopup(u, e.currentTarget)}
-                            >
-                              {renderUnit(u)}
-                            </span>
-                          ) : (
-                            <span key={j}>{renderUnit(u)}</span>
-                          ),
-                        )}
-                      </span>
-                    ))}
+                    {sentenceSpans}
                   </p>
                 );
               })}
