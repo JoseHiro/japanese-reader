@@ -134,6 +134,18 @@ export const ARTICLES: Article[] = [
         pos: "名詞",
         meaning: "sense of fulfillment; something worth doing",
       },
+      帰す: {
+        reading: "かえす",
+        pos: "動詞（五段）",
+        meaning: "to send (someone) home",
+        note: "「きす」ではなく「かえす」。「子どもを家に帰す」のように使う。",
+      },
+      降園: {
+        reading: "こうえん",
+        pos: "名詞・する動詞",
+        meaning: "leaving kindergarten (for the day)",
+        note: "来る「登園（とうえん）」とセットの語。「降」は「くだ」ではなく「こう」と読む。",
+      },
       成長: { reading: "せいちょう", pos: "名詞・する動詞", meaning: "growth; development" },
       年少: {
         reading: "ねんしょう",
@@ -751,6 +763,18 @@ export const ARTICLES: Article[] = [
         meaning: "movement; travel; getting around",
         note: "場所を変わって動くこと。「引っ越し」より広い意味で、日常の通勤・旅行にも使う。",
       },
+      一人: {
+        reading: "ひとり",
+        pos: "名詞・副詞",
+        meaning: "alone; by oneself; one person",
+        note: "「一人」は「いちにん」ではなく「ひとり」と読む。",
+      },
+      預け: {
+        reading: "あずけ",
+        pos: "動詞",
+        meaning: "to check in; to leave (baggage) with someone",
+        note: "「預ける」の連用形。「あづけ」ではなく「あずけ」。",
+      },
       乗り物: {
         reading: "のりもの",
         pos: "名詞",
@@ -1117,6 +1141,7 @@ export const ARTICLES: Article[] = [
 
 こうしてみると、私たちが毎日「おいしいね」と言って食べているごはんは、本当にたくさんの人の仕事に支えられているんですね。`,
     annotations: {
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan" },
       食: {
         reading: "しょく",
         pos: "名詞",
@@ -1945,6 +1970,18 @@ export const ARTICLES: Article[] = [
         meaning: "alone; by oneself; one person",
         note: "「一人」は「いちにん」ではなく「ひとり」と読む。",
       },
+      他: {
+        reading: "ほか",
+        pos: "名詞",
+        meaning: "other; else",
+        note: "「他の」は「たの」ではなく「ほかの」。「た」と読むのは「他人（たにん）」「他社（たしゃ）」のような複合語の時だけ。",
+      },
+      後に: {
+        reading: "あとに",
+        pos: "副詞",
+        meaning: "afterward; later",
+        note: "「ご」ではなく「あと」。「後で／その後」も同じ「あと」。「ご」は「今後」「食後」のような複合語の読み。",
+      },
       ランキング: { pos: "名詞", meaning: "ranking" },
       最高: {
         reading: "さいこう",
@@ -2357,6 +2394,18 @@ export const ARTICLES: Article[] = [
         pos: "形容詞",
         meaning: "knowledgeable (about); detailed",
         note: "「〜に詳しい」で「〜についてよく知っている」。",
+      },
+      間: {
+        reading: "あいだ",
+        pos: "名詞",
+        meaning: "space between; interval",
+        note: "「AとBの間」で「AとBの間にある空間・時間」。「ま」ではなく「あいだ」。",
+      },
+      形: {
+        reading: "けい",
+        pos: "名詞（接尾辞的）",
+        meaning: "form (grammatical)",
+        note: "文法用語の「〜形」は「がた」ではなく「けい」と読む（ます形、て形、辞書形など）。",
       },
       話題: {
         reading: "わだい",
