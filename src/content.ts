@@ -1937,6 +1937,14 @@ export const ARTICLES: Article[] = [
         note: "本人の公式な読みは「にしこり」。「にしきおり」ではない。",
       },
       選手: { reading: "せんしゅ", pos: "名詞", meaning: "athlete; player" },
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan" },
+      日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person" },
+      一人: {
+        reading: "ひとり",
+        pos: "名詞・副詞",
+        meaning: "alone; by oneself; one person",
+        note: "「一人」は「いちにん」ではなく「ひとり」と読む。",
+      },
       ランキング: { pos: "名詞", meaning: "ranking" },
       最高: {
         reading: "さいこう",
