@@ -103,6 +103,12 @@ function speak(text: string) {
   window.speechSynthesis.speak(u);
 }
 
+// A unit with a teaching annotation (highlighted, 解説 popup). Entries marked
+// `readingOnly` just pin the furigana and are treated like plain words.
+function isAuthored(unit: Unit): boolean {
+  return !!unit.annotation && !unit.annotation.readingOnly;
+}
+
 function unitReading(unit: Unit): string {
   if (unit.annotation?.reading) return unit.annotation.reading;
   return unit.tokens.map((t) => t.reading).join("");
@@ -487,7 +493,7 @@ export default function App() {
   const readerRef = useRef<HTMLDivElement>(null);
 
   function wordMeaning(u: Unit): string {
-    return u.annotation
+    return isAuthored(u) && u.annotation
       ? u.annotation.meaning
       : listGlosses[u.key]?.join("; ") ?? "";
   }
@@ -519,7 +525,7 @@ export default function App() {
       if (u.pos.includes("固有名詞")) return false;
       if (isLatinOnly(u.surface)) return false;
       if (!showBasic && isKatakanaOnly(u.surface)) return false;
-      if (u.annotation) return true;
+      if (isAuthored(u)) return true;
       if (showBasic) return true;
       if (!CONTENT_POS.has(u.pos)) return false;
       if (isBasicWord(u.key, u.surface)) return false;
@@ -553,7 +559,7 @@ export default function App() {
         if (!alive) return;
         const m: Record<string, string[]> = {};
         for (const u of uniqueWords) {
-          if (u.annotation) continue;
+          if (isAuthored(u)) continue;
           const r = unitReading(u);
           const g = dict[u.key] ?? dict[u.surface] ?? (r ? dict[r] : undefined);
           if (g) m[u.key] = g;
@@ -579,7 +585,7 @@ export default function App() {
     const units = paragraphs.flat().flatMap((s) => s.units);
     return {
       words: units.filter((u) => u.clickable).length,
-      annotated: units.filter((u) => u.annotation).length,
+      annotated: units.filter(isAuthored).length,
     };
   }, [paragraphs]);
 
@@ -747,7 +753,7 @@ export default function App() {
 
     // Authored words show their annotation; look up everything else in JMdict.
     const seq = ++lookupSeq.current;
-    if (unit.annotation) {
+    if (isAuthored(unit)) {
       setGlosses(null);
       return;
     }
@@ -781,7 +787,7 @@ export default function App() {
     if (
       showFurigana &&
       u.annotation?.reading &&
-      u.key === u.surface &&
+      u.annotationKey === u.surface &&
       /[一-鿿]/.test(u.surface)
     ) {
       return (
@@ -1013,7 +1019,7 @@ export default function App() {
                 {s.units.map((u, j) =>
                   u.clickable ? (
                     <span
-                      className={"word" + (u.annotation ? " annotated" : "")}
+                      className={"word" + (isAuthored(u) ? " annotated" : "")}
                       key={j}
                       onClick={(e) => openPopup(u, e.currentTarget)}
                     >
@@ -1078,9 +1084,9 @@ export default function App() {
 
         {popup && (
           <div className="popup" style={{ left: popup.left, top: popup.top }}>
-            <div className={"popup-head" + (popup.unit.annotation ? " authored" : "")}>
+            <div className={"popup-head" + (isAuthored(popup.unit) ? " authored" : "")}>
               <span className="popup-tag">
-                {popup.unit.annotation ? "解説" : "辞書"}
+                {isAuthored(popup.unit) ? "解説" : "辞書"}
               </span>
               <button className="popup-close" aria-label="閉じる" onClick={() => setPopup(null)}>
                 ×
@@ -1095,7 +1101,7 @@ export default function App() {
               </div>
               <p className="pos">{popup.unit.pos}</p>
 
-              {popup.unit.annotation ? (
+              {isAuthored(popup.unit) && popup.unit.annotation ? (
                 <>
                   <p className="meaning">{popup.unit.annotation.meaning}</p>
                   {popup.unit.annotation.note && (
@@ -1172,7 +1178,7 @@ export default function App() {
               <tbody>
                 {filteredWords.map((u, i) => (
                   <tr key={i}>
-                    <td className={"wl-word" + (u.annotation ? " annotated" : "")}>
+                    <td className={"wl-word" + (isAuthored(u) ? " annotated" : "")}>
                       <Furigana text={u.key || u.surface} show={showFurigana} />
                     </td>
                     <td className="wl-reading">{unitReading(u)}</td>
@@ -1602,7 +1608,7 @@ export default function App() {
                       u.clickable ? (
                         <span
                           className={
-                            "word" + (u.annotation ? " annotated" : "")
+                            "word" + (isAuthored(u) ? " annotated" : "")
                           }
                           key={j}
                           onClick={(e) => openPopup(u, e.currentTarget)}

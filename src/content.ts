@@ -18,6 +18,12 @@ export interface Annotation {
   /** Optional grammar/context note (Satori's "OTHER NOTE" equivalent). */
   note?: string;
   examples?: Example[];
+  /**
+   * Entry exists only to pin the furigana reading of an easy word / name
+   * (e.g. 一人 → ひとり). It is not highlighted, has no 解説 popup, and
+   * does not count toward 注釈.
+   */
+  readingOnly?: boolean;
 }
 
 /** Fill-in-the-blank vocabulary question (4 choices). */
@@ -765,6 +771,7 @@ export const ARTICLES: Article[] = [
       },
       一人: {
         reading: "ひとり",
+        readingOnly: true,
         pos: "名詞・副詞",
         meaning: "alone; by oneself; one person",
         note: "「一人」は「いちにん」ではなく「ひとり」と読む。",
@@ -1141,7 +1148,7 @@ export const ARTICLES: Article[] = [
 
 こうしてみると、私たちが毎日「おいしいね」と言って食べているごはんは、本当にたくさんの人の仕事に支えられているんですね。`,
     annotations: {
-      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan" },
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
       食: {
         reading: "しょく",
         pos: "名詞",
@@ -1166,6 +1173,7 @@ export const ARTICLES: Article[] = [
       },
       米: {
         reading: "こめ",
+        readingOnly: true,
         pos: "名詞",
         meaning: "rice (uncooked grain)",
         note: "「べい」と読むと「アメリカ」の意味（例：日米）。ここでは「こめ」。",
@@ -1962,22 +1970,25 @@ export const ARTICLES: Article[] = [
         note: "本人の公式な読みは「にしこり」。「にしきおり」ではない。",
       },
       選手: { reading: "せんしゅ", pos: "名詞", meaning: "athlete; player" },
-      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan" },
-      日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person" },
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
+      日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person", readingOnly: true },
       一人: {
         reading: "ひとり",
+        readingOnly: true,
         pos: "名詞・副詞",
         meaning: "alone; by oneself; one person",
         note: "「一人」は「いちにん」ではなく「ひとり」と読む。",
       },
       他: {
         reading: "ほか",
+        readingOnly: true,
         pos: "名詞",
         meaning: "other; else",
         note: "「他の」は「たの」ではなく「ほかの」。「た」と読むのは「他人（たにん）」「他社（たしゃ）」のような複合語の時だけ。",
       },
       後に: {
         reading: "あとに",
+        readingOnly: true,
         pos: "副詞",
         meaning: "afterward; later",
         note: "「ご」ではなく「あと」。「後で／その後」も同じ「あと」。「ご」は「今後」「食後」のような複合語の読み。",
@@ -2397,12 +2408,14 @@ export const ARTICLES: Article[] = [
       },
       間: {
         reading: "あいだ",
+        readingOnly: true,
         pos: "名詞",
         meaning: "space between; interval",
         note: "「AとBの間」で「AとBの間にある空間・時間」。「ま」ではなく「あいだ」。",
       },
       形: {
         reading: "けい",
+        readingOnly: true,
         pos: "名詞（接尾辞的）",
         meaning: "form (grammatical)",
         note: "文法用語の「〜形」は「がた」ではなく「けい」と読む（ます形、て形、辞書形など）。",
@@ -2416,38 +2429,45 @@ export const ARTICLES: Article[] = [
       ユニーク: { pos: "形容動詞", meaning: "unique" },
       一番星: {
         reading: "いちばんぼし",
+        readingOnly: true,
         pos: "固有名詞",
         meaning: "\"Ichibanboshi\" (fictional ramen shop name in this dialogue)",
       },
       岩上: {
         reading: "いわがみ",
+        readingOnly: true,
         pos: "固有名詞",
         meaning: "Iwagami (surname)",
       },
       日本: {
         reading: "にほん",
+        readingOnly: true,
         pos: "固有名詞",
         meaning: "Japan",
       },
       一人: {
         reading: "ひとり",
+        readingOnly: true,
         pos: "名詞・副詞",
         meaning: "alone; by oneself; one person",
         note: "「一人」は「いちにん」ではなく「ひとり」と読む（一人暮らし、一人で、など）。",
       },
       二人: {
         reading: "ふたり",
+        readingOnly: true,
         pos: "名詞",
         meaning: "two people; the two of them",
         note: "「二人」は「ににん」ではなく「ふたり」と読む。",
       },
       味: {
         reading: "あじ",
+        readingOnly: true,
         pos: "名詞",
         meaning: "taste; flavor",
       },
       行っ: {
         reading: "いっ",
+        readingOnly: true,
         pos: "動詞",
         meaning: "to go (て／た-form stem of 行く)",
         note: "「行く」の連用形。「行う（おこなう）」と漢字が同じで紛らわしいので読みを固定。",

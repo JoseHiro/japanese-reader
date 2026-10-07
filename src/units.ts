@@ -14,6 +14,8 @@ export interface Unit {
   pos: string;
   /** Authored annotation, if this unit matched one. */
   annotation?: Annotation;
+  /** The annotation key this unit matched (surface or base form). */
+  annotationKey?: string;
   clickable: boolean;
 }
 
@@ -47,12 +49,17 @@ export function buildUnits(
 
     if (matched) {
       const group = tokens.slice(i, i + matched.len);
+      const annotation = annotations[matched.key];
       units.push({
         tokens: group,
         surface: group.map((t) => t.surface).join(""),
-        key: matched.key,
-        pos: annotations[matched.key].pos ?? group[0].pos,
-        annotation: annotations[matched.key],
+        // Reading-only entries just pin furigana; keep the natural
+        // dictionary form so lookups and the word list treat the word
+        // like any other (e.g. 行っ → 行く).
+        key: annotation.readingOnly ? group[0].base : matched.key,
+        pos: annotation.pos ?? group[0].pos,
+        annotation,
+        annotationKey: matched.key,
         clickable: true,
       });
       i += matched.len;
