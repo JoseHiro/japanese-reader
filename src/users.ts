@@ -60,6 +60,12 @@ export const USERS: User[] = [
     tobiraReviewUpTo: 4,
     vocabPoolId: "artem",
   },
+  {
+    // New student; articles / lessons to be added once the content is decided.
+    id: "chris",
+    displayName: "Chris",
+    articleIds: [],
+  },
 ];
 
 export function articlesForUser(user: User): Article[] {
