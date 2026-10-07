@@ -1001,6 +1001,21 @@ ruby rt {
   padding: 14px 16px;
   margin-top: 10px;
 }
+/* Question number: small accent pill in front of each quiz question
+   (same look as the 翻訳練習 number). */
+.q-row { display: flex; align-items: flex-start; gap: 12px; }
+.q-row > :last-child { flex: 1; min-width: 0; }
+.q-num {
+  flex: none;
+  min-width: 26px;
+  margin-top: 4px;
+  font-size: 14px; font-weight: 600;
+  color: var(--accent);
+  padding: 2px 8px;
+  background: var(--accent-bg);
+  border-radius: 999px;
+  text-align: center;
+}
 .cloze-sentence { margin: 0 0 12px; font-size: 17px; line-height: 1.95; }
 .blank {
   display: inline-block; min-width: 46px; text-align: center;

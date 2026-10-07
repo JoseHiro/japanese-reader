@@ -1226,17 +1226,20 @@ export default function App() {
                     const answered = picked !== undefined;
                     return (
                       <div className="quiz-card" key={qi}>
-                        <p className="cloze-sentence">
-                          <Furigana text={q.before} show={showFurigana} />
-                          <span className="blank">
-                            {answered ? (
-                              <Furigana text={q.options[q.answer]} show={showFurigana} />
-                            ) : (
-                              "＿＿"
-                            )}
-                          </span>
-                          <Furigana text={q.after} show={showFurigana} />
-                        </p>
+                        <div className="q-row">
+                          <span className="q-num">{qi + 1}</span>
+                          <p className="cloze-sentence">
+                            <Furigana text={q.before} show={showFurigana} />
+                            <span className="blank">
+                              {answered ? (
+                                <Furigana text={q.options[q.answer]} show={showFurigana} />
+                              ) : (
+                                "＿＿"
+                              )}
+                            </span>
+                            <Furigana text={q.after} show={showFurigana} />
+                          </p>
+                        </div>
                         <div className="opts">
                           {q.options.map((opt, oi) => {
                             let cls = "opt";
@@ -1302,9 +1305,12 @@ export default function App() {
                 const hasHints = q.hints && q.hints.length > 0;
                 return (
                   <div className="quiz-card" key={qi}>
-                    <p className="q-text">
-                      <Furigana text={q.question} show={showFurigana} />
-                    </p>
+                    <div className="q-row">
+                      <span className="q-num">{qi + 1}</span>
+                      <p className="q-text">
+                        <Furigana text={q.question} show={showFurigana} />
+                      </p>
+                    </div>
                     <div className="quiz-actions">
                       {hasHints && (
                         <button
@@ -1397,6 +1403,7 @@ export default function App() {
                 // key change forces card state to reset on review toggle
                 key={rearrangeReview ? "review" : "normal"}
                 questions={visible}
+                numbers={visibleIndices.map((i) => i + 1)}
                 showFurigana={showFurigana}
                 onAllComplete={
                   rearrangeReview

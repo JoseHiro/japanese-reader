@@ -32,11 +32,14 @@ export function shuffledOrder(n: number, seed: number): number[] {
 function QuestionCard({
   q,
   index,
+  number,
   showFurigana,
   onFirstComplete,
 }: {
   q: RearrangeQuestion;
   index: number;
+  /** Number shown on the card (1-based position in the full quiz). */
+  number: number;
   showFurigana: boolean;
   /**
    * Fired exactly once, the first time this card becomes complete.
@@ -80,7 +83,10 @@ function QuestionCard({
 
   return (
     <div className="quiz-card">
-      <p className="rq-en">{q.translation}</p>
+      <div className="q-row">
+        <span className="q-num">{number}</span>
+        <p className="rq-en">{q.translation}</p>
+      </div>
       {q.hint && <p className="rq-hint">💡 {q.hint}</p>}
 
       <div className="rq-answer" aria-label="あなたの解答">
@@ -167,12 +173,15 @@ function QuestionCard({
 
 export function GrammarQuiz({
   questions,
+  numbers,
   showFurigana,
   onAllComplete,
   onResult,
   badgeLabel,
 }: {
   questions: RearrangeQuestion[];
+  /** Displayed numbers per question (defaults to 1..n); review mode passes the originals. */
+  numbers?: number[];
   showFurigana: boolean;
   /** Fired once when every question has been completed at least once. */
   onAllComplete?: () => void;
@@ -197,6 +206,7 @@ export function GrammarQuiz({
           key={i}
           q={q}
           index={i}
+          number={numbers?.[i] ?? i + 1}
           showFurigana={showFurigana}
           onFirstComplete={(correct) => {
             onResult?.(i, correct);
