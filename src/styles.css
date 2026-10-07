@@ -397,8 +397,8 @@ body {
 .ref-body .para { margin: 0 0 1.2em; }
 .ref-body .word { cursor: pointer; }
 .ref-body .word.annotated { color: var(--accent); text-decoration-color: var(--accent); }
-.ref-body .dlg-turn { margin: 0 0 12px; }
-.ref-body .dlg-avatar { width: 24px; height: 24px; }
+.ref-body .dlg-turn { flex-direction: column; align-items: stretch; gap: 0; margin: 0 0 0.6em; }
+.ref-body .dlg-name { width: auto; }
 
 @keyframes ref-slide-in {
   from { transform: translateX(-100%); }
@@ -832,50 +832,33 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* Dialogue-script turns (speaker："...") get a chat-like layout: a
-   colored initial "avatar", the speaker's name, and the line in a
-   rounded bubble. --dlg-color is set per element from the speaker's
-   assigned color so the avatar/name/bubble-accent all match. */
+/* Dialogue-script turns (speaker："...") are laid out like a plain script:
+   a small colored speaker name in a fixed-width column, then the line.
+   --dlg-color is set per element from the speaker's assigned color. */
 .dlg-turn {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 0 0 14px;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 0.3em;
 }
 .dlg-turn:last-child { margin-bottom: 0; }
-.dlg-avatar {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-top: 2px;
-  border-radius: 50%;
-  background: var(--dlg-color);
-  color: #fff;
-  font-size: 0.55em;
-  font-weight: 600;
-  line-height: 1;
-}
-.dlg-body {
-  flex: 1 1 auto;
-  min-width: 0;
-}
 .dlg-name {
-  display: block;
-  margin: 0 0 4px 2px;
-  font-size: 0.6em;
+  flex: none;
+  width: 6em;
+  font-size: 0.62em;
   font-weight: 600;
   color: var(--dlg-color);
 }
-.dlg-bubble {
+.dlg-line {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
-  padding: 10px 14px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--dlg-color);
-  border-radius: 0 var(--radius) var(--radius) var(--radius);
+}
+/* On narrow screens the name column would eat the line's width, so the
+   name sits above the line instead. */
+@media (max-width: 600px) {
+  .dlg-turn { flex-direction: column; align-items: stretch; gap: 0; margin-bottom: 0.6em; }
+  .dlg-name { width: auto; }
 }
 
 .sentence { }

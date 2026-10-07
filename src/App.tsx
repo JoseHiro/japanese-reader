@@ -1057,15 +1057,10 @@ export default function App() {
             const color = speakerColor(speaker, speakerOrderRef.current);
             return (
               <div className="dlg-turn" key={pi} style={{ "--dlg-color": color } as CSSProperties}>
-                <span className="dlg-avatar" aria-hidden>
-                  {speaker.slice(0, 1)}
+                <span className="dlg-name">
+                  <Furigana text={speaker} show={showFurigana} />
                 </span>
-                <div className="dlg-body">
-                  <span className="dlg-name">
-                    <Furigana text={speaker} show={showFurigana} />
-                  </span>
-                  <p className="dlg-bubble">{sentenceSpans}</p>
-                </div>
+                <p className="dlg-line">{sentenceSpans}</p>
               </div>
             );
           }
@@ -1625,15 +1620,10 @@ export default function App() {
                   const color = speakerColor(speaker, speakerOrderRef.current);
                   return (
                     <div className="dlg-turn" key={pi} style={{ "--dlg-color": color } as CSSProperties}>
-                      <span className="dlg-avatar" aria-hidden>
-                        {speaker.slice(0, 1)}
+                      <span className="dlg-name">
+                        <Furigana text={speaker} show={showFurigana} />
                       </span>
-                      <div className="dlg-body">
-                        <span className="dlg-name">
-                          <Furigana text={speaker} show={showFurigana} />
-                        </span>
-                        <p className="dlg-bubble">{sentenceSpans}</p>
-                      </div>
+                      <p className="dlg-line">{sentenceSpans}</p>
                     </div>
                   );
                 }
