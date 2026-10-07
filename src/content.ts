@@ -95,11 +95,17 @@ export interface Article {
   /**
    * Curated 翻訳練習 (EN→JP production) sentences, in the order they should
    * appear. Each entry is the exact Japanese sentence text (which must
-   * also have a matching entry in `translations`). When set, the
-   * translation-practice tab shows only these — keep it short so the tab
-   * doesn't feel like a whole-article rerun.
+   * also have a matching entry in `translations` or `practiceTranslations`).
+   * When set, the translation-practice tab shows only these — keep it
+   * short so the tab doesn't feel like a whole-article rerun.
    */
   translationPractice?: string[];
+  /**
+   * English translations used only by the 翻訳練習 tab (same keying as
+   * `translations`). Unlike `translations` they don't add 訳 buttons to the
+   * article, for articles that are read without per-sentence English.
+   */
+  practiceTranslations?: Record<string, string>;
   /**
    * Paragraph lines (exact text) that should render as section headings
    * rather than body text.
@@ -2398,6 +2404,34 @@ export const ARTICLES: Article[] = [
 ジェシー：ああ、そうですね。その気持ち、わかります。あと、男性のお客さんばっかりだと、ちょっと入りにくいですよね。
 ナオミ：そうですよね。
 ユウイチ：では、リスナーの皆さんが住んでいる町の近くには、変わったお店はありますか？あったら、ぜひ教えてください。`,
+    practiceTranslations: {
+      "自分の食べたい味になるように、味を選ぶんです。":
+        "You choose your flavor so that the ramen turns out just the way you want it.",
+      "今日は、ラーメンに詳しい岩上さんと一緒に、最近話題になっているユニークなラーメン屋さんに行ってみようと思います。":
+        "Today, together with Mr. Iwagami, who knows a lot about ramen, I'm going to visit a unique ramen shop that's been getting a lot of buzz lately.",
+      "あと、男性のお客さんばっかりだと、ちょっと入りにくいですよね。":
+        "Also, if it's nothing but male customers, it's a little hard to go in, isn't it?",
+      "この仕切りは、お客さんにラーメンの味に集中してもらうために作ってあります。":
+        "These dividers are made so that customers can focus on the taste of the ramen.",
+      "僕も行ったことがあるので、このストーリーを書いてみたんですけど、別に二人一緒に行ったわけじゃないんですよね。":
+        "I've been there too, so I wrote this story, but it's not like the two of us went there together or anything.",
+      "まず最初に、この機械にお金を入れて、食券を買います。":
+        "First of all, you put money into this machine and buy a meal ticket.",
+      "でも、たしかに、ラーメン屋さんは一人では絶対に行けませんね。":
+        "But it's true—I could never go to a ramen shop by myself.",
+      "あと、このシステムがあるため、女性のお客さんも多いんです。":
+        "Also, because of this system, there are a lot of female customers too.",
+    },
+    translationPractice: [
+      "自分の食べたい味になるように、味を選ぶんです。",
+      "今日は、ラーメンに詳しい岩上さんと一緒に、最近話題になっているユニークなラーメン屋さんに行ってみようと思います。",
+      "あと、男性のお客さんばっかりだと、ちょっと入りにくいですよね。",
+      "この仕切りは、お客さんにラーメンの味に集中してもらうために作ってあります。",
+      "僕も行ったことがあるので、このストーリーを書いてみたんですけど、別に二人一緒に行ったわけじゃないんですよね。",
+      "まず最初に、この機械にお金を入れて、食券を買います。",
+      "でも、たしかに、ラーメン屋さんは一人では絶対に行けませんね。",
+      "あと、このシステムがあるため、女性のお客さんも多いんです。",
+    ],
     headings: ["収録後のおしゃべり"],
     annotations: {
       詳しい: {

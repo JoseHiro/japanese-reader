@@ -1372,6 +1372,7 @@ export default function App() {
           paragraphs={paragraphs}
           showFurigana={showFurigana}
           curated={article?.translationPractice}
+          extraTranslations={article?.practiceTranslations}
         />
       )}
 

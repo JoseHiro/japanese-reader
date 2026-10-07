@@ -51,9 +51,18 @@ describe("ARTICLES structural invariants", () => {
   it("every translationPractice sentence has a matching translation entry", () => {
     for (const a of ARTICLES) {
       if (!a.translationPractice) continue;
-      const translations = a.translations ?? {};
+      const translations = { ...a.translations, ...a.practiceTranslations };
       const missing = a.translationPractice.filter((s) => !(s in translations));
       expect(missing, `${a.id} unmatched: ${missing.join(" | ")}`).toEqual([]);
+    }
+  });
+
+  it("every practiceTranslations key is a sentence of the article", () => {
+    for (const a of ARTICLES) {
+      const missing = Object.keys(a.practiceTranslations ?? {}).filter(
+        (s) => !a.text.includes(s),
+      );
+      expect(missing, `${a.id} not in text: ${missing.join(" | ")}`).toEqual([]);
     }
   });
 });

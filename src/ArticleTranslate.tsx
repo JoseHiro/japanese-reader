@@ -69,9 +69,15 @@ export function ArticleTranslate({
   paragraphs,
   showFurigana,
   curated,
+  extraTranslations,
 }: {
   paragraphs: Paragraph[];
   showFurigana: boolean;
+  /**
+   * Practice-only English (article's `practiceTranslations`) for sentences
+   * that carry no inline `translation`.
+   */
+  extraTranslations?: Record<string, string>;
   /**
    * Optional curated set (article's `translationPractice`) — the exact
    * Japanese sentences to include, in the order they should appear.
@@ -80,7 +86,14 @@ export function ArticleTranslate({
    */
   curated?: readonly string[];
 }) {
-  const translated = paragraphs.flat().filter((s) => s.translation);
+  const translated = paragraphs
+    .flat()
+    .map((s) =>
+      s.translation || !extraTranslations?.[s.text]
+        ? s
+        : { ...s, translation: extraTranslations[s.text] },
+    )
+    .filter((s) => s.translation);
   const sentences = (() => {
     if (!curated || curated.length === 0) return translated;
     const byText = new Map(translated.map((s) => [s.text, s]));
