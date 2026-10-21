@@ -3267,7 +3267,7 @@ export const ARTICLES: Article[] = [
           options: ["まず", "ほとんど", "ついに", "一度は"],
           answer: 2,
           explanation:
-            "不満が長い間大きくなっていった結果なので「ついに」。とびら L5-7。",
+            "不満が何年も大きくなっていった結果なので「ついに」。とびら L5-7。",
         },
         {
           before: "現在、鎌倉には年間1000万人",
@@ -3376,7 +3376,7 @@ export const ARTICLES: Article[] = [
           options: ["をもとに", "らしく", "をはじめ", "と違って"],
           answer: 2,
           grammarKey: "tobira-5-4",
-          explanation: "代表的な例（法然）を最初に挙げて、他の人も続けるので「をはじめ」。",
+          explanation: "代表的な例（法然）を最初に挙げて、ほかの人も続けるので「をはじめ」。",
         },
         {
           translation:
