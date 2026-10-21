@@ -2730,18 +2730,13 @@ export const ARTICLES: Article[] = [
   {
     id: "kamakura-jidai",
     title: "鎌倉時代 — 武士がつくった日本",
-    subtitle: "幕府の誕生から元寇、今に残る文化まで",
+    subtitle: "幕府の誕生から、今に残る町まで",
     date: "2026-10-21",
-    text: `「いい国つくろう鎌倉幕府」という言葉を知っていますか。日本人なら、学校で一度は聞いたことがあるでしょう。幕府ができた1192年を覚えるための語呂合わせです。ただ最近は、1185年に始まったという考え方の方が多くなっています。鎌倉時代は、それまでの貴族の時代と違って、武士が初めて政治の中心になった時代でした。
-1185年、源頼朝は平家との長い戦いに勝ちました。頼朝が政治の場所に選んだのは、京都ではなく関東の鎌倉です。鎌倉は三方を山に、一方を海に囲まれていて、敵が入りにくい土地でした。武士達にとって、守りやすい場所だったに違いありません。「幕府」という言葉も、もともと「戦いの時に将軍がいる所」という意味です。将軍と武士の関係は「御恩と奉公」と呼ばれます。将軍は武士に土地を与え、武士は戦いが起きた場合、命をかけて将軍のために戦いました。
-ところが、頼朝が亡くなると、源氏の将軍はたった三代で終わってしまいます。その後、実際に政治を動かしていたのは、将軍よりも、頼朝の妻・北条政子の家である北条氏の方でした。1232年には、武士の社会の習慣をもとにして、武士のための初めての法律「御成敗式目」が作られました。
-元寇と「神風」
-1274年、モンゴルの国である元の大軍が、九州に攻めてきました。1281年には、約14万人というさらに大きな軍が来ました。これほど大きな外国の軍が攻めてきたのは、日本の歴史で初めてのことでした。特に二回目の時には、大きな台風が元の船の多くを沈め、人々はこの風を「神風」と呼びました。
-しかし、戦いに勝っても、武士達は新しい土地をもらえませんでした。外国との戦いなので、敵から取れる土地がなかったからです。命とお金をかけた戦いは、武士にとって一種の投資のようなものでしたが、それが返ってこなかったのです。幕府への不満は大きくなり、1333年、鎌倉幕府はついに滅びました。
-今に残る鎌倉の文化
-鎌倉時代には、新しい仏教も生まれました。法然をはじめ、親鸞、日蓮、道元などのお坊さん達が、分かりやすい教えを広めました。例えば法然は、「南無阿弥陀仏」という六文字さえ唱えれば、誰でも救われると教えました。他に、禅の考え方も、その後の茶道や庭など、日本的な文化のもとになりました。また、『平家物語』もこの時代に生まれた物語で、今でも小説や漫画になり、2022年にはアニメ化もされました。
-最後に、今の鎌倉を見てみましょう。町には、高さ約11メートルの大仏があります。昔は建物の中にありましたが、建物が嵐や地震で壊れたため、500年以上前から外に座っています。暑い夏の日も寒い冬の日も、同じ場所に座り続けているのです。現在、鎌倉には年間1000万人以上の観光客が訪れます。1日あたり3万人近くになり、外国からの客も多い国際的な観光地です。800年前の武士達の時代が今も残る町を、友達と一緒に歩いてみるのも楽しいでしょう。`,
-    headings: ["元寇と「神風」", "今に残る鎌倉の文化"],
+    text: `「いい国つくろう鎌倉幕府」という言葉を知っていますか。日本人なら、学校で一度は聞いたことがあるでしょう。鎌倉時代は、それまでと違って、武士が初めて政治の中心になった時代です。
+12世紀の終わり、源頼朝は鎌倉に幕府を作りました。鎌倉は山と海に囲まれていて、敵が入りにくい町です。武士達にとって、守りやすい場所だったに違いありません。ところが、頼朝が亡くなった後、政治を動かしていたのは、頼朝の妻の家族である北条氏の方でした。北条氏は、武士の習慣をもとにして、新しい法律を作りました。
+1274年と1281年には、モンゴルの軍隊が日本を攻撃しました。特に二回目は、大きな台風で多くの船が沈み、人々はこの風を「神風」と呼びました。戦いには勝ちましたが、武士達は新しい土地をもらえず、幕府に不満を持つ人が増えていきました。そして1333年、鎌倉幕府はついに終わりました。
+この時代には、法然をはじめ、多くのお坊さんが新しい仏教を伝えました。法然は、「南無阿弥陀仏」という六文字さえ言えば、誰でも助けてもらえると教えました。また、『平家物語』もこの時代の物語で、2022年にはアニメ化もされました。
+今の鎌倉には、高さ約11メートルの大仏があり、500年以上前から、暑い日も寒い日も外に座っています。鎌倉には1年に1000万人以上の観光客が来て、1日あたり3万人近くになります。昔の建物や道が今も残る町を、友達と一緒に歩いてみるのも楽しいでしょう。`,
     targetGrammar: [
       "tobira-5-1",  // Number+Counter当たり
       "tobira-5-2",  // SentenceのはXの方だ
@@ -2755,45 +2750,34 @@ export const ARTICLES: Article[] = [
       "tobira-5-10", // 〜に違いない
       "tobira-5-11", // 〜をもとに(して)
       "tobira-5-12", // Nと違って (review)
-      "tobira-5-14", // N+的 (review)
     ],
     targetVocab: [
-      "残る", "呼ぶ", "暑い", "文字", "関係", "覚える", "投資", "入る",
-      "多い", "座る", "楽しい", "達", "最後", "小説", "国際", "場合",
-      "他に", "日本的", "一緒", "違う", "意味", "物語", "建物", "現在",
-      "以上", "約", "化", "長い",
+      "呼ぶ", "暑い", "文字", "入る", "多い", "座る", "楽しい", "達",
+      "違う", "一緒", "残る", "建物", "増える", "物語", "以上", "約", "化",
     ],
     annotations: {
       日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
       日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person", readingOnly: true },
       万人: { reading: "まんにん", pos: "名詞", meaning: "ten thousand people", readingOnly: true },
-      三方: { reading: "さんぽう", pos: "名詞", meaning: "three sides", readingOnly: true },
+      頼朝: { reading: "よりとも", pos: "固有名詞", meaning: "Yoritomo", readingOnly: true },
+      後: {
+        reading: "あと",
+        readingOnly: true,
+        pos: "名詞",
+        meaning: "after; later",
+        note: "「V-た後」は「あと」。「のち」は書き言葉で、「その後（ご）」は「ご」。",
+      },
       お坊さん: { reading: "おぼうさん", pos: "名詞", meaning: "Buddhist monk (polite)", readingOnly: true },
       鎌倉: {
         reading: "かまくら",
         pos: "固有名詞",
-        meaning: "Kamakura (city south of Tokyo; seat of the first shogunate)",
+        meaning: "Kamakura (city south of Tokyo)",
       },
       幕府: {
         reading: "ばくふ",
         pos: "名詞",
-        meaning: "shogunate; military government",
-        note: "将軍を中心とした武士の政府。鎌倉幕府・室町幕府・江戸幕府の三つがある。",
-      },
-      語呂合わせ: {
-        reading: "ごろあわせ",
-        pos: "名詞",
-        meaning: "mnemonic wordplay (esp. for numbers)",
-        note: "数字の読みを言葉に当てて覚える方法。「いい国（1192）」「いい箱（1185）」など。",
-      },
-      覚える: {
-        reading: "おぼえる",
-        pos: "動詞（一段）",
-        meaning: "to memorize; to remember",
-        note: "「覚えている」で「（今も）記憶している」。",
-        examples: [
-          { ja: "新しい単語を毎日十個覚える。", en: "I memorize ten new words every day." },
-        ],
+        meaning: "shogunate; samurai government",
+        note: "武士のトップ（将軍）を中心とした政府。鎌倉・室町・江戸の三つがある。",
       },
       一度は: {
         reading: "いちどは",
@@ -2801,30 +2785,17 @@ export const ARTICLES: Article[] = [
         meaning: "at least once",
         note: "「数＋助数詞＋は」で「少なくとも」。とびら L5-3。例：一日に二時間は勉強する。",
       },
-      の方が多く: {
-        reading: "のほうがおおく",
-        pos: "文型",
-        meaning: "(the other one) is more common",
-        note: "「AよりBの方が〜」の比較。ここでは「1192年説より1185年説の方が」。",
-      },
-      多い: { reading: "おおい", pos: "形容詞", meaning: "many; numerous; common" },
-      貴族: {
-        reading: "きぞく",
-        pos: "名詞",
-        meaning: "aristocrat; noble",
-        note: "平安時代に京都で政治をしていた身分の高い人達。",
-      },
       と違って: {
         reading: "とちがって",
         pos: "文型",
         meaning: "unlike ~; different from ~",
-        note: "「N と違って」で「N と対比して」。とびら L5-12。",
+        note: "「N と違って」で「N と比べて、違う点がある」。とびら L5-12。",
       },
       武士: {
         reading: "ぶし",
         pos: "名詞",
         meaning: "samurai; warrior",
-        note: "「侍（さむらい）」とほぼ同じ意味。歴史の説明では「武士」を使うことが多い。",
+        note: "「侍（さむらい）」とほぼ同じ意味。",
       },
       政治: { reading: "せいじ", pos: "名詞", meaning: "politics; government" },
       中心: { reading: "ちゅうしん", pos: "名詞", meaning: "center; core" },
@@ -2833,24 +2804,17 @@ export const ARTICLES: Article[] = [
         pos: "固有名詞",
         meaning: "Minamoto no Yoritomo (1147–1199), founder of the Kamakura shogunate",
       },
-      頼朝: { reading: "よりとも", pos: "固有名詞", meaning: "Yoritomo", readingOnly: true },
-      平家: {
-        reading: "へいけ",
-        pos: "固有名詞",
-        meaning: "the Taira clan (Heike)",
-        note: "源氏と戦って、1185年に滅んだ武士の一族。",
-      },
-      戦い: { reading: "たたかい", pos: "名詞", meaning: "battle; fight; war" },
-      関東: {
-        reading: "かんとう",
-        pos: "固有名詞",
-        meaning: "Kantō region (around Tokyo)",
+      世紀: {
+        reading: "せいき",
+        pos: "名詞",
+        meaning: "century",
+        note: "「12世紀」は1101年〜1200年。",
       },
       囲まれて: {
         reading: "かこまれて",
         pos: "動詞",
         meaning: "being surrounded (受け身・て形)",
-        note: "「AをBに囲まれる」で「AをBが囲んでいる」状態。",
+        note: "「A は B に囲まれている」で「A のまわりに B がある」。",
       },
       敵: { reading: "てき", pos: "名詞", meaning: "enemy" },
       入りにくい: {
@@ -2859,57 +2823,23 @@ export const ARTICLES: Article[] = [
         meaning: "hard to get into",
         note: "「V-masu＋にくい」で「〜するのが難しい」。反対は「入りやすい」。",
       },
-      土地: { reading: "とち", pos: "名詞", meaning: "land; plot of land" },
       達: {
         reading: "たち",
         pos: "接尾辞",
         meaning: "plural suffix for people",
-        note: "「武士達」「お坊さん達」。ひらがなで「たち」と書くことも多い。",
+        note: "「武士達」「私達」。ひらがなで「たち」と書くことも多い。",
+      },
+      守りやすい: {
+        reading: "まもりやすい",
+        pos: "形容詞",
+        meaning: "easy to defend",
+        note: "「V-masu＋やすい」で「〜するのが簡単」。",
       },
       違いありません: {
         reading: "ちがいありません",
         pos: "文型",
         meaning: "must be ~; there is no doubt that ~",
-        note: "「〜に違いない」の丁寧形。話し手が強く確信していることを表す。とびら L5-10。",
-      },
-      将軍: {
-        reading: "しょうぐん",
-        pos: "名詞",
-        meaning: "shogun; general",
-        note: "幕府のトップ。正式には「征夷大将軍（せいいたいしょうぐん）」。",
-      },
-      意味: { reading: "いみ", pos: "名詞・する動詞", meaning: "meaning; significance" },
-      関係: { reading: "かんけい", pos: "名詞・する動詞", meaning: "relationship; connection" },
-      御恩: {
-        reading: "ごおん",
-        pos: "名詞",
-        meaning: "favor; benefit (granted by a lord)",
-        note: "将軍が武士に土地を与えたり、守ったりすること。",
-      },
-      奉公: {
-        reading: "ほうこう",
-        pos: "名詞・する動詞",
-        meaning: "service (to a lord)",
-        note: "武士が将軍のために戦うこと。「御恩」とセットで使う。",
-      },
-      呼ぶ: { reading: "よぶ", pos: "動詞（五段）", meaning: "to call; to name" },
-      与え: {
-        reading: "あたえ",
-        pos: "動詞",
-        meaning: "to give; to grant (連用形)",
-        note: "「与える」は「あげる」より硬い書き言葉。",
-      },
-      場合: {
-        reading: "ばあい",
-        pos: "名詞",
-        meaning: "case; occasion",
-        note: "「V-た場合」で「もし〜したら」。",
-      },
-      命をかけて: {
-        reading: "いのちをかけて",
-        pos: "表現",
-        meaning: "risking one's life",
-        note: "「〜をかける」で「〜を失う危険があっても出す」。「お金をかける」も同じ形。",
+        note: "「〜に違いない」の丁寧形。話す人が強く確信していることを表す。とびら L5-10。",
       },
       ところが: {
         reading: "ところが",
@@ -2917,35 +2847,18 @@ export const ARTICLES: Article[] = [
         meaning: "however; but (contrary to expectation)",
         note: "前の文から予想されることと違う結果が来る時に使う。とびら L5-9。",
       },
-      源氏: {
-        reading: "げんじ",
-        pos: "固有名詞",
-        meaning: "the Minamoto clan (Genji)",
-        note: "頼朝の一族。「源（みなもと）」の音読み。",
-      },
-      三代: {
-        reading: "さんだい",
-        pos: "名詞",
-        meaning: "three generations",
-        note: "頼朝・頼家・実朝の三人で源氏の将軍は終わった。",
-      },
-      実際: { reading: "じっさい", pos: "名詞・副詞", meaning: "actually; in reality" },
-      動かし: {
-        reading: "うごかし",
+      動かして: {
+        reading: "うごかして",
         pos: "動詞",
-        meaning: "to move; to run; to control (連用形)",
+        meaning: "moving; running; controlling (て形)",
         note: "「動かす」は他動詞（何かを動かす）。自動詞は「動く」。",
       },
-      北条政子: {
-        reading: "ほうじょうまさこ",
-        pos: "固有名詞",
-        meaning: "Hōjō Masako (1157–1225), Yoritomo's wife",
-      },
+      妻: { reading: "つま", pos: "名詞", meaning: "wife" },
       北条氏: {
         reading: "ほうじょうし",
         pos: "固有名詞",
         meaning: "the Hōjō clan",
-        note: "「氏（し）」は「〜家」という意味の接尾辞。",
+        note: "「氏（し）」は「〜家」という意味。",
       },
       の方でした: {
         reading: "のほうでした",
@@ -2958,95 +2871,66 @@ export const ARTICLES: Article[] = [
         reading: "をもとに",
         pos: "文型",
         meaning: "based on ~",
-        note: "「N をもとに(して)」で「N を材料・基礎にして」。とびら L5-11。",
+        note: "「N をもとに(して)」で「N を材料にして」。とびら L5-11。",
       },
       法律: { reading: "ほうりつ", pos: "名詞", meaning: "law" },
-      御成敗式目: {
-        reading: "ごせいばいしきもく",
-        pos: "固有名詞",
-        meaning: "Goseibai Shikimoku (1232 legal code for the samurai)",
-        note: "北条泰時（ほうじょうやすとき）が作った。全部で51の決まりがある。",
+      軍隊: { reading: "ぐんたい", pos: "名詞", meaning: "army; military" },
+      攻撃: {
+        reading: "こうげき",
+        pos: "名詞・する動詞",
+        meaning: "attack",
+        note: "「〜を攻撃する」。反対は「守る」。",
       },
-      元寇: {
-        reading: "げんこう",
-        pos: "固有名詞",
-        meaning: "the Mongol invasions of Japan (1274, 1281)",
-      },
-      元: {
-        reading: "げん",
-        pos: "固有名詞",
-        meaning: "the Yuan dynasty (Mongol empire in China)",
-        note: "ここでは国の名前なので「げん」。「もと」と読まない。",
+      台風: { reading: "たいふう", pos: "名詞", meaning: "typhoon" },
+      沈み: {
+        reading: "しずみ",
+        pos: "動詞",
+        meaning: "to sink (連用形)",
+        note: "「沈む」は水の中に下りていくこと。反対は「浮かぶ」。",
       },
       神風: {
         reading: "かみかぜ",
         pos: "名詞",
         meaning: "\"divine wind\"",
-        note: "神様が日本を守るために吹かせた風、という考え方から。",
+        note: "「神様が日本を守るために吹かせた風」という意味。",
       },
-      大軍: { reading: "たいぐん", pos: "名詞", meaning: "large army" },
-      攻めて: {
-        reading: "せめて",
+      呼ぶ: { reading: "よぶ", pos: "動詞（五段）", meaning: "to call; to name" },
+      土地: { reading: "とち", pos: "名詞", meaning: "land; plot of land" },
+      不満: {
+        reading: "ふまん",
+        pos: "名詞・形容動詞",
+        meaning: "dissatisfaction; complaint",
+        note: "「〜に不満を持つ」で「〜をよくないと思っている」。",
+      },
+      増え: {
+        reading: "ふえ",
         pos: "動詞",
-        meaning: "to attack; to invade (て形)",
-        note: "「攻めてくる」で「こちらに向かって攻撃する」。反対は「守る」。",
+        meaning: "to increase (連用形)",
+        note: "「増えていく」で「だんだん多くなる」。",
       },
-      約: { reading: "やく", pos: "副詞", meaning: "approximately; about" },
-      歴史: { reading: "れきし", pos: "名詞", meaning: "history" },
-      沈め: {
-        reading: "しずめ",
-        pos: "動詞",
-        meaning: "to sink (something) (連用形)",
-        note: "「沈める」は他動詞。自動詞は「沈む」（船が沈む）。",
-      },
-      一種: {
-        reading: "いっしゅ",
-        pos: "名詞",
-        meaning: "a kind of; a sort of",
-        note: "「一種の N」で「ある意味で N と言えるもの」。",
-      },
-      投資: {
-        reading: "とうし",
-        pos: "名詞・する動詞",
-        meaning: "investment",
-        note: "あとで利益が返ってくることを期待して、お金や時間を使うこと。",
-      },
-      返って: {
-        reading: "かえって",
-        pos: "動詞",
-        meaning: "to come back; to be returned (て形)",
-      },
-      不満: { reading: "ふまん", pos: "名詞・形容動詞", meaning: "dissatisfaction; discontent" },
       ついに: {
         reading: "ついに",
         pos: "副詞",
         meaning: "at last; finally; in the end",
         note: "長い時間や過程の後で、ある結果になる。とびら L5-7。",
       },
-      滅び: {
-        reading: "ほろび",
-        pos: "動詞",
-        meaning: "to fall; to perish (連用形)",
-        note: "「滅びる」は国・家・文化などがなくなること。",
-      },
-      残る: { reading: "のこる", pos: "動詞（五段）", meaning: "to remain; to be left" },
-      仏教: { reading: "ぶっきょう", pos: "名詞", meaning: "Buddhism" },
       をはじめ: {
         reading: "をはじめ",
         pos: "文型",
         meaning: "starting with ~; including ~",
         note: "「N をはじめ」で「N を代表として、他にも」。とびら L5-4。",
       },
-      法然: { reading: "ほうねん", pos: "固有名詞", meaning: "Hōnen (1133–1212), founder of Jōdo-shū" },
-      親鸞: { reading: "しんらん", pos: "固有名詞", meaning: "Shinran (1173–1263), founder of Jōdo Shinshū" },
-      日蓮: { reading: "にちれん", pos: "固有名詞", meaning: "Nichiren (1222–1282), founder of Nichiren Buddhism" },
-      道元: { reading: "どうげん", pos: "固有名詞", meaning: "Dōgen (1200–1253), founder of Sōtō Zen" },
-      教え: { reading: "おしえ", pos: "名詞", meaning: "teaching; doctrine" },
+      法然: { reading: "ほうねん", pos: "固有名詞", meaning: "Hōnen (1133–1212), Buddhist monk" },
+      仏教: { reading: "ぶっきょう", pos: "名詞", meaning: "Buddhism" },
+      伝えました: {
+        reading: "つたえました",
+        pos: "動詞",
+        meaning: "spread; passed on (past)",
+      },
       南無阿弥陀仏: {
         reading: "なむあみだぶつ",
         pos: "名詞",
-        meaning: "Namu Amida Butsu (\"I take refuge in Amida Buddha\")",
-        note: "「念仏（ねんぶつ）」と呼ばれる短い言葉。",
+        meaning: "Namu Amida Butsu (a short Buddhist prayer)",
       },
       文字: { reading: "もじ", pos: "名詞", meaning: "letter; character" },
       さえ: {
@@ -3055,70 +2939,26 @@ export const ARTICLES: Article[] = [
         meaning: "just; only (as long as ~)",
         note: "「N さえ V-ば」で「N をすれば、他は要らない」。とびら L5-6。",
       },
-      唱えれば: {
-        reading: "となえれば",
-        pos: "動詞",
-        meaning: "if (one) chants (ば形)",
-        note: "「唱える」はお経や念仏を声に出して言うこと。",
-      },
-      救われる: {
-        reading: "すくわれる",
-        pos: "動詞",
-        meaning: "to be saved (受け身)",
-      },
-      他に: {
-        reading: "ほかに",
-        pos: "副詞",
-        meaning: "besides; in addition",
-        note: "「他に」は「ほかに」と読む。「たに」とは読まない。",
-      },
-      禅: {
-        reading: "ぜん",
-        pos: "名詞",
-        meaning: "Zen (Buddhism)",
-        note: "座って心を静かにする「座禅（ざぜん）」を大切にする仏教。",
-      },
-      茶道: { reading: "さどう", pos: "名詞", meaning: "the tea ceremony" },
-      日本的: {
-        reading: "にほんてき",
-        pos: "形容動詞",
-        meaning: "typically Japanese; Japanese-style",
-        note: "「N＋的」で「N のような・N らしい」。とびら L5-14。",
-      },
       平家物語: {
         reading: "へいけものがたり",
         pos: "固有名詞",
         meaning: "The Tale of the Heike",
-        note: "平家が栄えて滅びるまでを語る物語。琵琶という楽器を弾きながら語られた。",
+        note: "武士の一族「平家」の物語。",
       },
       物語: { reading: "ものがたり", pos: "名詞", meaning: "story; tale" },
-      小説: { reading: "しょうせつ", pos: "名詞", meaning: "novel; fiction" },
       アニメ化: {
         reading: "アニメか",
         pos: "名詞・する動詞",
         meaning: "being made into an anime",
-        note: "「N＋化（する）」で「N の形になる」。他に「ドラマ化」「映画化」など。とびら L5-8。",
+        note: "「N＋化（する）」で「N の形になる」。「ドラマ化」「映画化」など。とびら L5-8。",
       },
-      最後: { reading: "さいご", pos: "名詞", meaning: "the last; the end" },
-      大仏: {
-        reading: "だいぶつ",
-        pos: "名詞",
-        meaning: "giant statue of Buddha",
-        note: "鎌倉の大仏は高徳院（こうとくいん）にある。",
-      },
-      建物: { reading: "たてもの", pos: "名詞", meaning: "building" },
-      嵐: { reading: "あらし", pos: "名詞", meaning: "storm" },
+      約: { reading: "やく", pos: "副詞", meaning: "approximately; about" },
+      大仏: { reading: "だいぶつ", pos: "名詞", meaning: "giant statue of Buddha" },
       以上: {
         reading: "いじょう",
         pos: "名詞",
         meaning: "or more; more than",
-        note: "「500年以上」は 500年を含む。反対は「以下」。とびら L5-5。",
-      },
-      座って: {
-        reading: "すわって",
-        pos: "動詞",
-        meaning: "to sit (て形)",
-        note: "「座っている」で座った状態が続いていること。",
+        note: "「500年以上」は500年を含む。反対は「以下」。とびら L5-5。",
       },
       暑い: {
         reading: "あつい",
@@ -3126,25 +2966,21 @@ export const ARTICLES: Article[] = [
         meaning: "hot (weather)",
         note: "気温に使う。「熱い」はお湯など物の温度。",
       },
-      現在: { reading: "げんざい", pos: "名詞", meaning: "the present; currently" },
-      観光客: { reading: "かんこうきゃく", pos: "名詞", meaning: "tourist" },
-      訪れます: {
-        reading: "おとずれます",
+      座って: {
+        reading: "すわって",
         pos: "動詞",
-        meaning: "to visit (丁寧)",
-        note: "「訪れる」は「行く・来る」の書き言葉。場所を主語にしない。",
+        meaning: "to sit (て形)",
+        note: "「座っている」で座った状態が続いていること。",
       },
+      観光客: { reading: "かんこうきゃく", pos: "名詞", meaning: "tourist" },
       "1日あたり": {
         reading: "いちにちあたり",
         pos: "文型",
         meaning: "per day",
         note: "「数＋助数詞＋あたり」で「〜ごとに」。とびら L5-1。例：一人あたり千円。",
       },
-      国際的: {
-        reading: "こくさいてき",
-        pos: "形容動詞",
-        meaning: "international",
-      },
+      建物: { reading: "たてもの", pos: "名詞", meaning: "building" },
+      残る: { reading: "のこる", pos: "動詞（五段）", meaning: "to remain; to be left" },
       一緒: { reading: "いっしょ", pos: "名詞", meaning: "together", note: "「〜と一緒に」。" },
       楽しい: { reading: "たのしい", pos: "形容詞", meaning: "fun; enjoyable" },
     },
@@ -3153,168 +2989,96 @@ export const ARTICLES: Article[] = [
         "Have you heard the phrase \"Ii kuni tsukurō, Kamakura bakufu\" — \"let's build a good country, Kamakura shogunate\"?",
       "日本人なら、学校で一度は聞いたことがあるでしょう。":
         "If you're Japanese, you've probably heard it at least once at school.",
-      "幕府ができた1192年を覚えるための語呂合わせです。":
-        "It's a wordplay mnemonic for remembering 1192, the year the shogunate was founded.",
-      "ただ最近は、1185年に始まったという考え方の方が多くなっています。":
-        "These days, though, the view that it began in 1185 has become more common.",
-      "鎌倉時代は、それまでの貴族の時代と違って、武士が初めて政治の中心になった時代でした。":
-        "Unlike the age of the aristocrats before it, the Kamakura period was the first time samurai stood at the center of government.",
-      "1185年、源頼朝は平家との長い戦いに勝ちました。":
-        "In 1185, Minamoto no Yoritomo won his long war against the Taira (Heike).",
-      "頼朝が政治の場所に選んだのは、京都ではなく関東の鎌倉です。":
-        "The place Yoritomo chose as his seat of government wasn't Kyoto, but Kamakura in the Kantō region.",
-      "鎌倉は三方を山に、一方を海に囲まれていて、敵が入りにくい土地でした。":
-        "Kamakura is surrounded by mountains on three sides and the sea on the other, which made it hard for enemies to get in.",
+      "鎌倉時代は、それまでと違って、武士が初めて政治の中心になった時代です。":
+        "Unlike the eras before it, the Kamakura period was the first time samurai stood at the center of government.",
+      "12世紀の終わり、源頼朝は鎌倉に幕府を作りました。":
+        "At the end of the 12th century, Minamoto no Yoritomo set up a shogunate in Kamakura.",
+      "鎌倉は山と海に囲まれていて、敵が入りにくい町です。":
+        "Kamakura is surrounded by mountains and the sea, so it's a hard town for enemies to get into.",
       "武士達にとって、守りやすい場所だったに違いありません。":
         "For the samurai, it must have been an easy place to defend.",
-      "「幕府」という言葉も、もともと「戦いの時に将軍がいる所」という意味です。":
-        "The word bakufu itself originally means \"the place where the general stays during a war.\"",
-      "将軍と武士の関係は「御恩と奉公」と呼ばれます。":
-        "The relationship between the shogun and the samurai is called go'on to hōkō — \"favor and service.\"",
-      "将軍は武士に土地を与え、武士は戦いが起きた場合、命をかけて将軍のために戦いました。":
-        "The shogun granted land to the samurai, and when war broke out, the samurai fought for the shogun, risking their lives.",
-      "ところが、頼朝が亡くなると、源氏の将軍はたった三代で終わってしまいます。":
-        "However, after Yoritomo died, the line of Minamoto shoguns ended after just three generations.",
-      "その後、実際に政治を動かしていたのは、将軍よりも、頼朝の妻・北条政子の家である北条氏の方でした。":
-        "After that, the ones actually running the government weren't so much the shoguns as the Hōjō — the family of Yoritomo's wife, Hōjō Masako.",
-      "1232年には、武士の社会の習慣をもとにして、武士のための初めての法律「御成敗式目」が作られました。":
-        "In 1232, based on the customs of samurai society, the first law code for samurai — the Goseibai Shikimoku — was created.",
-      "1274年、モンゴルの国である元の大軍が、九州に攻めてきました。":
-        "In 1274, a huge army from Yuan, the Mongol state, invaded Kyushu.",
-      "1281年には、約14万人というさらに大きな軍が来ました。":
-        "In 1281, an even bigger army of about 140,000 came.",
-      "これほど大きな外国の軍が攻めてきたのは、日本の歴史で初めてのことでした。":
-        "It was the first time in Japanese history that a foreign army this large had attacked.",
-      "特に二回目の時には、大きな台風が元の船の多くを沈め、人々はこの風を「神風」と呼びました。":
-        "The second time especially, a great typhoon sank many of the Yuan ships, and people called this wind kamikaze — the \"divine wind.\"",
-      "しかし、戦いに勝っても、武士達は新しい土地をもらえませんでした。":
-        "But even though they won, the samurai didn't receive any new land.",
-      "外国との戦いなので、敵から取れる土地がなかったからです。":
-        "Because it was a war against a foreign country, there was no land to take from the enemy.",
-      "命とお金をかけた戦いは、武士にとって一種の投資のようなものでしたが、それが返ってこなかったのです。":
-        "For the samurai, a war where they staked their lives and money was a kind of investment — and it never paid them back.",
-      "幕府への不満は大きくなり、1333年、鎌倉幕府はついに滅びました。":
-        "Discontent with the shogunate grew, and in 1333 the Kamakura shogunate finally fell.",
-      "鎌倉時代には、新しい仏教も生まれました。":
-        "New forms of Buddhism were also born in the Kamakura period.",
-      "法然をはじめ、親鸞、日蓮、道元などのお坊さん達が、分かりやすい教えを広めました。":
-        "Starting with Hōnen, monks such as Shinran, Nichiren and Dōgen spread teachings that were easy to understand.",
-      "例えば法然は、「南無阿弥陀仏」という六文字さえ唱えれば、誰でも救われると教えました。":
-        "Hōnen, for example, taught that anyone could be saved as long as they chanted the six characters \"Namu Amida Butsu.\"",
-      "他に、禅の考え方も、その後の茶道や庭など、日本的な文化のもとになりました。":
-        "Besides that, Zen ideas also became the basis of later, typically Japanese culture such as the tea ceremony and gardens.",
-      "また、『平家物語』もこの時代に生まれた物語で、今でも小説や漫画になり、2022年にはアニメ化もされました。":
-        "The Tale of the Heike is also a story born in this era; it's still being turned into novels and manga, and in 2022 it was even made into an anime.",
-      "最後に、今の鎌倉を見てみましょう。":
-        "Finally, let's take a look at Kamakura today.",
-      "町には、高さ約11メートルの大仏があります。":
-        "In the town there's a giant Buddha about 11 meters tall.",
-      "昔は建物の中にありましたが、建物が嵐や地震で壊れたため、500年以上前から外に座っています。":
-        "It used to be inside a building, but since the building was destroyed by storms and earthquakes, it has been sitting outdoors for more than 500 years.",
-      "暑い夏の日も寒い冬の日も、同じ場所に座り続けているのです。":
-        "Through hot summer days and cold winter days, it has kept sitting in the same spot.",
-      "現在、鎌倉には年間1000万人以上の観光客が訪れます。":
-        "Today, more than 10 million tourists visit Kamakura every year.",
-      "1日あたり3万人近くになり、外国からの客も多い国際的な観光地です。":
-        "That comes to nearly 30,000 a day, and with many visitors from abroad, it's an international tourist destination.",
-      "800年前の武士達の時代が今も残る町を、友達と一緒に歩いてみるのも楽しいでしょう。":
-        "It would be fun to walk with friends through a town where the samurai era of 800 years ago still lives on.",
+      "ところが、頼朝が亡くなった後、政治を動かしていたのは、頼朝の妻の家族である北条氏の方でした。":
+        "However, after Yoritomo died, the ones running the government were the Hōjō — the family of Yoritomo's wife.",
+      "北条氏は、武士の習慣をもとにして、新しい法律を作りました。":
+        "Based on samurai customs, the Hōjō made a new set of laws.",
+      "1274年と1281年には、モンゴルの軍隊が日本を攻撃しました。":
+        "In 1274 and 1281, the Mongol army attacked Japan.",
+      "特に二回目は、大きな台風で多くの船が沈み、人々はこの風を「神風」と呼びました。":
+        "The second time especially, a big typhoon sank many of the ships, and people called this wind kamikaze — the \"divine wind.\"",
+      "戦いには勝ちましたが、武士達は新しい土地をもらえず、幕府に不満を持つ人が増えていきました。":
+        "They won the war, but the samurai didn't get any new land, and more and more people became unhappy with the shogunate.",
+      "そして1333年、鎌倉幕府はついに終わりました。":
+        "And in 1333, the Kamakura shogunate finally came to an end.",
+      "この時代には、法然をはじめ、多くのお坊さんが新しい仏教を伝えました。":
+        "In this era, many monks, starting with Hōnen, spread new forms of Buddhism.",
+      "法然は、「南無阿弥陀仏」という六文字さえ言えば、誰でも助けてもらえると教えました。":
+        "Hōnen taught that anyone could be saved as long as they said the six characters \"Namu Amida Butsu.\"",
+      "また、『平家物語』もこの時代の物語で、2022年にはアニメ化もされました。":
+        "The Tale of the Heike is also a story from this era, and in 2022 it was even made into an anime.",
+      "今の鎌倉には、高さ約11メートルの大仏があり、500年以上前から、暑い日も寒い日も外に座っています。":
+        "Kamakura today has a giant Buddha about 11 meters tall, which has been sitting outdoors through hot days and cold days for more than 500 years.",
+      "鎌倉には1年に1000万人以上の観光客が来て、1日あたり3万人近くになります。":
+        "More than 10 million tourists come to Kamakura a year — nearly 30,000 a day.",
+      "昔の建物や道が今も残る町を、友達と一緒に歩いてみるのも楽しいでしょう。":
+        "It would be fun to walk with friends through a town where old buildings and streets still remain.",
     },
     quiz: {
       cloze: [
         {
-          before: "幕府ができた1192年を",
-          after: "ための語呂合わせです。",
-          options: ["座る", "覚える", "動く", "入る"],
-          answer: 1,
-          explanation: "語呂合わせは数字を記憶するための方法なので「覚える」。",
-        },
-        {
-          before: "実際に政治を動かしていたのは、将軍よりも、北条氏の",
-          after: "でした。",
-          options: ["方", "ほど", "まで", "だけ"],
+          before: "鎌倉は山と海に",
+          after: "いて、敵が入りにくい町です。",
+          options: ["囲まれて", "座って", "呼ばれて", "残って"],
           answer: 0,
-          explanation:
-            "「S のは X の方だ」で「将軍ではなく北条氏が」と強調する。とびら L5-2。",
+          explanation: "まわりに山と海がある状態なので「囲まれている」。",
         },
         {
-          before: "1232年には、武士の社会の習慣を",
-          after: "、武士のための初めての法律が作られました。",
-          options: ["はじめ", "めぐって", "もとにして", "通じて"],
-          answer: 2,
-          explanation:
-            "習慣を材料・基礎にして法律を作ったので「をもとにして」。とびら L5-11。",
-        },
-        {
-          before: "法然は、「南無阿弥陀仏」という六文字",
-          after: "唱えれば、誰でも救われると教えました。",
-          options: ["まで", "しか", "より", "さえ"],
+          before: "頼朝が亡くなった後、政治を",
+          after: "いたのは、北条氏の方でした。",
+          options: ["座って", "入って", "呼んで", "動かして"],
           answer: 3,
-          explanation:
-            "「N さえ V-ば」で「それだけすれば十分」。とびら L5-6。「しか」は否定と一緒に使う。",
+          explanation: "「政治を動かす」で「政治を実際に決めて進める」。",
         },
         {
-          before: "命とお金をかけた戦いは、武士にとって一種の",
-          after: "のようなものでした。",
-          options: ["小説", "投資", "注文", "関係"],
+          before: "1274年と1281年には、モンゴルの軍隊が日本を",
+          after: "しました。",
+          options: ["注文", "攻撃", "投資", "関係"],
           answer: 1,
-          explanation:
-            "命とお金を使って、あとで土地が返ってくることを期待していたので「投資」。",
+          explanation: "軍隊がほかの国に戦いをしかけることは「攻撃する」。",
         },
         {
-          before: "幕府への不満は大きくなり、1333年、鎌倉幕府は",
-          after: "滅びました。",
-          options: ["まず", "ほとんど", "ついに", "一度は"],
+          before: "大きな台風で多くの船が沈み、人々はこの風を「神風」と",
+          after: "。",
+          options: ["増えました", "呼びました", "座りました", "入りました"],
+          answer: 1,
+          explanation: "「A を B と呼ぶ」で「A に B という名前をつけて言う」。",
+        },
+        {
+          before: "武士達は新しい土地をもらえず、幕府に不満を持つ人が",
+          after: "いきました。",
+          options: ["座って", "入って", "増えて", "覚えて"],
           answer: 2,
-          explanation:
-            "不満が何年も大きくなっていった結果なので「ついに」。とびら L5-7。",
+          explanation: "不満を持つ人がだんだん多くなったので「増えていく」。",
         },
         {
-          before: "現在、鎌倉には年間1000万人",
-          after: "の観光客が訪れます。",
-          options: ["以下", "以外", "以内", "以上"],
+          before: "法然は、「南無阿弥陀仏」という六",
+          after: "さえ言えば、誰でも助けてもらえると教えました。",
+          options: ["最後", "場合", "文字", "意味"],
+          answer: 2,
+          explanation: "「南無阿弥陀仏」は字が六つあるので「六文字」。",
+        },
+        {
+          before: "大仏は500年以上前から、暑い日も寒い日も外に",
+          after: "います。",
+          options: ["座って", "入って", "呼んで", "動いて"],
+          answer: 0,
+          explanation: "大仏は座った形の像なので「座っている」。",
+        },
+        {
+          before: "昔の建物や道が今も",
+          after: "町を、友達と一緒に歩いてみるのも楽しいでしょう。",
+          options: ["座る", "入る", "動く", "残る"],
           answer: 3,
-          explanation: "「1000万人以上」で「1000万人を含めてそれより多い」。とびら L5-5。",
-        },
-        {
-          before: "1日",
-          after: "3万人近くになり、外国からの客も多い国際的な観光地です。",
-          options: ["ずつ", "あたり", "ごろ", "ばかり"],
-          answer: 1,
-          explanation:
-            "年間の数を1日ごとに割った数なので「1日あたり」。とびら L5-1。",
-        },
-      ],
-      rearrange: [
-        {
-          translation: "For the samurai, it must have been an easy place to defend.",
-          chunks: ["武士達に", "とって", "守りやすい", "場所だった", "に", "違いありません"],
-          grammarKey: "tobira-5-10",
-          hint: "「〜に違いない／違いありません」を使って",
-        },
-        {
-          translation: "The ones actually running the government were the Hōjō clan.",
-          chunks: ["実際に", "政治を", "動かしていた", "のは", "北条氏の", "方でした"],
-          grammarKey: "tobira-5-2",
-          hint: "「S のは X の方だ」を使って",
-        },
-        {
-          translation: "If you're Japanese, you've probably heard it at least once at school.",
-          chunks: ["日本人なら", "学校で", "一度", "は", "聞いたことが", "あるでしょう"],
-          grammarKey: "tobira-5-3",
-          hint: "「数＋は」(at least) を使って",
-        },
-        {
-          translation: "Starting with Hōnen, monks such as Shinran and Nichiren spread new teachings.",
-          chunks: ["法然を", "はじめ", "親鸞や日蓮などの", "お坊さん達が", "新しい教えを", "広めました"],
-          grammarKey: "tobira-5-4",
-          hint: "「N をはじめ」を使って",
-        },
-        {
-          translation: "In 2022, it was even made into an anime.",
-          chunks: ["2022年には", "アニメ", "化", "も", "されました"],
-          grammarKey: "tobira-5-8",
-          hint: "「N＋化（する）」を使って",
+          explanation: "昔のものが今もなくならずにあるので「残る」。",
         },
       ],
       grammarChoice: [
@@ -3322,21 +3086,11 @@ export const ARTICLES: Article[] = [
           translation: "If you're Japanese, you've probably heard it at least once at school.",
           before: "日本人なら、学校で一度",
           after: "聞いたことがあるでしょう。",
-          options: ["しか", "は", "さえ", "ほど"],
+          options: ["しか", "は", "さえ", "も"],
           answer: 1,
           grammarKey: "tobira-5-3",
           explanation:
-            "「数＋助数詞＋は」で「少なくとも」。「一度しか」は後ろに否定（〜ない）が必要。",
-        },
-        {
-          translation:
-            "Unlike the age of the aristocrats before it, the Kamakura period was the first time samurai stood at the center of government.",
-          before: "鎌倉時代は、それまでの貴族の時代",
-          after: "、武士が初めて政治の中心になった時代でした。",
-          options: ["をはじめ", "をもとに", "と同じで", "と違って"],
-          answer: 3,
-          grammarKey: "tobira-5-12",
-          explanation: "貴族の時代と武士の時代を対比しているので「と違って」。",
+            "「数＋助数詞＋は」で「少なくとも」。「一度しか」「一度も」は後ろに否定（〜ない）が必要。",
         },
         {
           translation: "For the samurai, it must have been an easy place to defend.",
@@ -3345,45 +3099,52 @@ export const ARTICLES: Article[] = [
           options: ["に違いありません", "ようにしました", "わけにはいきません", "ことになりました"],
           answer: 0,
           grammarKey: "tobira-5-10",
-          explanation: "書き手の強い確信を表す「〜に違いない」の丁寧形。",
+          explanation: "書いた人の強い確信を表す「〜に違いない」の丁寧形。",
         },
         {
           translation:
-            "However, after Yoritomo died, the line of Minamoto shoguns ended after just three generations.",
+            "However, after Yoritomo died, the ones running the government were the Hōjō — the family of Yoritomo's wife.",
           before: "",
-          after: "、頼朝が亡くなると、源氏の将軍はたった三代で終わってしまいます。",
-          options: ["それで", "ついに", "まず", "ところが"],
+          after: "、頼朝が亡くなった後、政治を動かしていたのは、頼朝の妻の家族である北条氏の方でした。",
+          options: ["それで", "まず", "ついに", "ところが"],
           answer: 3,
           grammarKey: "tobira-5-9",
           explanation:
-            "前の段落（頼朝が幕府を作った）から予想されることと違う展開なので「ところが」。「それで」は結果を続ける時に使う。",
+            "頼朝が幕府を作ったのに、その後は北条氏が政治を動かした。予想と違う展開なので「ところが」。",
         },
         {
-          translation:
-            "Discontent with the shogunate grew, and in 1333 the Kamakura shogunate finally fell.",
-          before: "幕府への不満は大きくなり、1333年、鎌倉幕府は",
-          after: "滅びました。",
-          options: ["ほとんど", "ついに", "まず", "できれば"],
+          translation: "Based on samurai customs, the Hōjō made a new set of laws.",
+          before: "北条氏は、武士の習慣",
+          after: "、新しい法律を作りました。",
+          options: ["をはじめ", "と違って", "をもとにして", "らしく"],
+          answer: 2,
+          grammarKey: "tobira-5-11",
+          explanation: "習慣を材料にして法律を作ったので「をもとにして」。",
+        },
+        {
+          translation: "And in 1333, the Kamakura shogunate finally came to an end.",
+          before: "そして1333年、鎌倉幕府は",
+          after: "終わりました。",
+          options: ["たまに", "ついに", "まず", "できれば"],
           answer: 1,
           grammarKey: "tobira-5-7",
-          explanation: "不満が長く続いた末の結果なので「ついに」。",
+          explanation: "不満を持つ人が増えていった結果なので「ついに」。",
         },
         {
-          translation:
-            "Starting with Hōnen, monks such as Shinran, Nichiren and Dōgen spread teachings that were easy to understand.",
-          before: "法然",
-          after: "、親鸞、日蓮、道元などのお坊さん達が、分かりやすい教えを広めました。",
+          translation: "In this era, many monks, starting with Hōnen, spread new forms of Buddhism.",
+          before: "この時代には、法然",
+          after: "、多くのお坊さんが新しい仏教を伝えました。",
           options: ["をもとに", "らしく", "をはじめ", "と違って"],
           answer: 2,
           grammarKey: "tobira-5-4",
-          explanation: "代表的な例（法然）を最初に挙げて、ほかの人も続けるので「をはじめ」。",
+          explanation: "代表的な人（法然）を最初に言って、ほかの人も入れるので「をはじめ」。",
         },
         {
           translation:
-            "Hōnen taught that anyone could be saved as long as they chanted the six characters \"Namu Amida Butsu.\"",
+            "Hōnen taught that anyone could be saved as long as they said the six characters \"Namu Amida Butsu.\"",
           before: "法然は、「南無阿弥陀仏」という六文字",
-          after: "唱えれば、誰でも救われると教えました。",
-          options: ["さえ", "しか", "でも", "まで"],
+          after: "言えば、誰でも助けてもらえると教えました。",
+          options: ["さえ", "しか", "より", "まで"],
           answer: 0,
           grammarKey: "tobira-5-6",
           explanation: "「N さえ V-ば」で「それだけすれば十分」。後ろの「〜ば」とセットで使う。",
@@ -3392,98 +3153,114 @@ export const ARTICLES: Article[] = [
           translation: "In 2022 it was even made into an anime.",
           before: "2022年にはアニメ",
           after: "もされました。",
-          options: ["的", "化", "風", "性"],
-          answer: 1,
+          options: ["的", "性", "風", "化"],
+          answer: 3,
           grammarKey: "tobira-5-8",
           explanation: "「N＋化（する）」で「N の形になる」。「ドラマ化」「映画化」も同じ。",
         },
       ],
       particle: [
         {
-          text: "鎌倉は三方［を］山に、一方［を］海［に］囲まれていて、敵［が］入りにくい土地でした。",
+          text: "鎌倉は山［と］海［に］囲まれていて、敵［が］入りにくい町です。",
           translation:
-            "Kamakura is surrounded by mountains on three sides and the sea on the other, which made it hard for enemies to get in.",
-          explanation:
-            "「A を B に囲まれる」で「A の部分が B に囲まれている」。「〜にくい」の前の主語は「が」。",
+            "Kamakura is surrounded by mountains and the sea, so it's a hard town for enemies to get into.",
+          explanation: "「A と B」で二つを並べる。「B に囲まれる」。「〜にくい」の前の主語は「が」。",
         },
         {
-          text: "頼朝［が］政治の場所［に］選んだのは、京都ではなく関東［の］鎌倉です。",
+          text: "ところが、頼朝［が］亡くなった後、政治［を］動かしていたのは、頼朝［の］妻の家族である北条氏［の］方でした。",
           translation:
-            "The place Yoritomo chose as his seat of government wasn't Kyoto, but Kamakura in the Kantō region.",
+            "However, after Yoritomo died, the ones running the government were the Hōjō — the family of Yoritomo's wife.",
           explanation:
-            "「〜のは」の中の主語は「は」ではなく「が」。「X を Y に選ぶ」で「X を Y として選ぶ」。",
+            "「〜た後」の中の主語は「が」。「政治を動かす」。「S のは X の方だ」の「の方」。",
         },
         {
-          text: "将軍［は］武士［に］土地［を］与え、武士は戦い［が］起きた場合、命をかけて将軍のために戦いました。",
-          translation:
-            "The shogun granted land to the samurai, and when war broke out, the samurai fought for the shogun, risking their lives.",
-          explanation:
-            "「A は B に C を与える」が基本の形。「〜場合」の中の主語は「が」。",
+          text: "1274年と1281年［に］は、モンゴルの軍隊［が］日本［を］攻撃しました。",
+          translation: "In 1274 and 1281, the Mongol army attacked Japan.",
+          explanation: "年には「に」。「〜を攻撃する」。",
         },
         {
-          text: "1232年［に］は、武士の社会の習慣［を］もとにして、武士のための初めての法律「御成敗式目」［が］作られました。",
+          text: "特に二回目は、大きな台風［で］多くの船［が］沈み、人々はこの風［を］「神風」と呼びました。",
           translation:
-            "In 1232, based on the customs of samurai society, the first law code for samurai was created.",
-          explanation:
-            "年号には「に」。「〜をもとにして」は決まった形。受け身「作られる」の主語は「が」。",
+            "The second time especially, a big typhoon sank many of the ships, and people called this wind kamikaze.",
+          explanation: "原因は「で」（台風で沈む）。「A を B と呼ぶ」。",
         },
         {
-          text: "1274年、モンゴルの国である元の大軍［が］、九州［に］攻めてきました。",
-          translation: "In 1274, a huge army from Yuan, the Mongol state, invaded Kyushu.",
-          explanation: "攻める場所（目的地）は「に」。「九州を攻める」とも言えるが、「攻めてくる」は「に」が自然。",
+          text: "戦いには勝ちましたが、武士達は新しい土地をもらえず、幕府［に］不満［を］持つ人［が］増えていきました。",
+          translation:
+            "They won the war, but the samurai didn't get any new land, and more and more people became unhappy with the shogunate.",
+          explanation: "「〜に不満を持つ」で「〜をよくないと思う」。「増える」の主語は「が」。",
         },
         {
-          text: "外国［と］の戦いなので、敵［から］取れる土地［が］なかったからです。",
+          text: "今の鎌倉［に］は、高さ約11メートルの大仏［が］あり、500年以上前［から］、暑い日も寒い日も外に座っています。",
           translation:
-            "Because it was a war against a foreign country, there was no land to take from the enemy.",
-          explanation:
-            "「外国との戦い」＝「外国と戦うこと」。もらう・取る相手は「から」。「ない」の主語は「が」。",
+            "Kamakura today has a giant Buddha about 11 meters tall, which has been sitting outdoors for more than 500 years.",
+          explanation: "ものがある場所は「に」。始まりの時は「から」。",
         },
         {
-          text: "昔は建物の中［に］ありましたが、建物［が］嵐や地震［で］壊れたため、500年以上前［から］外［に］座っています。",
-          translation:
-            "It used to be inside a building, but since the building was destroyed by storms and earthquakes, it has been sitting outdoors for more than 500 years.",
-          explanation:
-            "存在の場所は「に」。原因は「で」（地震で壊れる）。始まりの時点は「から」。座る場所は「に」。",
+          text: "鎌倉には1年に1000万人以上［の］観光客［が］来て、1日あたり3万人近く［に］なります。",
+          translation: "More than 10 million tourists come to Kamakura a year — nearly 30,000 a day.",
+          explanation: "「1000万人以上の観光客」で数が名詞を説明する。「〜になる」は計算した結果。",
         },
         {
-          text: "800年前の武士達の時代［が］今［も］残る町［を］、友達［と］一緒に歩いてみるのも楽しいでしょう。",
+          text: "昔の建物や道［が］今［も］残る町［を］、友達［と］一緒に歩いてみるのも楽しいでしょう。",
           translation:
-            "It would be fun to walk with friends through a town where the samurai era of 800 years ago still lives on.",
-          explanation:
-            "「今も」＝今でも。歩く・通る場所は「を」（町を歩く）。「〜と一緒に」は決まった形。",
+            "It would be fun to walk with friends through a town where old buildings and streets still remain.",
+          explanation: "「今も」＝今でも。歩く場所は「を」（町を歩く）。「〜と一緒に」。",
+        },
+      ],
+      rearrange: [
+        {
+          translation: "The Kamakura period, unlike the eras before it, was the first time samurai became the center of government.",
+          chunks: ["鎌倉時代は", "それまでと", "違って", "武士が初めて", "政治の中心に", "なった時代です"],
+          grammarKey: "tobira-5-12",
+          hint: "「N と違って」を使って",
+        },
+        {
+          translation: "The ones running the government were the Hōjō.",
+          chunks: ["政治を", "動かしていた", "のは", "北条氏の", "方でした"],
+          grammarKey: "tobira-5-2",
+          hint: "「S のは X の方だ」を使って",
+        },
+        {
+          translation: "More than 10 million tourists come to Kamakura a year.",
+          chunks: ["鎌倉には", "1年に", "1000万人", "以上の", "観光客が", "来ます"],
+          grammarKey: "tobira-5-5",
+          hint: "「〜以上」を使って",
+        },
+        {
+          translation: "That comes to nearly 30,000 people a day.",
+          chunks: ["1日", "あたり", "3万人", "近くに", "なります"],
+          grammarKey: "tobira-5-1",
+          hint: "「数＋助数詞＋あたり」を使って",
         },
       ],
       reading: [
         {
-          question: "頼朝が政治の場所に鎌倉を選んだのは、どうしてだと考えられますか。",
-          answer:
-            "鎌倉は三方を山に、一方を海に囲まれていて、敵が入りにくい土地だったから。武士達にとって守りやすい場所だったに違いない。",
-          hints: ["三方", "山", "海", "囲まれる", "敵", "入りにくい", "守りやすい"],
+          question: "鎌倉は、どうして武士達にとって守りやすい場所だったのですか。",
+          answer: "山と海に囲まれていて、敵が入りにくい町だったから。",
+          hints: ["山", "海", "囲まれる", "敵", "入りにくい"],
         },
         {
-          question: "「御恩と奉公」とは、だれとだれの、どんな関係ですか。",
+          question: "頼朝が亡くなった後、政治を動かしていたのはだれですか。その人達は何をしましたか。",
           answer:
-            "将軍と武士の関係。将軍は武士に土地を与え（御恩）、武士は戦いが起きた場合、命をかけて将軍のために戦った（奉公）。",
-          hints: ["将軍", "武士", "関係", "土地", "与える", "場合", "命をかけて"],
+            "頼朝の妻の家族である北条氏。武士の習慣をもとにして、新しい法律を作った。",
+          hints: ["妻", "家族", "北条氏", "習慣", "もとにして", "法律"],
         },
         {
-          question: "元寇に勝ったのに、武士達が幕府に不満を持つようになったのはなぜですか。",
-          answer:
-            "外国との戦いだったので、敵から取れる土地がなく、武士達は新しい土地をもらえなかったから。命とお金をかけた投資のような戦いだったのに、それが返ってこなかった。",
-          hints: ["外国", "土地", "もらえない", "命", "お金", "投資", "返ってこない"],
+          question: "モンゴルとの戦いの後、幕府に不満を持つ人が増えたのはどうしてですか。",
+          answer: "戦いには勝ったが、武士達は新しい土地をもらえなかったから。",
+          hints: ["戦い", "勝つ", "新しい", "土地", "もらえない"],
         },
         {
           question: "法然はどんなことを教えましたか。",
-          answer:
-            "「南無阿弥陀仏」という六文字さえ唱えれば、誰でも救われると教えた。分かりやすい教えだった。",
-          hints: ["南無阿弥陀仏", "六文字", "さえ", "唱える", "誰でも", "救われる"],
+          answer: "「南無阿弥陀仏」という六文字さえ言えば、誰でも助けてもらえると教えた。",
+          hints: ["六文字", "さえ", "言えば", "誰でも", "助けてもらえる"],
         },
         {
-          question: "鎌倉時代から今に残っているものを、記事の中から三つ挙げてください。",
+          question: "今の鎌倉はどんな町ですか。記事の中から二つ挙げてください。",
           answer:
-            "①鎌倉の大仏（500年以上前から外に座っている）、②禅の考え方（茶道や庭など日本的な文化のもとになった）、③『平家物語』（今でも小説や漫画になり、アニメ化もされた）。",
-          hints: ["大仏", "禅", "茶道", "日本的", "平家物語", "小説", "アニメ化"],
+            "①高さ約11メートルの大仏が、500年以上前から外に座っている。②1年に1000万人以上の観光客が来る、昔の建物や道が今も残る町。",
+          hints: ["大仏", "座っている", "以上", "観光客", "建物", "残る"],
         },
       ],
     },
