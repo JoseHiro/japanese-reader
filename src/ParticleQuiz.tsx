@@ -49,8 +49,13 @@ function QuestionCard({
 }) {
   const { segments, answers } = parseParticleText(q.text);
   const choices = particleChoices(answers);
-  const [fills, setFills] = useState<(string | null)[]>(() => answers.map(() => null));
-  const [active, setActive] = useState(0);
+  // Fills and the selected blank live together so rapid taps always build
+  // on the latest state (each tap fills one blank, then moves on).
+  const [state, setState] = useState<{ fills: (string | null)[]; active: number }>(() => ({
+    fills: answers.map(() => null),
+    active: 0,
+  }));
+  const { fills, active } = state;
   const [checked, setChecked] = useState(false);
 
   const allFilled = fills.every((f) => f !== null);
@@ -58,20 +63,23 @@ function QuestionCard({
 
   function fill(p: string) {
     if (checked) return;
-    const next = fills.map((f, i) => (i === active ? p : f));
-    setFills(next);
-    // Move on to the next empty blank (wrapping), or stay if none are left.
-    const after = [...next.keys()].filter((i) => next[i] === null);
-    const nextEmpty = after.find((i) => i > active) ?? after[0];
-    if (nextEmpty !== undefined) setActive(nextEmpty);
+    setState(({ fills, active }) => {
+      const next = fills.map((f, i) => (i === active ? p : f));
+      // Move on to the next empty blank (wrapping), or stay if none are left.
+      const empty = [...next.keys()].filter((i) => next[i] === null);
+      const nextEmpty = empty.find((i) => i > active) ?? empty[0];
+      return { fills: next, active: nextEmpty ?? active };
+    });
+  }
+  function select(i: number) {
+    setState((s) => ({ ...s, active: i }));
   }
   function check() {
     setChecked(true);
     onCheck(allCorrect);
   }
   function reset() {
-    setFills(answers.map(() => null));
-    setActive(0);
+    setState({ fills: answers.map(() => null), active: 0 });
     setChecked(false);
   }
 
@@ -92,7 +100,7 @@ function QuestionCard({
                       (!checked && i === active ? " active" : "") +
                       (checked ? (fills[i] === answers[i] ? " correct" : " wrong") : "")
                     }
-                    onClick={() => !checked && setActive(i)}
+                    onClick={() => !checked && select(i)}
                     disabled={checked}
                     aria-label={`空欄 ${i + 1}`}
                   >

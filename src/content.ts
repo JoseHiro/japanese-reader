@@ -83,6 +83,7 @@ export interface GrammarChoiceQuestion {
   answer: number;
   /** Tobira grammar id, e.g. "tobira-5-10". */
   grammarKey?: string;
+  /** Shown after answering. Written in English (Japanese examples inline). */
   explanation?: string;
 }
 
@@ -95,6 +96,7 @@ export interface ParticleQuestion {
   text: string;
   /** Optional English meaning shown above the sentence. */
   translation?: string;
+  /** Shown after grading. Written in English (Japanese examples inline). */
   explanation?: string;
 }
 
@@ -3090,7 +3092,7 @@ export const ARTICLES: Article[] = [
           answer: 1,
           grammarKey: "tobira-5-3",
           explanation:
-            "「数＋助数詞＋は」で「少なくとも」。「一度しか」「一度も」は後ろに否定（〜ない）が必要。",
+            "Number + counter + は = \"at least.\" 一度は = \"at least once.\" しか and も need a negative verb (〜ない).",
         },
         {
           translation: "For the samurai, it must have been an easy place to defend.",
@@ -3099,7 +3101,8 @@ export const ARTICLES: Article[] = [
           options: ["に違いありません", "ようにしました", "わけにはいきません", "ことになりました"],
           answer: 0,
           grammarKey: "tobira-5-10",
-          explanation: "書いた人の強い確信を表す「〜に違いない」の丁寧形。",
+          explanation:
+            "〜に違いない = \"must be ~ / I'm sure ~.\" 〜に違いありません is the polite form.",
         },
         {
           translation:
@@ -3110,7 +3113,7 @@ export const ARTICLES: Article[] = [
           answer: 3,
           grammarKey: "tobira-5-9",
           explanation:
-            "頼朝が幕府を作ったのに、その後は北条氏が政治を動かした。予想と違う展開なので「ところが」。",
+            "ところが = \"however.\" Use it when something unexpected happens next.",
         },
         {
           translation: "Based on samurai customs, the Hōjō made a new set of laws.",
@@ -3119,7 +3122,8 @@ export const ARTICLES: Article[] = [
           options: ["をはじめ", "と違って", "をもとにして", "らしく"],
           answer: 2,
           grammarKey: "tobira-5-11",
-          explanation: "習慣を材料にして法律を作ったので「をもとにして」。",
+          explanation:
+            "N をもとにして = \"based on N.\"",
         },
         {
           translation: "And in 1333, the Kamakura shogunate finally came to an end.",
@@ -3128,7 +3132,8 @@ export const ARTICLES: Article[] = [
           options: ["たまに", "ついに", "まず", "できれば"],
           answer: 1,
           grammarKey: "tobira-5-7",
-          explanation: "不満を持つ人が増えていった結果なので「ついに」。",
+          explanation:
+            "ついに = \"finally,\" after a long time.",
         },
         {
           translation: "In this era, many monks, starting with Hōnen, spread new forms of Buddhism.",
@@ -3137,7 +3142,8 @@ export const ARTICLES: Article[] = [
           options: ["をもとに", "らしく", "をはじめ", "と違って"],
           answer: 2,
           grammarKey: "tobira-5-4",
-          explanation: "代表的な人（法然）を最初に言って、ほかの人も入れるので「をはじめ」。",
+          explanation:
+            "N をはじめ = \"starting with N.\" N is the main example, and there are others too.",
         },
         {
           translation:
@@ -3147,7 +3153,8 @@ export const ARTICLES: Article[] = [
           options: ["さえ", "しか", "より", "まで"],
           answer: 0,
           grammarKey: "tobira-5-6",
-          explanation: "「N さえ V-ば」で「それだけすれば十分」。後ろの「〜ば」とセットで使う。",
+          explanation:
+            "N さえ 〜ば = \"if you just do N, that is enough.\" Use it with the 〜ば form (言えば).",
         },
         {
           translation: "In 2022 it was even made into an anime.",
@@ -3156,7 +3163,8 @@ export const ARTICLES: Article[] = [
           options: ["的", "性", "風", "化"],
           answer: 3,
           grammarKey: "tobira-5-8",
-          explanation: "「N＋化（する）」で「N の形になる」。「ドラマ化」「映画化」も同じ。",
+          explanation:
+            "N + 化 = \"turn into N.\" アニメ化 = \"made into an anime.\" Also ドラマ化, 映画化.",
         },
       ],
       particle: [
@@ -3164,48 +3172,55 @@ export const ARTICLES: Article[] = [
           text: "鎌倉は山［と］海［に］囲まれていて、敵［が］入りにくい町です。",
           translation:
             "Kamakura is surrounded by mountains and the sea, so it's a hard town for enemies to get into.",
-          explanation: "「A と B」で二つを並べる。「B に囲まれる」。「〜にくい」の前の主語は「が」。",
+          explanation:
+            "と = \"and\": 山と海 = \"mountains and sea.\" 〜に囲まれる = \"surrounded by ~.\" The subject of 入りにくい takes が.",
         },
         {
           text: "ところが、頼朝［が］亡くなった後、政治［を］動かしていたのは、頼朝［の］妻の家族である北条氏［の］方でした。",
           translation:
             "However, after Yoritomo died, the ones running the government were the Hōjō — the family of Yoritomo's wife.",
           explanation:
-            "「〜た後」の中の主語は「が」。「政治を動かす」。「S のは X の方だ」の「の方」。",
+            "Inside 〜た後, the subject takes が. を marks the object (政治を動かす). の connects nouns (頼朝の妻, 北条氏の方).",
         },
         {
           text: "1274年と1281年［に］は、モンゴルの軍隊［が］日本［を］攻撃しました。",
           translation: "In 1274 and 1281, the Mongol army attacked Japan.",
-          explanation: "年には「に」。「〜を攻撃する」。",
+          explanation:
+            "Years take に. The army is the subject, so が. 攻撃する takes を.",
         },
         {
           text: "特に二回目は、大きな台風［で］多くの船［が］沈み、人々はこの風［を］「神風」と呼びました。",
           translation:
             "The second time especially, a big typhoon sank many of the ships, and people called this wind kamikaze.",
-          explanation: "原因は「で」（台風で沈む）。「A を B と呼ぶ」。",
+          explanation:
+            "で = the cause (\"because of the typhoon\"). The ships are the subject of 沈む, so が. A を B と呼ぶ = \"call A B.\"",
         },
         {
           text: "戦いには勝ちましたが、武士達は新しい土地をもらえず、幕府［に］不満［を］持つ人［が］増えていきました。",
           translation:
             "They won the war, but the samurai didn't get any new land, and more and more people became unhappy with the shogunate.",
-          explanation: "「〜に不満を持つ」で「〜をよくないと思う」。「増える」の主語は「が」。",
+          explanation:
+            "〜に不満を持つ = \"be unhappy with ~.\" The people are the subject of 増える, so が.",
         },
         {
           text: "今の鎌倉［に］は、高さ約11メートルの大仏［が］あり、500年以上前［から］、暑い日も寒い日も外に座っています。",
           translation:
             "Kamakura today has a giant Buddha about 11 meters tall, which has been sitting outdoors for more than 500 years.",
-          explanation: "ものがある場所は「に」。始まりの時は「から」。",
+          explanation:
+            "に = the place where something is. が = the thing that is there (ある). から = \"since\" (a starting time).",
         },
         {
           text: "鎌倉には1年に1000万人以上［の］観光客［が］来て、1日あたり3万人近く［に］なります。",
           translation: "More than 10 million tourists come to Kamakura a year — nearly 30,000 a day.",
-          explanation: "「1000万人以上の観光客」で数が名詞を説明する。「〜になる」は計算した結果。",
+          explanation:
+            "の connects a number to a noun. The tourists are the subject (観光客が来る), so が. 〜になる = \"comes to (a number).\"",
         },
         {
           text: "昔の建物や道［が］今［も］残る町［を］、友達［と］一緒に歩いてみるのも楽しいでしょう。",
           translation:
             "It would be fun to walk with friends through a town where old buildings and streets still remain.",
-          explanation: "「今も」＝今でも。歩く場所は「を」（町を歩く）。「〜と一緒に」。",
+          explanation:
+            "が marks the subject in 〜が残る町. 今も = \"still.\" を = the place you walk through (町を歩く). 〜と一緒に = \"together with ~.\"",
         },
       ],
       rearrange: [

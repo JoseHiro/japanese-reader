@@ -125,6 +125,8 @@
   1文に 2〜5 個。括弧を外した文が本文と一致すること（テストで確認）。
   選択肢は共通の助詞セット（は が を に で と へ も の から まで より）で、
   セット外の答え（`や` など）は自動で追加される。
+- どちらも `explanation`（文法の説明）は**簡単な英語**で、1〜2文に短く書く。日本語の例文・文型は
+  そのまま混ぜてよい（ふりがなが付く）。単語クイズの解説は日本語のまま。
 
 ```ts
 grammarChoice: [{
@@ -134,12 +136,12 @@ grammarChoice: [{
   options: ["に違いありません", "ようにしました", "わけにはいきません", "ことになりました"],
   answer: 0,
   grammarKey: "tobira-5-10",
-  explanation: "書き手の強い確信を表す「〜に違いない」の丁寧形。",
+  explanation: "〜に違いない (polite: 〜に違いありません) shows strong certainty: \"must be ~\".",
 }],
 particle: [{
   text: "外国［と］の戦いなので、敵［から］取れる土地［が］なかったからです。",
   translation: "Because it was a war against a foreign country, …",
-  explanation: "もらう・取る相手は「から」。",
+  explanation: "から marks who you get or take something from.",
 }],
 ```
 
