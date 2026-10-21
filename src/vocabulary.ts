@@ -124,6 +124,26 @@ export const ARTEM_VOCAB: VocabItem[] = [
   { word: "場合", reading: "ばあい", meaningEn: "case; occasion; situation", pos: "名詞", note: "「〜の場合」で「〜の時／〜の状況では」。", month: "2026-10" },
   { word: "達", reading: "たち", meaningEn: "plural suffix (people)", pos: "接尾辞", note: "「私たち」「子供たち」「選手達」など人を表す名詞について複数を作る。", month: "2026-10" },
   { word: "意味", reading: "いみ", meaningEn: "meaning; significance", pos: "名詞・する動詞", note: "「〜という意味」「〜を意味する」。", month: "2026-10" },
+
+  // --- Late-October additions (鎌倉時代 article). Words already in the pool
+  // from Artem's list (残る, 呼ぶ, 達, 場合, 僕, 違う, 速い, 意味) aren't repeated.
+  { word: "暑い", reading: "あつい", meaningEn: "hot (weather)", pos: "形容詞", note: "気温に使う。物の温度は「熱い」。", month: "2026-10" },
+  { word: "文字", reading: "もじ", meaningEn: "letter; character", pos: "名詞", month: "2026-10" },
+  { word: "関係", reading: "かんけい", meaningEn: "relationship; connection", pos: "名詞・する動詞", month: "2026-10" },
+  { word: "覚える", reading: "おぼえる", meaningEn: "to memorize; to remember", pos: "動詞（一段）", month: "2026-10" },
+  { word: "投資", reading: "とうし", meaningEn: "investment", pos: "名詞・する動詞", month: "2026-10" },
+  { word: "入る", reading: "はいる", meaningEn: "to enter; to go in", pos: "動詞（五段）", month: "2026-10" },
+  { word: "多い", reading: "おおい", meaningEn: "many; numerous", pos: "形容詞", month: "2026-10" },
+  { word: "座る", reading: "すわる", meaningEn: "to sit", pos: "動詞（五段）", month: "2026-10" },
+  { word: "注文", reading: "ちゅうもん", meaningEn: "order (food, goods)", pos: "名詞・する動詞", month: "2026-10" },
+  { word: "楽しい", reading: "たのしい", meaningEn: "fun; enjoyable", pos: "形容詞", month: "2026-10" },
+  { word: "動く", reading: "うごく", meaningEn: "to move; to operate", pos: "動詞（五段）", note: "他動詞は「動かす」（例：政治を動かす）。", month: "2026-10" },
+  { word: "最後", reading: "さいご", meaningEn: "the last; the end", pos: "名詞", month: "2026-10" },
+  { word: "小説", reading: "しょうせつ", meaningEn: "novel; fiction", pos: "名詞", month: "2026-10" },
+  { word: "国際", reading: "こくさい", meaningEn: "international", pos: "名詞", note: "「国際的」「国際関係」のように複合語で使うことが多い。", month: "2026-10" },
+  { word: "他に", reading: "ほかに", meaningEn: "besides; in addition; other than that", pos: "副詞", month: "2026-10" },
+  { word: "日本的", reading: "にほんてき", meaningEn: "typically Japanese; Japanese-style", pos: "形容動詞", note: "「N＋的」で「Nらしい・Nのような」。とびら L5-14。", month: "2026-10", tobiraLesson: 5 },
+  { word: "一緒", reading: "いっしょ", meaningEn: "together; with", pos: "名詞", note: "「〜と一緒に」。", month: "2026-10" },
 ];
 
 const POOLS: Record<string, VocabItem[]> = {
