@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import type { GrammarChoiceQuestion } from "./content";
+import { Choice, Choices } from "./shared/Choice";
 import { Furigana } from "./shared/Furigana";
 import { GrammarPanel, GrammarToggle } from "./shared/GrammarNote";
 import { grammarByKey } from "./tobira";
@@ -50,18 +51,20 @@ function QuestionCard({
           </p>
         </div>
       </div>
-      <div className="opts">
-        {q.options.map((opt, oi) => {
-          let cls = "opt";
-          if (answered && oi === q.answer) cls += " correct";
-          else if (answered && oi === picked) cls += " wrong";
-          return (
-            <button key={oi} className={cls} disabled={answered} onClick={() => pick(oi)}>
-              <Furigana text={opt} show={showFurigana} />
-            </button>
-          );
-        })}
-      </div>
+      <Choices>
+        {q.options.map((opt, oi) => (
+          <Choice
+            key={oi}
+            state={
+              answered && oi === q.answer ? "correct" : answered && oi === picked ? "wrong" : undefined
+            }
+            disabled={answered}
+            onClick={() => pick(oi)}
+          >
+            <Furigana text={opt} show={showFurigana} />
+          </Choice>
+        ))}
+      </Choices>
       {answered && q.explanation && (
         <p className="explain">
           <Furigana text={q.explanation} show={showFurigana} />

@@ -219,7 +219,7 @@ function DrillCard({
       <RuleChips rules={blank.rules} />
 
       <div className="pr-blank-controls">
-        <button className="pr-reveal-sm" onClick={onToggle}>
+        <button className="reveal-btn" onClick={onToggle}>
           {revealed ? "解答を隠す" : "解答を表示"}
         </button>
       </div>
@@ -285,7 +285,7 @@ function ChallengeCard({
       )}
       <RuleChips rules={challenge.rules} />
       <div className="pr-blank-controls">
-        <button className="pr-reveal-sm" onClick={() => setRevealed((v) => !v)}>
+        <button className="reveal-btn" onClick={() => setRevealed((v) => !v)}>
           {revealed ? "解答例を隠す" : "解答例を表示"}
         </button>
       </div>

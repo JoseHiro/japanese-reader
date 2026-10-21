@@ -1,7 +1,8 @@
 import { useMemo, useRef, useState } from "react";
 import type { RearrangeQuestion } from "./content";
+import { Choice, Choices } from "./shared/Choice";
 import { Furigana } from "./shared/Furigana";
-import { GrammarPanel, GrammarToggle } from "./shared/GrammarNote";
+import { GrammarHint } from "./shared/GrammarNote";
 import { grammarByKey } from "./tobira";
 
 // Sentence-rearrangement quiz. For each question, chunks are stored in
@@ -54,7 +55,6 @@ function QuestionCard({
   );
   // `picked` holds the original chunk indices in the order the learner picked them.
   const [picked, setPicked] = useState<number[]>([]);
-  const [showGrammar, setShowGrammar] = useState(false);
   const firedRef = useRef(false);
 
   const remaining = shuffledIdx.filter((i) => !picked.includes(i));
@@ -88,42 +88,42 @@ function QuestionCard({
         <span className="q-num">{number}</span>
         <p className="rq-en">{q.translation}</p>
       </div>
-      {q.hint && <p className="rq-hint">💡 {q.hint}</p>}
+      {/* Hovering (or tapping) the hint shows the Tobira explanation. Questions
+          without an authored hint fall back to the pattern's title. */}
+      {(q.hint || grammar) && (
+        <div className="rq-hint">
+          {grammar ? (
+            <GrammarHint grammar={grammar}>💡 {q.hint ?? grammar.title}</GrammarHint>
+          ) : (
+            <>💡 {q.hint}</>
+          )}
+        </div>
+      )}
 
       <div className="rq-answer" aria-label="あなたの解答">
         {picked.length === 0 && (
           <span className="rq-answer-empty">下から順番にチップを選んでください</span>
         )}
-        {picked.map((origIdx, pos) => {
-          const isCorrect = origIdx === pos;
-          const cls =
-            "rq-chip rq-picked" +
-            (complete ? (isCorrect ? " correct" : " wrong") : "");
-          return (
-            <button
-              key={`${origIdx}-${pos}`}
-              className={cls}
-              onClick={() => unpick(origIdx)}
-              disabled={complete}
-              title={complete ? "" : "クリックで戻す"}
-            >
-              <Furigana text={q.chunks[origIdx]} show={showFurigana} />
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="rq-pool" aria-label="選択肢">
-        {remaining.map((origIdx) => (
-          <button
-            key={origIdx}
-            className="rq-chip"
-            onClick={() => pick(origIdx)}
+        {picked.map((origIdx, pos) => (
+          <Choice
+            key={`${origIdx}-${pos}`}
+            state={complete ? (origIdx === pos ? "correct" : "wrong") : "placed"}
+            onClick={() => unpick(origIdx)}
+            disabled={complete}
+            title={complete ? "" : "クリックで戻す"}
           >
             <Furigana text={q.chunks[origIdx]} show={showFurigana} />
-          </button>
+          </Choice>
         ))}
       </div>
+
+      <Choices label="選択肢">
+        {remaining.map((origIdx) => (
+          <Choice key={origIdx} onClick={() => pick(origIdx)}>
+            <Furigana text={q.chunks[origIdx]} show={showFurigana} />
+          </Choice>
+        ))}
+      </Choices>
 
       {complete && (
         <div className="rq-result">
@@ -147,16 +147,7 @@ function QuestionCard({
             もう一度
           </button>
         )}
-        {grammar && (
-          <GrammarToggle
-            grammar={grammar}
-            open={showGrammar}
-            onToggle={() => setShowGrammar((v) => !v)}
-          />
-        )}
       </div>
-
-      {grammar && showGrammar && <GrammarPanel grammar={grammar} />}
     </div>
   );
 }

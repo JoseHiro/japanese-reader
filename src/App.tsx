@@ -37,6 +37,7 @@ import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
 import { GrammarQuiz } from "./GrammarQuiz";
 import { ReaderSkeleton } from "./shared/ReaderSkeleton";
+import { Choice, Choices } from "./shared/Choice";
 import { GrammarChoiceQuiz } from "./GrammarChoiceQuiz";
 import { ParticleQuiz } from "./ParticleQuiz";
 import { Flashcards } from "./Flashcards";
@@ -868,8 +869,7 @@ export default function App() {
           <div className="brand">
             <span className="logo"><img src={`${import.meta.env.BASE_URL}logo.png`} alt="" /></span>
             <div>
-              <h1>Yomu</h1>
-              <p>日本語リーダー</p>
+              <h1>Nihongo Reader</h1>
             </div>
           </div>
           <div className="header-tools">
@@ -1280,11 +1280,14 @@ export default function App() {
                             <Furigana text={q.after} show={showFurigana} />
                           </p>
                         </div>
-                        <div className="opts">
+                        <Choices>
                           {q.options.map((opt, oi) => {
-                            let cls = "opt";
-                            if (answered && oi === q.answer) cls += " correct";
-                            else if (answered && oi === picked) cls += " wrong";
+                            const state =
+                              answered && oi === q.answer
+                                ? "correct"
+                                : answered && oi === picked
+                                  ? "wrong"
+                                  : undefined;
                             // Review mode lets learners keep retrying until
                             // they land on the correct answer; normal mode
                             // locks the choice after the first pick.
@@ -1292,9 +1295,9 @@ export default function App() {
                               ? answered && picked === q.answer
                               : answered;
                             return (
-                              <button
+                              <Choice
                                 key={oi}
-                                className={cls}
+                                state={state}
                                 disabled={locked}
                                 onClick={() => {
                                   setClozePick((p) => ({ ...p, [qi]: oi }));
@@ -1302,10 +1305,10 @@ export default function App() {
                                 }}
                               >
                                 <Furigana text={opt} show={showFurigana} />
-                              </button>
+                              </Choice>
                             );
                           })}
-                        </div>
+                        </Choices>
                         {answered && q.explanation && (
                           <p className="explain">
                             <Furigana text={q.explanation} show={showFurigana} />

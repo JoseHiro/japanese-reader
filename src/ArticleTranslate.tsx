@@ -40,7 +40,7 @@ function TranslateCard({
       </div>
       <div className="tr-controls">
         <button
-          className="tr-reveal"
+          className="reveal-btn"
           onClick={() => setRevealed((v) => !v)}
         >
           {revealed ? "日本語を隠す" : "日本語を表示"}

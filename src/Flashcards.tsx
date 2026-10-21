@@ -145,7 +145,7 @@ export function Flashcards({
           {!revealed ? (
             <div className="fc-controls">
               <button
-                className="fc-reveal"
+                className="reveal-btn reveal-btn-lg"
                 onClick={() => setRevealed(true)}
               >
                 日本語を表示

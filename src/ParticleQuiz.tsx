@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import type { ParticleQuestion } from "./content";
+import { Choice, Choices } from "./shared/Choice";
 import { Furigana } from "./shared/Furigana";
 
 // 助詞 quiz. Each sentence has several particles blanked out. The learner
@@ -113,13 +114,13 @@ function QuestionCard({
         </div>
       </div>
 
-      <div className="rq-pool" aria-label="助詞">
+      <Choices label="助詞">
         {choices.map((p) => (
-          <button key={p} className="rq-chip pq-chip" onClick={() => fill(p)} disabled={checked}>
+          <Choice key={p} className="pq-chip" onClick={() => fill(p)} disabled={checked}>
             {p}
-          </button>
+          </Choice>
         ))}
-      </div>
+      </Choices>
 
       {checked && (
         <div className="rq-result">
