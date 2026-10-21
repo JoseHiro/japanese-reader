@@ -18,7 +18,7 @@ export function SignIn({ onSignIn }: { onSignIn: (user: User) => void }) {
     <div className="signin">
       <div className="signin-card">
         <div className="signin-brand">
-          <span className="logo">読</span>
+          <span className="logo"><img src={`${import.meta.env.BASE_URL}logo.png`} alt="" /></span>
           <div>
             <h1>Yomu</h1>
             <p>日本語リーダー</p>

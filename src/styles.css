@@ -16,6 +16,8 @@
   --quiz-wrong-border: #e24b4a;
   --quiz-wrong-text: #b02a2a;
   --shadow-popup: 0 8px 28px rgba(0, 0, 0, 0.16);
+  --sk-base: #e2e2db;
+  --sk-highlight: #efefe9;
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
     "Segoe UI", Roboto, sans-serif;
 }
@@ -37,6 +39,8 @@
   --quiz-wrong-border: #f16766;
   --quiz-wrong-text: #ff9d9c;
   --shadow-popup: 0 8px 28px rgba(0, 0, 0, 0.55);
+  --sk-base: #272c35;
+  --sk-highlight: #353c48;
 }
 
 * { box-sizing: border-box; }
@@ -70,7 +74,7 @@ body {
   justify-content: space-between;
   gap: 16px;
 }
-.site-header .logo { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.site-header .logo { background: #fff; }
 .site-header h1 { margin: 0; font-size: 20px; font-weight: 600; color: #fff; }
 .site-header .brand p { margin: 0; font-size: 13px; color: rgba(255, 255, 255, 0.82); }
 .site-header .toggle { color: rgba(255, 255, 255, 0.95); }
@@ -715,12 +719,13 @@ body {
 
 .logo {
   width: 40px; height: 40px;
+  flex: none;
   display: grid; place-items: center;
-  background: var(--accent-bg);
-  color: var(--accent);
-  border-radius: 10px;
-  font-size: 20px; font-weight: 600;
+  background: #fff;
+  border-radius: 11px;
+  box-shadow: 0 1px 2px rgba(15, 17, 21, 0.12), 0 2px 8px rgba(15, 17, 21, 0.08);
 }
+.logo img { width: 26px; height: 26px; display: block; }
 
 .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
 .header p { margin: 0; font-size: 13px; color: var(--text-muted); }
@@ -822,6 +827,61 @@ body {
 
 .para {
   margin: 0 0 1.4em;
+}
+
+/* Reader loading skeleton: paragraph-shaped bars on the same rhythm as the
+   furigana'd text, with a highlight sweeping across them. Fades in after a
+   short delay so fast loads don't flash. */
+.reader-skeleton {
+  animation: sk-appear .3s ease-out .15s both;
+}
+.sk-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+}
+.sk-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: sk-pulse 1.2s ease-in-out infinite;
+}
+.sk-para { margin: 0 0 1.4em; }
+.sk-line {
+  height: .78em;
+  margin: 0 0 calc(2.7em - .78em);
+  border-radius: 999px;
+  background: linear-gradient(
+    100deg,
+    var(--sk-base) 30%,
+    var(--sk-highlight) 50%,
+    var(--sk-base) 70%
+  );
+  background-size: 300% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
+}
+.sk-para:last-child .sk-line:last-child { margin-bottom: 0; }
+@keyframes sk-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
+}
+@keyframes sk-pulse {
+  0%, 100% { opacity: .35; transform: scale(.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@keyframes sk-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reader-skeleton, .sk-line, .sk-dot { animation: none; }
+  .sk-line { background: var(--sk-base); }
 }
 .para:last-child { margin-bottom: 0; }
 .para.heading {

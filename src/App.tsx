@@ -36,6 +36,7 @@ import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
 import { GrammarQuiz } from "./GrammarQuiz";
+import { ReaderSkeleton } from "./shared/ReaderSkeleton";
 import { GrammarChoiceQuiz } from "./GrammarChoiceQuiz";
 import { ParticleQuiz } from "./ParticleQuiz";
 import { Flashcards } from "./Flashcards";
@@ -865,7 +866,7 @@ export default function App() {
       <header className="site-header">
         <div className="header-inner">
           <div className="brand">
-            <span className="logo">読</span>
+            <span className="logo"><img src={`${import.meta.env.BASE_URL}logo.png`} alt="" /></span>
             <div>
               <h1>Yomu</h1>
               <p>日本語リーダー</p>
@@ -1045,7 +1046,7 @@ export default function App() {
 
       {activeTab === "article" && (
       <div className="reader" ref={readerRef}>
-        {paragraphs.map((sents, pi) => {
+        {!loading && paragraphs.map((sents, pi) => {
           const paraText = sents.map((s) => s.text).join("");
           const isHeading = headings.has(paraText);
           const speaker = sents[0]?.speaker;
@@ -1116,7 +1117,7 @@ export default function App() {
             </p>
           );
         })}
-        {loading && <p className="hint">解析中…</p>}
+        {loading && <ReaderSkeleton />}
         {paragraphs.length === 0 && !loading && (
           <p className="hint">左の記事を選ぶと、単語ごとに解析されます。</p>
         )}
