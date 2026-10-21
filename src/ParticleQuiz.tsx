@@ -152,7 +152,7 @@ function QuestionCard({
 
       <div className="rq-actions">
         {!checked && (
-          <button className="rq-btn pq-check" onClick={check} disabled={!allFilled}>
+          <button className="reveal-btn" onClick={check} disabled={!allFilled}>
             答え合わせ
           </button>
         )}

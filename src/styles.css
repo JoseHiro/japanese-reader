@@ -1148,13 +1148,15 @@ ruby rt {
   -webkit-tap-highlight-color: transparent;
   transition: filter .15s ease, transform .08s ease;
 }
-.reveal-btn:hover { filter: brightness(1.08); }
-.reveal-btn:active { transform: translateY(1px) scale(.98); }
+.reveal-btn:hover:not(:disabled) { filter: brightness(1.08); }
+.reveal-btn:active:not(:disabled) { transform: translateY(1px) scale(.98); }
+/* e.g. 答え合わせ before every blank is filled */
+.reveal-btn:disabled { opacity: .4; cursor: default; }
 .reveal-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .reveal-btn-lg { padding: 10px 22px; font-size: 15px; border-radius: 10px; }
 @media (prefers-reduced-motion: reduce) {
   .reveal-btn { transition: none; }
-  .reveal-btn:active { transform: none; }
+  .reveal-btn:active:not(:disabled) { transform: none; }
 }
 .quiz-actions {
   display: flex;
@@ -1854,8 +1856,6 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
   color: var(--quiz-wrong-text);
 }
 .pq-chip { min-width: 3em; }
-.pq-check:not(:disabled) { color: var(--accent); border-color: var(--accent); }
-.pq-check:disabled { opacity: .5; cursor: default; }
 .pq-answer {
   color: var(--quiz-correct-text);
   font-weight: 600;
