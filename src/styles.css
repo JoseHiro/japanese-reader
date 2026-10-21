@@ -1756,6 +1756,47 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
 .rq-grammar-form { margin: 0 0 8px; font-size: 13px; }
 .rq-grammar-expl { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text); }
 
+/* ---------- 助詞クイズ (particle fill-in) ---------- */
+.pq-sentence { line-height: 2.3; }
+.pq-blank {
+  display: inline-block;
+  min-width: 2.4em;
+  margin: 0 3px;
+  padding: 0 6px;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px dashed var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  vertical-align: baseline;
+}
+.pq-blank.active { border: 2px solid var(--accent); background: var(--accent-bg); }
+.pq-blank:disabled { cursor: default; }
+.pq-blank.correct {
+  border-style: solid;
+  background: var(--quiz-correct-bg);
+  border-color: var(--quiz-correct-border);
+  color: var(--quiz-correct-text);
+}
+.pq-blank.wrong {
+  border-style: solid;
+  background: var(--quiz-wrong-bg);
+  border-color: var(--quiz-wrong-border);
+  color: var(--quiz-wrong-text);
+}
+.pq-chip { min-width: 3em; }
+.pq-check:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.pq-check:disabled { opacity: .5; cursor: default; }
+.pq-answer {
+  color: var(--quiz-correct-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ---------- 単語練習 (flashcards) ---------- */
 .fc-root { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
 .fc-toolbar {

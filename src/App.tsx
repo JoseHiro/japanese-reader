@@ -28,12 +28,16 @@ import {
   IconGrammarQuiz,
   IconFlashcards,
   IconGrammarBook,
+  IconGrammarChoice,
+  IconParticle,
 } from "./shared/icons";
 import { findUser, articlesForUser, lessonsForUser, vocabForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
 import { GrammarQuiz } from "./GrammarQuiz";
+import { GrammarChoiceQuiz } from "./GrammarChoiceQuiz";
+import { ParticleQuiz } from "./ParticleQuiz";
 import { Flashcards } from "./Flashcards";
 import { GrammarReference } from "./GrammarReference";
 import { parseHash, formatArticleHash, formatLessonHash } from "./route";
@@ -141,6 +145,16 @@ const GRAMMAR_QUIZ_TAB: TabDef = {
   label: "文法クイズ",
   icon: <IconGrammarQuiz />,
 };
+const GRAMMAR_CHOICE_TAB: TabDef = {
+  id: "grammarChoice",
+  label: "文法選択",
+  icon: <IconGrammarChoice />,
+};
+const PARTICLE_QUIZ_TAB: TabDef = {
+  id: "particleQuiz",
+  label: "助詞クイズ",
+  icon: <IconParticle />,
+};
 const FLASHCARDS_TAB: TabDef = {
   id: "flashcards",
   label: "単語練習",
@@ -178,7 +192,9 @@ function tabGroupsForUser(u: User): TabGroup[] {
   const practice: TabDef[] = [
     BASE_TABS[3], // 単語クイズ
   ];
-  if (u.tobiraCurrent !== undefined) practice.push(GRAMMAR_QUIZ_TAB);
+  if (u.tobiraCurrent !== undefined) {
+    practice.push(GRAMMAR_CHOICE_TAB, PARTICLE_QUIZ_TAB, GRAMMAR_QUIZ_TAB);
+  }
   practice.push(BASE_TABS[4]); // 読解クイズ
   practice.push(BASE_TABS[2]); // 翻訳練習
   if (u.vocabPoolId) practice.push(FLASHCARDS_TAB);
@@ -211,10 +227,32 @@ function userDoneKey(userId: string): string {
 function legacyVocabDoneKey(userId: string, articleId: string): string {
   return `yomu-quiz-done:${userId}:${articleId}:vocab`;
 }
+// Objective quizzes whose wrong answers are remembered for 間違い復習.
+type QuizKind = "cloze" | "rearrange" | "grammarChoice" | "particle";
+const QUIZ_KINDS: QuizKind[] = ["cloze", "rearrange", "grammarChoice", "particle"];
+
+function emptyMissed(): Record<QuizKind, Set<number>> {
+  return { cloze: new Set(), rearrange: new Set(), grammarChoice: new Set(), particle: new Set() };
+}
+const NO_REVIEW: Record<QuizKind, boolean> = {
+  cloze: false,
+  rearrange: false,
+  grammarChoice: false,
+  particle: false,
+};
+
+// Tabs rendered by a self-contained quiz component, with the quiz kind
+// that tracks their misses.
+const COMPONENT_QUIZ_TABS: Record<string, QuizKind> = {
+  grammarQuiz: "rearrange",
+  grammarChoice: "grammarChoice",
+  particleQuiz: "particle",
+};
+
 function missedKey(
   userId: string,
   articleId: string,
-  kind: "cloze" | "rearrange",
+  kind: QuizKind,
 ): string {
   return `yomu-quiz-missed:${userId}:${articleId}:${kind}`;
 }
@@ -311,11 +349,13 @@ export default function App() {
   const [userTabDone, setUserTabDone] = useState<Set<string>>(new Set());
   // Per-(user, article) indices of missed questions in the objective
   // quizzes, so the learner can review just what they got wrong.
-  const [clozeMissed, setClozeMissed] = useState<Set<number>>(new Set());
-  const [rearrangeMissed, setRearrangeMissed] = useState<Set<number>>(new Set());
+  const [missed, setMissed] = useState<Record<QuizKind, Set<number>>>(emptyMissed);
   // Session-only: are we currently showing just the missed set?
-  const [clozeReview, setClozeReview] = useState(false);
-  const [rearrangeReview, setRearrangeReview] = useState(false);
+  const [review, setReview] = useState<Record<QuizKind, boolean>>(NO_REVIEW);
+  const clozeMissed = missed.cloze;
+  const clozeReview = review.cloze;
+  const setReviewFor = (kind: QuizKind, on: boolean) =>
+    setReview((r) => (r[kind] === on ? r : { ...r, [kind]: on }));
 
   useEffect(() => {
     localStorage.setItem(
@@ -361,13 +401,11 @@ export default function App() {
   // drop any lingering "review-only" mode from the previous article.
   useEffect(() => {
     if (!user || !article) {
-      setClozeMissed(new Set());
-      setRearrangeMissed(new Set());
-      setClozeReview(false);
-      setRearrangeReview(false);
+      setMissed(emptyMissed());
+      setReview(NO_REVIEW);
       return;
     }
-    const load = (kind: "cloze" | "rearrange"): Set<number> => {
+    const load = (kind: QuizKind): Set<number> => {
       try {
         const raw = localStorage.getItem(missedKey(user.id, article.id, kind));
         return new Set(raw ? (JSON.parse(raw) as number[]) : []);
@@ -375,30 +413,30 @@ export default function App() {
         return new Set();
       }
     };
-    setClozeMissed(load("cloze"));
-    setRearrangeMissed(load("rearrange"));
-    setClozeReview(false);
-    setRearrangeReview(false);
+    const loaded = emptyMissed();
+    for (const kind of QUIZ_KINDS) loaded[kind] = load(kind);
+    setMissed(loaded);
+    setReview(NO_REVIEW);
   }, [user?.id, article?.id]);
 
   function updateMissed(
-    kind: "cloze" | "rearrange",
+    kind: QuizKind,
     index: number,
     correct: boolean,
   ) {
     if (!user || !article) return;
-    const setter = kind === "cloze" ? setClozeMissed : setRearrangeMissed;
     const storageKey = missedKey(user.id, article.id, kind);
-    setter((prev) => {
+    setMissed((all) => {
+      const prev = all[kind];
       const has = prev.has(index);
-      if (correct === !has) return prev; // no change needed
+      if (correct === !has) return all; // no change needed
       const next = new Set(prev);
       if (correct) next.delete(index);
       else next.add(index);
       try {
         localStorage.setItem(storageKey, JSON.stringify([...next]));
       } catch {}
-      return next;
+      return { ...all, [kind]: next };
     });
   }
 
@@ -409,7 +447,7 @@ export default function App() {
       for (const idx of clozeMissed) delete next[idx];
       return next;
     });
-    setClozeReview(true);
+    setReviewFor("cloze", true);
   }
 
   function isTabDone(tabId: string): boolean {
@@ -984,23 +1022,24 @@ export default function App() {
                 <button
                   className={"review-btn review-btn-sm" + (clozeReview ? " on" : "")}
                   onClick={() =>
-                    clozeReview ? setClozeReview(false) : enterClozeReview()
+                    clozeReview ? setReviewFor("cloze", false) : enterClozeReview()
                   }
                 >
                   {clozeReview ? "全問に戻す" : `🔁 間違い ${clozeMissed.size} 問`}
                 </button>
               )}
-            {activeTab === "grammarQuiz" &&
-              (rearrangeMissed.size > 0 || rearrangeReview) && (
+            {(() => {
+              const kind = COMPONENT_QUIZ_TABS[activeTab];
+              if (!kind || (missed[kind].size === 0 && !review[kind])) return null;
+              return (
                 <button
-                  className={"review-btn review-btn-sm" + (rearrangeReview ? " on" : "")}
-                  onClick={() => setRearrangeReview((v) => !v)}
+                  className={"review-btn review-btn-sm" + (review[kind] ? " on" : "")}
+                  onClick={() => setReviewFor(kind, !review[kind])}
                 >
-                  {rearrangeReview
-                    ? "全問に戻す"
-                    : `🔁 間違い ${rearrangeMissed.size} 問`}
+                  {review[kind] ? "全問に戻す" : `🔁 間違い ${missed[kind].size} 問`}
                 </button>
-              )}
+              );
+            })()}
           </div>
         )}
 
@@ -1376,15 +1415,33 @@ export default function App() {
         />
       )}
 
-      {activeTab === "grammarQuiz" && (() => {
-        const allRearrange = article?.quiz?.rearrange ?? [];
-        const visibleIndices = rearrangeReview
-          ? allRearrange.map((_, i) => i).filter((i) => rearrangeMissed.has(i))
-          : allRearrange.map((_, i) => i);
-        const visible = visibleIndices.map((i) => allRearrange[i]);
+      {COMPONENT_QUIZ_TABS[activeTab] && (() => {
+        const kind = COMPONENT_QUIZ_TABS[activeTab];
+        const all =
+          kind === "rearrange"
+            ? article?.quiz?.rearrange ?? []
+            : kind === "grammarChoice"
+              ? article?.quiz?.grammarChoice ?? []
+              : article?.quiz?.particle ?? [];
+        const inReview = review[kind];
+        const visibleIndices = inReview
+          ? all.map((_, i) => i).filter((i) => missed[kind].has(i))
+          : all.map((_, i) => i);
+        // key change forces card state to reset on review toggle
+        const quizKey = `${activeTab}-${inReview ? "review" : "normal"}`;
+        const common = {
+          numbers: visibleIndices.map((i) => i + 1),
+          showFurigana,
+          onAllComplete: inReview ? undefined : () => markTabDone(activeTab, true),
+          onResult: (posIdx: number, correct: boolean) => {
+            const original = visibleIndices[posIdx];
+            if (original !== undefined) updateMissed(kind, original, correct);
+          },
+          badgeLabel: inReview ? "復習 (間違い直し)" : undefined,
+        };
         return (
           <section className="quiz">
-            {allRearrange.length > 0 && (
+            {all.length > 0 && (
               <div className="quiz-toolbar">
                 <button
                   className="ref-toggle-btn"
@@ -1395,29 +1452,27 @@ export default function App() {
                 </button>
               </div>
             )}
-            {rearrangeReview && visible.length === 0 ? (
+            {inReview && visibleIndices.length === 0 ? (
               <p className="hint review-empty">
                 🎉 復習すべき間違いはありません。「全問に戻す」で通常表示に切り替えられます。
               </p>
-            ) : (
+            ) : kind === "rearrange" ? (
               <GrammarQuiz
-                // key change forces card state to reset on review toggle
-                key={rearrangeReview ? "review" : "normal"}
-                questions={visible}
-                numbers={visibleIndices.map((i) => i + 1)}
-                showFurigana={showFurigana}
-                onAllComplete={
-                  rearrangeReview
-                    ? undefined
-                    : () => markTabDone("grammarQuiz", true)
-                }
-                onResult={(posIdx, correct) => {
-                  const original = visibleIndices[posIdx];
-                  if (original !== undefined) {
-                    updateMissed("rearrange", original, correct);
-                  }
-                }}
-                badgeLabel={rearrangeReview ? "復習 (間違い直し)" : undefined}
+                key={quizKey}
+                {...common}
+                questions={visibleIndices.map((i) => article!.quiz!.rearrange![i])}
+              />
+            ) : kind === "grammarChoice" ? (
+              <GrammarChoiceQuiz
+                key={quizKey}
+                {...common}
+                questions={visibleIndices.map((i) => article!.quiz!.grammarChoice![i])}
+              />
+            ) : (
+              <ParticleQuiz
+                key={quizKey}
+                {...common}
+                questions={visibleIndices.map((i) => article!.quiz!.particle![i])}
               />
             )}
           </section>
@@ -1522,6 +1577,16 @@ export default function App() {
                   <dd>Sentence-by-sentence translation practice.</dd>
                   <dt>単語クイズ</dt>
                   <dd>Fill-in-the-blank vocabulary quiz (4 choices).</dd>
+                  <dt>文法選択</dt>
+                  <dd>
+                    Read the English, then pick the grammar form that fills
+                    the blank in the Japanese sentence (4 choices).
+                  </dd>
+                  <dt>助詞クイズ</dt>
+                  <dd>
+                    Fill in the missing particles. Tap a blank, then a
+                    particle chip; press 答え合わせ when all are filled.
+                  </dd>
                   <dt>文法クイズ</dt>
                   <dd>
                     Sentence rearrangement. Pick chunks in order; expand

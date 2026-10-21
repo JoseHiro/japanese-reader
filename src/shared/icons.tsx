@@ -160,3 +160,24 @@ export function IconGrammarBook() {
     </svg>
   );
 }
+
+export function IconGrammarChoice() {
+  return (
+    <svg {...base}>
+      <rect x="3" y="4" width="18" height="4" rx="1" />
+      <circle cx="6" cy="14" r="1.6" />
+      <path d="M10 14h10" />
+      <circle cx="6" cy="19.5" r="1.6" />
+      <path d="M10 19.5h10" />
+    </svg>
+  );
+}
+
+export function IconParticle() {
+  return (
+    <svg {...base}>
+      <path d="M3 12h4M17 12h4" />
+      <rect x="9" y="8" width="6" height="8" rx="1.5" strokeDasharray="2 2" />
+    </svg>
+  );
+}

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ARTICLES } from "./content";
 import { grammarByKey } from "./tobira";
 import { ARTEM_VOCAB } from "./vocabulary";
+import { parseParticleText } from "./ParticleQuiz";
 
 describe("ARTICLES structural invariants", () => {
   it("has unique article ids", () => {
@@ -44,6 +45,28 @@ describe("ARTICLES structural invariants", () => {
           grammarByKey(q.grammarKey),
           `${a.id}#${qi} grammarKey=${q.grammarKey}`,
         ).toBeDefined();
+      }
+    }
+  });
+
+  it("grammarChoice questions have four options, a valid answer and a known grammarKey", () => {
+    for (const a of ARTICLES) {
+      for (const [qi, q] of (a.quiz?.grammarChoice ?? []).entries()) {
+        expect(q.options.length, `${a.id}#${qi}`).toBe(4);
+        expect(q.answer, `${a.id}#${qi}`).toBeGreaterThanOrEqual(0);
+        expect(q.answer, `${a.id}#${qi}`).toBeLessThan(q.options.length);
+        expect(q.translation.trim(), `${a.id}#${qi}`).toBeTruthy();
+        if (q.grammarKey) {
+          expect(grammarByKey(q.grammarKey), `${a.id}#${qi} ${q.grammarKey}`).toBeDefined();
+        }
+      }
+    }
+  });
+
+  it("particle questions have at least one blank", () => {
+    for (const a of ARTICLES) {
+      for (const [qi, q] of (a.quiz?.particle ?? []).entries()) {
+        expect(parseParticleText(q.text).answers.length, `${a.id}#${qi}`).toBeGreaterThan(0);
       }
     }
   });
@@ -125,5 +148,28 @@ describe("Marugame Seimen article", () => {
       );
     const missing = sentences.filter((s) => !(s in translations));
     expect(missing, `missing translations: ${missing.join(" | ")}`).toEqual([]);
+  });
+});
+
+describe("Kamakura article", () => {
+  const article = ARTICLES.find((a) => a.id === "kamakura-jidai")!;
+
+  it("has a translation for every sentence", () => {
+    const sentences = article.text
+      .split("\n")
+      .flatMap((line) => line.split(/(?<=。)/).filter((s) => s.includes("。")));
+    const missing = sentences.filter((s) => !(s in (article.translations ?? {})));
+    expect(missing).toEqual([]);
+  });
+
+  it("builds its grammarChoice and particle questions from article sentences", () => {
+    for (const q of article.quiz?.grammarChoice ?? []) {
+      const sentence = q.before + q.options[q.answer] + q.after;
+      expect(article.text, sentence).toContain(sentence);
+    }
+    for (const q of article.quiz?.particle ?? []) {
+      const sentence = q.text.replace(/［([^］]+)］/g, "$1");
+      expect(article.text, sentence).toContain(sentence);
+    }
   });
 });

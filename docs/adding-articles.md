@@ -113,6 +113,36 @@
 - `hints` は「模範解答に出てくる主要語」を並べる。読者が自力で書く
   ときの語彙ヒント。
 
+**文法選択 (`grammarChoice`) / 助詞穴埋め (`particle`) — とびら利用者（Artem）向け、各 8 問目安**
+
+`tobiraCurrent` が設定されたユーザーには「文法選択」「助詞クイズ」タブが出る。
+
+- 文法選択: 英訳を読んで、日本語文の空欄に入る文法形を 4 択で選ぶ。
+  `before + options[answer] + after` が本文の1文と一致するように作る
+  （テストで確認）。誤答は同じ課の別の文型を混ぜる。`grammarKey` を付けると
+  回答後に「📘 文法」ボタンでとびらの解説が出る。
+- 助詞穴埋め: 本文の1文の助詞を `［を］` のように全角角かっこで囲む。
+  1文に 2〜5 個。括弧を外した文が本文と一致すること（テストで確認）。
+  選択肢は共通の助詞セット（は が を に で と へ も の から まで より）で、
+  セット外の答え（`や` など）は自動で追加される。
+
+```ts
+grammarChoice: [{
+  translation: "For the samurai, it must have been an easy place to defend.",
+  before: "武士達にとって、守りやすい場所だった",
+  after: "。",
+  options: ["に違いありません", "ようにしました", "わけにはいきません", "ことになりました"],
+  answer: 0,
+  grammarKey: "tobira-5-10",
+  explanation: "書き手の強い確信を表す「〜に違いない」の丁寧形。",
+}],
+particle: [{
+  text: "外国［と］の戦いなので、敵［から］取れる土地［が］なかったからです。",
+  translation: "Because it was a war against a foreign country, …",
+  explanation: "もらう・取る相手は「から」。",
+}],
+```
+
 ## 7. ユーザーの本棚に追加
 
 `src/users.ts` の対象ユーザーの `articleIds` に新しい `id` を先頭に足す。

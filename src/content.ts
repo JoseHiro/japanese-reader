@@ -67,10 +67,43 @@ export interface RearrangeQuestion {
   hint?: string;
 }
 
+/**
+ * Grammar multiple-choice question: the learner reads the English meaning
+ * and picks the grammar form that fills the blank in the Japanese sentence.
+ */
+export interface GrammarChoiceQuestion {
+  /** English meaning of the whole sentence, shown as the prompt. */
+  translation: string;
+  /** Japanese text before the blank. */
+  before: string;
+  /** Japanese text after the blank. */
+  after: string;
+  options: string[];
+  /** Index into options of the correct form. */
+  answer: number;
+  /** Tobira grammar id, e.g. "tobira-5-10". */
+  grammarKey?: string;
+  explanation?: string;
+}
+
+/**
+ * Particle fill-in question. `text` is a sentence with each particle to
+ * fill written in full-width brackets, e.g. "鎌倉は三方［を］山に囲まれて…".
+ * The UI blanks each bracketed particle and offers a shared particle set.
+ */
+export interface ParticleQuestion {
+  text: string;
+  /** Optional English meaning shown above the sentence. */
+  translation?: string;
+  explanation?: string;
+}
+
 export interface Quiz {
   cloze?: ClozeQuestion[];
   reading?: ReadingQuestion[];
   rearrange?: RearrangeQuestion[];
+  grammarChoice?: GrammarChoiceQuestion[];
+  particle?: ParticleQuestion[];
 }
 
 export interface Article {
@@ -3282,6 +3315,143 @@ export const ARTICLES: Article[] = [
           chunks: ["2022年には", "アニメ", "化", "も", "されました"],
           grammarKey: "tobira-5-8",
           hint: "「N＋化（する）」を使って",
+        },
+      ],
+      grammarChoice: [
+        {
+          translation: "If you're Japanese, you've probably heard it at least once at school.",
+          before: "日本人なら、学校で一度",
+          after: "聞いたことがあるでしょう。",
+          options: ["しか", "は", "さえ", "ほど"],
+          answer: 1,
+          grammarKey: "tobira-5-3",
+          explanation:
+            "「数＋助数詞＋は」で「少なくとも」。「一度しか」は後ろに否定（〜ない）が必要。",
+        },
+        {
+          translation:
+            "Unlike the age of the aristocrats before it, the Kamakura period was the first time samurai stood at the center of government.",
+          before: "鎌倉時代は、それまでの貴族の時代",
+          after: "、武士が初めて政治の中心になった時代でした。",
+          options: ["をはじめ", "をもとに", "と同じで", "と違って"],
+          answer: 3,
+          grammarKey: "tobira-5-12",
+          explanation: "貴族の時代と武士の時代を対比しているので「と違って」。",
+        },
+        {
+          translation: "For the samurai, it must have been an easy place to defend.",
+          before: "武士達にとって、守りやすい場所だった",
+          after: "。",
+          options: ["に違いありません", "ようにしました", "わけにはいきません", "ことになりました"],
+          answer: 0,
+          grammarKey: "tobira-5-10",
+          explanation: "書き手の強い確信を表す「〜に違いない」の丁寧形。",
+        },
+        {
+          translation:
+            "However, after Yoritomo died, the line of Minamoto shoguns ended after just three generations.",
+          before: "",
+          after: "、頼朝が亡くなると、源氏の将軍はたった三代で終わってしまいます。",
+          options: ["それで", "ついに", "まず", "ところが"],
+          answer: 3,
+          grammarKey: "tobira-5-9",
+          explanation:
+            "前の段落（頼朝が幕府を作った）から予想されることと違う展開なので「ところが」。「それで」は結果を続ける時に使う。",
+        },
+        {
+          translation:
+            "Discontent with the shogunate grew, and in 1333 the Kamakura shogunate finally fell.",
+          before: "幕府への不満は大きくなり、1333年、鎌倉幕府は",
+          after: "滅びました。",
+          options: ["ほとんど", "ついに", "まず", "できれば"],
+          answer: 1,
+          grammarKey: "tobira-5-7",
+          explanation: "不満が長く続いた末の結果なので「ついに」。",
+        },
+        {
+          translation:
+            "Starting with Hōnen, monks such as Shinran, Nichiren and Dōgen spread teachings that were easy to understand.",
+          before: "法然",
+          after: "、親鸞、日蓮、道元などのお坊さん達が、分かりやすい教えを広めました。",
+          options: ["をもとに", "らしく", "をはじめ", "と違って"],
+          answer: 2,
+          grammarKey: "tobira-5-4",
+          explanation: "代表的な例（法然）を最初に挙げて、他の人も続けるので「をはじめ」。",
+        },
+        {
+          translation:
+            "Hōnen taught that anyone could be saved as long as they chanted the six characters \"Namu Amida Butsu.\"",
+          before: "法然は、「南無阿弥陀仏」という六文字",
+          after: "唱えれば、誰でも救われると教えました。",
+          options: ["さえ", "しか", "でも", "まで"],
+          answer: 0,
+          grammarKey: "tobira-5-6",
+          explanation: "「N さえ V-ば」で「それだけすれば十分」。後ろの「〜ば」とセットで使う。",
+        },
+        {
+          translation: "In 2022 it was even made into an anime.",
+          before: "2022年にはアニメ",
+          after: "もされました。",
+          options: ["的", "化", "風", "性"],
+          answer: 1,
+          grammarKey: "tobira-5-8",
+          explanation: "「N＋化（する）」で「N の形になる」。「ドラマ化」「映画化」も同じ。",
+        },
+      ],
+      particle: [
+        {
+          text: "鎌倉は三方［を］山に、一方［を］海［に］囲まれていて、敵［が］入りにくい土地でした。",
+          translation:
+            "Kamakura is surrounded by mountains on three sides and the sea on the other, which made it hard for enemies to get in.",
+          explanation:
+            "「A を B に囲まれる」で「A の部分が B に囲まれている」。「〜にくい」の前の主語は「が」。",
+        },
+        {
+          text: "頼朝［が］政治の場所［に］選んだのは、京都ではなく関東［の］鎌倉です。",
+          translation:
+            "The place Yoritomo chose as his seat of government wasn't Kyoto, but Kamakura in the Kantō region.",
+          explanation:
+            "「〜のは」の中の主語は「は」ではなく「が」。「X を Y に選ぶ」で「X を Y として選ぶ」。",
+        },
+        {
+          text: "将軍［は］武士［に］土地［を］与え、武士は戦い［が］起きた場合、命をかけて将軍のために戦いました。",
+          translation:
+            "The shogun granted land to the samurai, and when war broke out, the samurai fought for the shogun, risking their lives.",
+          explanation:
+            "「A は B に C を与える」が基本の形。「〜場合」の中の主語は「が」。",
+        },
+        {
+          text: "1232年［に］は、武士の社会の習慣［を］もとにして、武士のための初めての法律「御成敗式目」［が］作られました。",
+          translation:
+            "In 1232, based on the customs of samurai society, the first law code for samurai was created.",
+          explanation:
+            "年号には「に」。「〜をもとにして」は決まった形。受け身「作られる」の主語は「が」。",
+        },
+        {
+          text: "1274年、モンゴルの国である元の大軍［が］、九州［に］攻めてきました。",
+          translation: "In 1274, a huge army from Yuan, the Mongol state, invaded Kyushu.",
+          explanation: "攻める場所（目的地）は「に」。「九州を攻める」とも言えるが、「攻めてくる」は「に」が自然。",
+        },
+        {
+          text: "外国［と］の戦いなので、敵［から］取れる土地［が］なかったからです。",
+          translation:
+            "Because it was a war against a foreign country, there was no land to take from the enemy.",
+          explanation:
+            "「外国との戦い」＝「外国と戦うこと」。もらう・取る相手は「から」。「ない」の主語は「が」。",
+        },
+        {
+          text: "昔は建物の中［に］ありましたが、建物［が］嵐や地震［で］壊れたため、500年以上前［から］外［に］座っています。",
+          translation:
+            "It used to be inside a building, but since the building was destroyed by storms and earthquakes, it has been sitting outdoors for more than 500 years.",
+          explanation:
+            "存在の場所は「に」。原因は「で」（地震で壊れる）。始まりの時点は「から」。座る場所は「に」。",
+        },
+        {
+          text: "800年前の武士達の時代［が］今［も］残る町［を］、友達［と］一緒に歩いてみるのも楽しいでしょう。",
+          translation:
+            "It would be fun to walk with friends through a town where the samurai era of 800 years ago still lives on.",
+          explanation:
+            "「今も」＝今でも。歩く・通る場所は「を」（町を歩く）。「〜と一緒に」は決まった形。",
         },
       ],
       reading: [

@@ -10,6 +10,8 @@ const TAB_TO_SLUG: Record<string, string> = {
   vocabQuiz: "vocab-quiz",
   readingQuiz: "reading-quiz",
   grammarQuiz: "grammar-quiz",
+  grammarChoice: "grammar-choice",
+  particleQuiz: "particle-quiz",
   flashcards: "flashcards",
   grammarRef: "grammar",
 };

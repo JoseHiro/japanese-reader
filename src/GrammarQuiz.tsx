@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import type { RearrangeQuestion } from "./content";
 import { Furigana } from "./shared/Furigana";
+import { GrammarPanel, GrammarToggle } from "./shared/GrammarNote";
 import { grammarByKey } from "./tobira";
 
 // Sentence-rearrangement quiz. For each question, chunks are stored in
@@ -147,26 +148,15 @@ function QuestionCard({
           </button>
         )}
         {grammar && (
-          <button
-            className="rq-btn rq-grammar-toggle"
-            onClick={() => setShowGrammar((v) => !v)}
-            aria-expanded={showGrammar}
-          >
-            {showGrammar ? "▾ 文法を隠す" : `📘 文法 (${grammar.title})`}
-          </button>
+          <GrammarToggle
+            grammar={grammar}
+            open={showGrammar}
+            onToggle={() => setShowGrammar((v) => !v)}
+          />
         )}
       </div>
 
-      {grammar && showGrammar && (
-        <aside className="rq-grammar">
-          <h4>{grammar.title}</h4>
-          {grammar.meaning_en && <p className="rq-grammar-en">{grammar.meaning_en}</p>}
-          {grammar.pattern_form && (
-            <p className="rq-grammar-form"><b>形:</b> {grammar.pattern_form}</p>
-          )}
-          <p className="rq-grammar-expl">{grammar.explanation}</p>
-        </aside>
-      )}
+      {grammar && showGrammar && <GrammarPanel grammar={grammar} />}
     </div>
   );
 }
