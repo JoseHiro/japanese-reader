@@ -47,7 +47,7 @@ function QuestionCard({
    * Fired exactly once, the first time this card becomes complete.
    * `correct` is true iff the picked order equals the canonical [0..n-1].
    */
-  onFirstComplete?: (correct: boolean) => void;
+  onFirstComplete?: (correct: boolean, order: number[]) => void;
 }) {
   const shuffledIdx = useMemo(
     () => shuffledOrder(q.chunks.length, index + 1),
@@ -69,7 +69,7 @@ function QuestionCard({
     if (next.length === q.chunks.length && !firedRef.current) {
       firedRef.current = true;
       const correct = next.every((v, k) => v === k);
-      onFirstComplete?.(correct);
+      onFirstComplete?.(correct, next);
     }
   }
   function unpick(i: number) {
@@ -171,7 +171,7 @@ export function GrammarQuiz({
    * position in the `questions` array — the caller is responsible for
    * mapping it back to any original id when the array has been filtered.
    */
-  onResult?: (index: number, correct: boolean) => void;
+  onResult?: (index: number, correct: boolean, order: number[]) => void;
   badgeLabel?: string;
 }) {
   const completedRef = useRef<Set<number>>(new Set());
@@ -189,8 +189,8 @@ export function GrammarQuiz({
           index={i}
           number={numbers?.[i] ?? i + 1}
           showFurigana={showFurigana}
-          onFirstComplete={(correct) => {
-            onResult?.(i, correct);
+          onFirstComplete={(correct, order) => {
+            onResult?.(i, correct, order);
             completedRef.current.add(i);
             if (
               !firedAllRef.current &&

@@ -19,7 +19,7 @@ function QuestionCard({
   q: GrammarChoiceQuestion;
   number: number;
   showFurigana: boolean;
-  onAnswer: (correct: boolean) => void;
+  onAnswer: (correct: boolean, picked: number) => void;
 }) {
   const [picked, setPicked] = useState<number | null>(null);
   const [showGrammar, setShowGrammar] = useState(false);
@@ -29,7 +29,7 @@ function QuestionCard({
   function pick(oi: number) {
     if (answered) return;
     setPicked(oi);
-    onAnswer(oi === q.answer);
+    onAnswer(oi === q.answer, oi);
   }
 
   return (
@@ -100,7 +100,7 @@ export function GrammarChoiceQuiz({
   /** Fired once when every question has been answered. */
   onAllComplete?: () => void;
   /** Fired when a card is answered; `index` is its position in `questions`. */
-  onResult?: (index: number, correct: boolean) => void;
+  onResult?: (index: number, correct: boolean, picked: number) => void;
   badgeLabel?: string;
 }) {
   const answeredRef = useRef<Set<number>>(new Set());
@@ -117,8 +117,8 @@ export function GrammarChoiceQuiz({
           q={q}
           number={numbers?.[i] ?? i + 1}
           showFurigana={showFurigana}
-          onAnswer={(correct) => {
-            onResult?.(i, correct);
+          onAnswer={(correct, picked) => {
+            onResult?.(i, correct, picked);
             answeredRef.current.add(i);
             if (!firedAllRef.current && answeredRef.current.size >= questions.length) {
               firedAllRef.current = true;

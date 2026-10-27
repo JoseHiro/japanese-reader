@@ -2,39 +2,12 @@ import { useRef, useState } from "react";
 import type { ParticleQuestion } from "./content";
 import { Choice, Choices } from "./shared/Choice";
 import { Furigana } from "./shared/Furigana";
+import { parseParticleText, particleChoices } from "./particles";
 
 // 助詞 quiz. Each sentence has several particles blanked out. The learner
 // taps a blank (the first empty one is selected automatically), then a
 // particle chip to fill it; once every blank is filled, 答え合わせ grades
 // all of them at once.
-
-/** Particles offered for every question (answers outside this set are appended). */
-export const PARTICLES = ["は", "が", "を", "に", "で", "と", "へ", "も", "の", "から", "まで", "より"];
-
-const BLANK_RE = /［([^］]+)］/g;
-
-/**
- * Split "A［を］B［に］C" into text segments ["A", "B", "C"] and answers
- * ["を", "に"]. `segments.length` is always `answers.length + 1`.
- */
-export function parseParticleText(text: string): { segments: string[]; answers: string[] } {
-  const segments: string[] = [];
-  const answers: string[] = [];
-  let last = 0;
-  for (const m of text.matchAll(BLANK_RE)) {
-    segments.push(text.slice(last, m.index));
-    answers.push(m[1]);
-    last = m.index! + m[0].length;
-  }
-  segments.push(text.slice(last));
-  return { segments, answers };
-}
-
-/** The particle chips for a question: the shared set plus any extra answers. */
-export function particleChoices(answers: string[]): string[] {
-  const extra = answers.filter((a, i) => !PARTICLES.includes(a) && answers.indexOf(a) === i);
-  return [...PARTICLES, ...extra];
-}
 
 function QuestionCard({
   q,
@@ -46,7 +19,7 @@ function QuestionCard({
   number: number;
   showFurigana: boolean;
   /** Fired each time the learner grades the card. */
-  onCheck: (correct: boolean) => void;
+  onCheck: (correct: boolean, fills: string[]) => void;
 }) {
   const { segments, answers } = parseParticleText(q.text);
   const choices = particleChoices(answers);
@@ -77,7 +50,7 @@ function QuestionCard({
   }
   function check() {
     setChecked(true);
-    onCheck(allCorrect);
+    onCheck(allCorrect, fills.map((f) => f ?? ""));
   }
   function reset() {
     setState({ fills: answers.map(() => null), active: 0 });
@@ -181,7 +154,7 @@ export function ParticleQuiz({
   /** Fired once when every question has been graded at least once. */
   onAllComplete?: () => void;
   /** Fired each time a card is graded; `index` is its position in `questions`. */
-  onResult?: (index: number, correct: boolean) => void;
+  onResult?: (index: number, correct: boolean, fills: string[]) => void;
   badgeLabel?: string;
 }) {
   const checkedRef = useRef<Set<number>>(new Set());
@@ -198,8 +171,8 @@ export function ParticleQuiz({
           q={q}
           number={numbers?.[i] ?? i + 1}
           showFurigana={showFurigana}
-          onCheck={(correct) => {
-            onResult?.(i, correct);
+          onCheck={(correct, fills) => {
+            onResult?.(i, correct, fills);
             checkedRef.current.add(i);
             if (!firedAllRef.current && checkedRef.current.size >= questions.length) {
               firedAllRef.current = true;

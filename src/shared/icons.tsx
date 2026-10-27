@@ -181,3 +181,58 @@ export function IconParticle() {
     </svg>
   );
 }
+
+export function IconBookOpen() {
+  return (
+    <svg {...base}>
+      <path d="M3 5.5C5 4.5 8 4.5 12 6.5c4-2 7-2 9-1V19c-2-1-5-1-9 1-4-2-7-2-9-1z" />
+      <path d="M12 6.5V20" />
+    </svg>
+  );
+}
+
+export function IconCopy() {
+  return (
+    <svg {...base}>
+      <rect x="8" y="8" width="12" height="12" rx="2" />
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+    </svg>
+  );
+}
+
+export function IconCheck() {
+  return (
+    <svg {...base}>
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </svg>
+  );
+}
+
+export function IconCheckCircle() {
+  return (
+    <svg {...base}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 12.5l2.7 2.7L16 9.8" />
+    </svg>
+  );
+}
+
+export function IconRetry() {
+  return (
+    <svg {...base}>
+      <path d="M4 12a8 8 0 1 0 2.3-5.6" />
+      <path d="M4 4v4.5h4.5" />
+    </svg>
+  );
+}
+
+export function IconList() {
+  return (
+    <svg {...base}>
+      <path d="M9 6h11M9 12h11M9 18h11" />
+      <circle cx="4.5" cy="6" r="1" />
+      <circle cx="4.5" cy="12" r="1" />
+      <circle cx="4.5" cy="18" r="1" />
+    </svg>
+  );
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PARTICLES, parseParticleText, particleChoices } from "./ParticleQuiz";
+import { PARTICLES, parseParticleText, particleChoices } from "./particles";
 
 describe("parseParticleText", () => {
   it("splits bracketed particles into answers and the text around them", () => {

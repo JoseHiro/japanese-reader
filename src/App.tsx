@@ -30,6 +30,11 @@ import {
   IconGrammarBook,
   IconGrammarChoice,
   IconParticle,
+  IconBookOpen,
+  IconCheck,
+  IconCheckCircle,
+  IconRetry,
+  IconList,
 } from "./shared/icons";
 import { findUser, articlesForUser, lessonsForUser, vocabForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
@@ -37,6 +42,14 @@ import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
 import { GrammarQuiz } from "./GrammarQuiz";
 import { ReaderSkeleton } from "./shared/ReaderSkeleton";
+import { CopyResultsButton } from "./shared/CopyResultsButton";
+import { ActionBar, ActionButton } from "./shared/ActionButton";
+import {
+  emptyAttempts,
+  formatQuizReport,
+  type QuizAttempts,
+  type ReportKind,
+} from "./quizReport";
 import { Choice, Choices } from "./shared/Choice";
 import { GrammarChoiceQuiz } from "./GrammarChoiceQuiz";
 import { ParticleQuiz } from "./ParticleQuiz";
@@ -251,6 +264,18 @@ const COMPONENT_QUIZ_TABS: Record<string, QuizKind> = {
   particleQuiz: "particle",
 };
 
+// Quiz tabs that get "Article" + "Copy results" in the action bar, and the
+// report / question list each one uses.
+const REPORT_KIND_BY_TAB: Record<string, ReportKind> = {
+  vocabQuiz: "cloze",
+  grammarChoice: "grammarChoice",
+  particleQuiz: "particle",
+  grammarQuiz: "rearrange",
+  readingQuiz: "reading",
+};
+// Tabs with a manual "Mark done" toggle (the objective quizzes auto-complete).
+const MANUAL_DONE_TABS = new Set(["readingQuiz", "translate", "flashcards"]);
+
 function missedKey(
   userId: string,
   articleId: string,
@@ -354,6 +379,9 @@ export default function App() {
   const [missed, setMissed] = useState<Record<QuizKind, Set<number>>>(emptyMissed);
   // Session-only: are we currently showing just the missed set?
   const [review, setReview] = useState<Record<QuizKind, boolean>>(NO_REVIEW);
+  // What the learner actually answered this session (every attempt), for
+  // 📋 結果をコピー. Not persisted: cleared on reload or article change.
+  const [attempts, setAttempts] = useState<QuizAttempts>(emptyAttempts);
   const clozeMissed = missed.cloze;
   const clozeReview = review.cloze;
   const setReviewFor = (kind: QuizKind, on: boolean) =>
@@ -405,6 +433,7 @@ export default function App() {
     if (!user || !article) {
       setMissed(emptyMissed());
       setReview(NO_REVIEW);
+      setAttempts(emptyAttempts());
       return;
     }
     const load = (kind: QuizKind): Set<number> => {
@@ -419,7 +448,34 @@ export default function App() {
     for (const kind of QUIZ_KINDS) loaded[kind] = load(kind);
     setMissed(loaded);
     setReview(NO_REVIEW);
+    setAttempts(emptyAttempts());
   }, [user?.id, article?.id]);
+
+  function recordAttempt<K extends Exclude<ReportKind, "reading">>(
+    kind: K,
+    index: number,
+    answer: QuizAttempts[K][number][number],
+  ) {
+    setAttempts((a) => {
+      const prev = (a[kind] as Record<number, unknown[]>)[index] ?? [];
+      return { ...a, [kind]: { ...a[kind], [index]: [...prev, answer] } };
+    });
+  }
+
+  function setReadingAnswer(index: number, text: string) {
+    setAttempts((a) => ({ ...a, reading: { ...a.reading, [index]: text } }));
+  }
+
+  function quizReport(kind: ReportKind): string {
+    if (!article || !user) return "";
+    return formatQuizReport({
+      article,
+      kind,
+      attempts,
+      userName: user.displayName,
+      date: new Date(),
+    });
+  }
 
   function updateMissed(
     kind: QuizKind,
@@ -1007,38 +1063,65 @@ export default function App() {
                 </span>
               )}
             </div>
-            {(activeTab === "readingQuiz" ||
-              activeTab === "translate" ||
-              activeTab === "flashcards") && (
-              <button
-                className={"done-toggle" + (isTabDone(activeTab) ? " done" : "")}
-                onClick={() => toggleTabDone(activeTab)}
-                aria-pressed={isTabDone(activeTab)}
-              >
-                {isTabDone(activeTab) ? "✓ 完了" : "完了にする"}
-              </button>
-            )}
-            {activeTab === "vocabQuiz" &&
-              (clozeMissed.size > 0 || clozeReview) && (
-                <button
-                  className={"review-btn review-btn-sm" + (clozeReview ? " on" : "")}
-                  onClick={() =>
-                    clozeReview ? setReviewFor("cloze", false) : enterClozeReview()
-                  }
-                >
-                  {clozeReview ? "全問に戻す" : `🔁 間違い ${clozeMissed.size} 問`}
-                </button>
-              )}
             {(() => {
-              const kind = COMPONENT_QUIZ_TABS[activeTab];
-              if (!kind || (missed[kind].size === 0 && !review[kind])) return null;
+              const reportKind = REPORT_KIND_BY_TAB[activeTab];
+              const hasQuestions = !!reportKind && (article.quiz?.[reportKind]?.length ?? 0) > 0;
+              const missKind: QuizKind | undefined =
+                activeTab === "vocabQuiz" ? "cloze" : COMPONENT_QUIZ_TABS[activeTab];
+              const showReview =
+                !!missKind && (missed[missKind].size > 0 || review[missKind]);
+              const manualDone = MANUAL_DONE_TABS.has(activeTab);
+              if (!hasQuestions && !showReview && !manualDone) return null;
+              const done = isTabDone(activeTab);
               return (
-                <button
-                  className={"review-btn review-btn-sm" + (review[kind] ? " on" : "")}
-                  onClick={() => setReviewFor(kind, !review[kind])}
-                >
-                  {review[kind] ? "全問に戻す" : `🔁 間違い ${missed[kind].size} 問`}
-                </button>
+                <ActionBar>
+                  {hasQuestions && (
+                    <ActionButton
+                      icon={<IconBookOpen />}
+                      label="Article"
+                      title="Open the article alongside the quiz"
+                      onClick={() => setShowArticleRef(true)}
+                    />
+                  )}
+                  {hasQuestions && (
+                    <CopyResultsButton
+                      // fresh per tab/article so "Copied" never carries over
+                      key={`${article.id}:${activeTab}`}
+                      getText={() => quizReport(reportKind)}
+                    />
+                  )}
+                  {showReview &&
+                    (review[missKind] ? (
+                      <ActionButton
+                        icon={<IconList />}
+                        label="Show all"
+                        tone="warning"
+                        active
+                        title="Back to every question"
+                        onClick={() => setReviewFor(missKind, false)}
+                      />
+                    ) : (
+                      <ActionButton
+                        icon={<IconRetry />}
+                        label="Review mistakes"
+                        tone="warning"
+                        badge={missed[missKind].size}
+                        title="Show only the questions you got wrong"
+                        onClick={() =>
+                          missKind === "cloze" ? enterClozeReview() : setReviewFor(missKind, true)
+                        }
+                      />
+                    ))}
+                  {manualDone && (
+                    <ActionButton
+                      icon={done ? <IconCheckCircle /> : <IconCheck />}
+                      label={done ? "Done" : "Mark done"}
+                      tone={done ? "success" : "default"}
+                      pressed={done}
+                      onClick={() => toggleTabDone(activeTab)}
+                    />
+                  )}
+                </ActionBar>
               );
             })()}
           </div>
@@ -1233,17 +1316,6 @@ export default function App() {
 
       {activeTab === "vocabQuiz" && (
         <section className="quiz">
-          {article && article.quiz?.cloze && article.quiz.cloze.length > 0 && (
-            <div className="quiz-toolbar">
-              <button
-                className="ref-toggle-btn"
-                onClick={() => setShowArticleRef(true)}
-                title="記事を横に開いて参照する"
-              >
-                📖 記事を見る
-              </button>
-            </div>
-          )}
           {article?.quiz?.cloze && article.quiz.cloze.length > 0 ? (
             (() => {
               const visible = article.quiz.cloze
@@ -1302,6 +1374,7 @@ export default function App() {
                                 onClick={() => {
                                   setClozePick((p) => ({ ...p, [qi]: oi }));
                                   updateMissed("cloze", qi, oi === q.answer);
+                                  recordAttempt("cloze", qi, oi);
                                 }}
                               >
                                 <Furigana text={opt} show={showFurigana} />
@@ -1328,17 +1401,6 @@ export default function App() {
 
       {activeTab === "readingQuiz" && (
         <section className="quiz">
-          {article && article.quiz?.reading && article.quiz.reading.length > 0 && (
-            <div className="quiz-toolbar">
-              <button
-                className="ref-toggle-btn"
-                onClick={() => setShowArticleRef(true)}
-                title="記事を横に開いて参照する"
-              >
-                📖 記事を見る
-              </button>
-            </div>
-          )}
           {article?.quiz?.reading && article.quiz.reading.length > 0 ? (
             <div className="quiz-block">
               <span className="q-badge">読解</span>
@@ -1354,6 +1416,14 @@ export default function App() {
                         <Furigana text={q.question} show={showFurigana} />
                       </p>
                     </div>
+                    <textarea
+                      className="answer-input"
+                      rows={2}
+                      placeholder="日本語で答えを書いてみましょう"
+                      aria-label={`${qi + 1}番の答え`}
+                      value={attempts.reading[qi] ?? ""}
+                      onChange={(e) => setReadingAnswer(qi, e.target.value)}
+                    />
                     <div className="quiz-actions">
                       {hasHints && (
                         <button
@@ -1383,7 +1453,7 @@ export default function App() {
                           })
                         }
                       >
-                        {shown ? "隠す" : "回答"}
+                        {shown ? "模範解答を隠す" : "模範解答"}
                       </button>
                     </div>
                     {hasHints && hintShown && (
@@ -1437,25 +1507,19 @@ export default function App() {
           numbers: visibleIndices.map((i) => i + 1),
           showFurigana,
           onAllComplete: inReview ? undefined : () => markTabDone(activeTab, true),
-          onResult: (posIdx: number, correct: boolean) => {
-            const original = visibleIndices[posIdx];
-            if (original !== undefined) updateMissed(kind, original, correct);
-          },
           badgeLabel: inReview ? "復習 (間違い直し)" : undefined,
         };
+        // Map a card's position back to its question index, then record it.
+        const result =
+          <A,>(record: (index: number, answer: A) => void) =>
+          (posIdx: number, correct: boolean, answer: A) => {
+            const original = visibleIndices[posIdx];
+            if (original === undefined) return;
+            updateMissed(kind, original, correct);
+            record(original, answer);
+          };
         return (
           <section className="quiz">
-            {all.length > 0 && (
-              <div className="quiz-toolbar">
-                <button
-                  className="ref-toggle-btn"
-                  onClick={() => setShowArticleRef(true)}
-                  title="記事を横に開いて参照する"
-                >
-                  📖 記事を見る
-                </button>
-              </div>
-            )}
             {inReview && visibleIndices.length === 0 ? (
               <p className="hint review-empty">
                 🎉 復習すべき間違いはありません。「全問に戻す」で通常表示に切り替えられます。
@@ -1464,18 +1528,21 @@ export default function App() {
               <GrammarQuiz
                 key={quizKey}
                 {...common}
+                onResult={result<number[]>((i, order) => recordAttempt("rearrange", i, order))}
                 questions={visibleIndices.map((i) => article!.quiz!.rearrange![i])}
               />
             ) : kind === "grammarChoice" ? (
               <GrammarChoiceQuiz
                 key={quizKey}
                 {...common}
+                onResult={result<number>((i, picked) => recordAttempt("grammarChoice", i, picked))}
                 questions={visibleIndices.map((i) => article!.quiz!.grammarChoice![i])}
               />
             ) : (
               <ParticleQuiz
                 key={quizKey}
                 {...common}
+                onResult={result<string[]>((i, fills) => recordAttempt("particle", i, fills))}
                 questions={visibleIndices.map((i) => article!.quiz!.particle![i])}
               />
             )}

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ARTICLES } from "./content";
 import { grammarByKey } from "./tobira";
 import { ARTEM_VOCAB } from "./vocabulary";
-import { parseParticleText } from "./ParticleQuiz";
+import { parseParticleText } from "./particles";
 
 describe("ARTICLES structural invariants", () => {
   it("has unique article ids", () => {
