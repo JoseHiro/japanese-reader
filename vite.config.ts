@@ -1,4 +1,5 @@
-import { defineConfig, type Plugin, type Connect } from "vite";
+import { type Plugin, type Connect } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -43,4 +44,6 @@ function serveDictRaw(): Plugin {
 export default defineConfig({
   base: "./",
   plugins: [react(), serveDictRaw()],
+  // Unit tests only; e2e/ is run by Playwright (`npm run test:e2e`).
+  test: { include: ["src/**/*.test.{ts,tsx}"] },
 });

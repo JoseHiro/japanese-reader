@@ -15,6 +15,20 @@ npm run dev      # http://localhost:5173
 `npm install` 後、`prebuild`/`copy-dict` が kuromoji の辞書ファイルと
 ブラウザ用ビルドを `public/dict` と `public/vendor` にコピーする。
 
+## テスト
+
+```bash
+npm test                          # ユニットテスト（vitest, src/**/*.test.ts）
+npx playwright install chromium   # 初回のみ
+npm run test:e2e                  # E2E テスト（Playwright, e2e/*.spec.ts）
+```
+
+`npm run test:e2e` は `npm run dev`（5173 番）を自動で起動する（起動済みなら
+それを使う）。全ユーザー×記事×クイズタブの「Copy results」、助詞クイズの
+採点、並べ替えの 💡 ヒントなどを Chromium で確認する。失敗時のトレースは
+`test-results/` に残るので `npx playwright show-trace <trace.zip>` で開ける。
+CI では deploy の前に両方が走り、落ちたらデプロイされない。
+
 ## ビルド
 
 ```bash

@@ -25,6 +25,16 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Tests gate the deploy: unit (vitest), then e2e (Playwright, Chromium).
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7
       - run: npm run build
       - run: touch dist/.nojekyll
       - uses: peaceiris/actions-gh-pages@v4
