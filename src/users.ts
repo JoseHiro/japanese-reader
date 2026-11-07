@@ -12,6 +12,12 @@ export interface User {
   displayName: string;
   /** Article ids from ARTICLES that this user can see. */
   articleIds: string[];
+  /**
+   * JapanesePod101 transcripts (article ids from ARTICLES) this user can
+   * see. They get their own sidebar tab and read like articles, but
+   * without quiz tabs. Set (even to []) to show the tab.
+   */
+  podIds?: string[];
   /** Lesson ids from LESSONS that this user can see. */
   lessonIds?: string[];
   /**
@@ -39,12 +45,14 @@ export const USERS: User[] = [
     id: "shaun",
     displayName: "Shaun",
     articleIds: [
-      "ramen-ichibanboshi",
+      "professions-law",
+      "homestay-scolding",
       "professions-food",
       "professions-transport",
       "professions-daily",
       "growth",
     ],
+    podIds: ["ramen-ichibanboshi"],
   },
   {
     id: "andy",
@@ -68,11 +76,17 @@ export const USERS: User[] = [
   },
 ];
 
-export function articlesForUser(user: User): Article[] {
+function articlesById(ids: string[]): Article[] {
   const byId = new Map(ARTICLES.map((a) => [a.id, a]));
-  return user.articleIds
-    .map((id) => byId.get(id))
-    .filter((a): a is Article => !!a);
+  return ids.map((id) => byId.get(id)).filter((a): a is Article => !!a);
+}
+
+export function articlesForUser(user: User): Article[] {
+  return articlesById(user.articleIds);
+}
+
+export function podsForUser(user: User): Article[] {
+  return articlesById(user.podIds ?? []);
 }
 
 export function lessonsForUser(user: User): Lesson[] {

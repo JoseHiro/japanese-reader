@@ -16,7 +16,7 @@ describe("USERS registry", () => {
   it("every listed article id resolves to an actual article", () => {
     const articleIds = new Set(ARTICLES.map((a) => a.id));
     for (const u of USERS) {
-      for (const aid of u.articleIds) {
+      for (const aid of [...u.articleIds, ...(u.podIds ?? [])]) {
         expect(articleIds, `${u.id} → ${aid}`).toContain(aid);
       }
     }

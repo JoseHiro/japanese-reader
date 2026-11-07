@@ -3280,4 +3280,650 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    id: "professions-law",
+    title: "法律を支える人たち",
+    subtitle: "警察・裁判所・弁護士の仕事",
+    date: "2026-11-07",
+    text: `私たちが毎日安心して暮らせるのは、法律と、それを守る人たちがいるおかげです。今回は、法律と正義を支えている職業を紹介します。
+
+まず、事件が起きたときに最初に動くのが警察です。警察官は町の安全を守り、事件があれば現場に行って調べます。そして、証拠を集めて犯人を探します。ただし、犯人を捕まえても、警察がその人を罰するわけではありません。本当に罪があるかどうかを決めるのは、裁判所です。
+
+次に、裁判所で働く人たちです。裁判所では、法律に違反したと疑われている人について、裁判が行われます。その裁判を進めるのが裁判官です。裁判官は両方の話をよく聞き、証拠を調べてから判決を出します。罪があると分かれば有罪、なければ無罪です。有罪の場合は、どのくらいの罰がふさわしいかも決めるので、とても責任の重い仕事です。
+
+最後に、弁護士です。弁護士は法律の専門家で、法律のことで困っている人を助けます。裁判では、罪を疑われている人の味方になり、その人の話を裁判官に伝えます。お金や家族の問題など、裁判にならない相談を受けることも多いです。
+
+日本では2009年から「裁判員制度」が始まりました。選ばれた市民が裁判官と一緒に裁判に参加し、有罪か無罪か、どんな罰にするかを話し合います。専門家ではない人の考えも、判決に生かされるようになったのです。
+
+こうしてみると、私たちの安全な生活は、法律と、それを正しく使おうとする人たちに支えられているんですね。`,
+    annotations: {
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
+      安心: {
+        reading: "あんしん",
+        pos: "名詞・する動詞",
+        meaning: "peace of mind; feeling safe",
+        note: "心配がなく、落ち着いていられること。「安心して〜できる」の形でよく使う。",
+      },
+      暮らせる: {
+        reading: "くらせる",
+        pos: "動詞（一段）",
+        meaning: "can live (potential of 暮らす)",
+        note: "「暮らす」（毎日の生活を送る）の可能形。「住む」は場所、「暮らす」は生活の様子に注目する。",
+      },
+      法律: {
+        reading: "ほうりつ",
+        pos: "名詞",
+        meaning: "law",
+        note: "国が決めた、みんなが守らなければならないきまり。学校や家のきまりは「ルール」「規則」という。",
+        examples: [
+          { ja: "日本では、20歳未満の人がお酒を飲むことは法律で禁止されている。", en: "In Japan, drinking alcohol under the age of 20 is prohibited by law." },
+        ],
+      },
+      正義: {
+        reading: "せいぎ",
+        pos: "名詞",
+        meaning: "justice; righteousness",
+        note: "人として正しいこと。「正義の味方」（正しい人を助けるヒーロー）という言い方もある。",
+      },
+      職業: { reading: "しょくぎょう", pos: "名詞", meaning: "occupation; profession" },
+      事件: {
+        reading: "じけん",
+        pos: "名詞",
+        meaning: "incident; case (often a crime)",
+        note: "ふつうではない、大きな出来事。特に犯罪に関係することが多い。",
+      },
+      警察: {
+        reading: "けいさつ",
+        pos: "名詞",
+        meaning: "police",
+        note: "町の安全を守り、事件を調べる組織。困ったときの電話番号は日本では110番。",
+      },
+      警察官: {
+        reading: "けいさつかん",
+        pos: "名詞",
+        meaning: "police officer",
+        note: "警察で働く人。話し言葉では「おまわりさん」とも呼ぶ。",
+      },
+      現場: {
+        reading: "げんば",
+        pos: "名詞",
+        meaning: "scene (of an incident); site",
+        note: "事件や事故が実際に起きた場所。工事をしている場所も「現場」という。",
+      },
+      証拠: {
+        reading: "しょうこ",
+        pos: "名詞",
+        meaning: "evidence; proof",
+        note: "本当にあったことだと示すもの。「証拠を集める」「証拠がない」の形でよく使う。",
+        examples: [
+          { ja: "犯人がそこにいた証拠は見つからなかった。", en: "No evidence was found that the culprit had been there." },
+        ],
+      },
+      犯人: {
+        reading: "はんにん",
+        pos: "名詞",
+        meaning: "culprit; offender",
+        note: "罪になることをした人。",
+      },
+      捕まえる: { reading: "つかまえる", pos: "動詞（一段）", meaning: "to catch; to arrest" },
+      罰する: {
+        reading: "ばっする",
+        pos: "動詞（サ変）",
+        meaning: "to punish",
+        note: "悪いことをした人に罰を与えること。かたい言葉で、法律やルールの話でよく使う。",
+      },
+      罪: {
+        reading: "つみ",
+        pos: "名詞",
+        meaning: "crime; sin; guilt",
+        note: "法律や道徳に反する悪いこと。「罪を犯す（おかす）」の形でよく使う。",
+      },
+      裁判所: {
+        reading: "さいばんしょ",
+        pos: "名詞",
+        meaning: "court; courthouse",
+        note: "裁判を行う場所・機関。",
+      },
+      違反: {
+        reading: "いはん",
+        pos: "名詞・する動詞",
+        meaning: "violation; breach",
+        note: "法律やルールを守らないこと。「〜に違反する」の形で使う。「交通違反」「ルール違反」など。",
+        examples: [
+          { ja: "スピード違反で警察に止められた。", en: "I was stopped by the police for speeding." },
+        ],
+      },
+      疑う: {
+        reading: "うたがう",
+        pos: "動詞（五段）",
+        meaning: "to suspect; to doubt",
+        note: "「〜と疑われる」で「〜ではないかと思われる」の意味。",
+      },
+      裁判: {
+        reading: "さいばん",
+        pos: "名詞・する動詞",
+        meaning: "trial; court case",
+        note: "裁判所で、法律に従って正しいかどうかを決めること。",
+      },
+      裁判官: {
+        reading: "さいばんかん",
+        pos: "名詞",
+        meaning: "judge",
+        note: "裁判を進めて、判決を出す人。",
+      },
+      判決: {
+        reading: "はんけつ",
+        pos: "名詞",
+        meaning: "verdict; ruling; judgment",
+        note: "裁判の最後に裁判官が出す結論。「判決を出す」「判決が出る」の形で使う。",
+      },
+      有罪: {
+        reading: "ゆうざい",
+        pos: "名詞",
+        meaning: "guilty",
+        note: "裁判で、罪があると決まること。反対は「無罪」。",
+      },
+      無罪: {
+        reading: "むざい",
+        pos: "名詞",
+        meaning: "not guilty; innocent",
+        note: "裁判で、罪がないと決まること。",
+      },
+      罰: {
+        reading: "ばつ",
+        pos: "名詞",
+        meaning: "punishment; penalty",
+        note: "悪いことをした人が受けるもの。「罰を与える」「罰を受ける」。",
+      },
+      ふさわしい: {
+        reading: "ふさわしい",
+        pos: "形容詞",
+        meaning: "suitable; appropriate",
+      },
+      責任: {
+        reading: "せきにん",
+        pos: "名詞",
+        meaning: "responsibility",
+        note: "しなければならない仕事や役目。「責任が重い」は「その役目がとても大事で大変だ」という意味。",
+      },
+      弁護士: {
+        reading: "べんごし",
+        pos: "名詞",
+        meaning: "lawyer; attorney",
+        note: "法律の専門家として、困っている人の相談にのったり、裁判で味方になったりする人。",
+        examples: [
+          { ja: "家の問題で、弁護士に相談することにした。", en: "I decided to consult a lawyer about a problem with my house." },
+        ],
+      },
+      専門家: { reading: "せんもんか", pos: "名詞", meaning: "expert; specialist" },
+      味方: {
+        reading: "みかた",
+        pos: "名詞",
+        meaning: "ally; someone on your side",
+        note: "その人を助けて、一緒に立ってくれる人。反対は「敵（てき）」。",
+      },
+      相談: {
+        reading: "そうだん",
+        pos: "名詞・する動詞",
+        meaning: "consultation; asking for advice",
+      },
+      裁判員制度: {
+        reading: "さいばんいんせいど",
+        pos: "名詞",
+        meaning: "lay judge system",
+        note: "選ばれた市民が、裁判官と一緒に重い事件の裁判に参加する日本の制度。2009年に始まった。",
+      },
+      市民: { reading: "しみん", pos: "名詞", meaning: "citizen; ordinary people" },
+      参加: { reading: "さんか", pos: "名詞・する動詞", meaning: "participation; taking part" },
+      生かす: {
+        reading: "いかす",
+        pos: "動詞（五段）",
+        meaning: "to make use of; to put to good use",
+        note: "持っているものや考えを、役に立つように使うこと。",
+      },
+    },
+    translations: {
+      "私たちが毎日安心して暮らせるのは、法律と、それを守る人たちがいるおかげです。":
+        "The reason we can live safely every day is thanks to the law and the people who uphold it.",
+      "今回は、法律と正義を支えている職業を紹介します。":
+        "This time I'll introduce the professions that support law and justice.",
+      "まず、事件が起きたときに最初に動くのが警察です。":
+        "First, the ones who act first when an incident happens are the police.",
+      "警察官は町の安全を守り、事件があれば現場に行って調べます。":
+        "Police officers keep the town safe, and when something happens they go to the scene and investigate.",
+      "そして、証拠を集めて犯人を探します。":
+        "Then they gather evidence and look for the culprit.",
+      "ただし、犯人を捕まえても、警察がその人を罰するわけではありません。":
+        "But even when they catch the culprit, it isn't the police who punish that person.",
+      "本当に罪があるかどうかを決めるのは、裁判所です。":
+        "It's the court that decides whether they are really guilty of a crime.",
+      "次に、裁判所で働く人たちです。":
+        "Next, the people who work at the court.",
+      "裁判所では、法律に違反したと疑われている人について、裁判が行われます。":
+        "At the court, trials are held for people suspected of breaking the law.",
+      "その裁判を進めるのが裁判官です。":
+        "The one who runs the trial is the judge.",
+      "裁判官は両方の話をよく聞き、証拠を調べてから判決を出します。":
+        "The judge listens carefully to both sides, examines the evidence, and then gives a verdict.",
+      "罪があると分かれば有罪、なければ無罪です。":
+        "If it's clear they committed the crime, they're guilty; if not, they're not guilty.",
+      "有罪の場合は、どのくらいの罰がふさわしいかも決めるので、とても責任の重い仕事です。":
+        "When someone is found guilty, the judge also decides what punishment fits, so it's a job with a very heavy responsibility.",
+      "最後に、弁護士です。":
+        "Lastly, lawyers.",
+      "弁護士は法律の専門家で、法律のことで困っている人を助けます。":
+        "Lawyers are legal experts who help people with legal problems.",
+      "裁判では、罪を疑われている人の味方になり、その人の話を裁判官に伝えます。":
+        "In a trial, they take the side of the person suspected of the crime and tell that person's story to the judge.",
+      "お金や家族の問題など、裁判にならない相談を受けることも多いです。":
+        "They also often give advice on matters that never go to court, such as money or family problems.",
+      "日本では2009年から「裁判員制度」が始まりました。":
+        "In Japan, the \"lay judge system\" started in 2009.",
+      "選ばれた市民が裁判官と一緒に裁判に参加し、有罪か無罪か、どんな罰にするかを話し合います。":
+        "Selected citizens take part in trials together with judges and discuss whether the person is guilty and what the punishment should be.",
+      "専門家ではない人の考えも、判決に生かされるようになったのです。":
+        "So now the views of people who aren't legal experts are also reflected in verdicts.",
+      "こうしてみると、私たちの安全な生活は、法律と、それを正しく使おうとする人たちに支えられているんですね。":
+        "When you look at it this way, our safe daily lives are supported by the law and by the people who try to use it fairly.",
+    },
+    translationPractice: [
+      "まず、事件が起きたときに最初に動くのが警察です。",
+      "そして、証拠を集めて犯人を探します。",
+      "本当に罪があるかどうかを決めるのは、裁判所です。",
+      "その裁判を進めるのが裁判官です。",
+      "罪があると分かれば有罪、なければ無罪です。",
+      "弁護士は法律の専門家で、法律のことで困っている人を助けます。",
+      "日本では2009年から「裁判員制度」が始まりました。",
+      "私たちが毎日安心して暮らせるのは、法律と、それを守る人たちがいるおかげです。",
+    ],
+    quiz: {
+      cloze: [
+        {
+          before: "事件があると、",
+          after: "は現場に行って調べ、証拠を集めて犯人を探します。",
+          options: ["裁判官", "警察官", "弁護士", "市民"],
+          answer: 1,
+          explanation: "現場に行って事件を調べ、犯人を探すのは「警察官」の仕事です。",
+        },
+        {
+          before: "証拠を集めて",
+          after: "を探します。",
+          options: ["犯人", "裁判官", "味方", "専門家"],
+          answer: 0,
+          explanation: "「犯人」は罪になることをした人。警察は証拠から犯人を探します。",
+        },
+        {
+          before: "本当に罪があるかどうかを決めるのは、",
+          after: "です。",
+          options: ["警察", "裁判所", "現場", "市民"],
+          answer: 1,
+          explanation: "罪があるかどうかは、警察ではなく「裁判所」の裁判で決まります。",
+        },
+        {
+          before: "裁判所では、法律に",
+          after: "したと疑われている人について、裁判が行われます。",
+          options: ["参加", "相談", "違反", "安心"],
+          answer: 2,
+          explanation: "「〜に違反する」で「法律やルールを守らない」という意味です。",
+        },
+        {
+          before: "裁判官は両方の話をよく聞き、証拠を調べてから",
+          after: "を出します。",
+          options: ["判決", "責任", "正義", "事件"],
+          answer: 0,
+          explanation: "裁判の最後に裁判官が出す結論を「判決」といいます。",
+        },
+        {
+          before: "罪があると分かれば",
+          after: "、なければ無罪です。",
+          options: ["無罪", "有罪", "犯人", "違反"],
+          answer: 1,
+          explanation: "「有罪」は罪があると決まること。反対の言葉は「無罪」です。",
+        },
+        {
+          before: "",
+          after: "は法律の専門家で、裁判では罪を疑われている人の味方になります。",
+          options: ["裁判官", "警察官", "弁護士", "裁判員"],
+          answer: 2,
+          explanation: "疑われている人の味方になり、その人の話を伝えるのは「弁護士」です。",
+        },
+        {
+          before: "有罪の場合は、どのくらいの",
+          after: "がふさわしいかも決めます。",
+          options: ["証拠", "罰", "相談", "法律"],
+          answer: 1,
+          explanation: "「罰」は悪いことをした人が受けるもの。裁判官はその重さも決めます。",
+        },
+      ],
+      reading: [
+        {
+          question: "事件が起きたとき、警察はどんなことをしますか？",
+          answer: "現場に行って調べ、証拠を集めて犯人を探します。でも、犯人を罰するのは警察ではありません。",
+          hints: ["現場", "調べる", "証拠", "集める", "犯人", "罰する"],
+        },
+        {
+          question: "裁判官はどんな仕事ですか？",
+          answer: "裁判を進めて、両方の話を聞き、証拠を調べてから判決を出します。有罪なら罰も決めます。",
+          hints: ["裁判", "進める", "証拠", "判決", "有罪", "罰"],
+        },
+        {
+          question: "裁判のとき、弁護士はどんなことをしますか？",
+          answer: "罪を疑われている人の味方になって、その人の話を裁判官に伝えます。",
+          hints: ["罪", "疑われている", "味方", "裁判官", "伝える"],
+        },
+        {
+          question: "弁護士は、裁判のほかにどんな仕事をしますか？",
+          answer: "お金や家族の問題など、裁判にならない相談を受けることも多いです。",
+          hints: ["お金", "家族", "問題", "相談"],
+        },
+        {
+          question: "「裁判員制度」とは何ですか？",
+          answer: "選ばれた市民が裁判官と一緒に裁判に参加して、有罪か無罪か、どんな罰にするかを話し合う制度です。",
+          hints: ["市民", "裁判官", "参加", "有罪", "無罪", "罰", "話し合う"],
+        },
+      ],
+    },
+  },
+  {
+    id: "homestay-scolding",
+    title: "ホームステイの娘を叱った日",
+    subtitle: "怒ることと叱ること",
+    date: "2026-11-07",
+    text: `去年の秋から、私の家に日本から来た高校生のユイが住んでいます。ユイは16歳で、私たちのホームステイの娘です。明るくてよく笑う子なので、家族みんなとすぐに仲良くなりました。
+
+ユイが来た日に、家族で家のルールを決めました。夜は10時までに帰ること、遅くなるときは必ず連絡すること、自分の部屋は自分で片付けることの三つです。ユイは「分かりました」と言って、そのルールを紙に書いて部屋に貼りました。
+
+ところが、ある金曜日の夜、ユイは10時を過ぎても帰ってきませんでした。電話をかけても出ません。11時になると本当に心配になって、警察に連絡しようかと家族で話していました。そのとき、玄関から「ただいま」という声が聞こえました。友だちの家で映画を見ていて、時間を忘れていたそうです。
+
+私はほっとしましたが、同時に腹も立ちました。それでも、大きな声で怒るのではなく、落ち着いて叱ることにしました。私はユイに、遅くなったことより、連絡がなかったことが問題だと話しました。ユイを預かっている私たちには、ユイを守る責任があるからです。
+
+ユイは泣きながら「心配をかけて、ごめんなさい」と謝りました。私はすぐにユイを許しましたが、罰として次の週末は夜の外出をなしにしました。ユイは文句を言わずに、「当然です」と笑いました。
+
+次の日の朝ごはんのとき、ユイが「日本のお母さんは怒ると怖いけど、ここでは叱られても理由が分かるから、なんだかうれしかったです」と言いました。怒ることと叱ることは似ていますが、少し違うのかもしれません。`,
+    annotations: {
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
+      ホームステイ: {
+        reading: "ホームステイ",
+        pos: "名詞・する動詞",
+        meaning: "homestay",
+        note: "留学生などが、その国の家族の家に住んで生活すること。受け入れる家族は「ホストファミリー」。",
+      },
+      娘: {
+        reading: "むすめ",
+        pos: "名詞",
+        meaning: "daughter; girl",
+        note: "自分の女の子ども。人の娘には「娘さん」「お嬢さん」を使う。",
+      },
+      仲良く: {
+        reading: "なかよく",
+        pos: "副詞",
+        meaning: "on good terms; close",
+        note: "「仲良くなる」で「友だちのように親しくなる」の意味。",
+      },
+      ルール: { reading: "ルール", pos: "名詞", meaning: "rule" },
+      連絡: {
+        reading: "れんらく",
+        pos: "名詞・する動詞",
+        meaning: "contact; letting someone know",
+        note: "電話やメッセージで、相手に知らせること。",
+        examples: [
+          { ja: "遅れるときは、必ず連絡してください。", en: "Please be sure to let us know if you'll be late." },
+        ],
+      },
+      片付ける: {
+        reading: "かたづける",
+        pos: "動詞（一段）",
+        meaning: "to tidy up; to put away",
+      },
+      貼る: { reading: "はる", pos: "動詞（五段）", meaning: "to stick; to put up (on a wall)" },
+      ところが: {
+        reading: "ところが",
+        pos: "接続詞",
+        meaning: "however; but (unexpectedly)",
+        note: "前の話から予想しなかったことが起きるときに使う。",
+      },
+      過ぎる: { reading: "すぎる", pos: "動詞（一段）", meaning: "to pass; to go past (a time)" },
+      心配: {
+        reading: "しんぱい",
+        pos: "名詞・する動詞",
+        meaning: "worry; concern",
+        note: "「心配をかける」で「人に心配させる」の意味。謝るときによく使う。",
+      },
+      警察: {
+        reading: "けいさつ",
+        pos: "名詞",
+        meaning: "police",
+        note: "町の安全を守る組織。日本では110番に電話する。",
+      },
+      玄関: {
+        reading: "げんかん",
+        pos: "名詞",
+        meaning: "entrance; front door (area)",
+        note: "家の入り口。日本の家では、ここで靴を脱ぐ。",
+      },
+      ほっと: {
+        reading: "ほっと",
+        pos: "副詞",
+        meaning: "(feel) relieved",
+        note: "「ほっとする」で、心配がなくなって安心すること。",
+      },
+      同時に: { reading: "どうじに", pos: "副詞", meaning: "at the same time" },
+      腹: {
+        reading: "はら",
+        pos: "名詞",
+        meaning: "belly; (here) anger",
+        note: "「腹が立つ」で「怒る気持ちになる」の意味。「怒る」より、心の中の気持ちを言う。",
+      },
+      怒る: {
+        reading: "おこる",
+        pos: "動詞（五段）",
+        meaning: "to get angry; to tell off",
+        note: "自分の気持ちのまま、腹を立てること。人に向けて大きな声を出すことも「怒る」という。",
+        examples: [
+          { ja: "弟が私のケーキを食べたので、怒った。", en: "My little brother ate my cake, so I got angry." },
+        ],
+      },
+      落ち着く: {
+        reading: "おちつく",
+        pos: "動詞（五段）",
+        meaning: "to calm down; to stay calm",
+      },
+      叱る: {
+        reading: "しかる",
+        pos: "動詞（五段）",
+        meaning: "to scold",
+        note: "相手のためを思って、よくないことを注意すること。親や先生が子どもに使うことが多い。",
+        examples: [
+          { ja: "宿題をしなかったので、先生に叱られた。", en: "I was scolded by my teacher for not doing my homework." },
+        ],
+      },
+      預かる: {
+        reading: "あずかる",
+        pos: "動詞（五段）",
+        meaning: "to look after; to take care of (something entrusted)",
+        note: "人から大切なものや人を任されて、守ること。「子どもを預かる」「荷物を預かる」。",
+      },
+      責任: {
+        reading: "せきにん",
+        pos: "名詞",
+        meaning: "responsibility",
+        note: "しなければならない役目。「〜する責任がある」の形でよく使う。",
+      },
+      謝る: {
+        reading: "あやまる",
+        pos: "動詞（五段）",
+        meaning: "to apologize",
+        note: "自分が悪かったと言って、「ごめんなさい」「すみません」と伝えること。",
+      },
+      許す: {
+        reading: "ゆるす",
+        pos: "動詞（五段）",
+        meaning: "to forgive; to allow",
+        note: "相手の悪かったことを、もう責めないこと。「〜を許す」。",
+        examples: [
+          { ja: "友だちが謝ってくれたので、許すことにした。", en: "My friend apologized, so I decided to forgive them." },
+        ],
+      },
+      罰: {
+        reading: "ばつ",
+        pos: "名詞",
+        meaning: "punishment; penalty",
+        note: "悪いことをした人が受けるもの。「罰として〜」の形でよく使う。",
+      },
+      外出: { reading: "がいしゅつ", pos: "名詞・する動詞", meaning: "going out" },
+      文句: {
+        reading: "もんく",
+        pos: "名詞",
+        meaning: "complaint",
+        note: "「文句を言う」で、不満を口に出すこと。",
+      },
+      当然: {
+        reading: "とうぜん",
+        pos: "名詞・形容動詞",
+        meaning: "natural; of course; deserved",
+        note: "そうなって当たり前だ、という気持ち。",
+      },
+      理由: { reading: "りゆう", pos: "名詞", meaning: "reason" },
+      似る: { reading: "にる", pos: "動詞（一段）", meaning: "to be similar; to resemble" },
+    },
+    translations: {
+      "去年の秋から、私の家に日本から来た高校生のユイが住んでいます。":
+        "Since last fall, a high school student from Japan named Yui has been living in our home.",
+      "ユイは16歳で、私たちのホームステイの娘です。":
+        "Yui is 16, and she's our homestay daughter.",
+      "明るくてよく笑う子なので、家族みんなとすぐに仲良くなりました。":
+        "She's cheerful and laughs a lot, so she quickly became close with the whole family.",
+      "ユイが来た日に、家族で家のルールを決めました。":
+        "On the day Yui arrived, we decided on the house rules together as a family.",
+      "夜は10時までに帰ること、遅くなるときは必ず連絡すること、自分の部屋は自分で片付けることの三つです。":
+        "There were three: be home by 10 p.m., always get in touch if you'll be late, and keep your own room tidy.",
+      "ユイは「分かりました」と言って、そのルールを紙に書いて部屋に貼りました。":
+        "Yui said, \"Got it,\" wrote the rules on a piece of paper, and put it up in her room.",
+      "ところが、ある金曜日の夜、ユイは10時を過ぎても帰ってきませんでした。":
+        "But one Friday night, Yui still hadn't come home after 10.",
+      "電話をかけても出ません。":
+        "We called her, but she didn't answer.",
+      "11時になると本当に心配になって、警察に連絡しようかと家族で話していました。":
+        "By 11 we were really worried, and the family was talking about whether to call the police.",
+      "そのとき、玄関から「ただいま」という声が聞こえました。":
+        "Just then, we heard \"I'm home!\" from the front door.",
+      "友だちの家で映画を見ていて、時間を忘れていたそうです。":
+        "Apparently she'd been watching a movie at a friend's house and lost track of time.",
+      "私はほっとしましたが、同時に腹も立ちました。":
+        "I was relieved, but at the same time I was angry.",
+      "それでも、大きな声で怒るのではなく、落ち着いて叱ることにしました。":
+        "Even so, I decided not to yell at her in anger, but to scold her calmly.",
+      "私はユイに、遅くなったことより、連絡がなかったことが問題だと話しました。":
+        "I told Yui that the problem wasn't so much that she was late, but that she hadn't contacted us.",
+      "ユイを預かっている私たちには、ユイを守る責任があるからです。":
+        "That's because we're looking after Yui, so we have a responsibility to keep her safe.",
+      "ユイは泣きながら「心配をかけて、ごめんなさい」と謝りました。":
+        "Yui cried and apologized, saying, \"I'm sorry I made you worry.\"",
+      "私はすぐにユイを許しましたが、罰として次の週末は夜の外出をなしにしました。":
+        "I forgave her right away, but as a punishment, she couldn't go out at night the next weekend.",
+      "ユイは文句を言わずに、「当然です」と笑いました。":
+        "Yui didn't complain; she just smiled and said, \"That's fair.\"",
+      "次の日の朝ごはんのとき、ユイが「日本のお母さんは怒ると怖いけど、ここでは叱られても理由が分かるから、なんだかうれしかったです」と言いました。":
+        "At breakfast the next day, Yui said, \"My mom in Japan is scary when she gets angry, but here, even when I get scolded, I understand why, so somehow it made me happy.\"",
+      "怒ることと叱ることは似ていますが、少し違うのかもしれません。":
+        "Getting angry and scolding are similar, but maybe they're a little different.",
+    },
+    translationPractice: [
+      "ユイが来た日に、家族で家のルールを決めました。",
+      "電話をかけても出ません。",
+      "友だちの家で映画を見ていて、時間を忘れていたそうです。",
+      "私はほっとしましたが、同時に腹も立ちました。",
+      "それでも、大きな声で怒るのではなく、落ち着いて叱ることにしました。",
+      "ユイは泣きながら「心配をかけて、ごめんなさい」と謝りました。",
+      "ユイは文句を言わずに、「当然です」と笑いました。",
+      "怒ることと叱ることは似ていますが、少し違うのかもしれません。",
+    ],
+    quiz: {
+      cloze: [
+        {
+          before: "遅くなるときは必ず",
+          after: "すること。",
+          options: ["連絡", "外出", "心配", "文句"],
+          answer: 0,
+          explanation: "「連絡する」は電話やメッセージで相手に知らせることです。",
+        },
+        {
+          before: "自分の部屋は自分で",
+          after: "こと。",
+          options: ["預かる", "片付ける", "許す", "貼る"],
+          answer: 1,
+          explanation: "「片付ける」は、散らかった物を元の場所に戻してきれいにすることです。",
+        },
+        {
+          before: "11時になると本当に心配になって、",
+          after: "に連絡しようかと家族で話していました。",
+          options: ["玄関", "高校", "警察", "友だち"],
+          answer: 2,
+          explanation: "人がいなくなって心配なとき、連絡するのは「警察」です。",
+        },
+        {
+          before: "私は",
+          after: "しましたが、同時に腹も立ちました。",
+          options: ["ほっと", "がっかり", "びっくり", "うっかり"],
+          answer: 0,
+          explanation: "ユイが無事に帰ってきて安心したので「ほっとした」です。",
+        },
+        {
+          before: "大きな声で怒るのではなく、落ち着いて",
+          after: "ことにしました。",
+          options: ["謝る", "許す", "叱る", "笑う"],
+          answer: 2,
+          explanation: "相手のためを思って注意することを「叱る」といいます。",
+        },
+        {
+          before: "ユイを預かっている私たちには、ユイを守る",
+          after: "があるからです。",
+          options: ["理由", "責任", "ルール", "罰"],
+          answer: 1,
+          explanation: "「〜する責任がある」は、それをしなければならない役目がある、という意味です。",
+        },
+        {
+          before: "ユイは泣きながら「心配をかけて、ごめんなさい」と",
+          after: "。",
+          options: ["許しました", "叱りました", "謝りました", "怒りました"],
+          answer: 2,
+          explanation: "「ごめんなさい」と言うのは「謝る」ことです。",
+        },
+        {
+          before: "",
+          after: "として次の週末は夜の外出をなしにしました。",
+          options: ["罰", "責任", "理由", "連絡"],
+          answer: 0,
+          explanation: "悪いことをしたときに受けるものが「罰」。「罰として〜」の形で使います。",
+        },
+      ],
+      reading: [
+        {
+          question: "ユイが来た日に、家族はどんなルールを決めましたか？",
+          answer: "夜10時までに帰る、遅くなるときは連絡する、自分の部屋は自分で片付ける、の三つです。",
+          hints: ["10時", "帰る", "連絡", "部屋", "片付ける"],
+        },
+        {
+          question: "ある金曜日の夜、何がありましたか？",
+          answer: "ユイが10時を過ぎても帰らず、電話にも出ませんでした。友だちの家で映画を見ていて、時間を忘れていました。",
+          hints: ["過ぎる", "帰る", "電話", "友だちの家", "映画", "忘れる"],
+        },
+        {
+          question: "「私」は、何がいちばん問題だと話しましたか？それはなぜですか？",
+          answer: "遅くなったことより、連絡がなかったことです。ユイを預かっていて、守る責任があるからです。",
+          hints: ["連絡", "預かる", "守る", "責任"],
+        },
+        {
+          question: "ユイが謝ったあと、「私」はどうしましたか？",
+          answer: "すぐにユイを許しましたが、罰として次の週末は夜の外出をなしにしました。",
+          hints: ["許す", "罰", "週末", "外出"],
+        },
+        {
+          question: "ユイはなぜ「うれしかった」と言ったのですか？",
+          answer: "日本のお母さんは怒ると怖いけど、ここでは叱られても理由が分かるからです。",
+          hints: ["怒る", "怖い", "叱られる", "理由", "分かる"],
+        },
+      ],
+    },
+  },
 ];

@@ -2226,3 +2226,33 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
     padding-bottom: 8px;
   }
 }
+
+/* Sidebar switch between 記事 and JapanesePod101 (users with podIds). */
+.library-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  margin: 0 20px 4px 0; /* clear the sidebar's collapse button */
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.library-tab {
+  flex: 1;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.library-tab:hover { color: var(--text); }
+.library-tab.active {
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+}
+.library-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }

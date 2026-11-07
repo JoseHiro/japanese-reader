@@ -36,7 +36,7 @@ import {
   IconRetry,
   IconList,
 } from "./shared/icons";
-import { findUser, articlesForUser, lessonsForUser, vocabForUser, type User } from "./users";
+import { findUser, articlesForUser, podsForUser, lessonsForUser, vocabForUser, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
@@ -146,6 +146,9 @@ const BASE_TABS: TabDef[] = [
   { id: "vocabQuiz", label: "単語クイズ", icon: <IconVocabQuiz /> },
   { id: "readingQuiz", label: "読解クイズ", icon: <IconReadingQuiz /> },
 ];
+
+// JapanesePod101 transcripts: reading only, no quizzes.
+const POD_TABS: TabDef[] = [BASE_TABS[0], BASE_TABS[1]];
 
 const PRACTICE_TAB: TabDef = {
   id: "practice",
@@ -331,6 +334,23 @@ export default function App() {
     () => sortArticles(user ? articlesForUser(user) : []),
     [user],
   );
+
+  // JapanesePod101 transcripts: read like articles, listed under their own
+  // sidebar tab, no quiz tabs.
+  const sortedPods = useMemo(
+    () => sortArticles(user ? podsForUser(user) : []),
+    [user],
+  );
+  const hasPodTab = !!user?.podIds;
+  // Everything the reader can open by id (route lookups).
+  const readable = useMemo(() => [...sortedArticles, ...sortedPods], [sortedArticles, sortedPods]);
+  const [libraryTab, setLibraryTab] = useState<"articles" | "pod">("articles");
+  const libraryList = libraryTab === "pod" ? sortedPods : sortedArticles;
+  const isPodArticle = (a: Article) => sortedPods.some((p) => p.id === a.id);
+  const isPod = !!article && isPodArticle(article);
+  // Pod101 transcripts only have the reading tabs.
+  const tabFor = (a: Article, tab: string) =>
+    isPodArticle(a) && !POD_TABS.some((t) => t.id === tab) ? "article" : tab;
 
   const userLessons = useMemo(() => (user ? lessonsForUser(user) : []), [user]);
   const isLessonMode = userLessons.length > 0;
@@ -729,9 +749,10 @@ export default function App() {
   }
 
   function loadArticle(a: Article, tab: string = "article") {
+    setLibraryTab(isPodArticle(a) ? "pod" : "articles");
     setArticle(a);
     setHeadings(new Set(a.headings ?? []));
-    setActiveTab(tab);
+    setActiveTab(tabFor(a, tab));
     setListGlosses({});
     setWordQuery("");
     resetQuiz();
@@ -779,7 +800,7 @@ export default function App() {
     const r = parseHash();
     const target =
       r.kind === "article"
-        ? sortedArticles.find((a) => a.id === r.articleId)
+        ? readable.find((a) => a.id === r.articleId)
         : undefined;
     if (target) loadArticle(target, r.articleTab ?? "article");
     else if (sortedArticles[0]) loadArticle(sortedArticles[0]);
@@ -819,10 +840,15 @@ export default function App() {
     function handle() {
       const r = parseHash();
       if (r.kind === "article" && r.articleId) {
-        const target = sortedArticles.find((a) => a.id === r.articleId);
+        const target = readable.find((a) => a.id === r.articleId);
         if (target) {
-          if (article?.id !== target.id) loadArticle(target, r.articleTab ?? "article");
-          else if (r.articleTab && r.articleTab !== activeTab) setActiveTab(r.articleTab);
+          const tab = tabFor(target, r.articleTab ?? "article");
+          if (article?.id !== target.id) loadArticle(target, tab);
+          else if (tab !== activeTab) setActiveTab(tab);
+          // A tab this item doesn't have (e.g. a quiz on Pod101): fix the URL.
+          if (tab !== r.articleTab) {
+            window.history.replaceState(null, "", formatArticleHash(target.id, tab));
+          }
         }
       } else if (r.kind === "lesson" && r.lessonId) {
         if (userLessons.some((l) => l.id === r.lessonId)) {
@@ -834,7 +860,7 @@ export default function App() {
     window.addEventListener("hashchange", handle);
     return () => window.removeEventListener("hashchange", handle);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortedArticles, userLessons, article?.id, activeTab, openLessonId, lessonTab]);
+  }, [readable, userLessons, article?.id, activeTab, openLessonId, lessonTab]);
 
   function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
@@ -1007,13 +1033,37 @@ export default function App() {
           </nav>
         ) : (
           <nav className="article-list">
-            <span className="list-label">記事</span>
-            {sortedArticles.length === 0 && (
+            {hasPodTab ? (
+              <div className="library-tabs" role="tablist" aria-label="ライブラリ">
+                {(
+                  [
+                    ["articles", "記事"],
+                    ["pod", "JapanesePod101"],
+                  ] as const
+                ).map(([id, label]) => (
+                  <button
+                    key={id}
+                    type="button"
+                    role="tab"
+                    aria-selected={libraryTab === id}
+                    className={"library-tab" + (libraryTab === id ? " active" : "")}
+                    onClick={() => setLibraryTab(id)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="list-label">記事</span>
+            )}
+            {libraryList.length === 0 && (
               <p className="empty-library">
-                {user.displayName} さんの記事はまだありません。
+                {libraryTab === "pod"
+                  ? "JapanesePod101 の教材はまだありません。"
+                  : `${user.displayName} さんの記事はまだありません。`}
               </p>
             )}
-            {sortedArticles.map((a) => (
+            {libraryList.map((a) => (
               <button
                 key={a.id}
                 className={"article-item" + (article?.id === a.id ? " active" : "")}
@@ -1032,7 +1082,7 @@ export default function App() {
 
       {!isLessonMode && (article || user.vocabPoolId || user.tobiraCurrent !== undefined) && (
         <TabRail
-          groups={tabGroupsForUser(user).map((g) => ({
+          groups={(isPod ? [{ id: "main", tabs: POD_TABS }] : tabGroupsForUser(user)).map((g) => ({
             ...g,
             tabs: g.tabs.map((t) =>
               isTabDone(t.id) ? { ...t, done: true } : t,
