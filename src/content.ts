@@ -3926,4 +3926,436 @@ export const ARTICLES: Article[] = [
       ],
     },
   },
+  {
+    id: "pod101-li5-01",
+    title: "血液型で何が分かる？",
+    subtitle: "Lower Intermediate S5 #1 ・ What Does Your Blood Type Say About You?",
+    date: "2026-11-07",
+    text: `さくら：愛、どうしたの？相談があるって。
+愛：実は、サークルに好きな人ができて。
+さくら：え？本当？どんな感じの人？
+愛：それが、B型の人なの・・・。ほら、B型の人って変わった人が多いでしょ。それに、彼、女友達が多いみたいだし・・・どうしたら、私のこと好きになってもらえるかな・・・。
+さくら：ふーん。彼、B型なんだ。ちなみに、わたしもB型なんだよ。知ってた？
+愛：ええ？じゃあ、さくら、同じ血液型だったら、B型の人の気持ちも分かるでしょ？
+さくら：バカなこと聞かないでよ。血液型で全部わかったら、苦労しないよ。（笑）でも、ネットで検索したら面白いんじゃない。話題づくりにもいいし。掲示板を見たら、いろいろな意見が読めるかもよ。
+愛：「B型の男性は、個性的で芸術的な女性が好きです。B型の男性は自由なので、束縛したら、嫌われます。」・・・か。
+さくら：ふーん。確かに、わたしも束縛されたら、嫌いになるかもしれない。
+愛：決めた！わたし、個性的な女になる。
+さくら：えー！`,
+    annotations: {
+      "相談": { reading: "そうだん", pos: "名詞・する動詞", meaning: "consultation; asking for advice", note: "「相談がある」で「聞いてほしい話・助けてほしいことがある」。" },
+      "サークル": { reading: "サークル", pos: "名詞", meaning: "(university) club; circle", note: "大学の、趣味やスポーツのグループ。「部活」よりゆるいことが多い。" },
+      "血液型": { reading: "けつえきがた", pos: "名詞", meaning: "blood type", note: "日本では、血液型で性格が分かると考える人が多く、よく話題になる。" },
+      "変わる": { reading: "かわる", pos: "動詞（五段）", meaning: "to change; (変わった人) unusual, eccentric", note: "「変わった人」は「ふつうとは少し違う、おもしろい人」の意味。" },
+      "ちなみに": { reading: "ちなみに", pos: "接続詞", meaning: "by the way; incidentally", note: "前の話に関係する情報を付け足すときに使う。" },
+      "苦労": { reading: "くろう", pos: "名詞・する動詞", meaning: "hardship; trouble", note: "「〜たら苦労しない」で「それができたら簡単なのに（実際は難しい）」。" },
+      "検索": { reading: "けんさく", pos: "名詞・する動詞", meaning: "(web) search" },
+      "話題": { reading: "わだい", pos: "名詞", meaning: "topic (of conversation)", note: "「話題づくり」は話すきっかけを作ること。" },
+      "掲示板": { reading: "けいじばん", pos: "名詞", meaning: "bulletin board; online forum", note: "ここではインターネットの掲示板のこと。" },
+      "意見": { reading: "いけん", pos: "名詞", meaning: "opinion" },
+      "個性的": { reading: "こせいてき", pos: "形容動詞", meaning: "unique; distinctive; having a strong personality" },
+      "芸術的": { reading: "げいじゅつてき", pos: "形容動詞", meaning: "artistic" },
+      "束縛": { reading: "そくばく", pos: "名詞・する動詞", meaning: "restraint; tying someone down", note: "恋人の自由を制限すること。「束縛する／される」。" },
+      "嫌う": { reading: "きらう", pos: "動詞（五段）", meaning: "to dislike; to hate", note: "「嫌われる」は受け身で「きらいだと思われる」。" },
+      "確か": { reading: "たしか", pos: "形容動詞・副詞", meaning: "certain; (確かに) indeed, that's true" },
+    },
+    translations: {
+      "愛、どうしたの？":
+        "Ai, what's up?",
+      "相談があるって。":
+        "You said you wanted to talk to me about something.",
+      "実は、サークルに好きな人ができて。":
+        "Actually, there's someone in my club I've started to like.",
+      "え？":
+        "Huh?",
+      "本当？":
+        "Really?",
+      "どんな感じの人？":
+        "What's he like?",
+      "それが、B型の人なの・・・。":
+        "Well, the thing is, he's type B...",
+      "ほら、B型の人って変わった人が多いでしょ。":
+        "You know, a lot of type B people are kind of eccentric, right?",
+      "それに、彼、女友達が多いみたいだし・・・どうしたら、私のこと好きになってもらえるかな・・・。":
+        "And he seems to have lots of female friends... What can I do to get him to like me...?",
+      "ふーん。":
+        "Hmm.",
+      "彼、B型なんだ。":
+        "So he's type B.",
+      "ちなみに、わたしもB型なんだよ。":
+        "By the way, I'm type B too.",
+      "知ってた？":
+        "Did you know?",
+      "ええ？":
+        "What?",
+      "じゃあ、さくら、同じ血液型だったら、B型の人の気持ちも分かるでしょ？":
+        "Then Sakura, if you're the same blood type, you must understand how type B people feel, right?",
+      "バカなこと聞かないでよ。":
+        "Don't ask silly questions.",
+      "血液型で全部わかったら、苦労しないよ。":
+        "If you could figure out everything from blood type, life would be easy.",
+      "（笑）でも、ネットで検索したら面白いんじゃない。":
+        "(laughs) But it might be fun to search online.",
+      "話題づくりにもいいし。":
+        "It'd be good for coming up with things to talk about, too.",
+      "掲示板を見たら、いろいろな意見が読めるかもよ。":
+        "If you look at forums, you might find all kinds of opinions.",
+      "「B型の男性は、個性的で芸術的な女性が好きです。B型の男性は自由なので、束縛したら、嫌われます。」・・・か。":
+        "\"Type B men like women who are unique and artistic. Type B men are free spirits, so if you tie them down, they'll dislike you.\" ...Huh.",
+      "確かに、わたしも束縛されたら、嫌いになるかもしれない。":
+        "True, if someone tied me down, I might start disliking them too.",
+      "決めた！":
+        "I've decided!",
+      "わたし、個性的な女になる。":
+        "I'm going to become a unique woman.",
+      "えー！":
+        "Whaaat!",
+    },
+  },
+  {
+    id: "pod101-li5-02",
+    title: "『B型自分の説明書』",
+    subtitle: "Lower Intermediate S5 #2 ・ Many Things Will Fall into Place!",
+    date: "2026-11-06",
+    text: `さくら：ねえねえ、愛。最近彼とどうなった？
+愛：彼の気持ちがわからない。彼、気分屋だし・・・。
+さくら：はい、これプレゼント。
+愛：何？この本。『B型自分の説明書』。おおー。
+さくら：これ読むと、彼の気持ちがわかるかもよ。
+翼：あ、愛ちゃん。
+愛：あ、つ、つ、翼君！ひさしぶり。ははは。どうしたの？い、今から授業？
+翼：そうそう。たまには、授業に出ないと、卒業できないからね。あ、その本、今すごい人気だよねー。あれ？愛ちゃんはB型？
+愛：う、ううん。わたしはA型。
+翼：ちょっと見せて。
+愛：あ、うん。もちろん！
+さくら：（小さい声で）ねぇねぇ、愛、この人？
+愛：（小さい声で）そう！
+翼：ヘー。B型は変わっているって言われるとうれしい。・・・ヘー。
+愛：や、やっぱりさ、翼君も、個性的だね・・・って言われるとうれしいの？
+翼：え？俺？別に。ていうか、俺、O型だし。
+愛：ええ？B型じゃないの？
+翼：ああ、よく間違えられるけど、O型。しかも、俺、占い絶対信じないし。`,
+    annotations: {
+      "気持ち": { reading: "きもち", pos: "名詞", meaning: "feelings" },
+      "気分屋": { reading: "きぶんや", pos: "名詞", meaning: "moody person", note: "その時の気分で、態度や考えがよく変わる人。" },
+      "説明書": { reading: "せつめいしょ", pos: "名詞", meaning: "instruction manual", note: "『B型自分の説明書』は、実際に日本でとても売れた本。" },
+      "ひさしぶり": { reading: "ひさしぶり", pos: "名詞・形容動詞", meaning: "long time no see" },
+      "授業": { reading: "じゅぎょう", pos: "名詞", meaning: "class; lesson", note: "「授業に出る」で「授業に出席する」。" },
+      "たまに": { reading: "たまに", pos: "副詞", meaning: "occasionally; once in a while" },
+      "卒業": { reading: "そつぎょう", pos: "名詞・する動詞", meaning: "graduation" },
+      "人気": { reading: "にんき", pos: "名詞", meaning: "popularity" },
+      "やっぱり": { reading: "やっぱり", pos: "副詞", meaning: "as expected; after all", note: "「やはり」の話し言葉。" },
+      "別に": { reading: "べつに", pos: "副詞", meaning: "not particularly", note: "否定の気持ちで「特にそうでもない」と言うときに使う。" },
+      "ていうか": { reading: "ていうか", pos: "接続詞", meaning: "or rather; I mean", note: "相手の話を少し訂正したり、話を変えたりするときのくだけた言い方。" },
+      "間違える": { reading: "まちがえる", pos: "動詞（一段）", meaning: "to mistake; to get wrong", note: "「間違えられる」は「（人に）間違って思われる」。" },
+      "しかも": { reading: "しかも", pos: "接続詞", meaning: "moreover; on top of that" },
+      "占い": { reading: "うらない", pos: "名詞", meaning: "fortune-telling; horoscope" },
+      "絶対": { reading: "ぜったい", pos: "副詞", meaning: "absolutely; (with negative) never" },
+      "信じる": { reading: "しんじる", pos: "動詞（一段）", meaning: "to believe" },
+    },
+    translations: {
+      "ねえねえ、愛。":
+        "Hey, hey, Ai.",
+      "最近彼とどうなった？":
+        "How are things going with him lately?",
+      "彼の気持ちがわからない。":
+        "I don't know how he feels.",
+      "彼、気分屋だし・・・。":
+        "He's moody, too...",
+      "はい、これプレゼント。":
+        "Here, a present for you.",
+      "何？":
+        "What?",
+      "この本。":
+        "This book?",
+      "『B型自分の説明書』。":
+        "\"Type B: My Own Instruction Manual.\"",
+      "おおー。":
+        "Ooh.",
+      "これ読むと、彼の気持ちがわかるかもよ。":
+        "If you read this, you might understand how he feels.",
+      "あ、愛ちゃん。":
+        "Oh, Ai.",
+      "あ、つ、つ、翼君！":
+        "Oh, T-T-Tsubasa!",
+      "ひさしぶり。":
+        "Long time no see.",
+      "ははは。":
+        "Ha ha ha.",
+      "どうしたの？":
+        "What's up?",
+      "い、今から授業？":
+        "A-are you heading to class now?",
+      "そうそう。":
+        "Yeah, yeah.",
+      "たまには、授業に出ないと、卒業できないからね。":
+        "If I don't show up to class once in a while, I won't be able to graduate.",
+      "あ、その本、今すごい人気だよねー。":
+        "Oh, that book is really popular right now, isn't it?",
+      "あれ？":
+        "Huh?",
+      "愛ちゃんはB型？":
+        "Are you type B, Ai?",
+      "う、ううん。":
+        "N-no.",
+      "わたしはA型。":
+        "I'm type A.",
+      "ちょっと見せて。":
+        "Let me take a look.",
+      "あ、うん。":
+        "Oh, sure.",
+      "もちろん！":
+        "Of course!",
+      "（小さい声で）ねぇねぇ、愛、この人？":
+        "(whispering) Hey, Ai, is this the guy?",
+      "（小さい声で）そう！":
+        "(whispering) Yes!",
+      "ヘー。":
+        "Huh.",
+      "B型は変わっているって言われるとうれしい。":
+        "\"Type B people are happy when told they're unusual.\"",
+      "・・・ヘー。":
+        "...Huh.",
+      "や、やっぱりさ、翼君も、個性的だね・・・って言われるとうれしいの？":
+        "S-so, Tsubasa, are you happy too when people say you're unique...?",
+      "俺？":
+        "Me?",
+      "別に。":
+        "Not really.",
+      "ていうか、俺、O型だし。":
+        "I mean, I'm type O.",
+      "B型じゃないの？":
+        "You're not type B?",
+      "ああ、よく間違えられるけど、O型。":
+        "Yeah, people often get it wrong, but I'm type O.",
+      "しかも、俺、占い絶対信じないし。":
+        "And besides, I never believe in fortune-telling.",
+      "え？":
+        "Huh?",
+      "ええ？":
+        "What?",
+    },
+  },
+  {
+    id: "pod101-li5-03",
+    title: "深夜の通販番組",
+    subtitle: "Lower Intermediate S5 #3 ・ If You Watch Late-Night TV, You Might Get a Deal!",
+    date: "2026-11-05",
+    text: `オカダ社長：はい、今日ご紹介するのは、こちら！シャポーから発売されている電子辞書です！電子辞書は「学習」「旅行」「日常生活」「ビジネス」の場面でとても役に立ちます。ご家族、お友達、近所の人、まだ持っていない人が周りにいたら、是非プレゼントしてあげてください。では、機能の説明をします。まず、大きな画面。そして、このボタンを押すと、バックライトが光ります。
+観客：おー！
+オカダ社長：漢字の読み方がわからなかったら、ペンで、ここに、漢字を書きます。漢字を書くと、辞書が引けます。はい、この素晴らしい内容で、お値段はなんと、消費税込み24800円。
+観客：おー！
+オカダ社長：まだ驚いたら、だめですよ。送料無料。そして、今日中に電話で注文すると、5000円引き。
+観客：ええー！
+オカダ社長：ということで、お値段は、19800円。19800円です。さらにさらに、2つ買うと、電子辞書がもう一つもらえます。どうですか！`,
+    annotations: {
+      "紹介": { reading: "しょうかい", pos: "名詞・する動詞", meaning: "introduction; presentation" },
+      "発売": { reading: "はつばい", pos: "名詞・する動詞", meaning: "release; putting on sale", note: "「〜から発売されている」で「〜という会社が売っている」。" },
+      "電子辞書": { reading: "でんしじしょ", pos: "名詞", meaning: "electronic dictionary" },
+      "日常生活": { reading: "にちじょうせいかつ", pos: "名詞", meaning: "daily life" },
+      "場面": { reading: "ばめん", pos: "名詞", meaning: "scene; situation" },
+      "役に立つ": { reading: "やくにたつ", pos: "動詞（五段）", meaning: "to be useful" },
+      "近所": { reading: "きんじょ", pos: "名詞", meaning: "neighborhood" },
+      "是非": { reading: "ぜひ", pos: "副詞", meaning: "by all means; definitely", note: "相手に強くすすめるときに使う。" },
+      "機能": { reading: "きのう", pos: "名詞", meaning: "function; feature" },
+      "画面": { reading: "がめん", pos: "名詞", meaning: "screen" },
+      "光る": { reading: "ひかる", pos: "動詞（五段）", meaning: "to light up; to shine" },
+      "引ける": { reading: "ひける", pos: "動詞（一段）", meaning: "can look up (potential of 引く)", note: "「辞書を引く」で「辞書で調べる」。辞書は「使う」ではなく「引く」と言う。" },
+      "素晴らしい": { reading: "すばらしい", pos: "形容詞", meaning: "wonderful; splendid" },
+      "値段": { reading: "ねだん", pos: "名詞", meaning: "price", note: "「お値段」は丁寧な言い方。" },
+      "消費税": { reading: "しょうひぜい", pos: "名詞", meaning: "consumption tax (sales tax)", note: "「消費税込み」は税金を含めた値段。" },
+      "驚く": { reading: "おどろく", pos: "動詞（五段）", meaning: "to be surprised" },
+      "送料": { reading: "そうりょう", pos: "名詞", meaning: "shipping fee" },
+      "無料": { reading: "むりょう", pos: "名詞", meaning: "free of charge" },
+      "注文": { reading: "ちゅうもん", pos: "名詞・する動詞", meaning: "order" },
+      "引き": { reading: "びき", pos: "接尾辞", meaning: "... off (discount)", note: "「5000円引き」で「5000円安くなる」。" },
+    },
+    translations: {
+      "はい、今日ご紹介するのは、こちら！":
+        "All right, what we're introducing today is this!",
+      "シャポーから発売されている電子辞書です！":
+        "An electronic dictionary from Chapeau!",
+      "電子辞書は「学習」「旅行」「日常生活」「ビジネス」の場面でとても役に立ちます。":
+        "Electronic dictionaries are really useful for studying, travel, daily life, and business.",
+      "ご家族、お友達、近所の人、まだ持っていない人が周りにいたら、是非プレゼントしてあげてください。":
+        "If there's anyone around you who doesn't have one yet, like your family, friends, or neighbors, be sure to give them one as a gift.",
+      "では、機能の説明をします。":
+        "Now, let me explain the features.",
+      "まず、大きな画面。":
+        "First, a big screen.",
+      "そして、このボタンを押すと、バックライトが光ります。":
+        "And when you press this button, the backlight comes on.",
+      "おー！":
+        "Ooh!",
+      "漢字の読み方がわからなかったら、ペンで、ここに、漢字を書きます。":
+        "If you don't know how to read a kanji, you write it here with the pen.",
+      "漢字を書くと、辞書が引けます。":
+        "Once you write the kanji, you can look it up.",
+      "はい、この素晴らしい内容で、お値段はなんと、消費税込み24800円。":
+        "With all these great features, the price is just 24,800 yen, tax included.",
+      "まだ驚いたら、だめですよ。":
+        "Don't be surprised yet.",
+      "送料無料。":
+        "Free shipping.",
+      "そして、今日中に電話で注文すると、5000円引き。":
+        "And if you order by phone today, you get 5,000 yen off.",
+      "ええー！":
+        "Whoa!",
+      "ということで、お値段は、19800円。":
+        "So the price is 19,800 yen.",
+      "19800円です。":
+        "19,800 yen.",
+      "さらにさらに、2つ買うと、電子辞書がもう一つもらえます。":
+        "And on top of that, if you buy two, you get another electronic dictionary free.",
+      "どうですか！":
+        "How about that!",
+    },
+  },
+  {
+    id: "pod101-li5-04",
+    title: "上手な断り方",
+    subtitle: "Lower Intermediate S5 #4 ・ If You Follow Her Advice, You Won't Make a Mistake!",
+    date: "2026-11-04",
+    text: `DJマキコ：みなさん、こんばんは。DJマキコです。今日のゲストは、マナーの達人の米田ハツさんです。
+米田ハツ：（咳払い）宜しくお願い致します。
+DJマキコ：今日は、中国からの留学生、金さんからの質問です。「友達に遊びに行こうと誘われたのですが、どうやって断ればいいでしょうか。」
+米田ハツ：日本人は、基本的に直接はっきりと「いいえ」と言わないことが多いです。相手に気づいてもらえるように、話し方に気をつけましょう。あと、理由を言えば、完璧ですね。
+DJマキコ：なるほど。例えば、「その日はちょっと・・・。次の日にテストがあるんですよ。」とかですか？
+米田ハツ：そうです。あと、相手にしっかりと謝ることですね。せっかく相手が誘ってくれたのですから。「ごめん。でも誘ってくれてありがとう」と言えば、相手も悪い気分にはなりませんよ。
+DJマキコ：先生、今日はありがとうございます。
+米田ハツ：いえいえ、こちらこそ。
+DJマキコ：それでは、また。`,
+    annotations: {
+      "ゲスト": { reading: "ゲスト", pos: "名詞", meaning: "guest" },
+      "マナー": { reading: "マナー", pos: "名詞", meaning: "manners; etiquette" },
+      "達人": { reading: "たつじん", pos: "名詞", meaning: "master; expert" },
+      "咳払い": { reading: "せきばらい", pos: "名詞・する動詞", meaning: "clearing one's throat" },
+      "留学生": { reading: "りゅうがくせい", pos: "名詞", meaning: "international student" },
+      "誘う": { reading: "さそう", pos: "動詞（五段）", meaning: "to invite; to ask (someone) out", note: "「誘われる」は受け身で「誘いを受ける」。" },
+      "断る": { reading: "ことわる", pos: "動詞（五段）", meaning: "to decline; to turn down" },
+      "基本的": { reading: "きほんてき", pos: "形容動詞", meaning: "basically; fundamentally" },
+      "直接": { reading: "ちょくせつ", pos: "名詞・副詞", meaning: "directly" },
+      "はっきり": { reading: "はっきり", pos: "副詞", meaning: "clearly; plainly" },
+      "相手": { reading: "あいて", pos: "名詞", meaning: "the other person; partner" },
+      "気づく": { reading: "きづく", pos: "動詞（五段）", meaning: "to notice; to realize", note: "「気づいてもらう」で「（言わなくても）相手に分かってもらう」。" },
+      "完璧": { reading: "かんぺき", pos: "形容動詞", meaning: "perfect" },
+      "謝る": { reading: "あやまる", pos: "動詞（五段）", meaning: "to apologize" },
+      "せっかく": { reading: "せっかく", pos: "副詞", meaning: "kindly (went to the trouble); with effort", note: "相手がわざわざしてくれたことを大切に思う気持ちを表す。" },
+      "気分": { reading: "きぶん", pos: "名詞", meaning: "mood; feeling", note: "「悪い気分にはならない」で「いやな気持ちにはならない」。" },
+    },
+    translations: {
+      "みなさん、こんばんは。":
+        "Good evening, everyone.",
+      "DJマキコです。":
+        "This is DJ Makiko.",
+      "今日のゲストは、マナーの達人の米田ハツさんです。":
+        "Today's guest is etiquette master Hatsu Yoneda.",
+      "（咳払い）宜しくお願い致します。":
+        "(clears throat) It's a pleasure to be here.",
+      "今日は、中国からの留学生、金さんからの質問です。":
+        "Today's question is from Kim, an international student from China.",
+      "「友達に遊びに行こうと誘われたのですが、どうやって断ればいいでしょうか。」":
+        "\"A friend invited me to go out. How should I turn them down?\"",
+      "日本人は、基本的に直接はっきりと「いいえ」と言わないことが多いです。":
+        "Japanese people basically often avoid saying \"no\" directly and clearly.",
+      "相手に気づいてもらえるように、話し方に気をつけましょう。":
+        "Be careful with how you say it, so the other person picks up on it.",
+      "あと、理由を言えば、完璧ですね。":
+        "And if you give a reason, that's perfect.",
+      "なるほど。":
+        "I see.",
+      "例えば、「その日はちょっと・・・。次の日にテストがあるんですよ。」とかですか？":
+        "For example, something like \"That day's a bit... I have a test the next day\"?",
+      "そうです。":
+        "Exactly.",
+      "あと、相手にしっかりと謝ることですね。":
+        "Also, make sure to apologize properly.",
+      "せっかく相手が誘ってくれたのですから。":
+        "After all, they went to the trouble of inviting you.",
+      "「ごめん。でも誘ってくれてありがとう」と言えば、相手も悪い気分にはなりませんよ。":
+        "If you say \"Sorry, but thanks for inviting me,\" they won't feel bad.",
+      "先生、今日はありがとうございます。":
+        "Thank you so much for today.",
+      "いえいえ、こちらこそ。":
+        "Not at all, thank you.",
+      "それでは、また。":
+        "Well then, until next time.",
+    },
+  },
+  {
+    id: "pod101-li5-05",
+    title: "手相占い",
+    subtitle: "Lower Intermediate S5 #5 ・ You Will See Your Future in Japan",
+    date: "2026-11-03",
+    text: `赤坂の父：お嬢さん、悩みがあるんじゃないですか。手相占いをしませんか。
+島崎聖子：ええ？悩みがあるって、どうしてわかったの？
+赤坂の父：顔を見ればわかりますよ。そこに、すわりなさい。悩みは結婚とお仕事ですか？
+島崎聖子：ええ？なんで、結婚と仕事で悩んでいるって、わかったんですか？
+赤坂の父：女性だと、一番気になることですよね。じゃあ、手を見せてください。（ふむふむ）あなた、仕事で成功できたら、結婚はしないで良いと思っていますよね。
+島崎聖子：え？いや、そんな・・・。自分より、年収が高くて、頭がよくて、仕事ができる男性がいれば、結婚したいですよ。
+赤坂の父：そんなことを言っていると、一生独身ですよ。あ、いや・・・待ってください・・・あなた、結婚できますよ。
+島崎聖子：ええ？本当ですか？
+赤坂の父：間違いなく理想の相手と出会います。
+島崎聖子：よかったー。いつですか。
+赤坂の父：45年後ですね。`,
+    annotations: {
+      "お嬢さん": { reading: "おじょうさん", pos: "名詞", meaning: "young lady; miss", note: "若い女性を丁寧に呼ぶ言い方。人の娘のことも言う。" },
+      "悩み": { reading: "なやみ", pos: "名詞", meaning: "worry; trouble" },
+      "悩む": { reading: "なやむ", pos: "動詞（五段）", meaning: "to worry; to be troubled" },
+      "手相占い": { reading: "てそううらない", pos: "名詞", meaning: "palm reading" },
+      "結婚": { reading: "けっこん", pos: "名詞・する動詞", meaning: "marriage" },
+      "気になる": { reading: "きになる", pos: "動詞（五段）", meaning: "to be on one's mind; to be concerned about" },
+      "成功": { reading: "せいこう", pos: "名詞・する動詞", meaning: "success" },
+      "年収": { reading: "ねんしゅう", pos: "名詞", meaning: "annual income" },
+      "一生": { reading: "いっしょう", pos: "名詞", meaning: "one's whole life" },
+      "独身": { reading: "どくしん", pos: "名詞", meaning: "single; unmarried" },
+      "間違いなく": { reading: "まちがいなく", pos: "副詞", meaning: "without a doubt; definitely" },
+      "理想": { reading: "りそう", pos: "名詞", meaning: "ideal", note: "「理想の相手」は自分が一番いいと思う結婚相手。" },
+      "出会う": { reading: "であう", pos: "動詞（五段）", meaning: "to meet (by chance); to come across" },
+    },
+    translations: {
+      "お嬢さん、悩みがあるんじゃないですか。":
+        "Young lady, you have something troubling you, don't you?",
+      "手相占いをしませんか。":
+        "How about a palm reading?",
+      "ええ？":
+        "What?",
+      "悩みがあるって、どうしてわかったの？":
+        "How did you know I have something on my mind?",
+      "顔を見ればわかりますよ。":
+        "I can tell by looking at your face.",
+      "そこに、すわりなさい。":
+        "Sit down there.",
+      "悩みは結婚とお仕事ですか？":
+        "Is it marriage and work that's worrying you?",
+      "なんで、結婚と仕事で悩んでいるって、わかったんですか？":
+        "How did you know I'm worried about marriage and work?",
+      "女性だと、一番気になることですよね。":
+        "For a woman, those are the things that are most on her mind.",
+      "じゃあ、手を見せてください。":
+        "Now, let me see your hand.",
+      "（ふむふむ）あなた、仕事で成功できたら、結婚はしないで良いと思っていますよね。":
+        "(hmm, hmm) You think that if you can succeed at work, you don't need to get married, don't you?",
+      "え？":
+        "Huh?",
+      "いや、そんな・・・。":
+        "No, that's not...",
+      "自分より、年収が高くて、頭がよくて、仕事ができる男性がいれば、結婚したいですよ。":
+        "If there were a man who earned more than me, was smart, and good at his job, I'd want to marry him.",
+      "そんなことを言っていると、一生独身ですよ。":
+        "If you keep saying things like that, you'll be single your whole life.",
+      "あ、いや・・・待ってください・・・あなた、結婚できますよ。":
+        "Oh, wait... hold on... you will get married.",
+      "本当ですか？":
+        "Really?",
+      "間違いなく理想の相手と出会います。":
+        "You'll definitely meet your ideal partner.",
+      "よかったー。":
+        "Thank goodness!",
+      "いつですか。":
+        "When?",
+      "45年後ですね。":
+        "In 45 years.",
+    },
+  },
 ];

@@ -52,7 +52,14 @@ export const USERS: User[] = [
       "professions-daily",
       "growth",
     ],
-    podIds: ["ramen-ichibanboshi"],
+    podIds: [
+      "pod101-li5-01",
+      "pod101-li5-02",
+      "pod101-li5-03",
+      "pod101-li5-04",
+      "pod101-li5-05",
+      "ramen-ichibanboshi",
+    ],
   },
   {
     id: "andy",
