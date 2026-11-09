@@ -176,6 +176,7 @@ export const ARTICLES: Article[] = [
 あとは、「正しい言葉」を使うこと、汚い言葉を使わないことを心がけています。流行の言葉などもあまり使わないようにしています。また、「正しいこと」「よくないこと」をきちんと教えることも大切にしています。子どもたちがなにかよくないことや危ないことをしていたとき、軽く「ダメだよ」と流してしまうと、エスカレートしてけがにつながることもあります。悪いことをしたときは「ダメだよ」と、その都度きちんと教えるようにしています。`,
     headings: ["子どもたちみんなが「今日は楽しかった」で帰れるように"],
     annotations: {
+      方: { reading: "かた", pos: "名詞", meaning: "person (polite)", readingOnly: true },
       やりがい: {
         reading: "やりがい",
         pos: "名詞",
@@ -804,6 +805,9 @@ export const ARTICLES: Article[] = [
 
 こうして考えてみると、私たちが「行きたい所へ行ける」という当たり前のことは、本当にたくさんの人の仕事に支えられているんですね。`,
     annotations: {
+      何百人: { reading: "なんびゃくにん", pos: "名詞", meaning: "hundreds of people", readingOnly: true },
+      何です: { reading: "なんです", pos: "連語", meaning: "what is it", readingOnly: true },
+      何だ: { reading: "なんだ", pos: "連語", meaning: "what is it", readingOnly: true },
       移動: {
         reading: "いどう",
         pos: "名詞・する動詞",
@@ -1189,6 +1193,7 @@ export const ARTICLES: Article[] = [
 
 こうしてみると、私たちが毎日「おいしいね」と言って食べているごはんは、本当にたくさんの人の仕事に支えられているんですね。`,
     annotations: {
+      何です: { reading: "なんです", pos: "連語", meaning: "what is it", readingOnly: true },
       日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
       食: {
         reading: "しょく",
@@ -1602,6 +1607,9 @@ export const ARTICLES: Article[] = [
       "以上", "化", "成功", "大切",
     ],
     annotations: {
+      型: { reading: "がた", pos: "接尾語", meaning: "-type; -style", readingOnly: true },
+      "11月": { reading: "じゅういちがつ", pos: "名詞", meaning: "November", readingOnly: true },
+      何です: { reading: "なんです", pos: "連語", meaning: "what is it", readingOnly: true },
       丸亀製麺: {
         reading: "まるがめせいめん",
         pos: "固有名詞",
@@ -2028,11 +2036,11 @@ export const ARTICLES: Article[] = [
         note: "「他の」は「たの」ではなく「ほかの」。「た」と読むのは「他人（たにん）」「他社（たしゃ）」のような複合語の時だけ。",
       },
       後に: {
-        reading: "あとに",
+        reading: "のちに",
         readingOnly: true,
         pos: "副詞",
         meaning: "afterward; later",
-        note: "「ご」ではなく「あと」。「後で／その後」も同じ「あと」。「ご」は「今後」「食後」のような複合語の読み。",
+        note: "「後に語る」のように「のちに」と読む。「後で／その後」は「あと」、「今後」「食後」のような複合語は「ご」。",
       },
       ランキング: { pos: "名詞", meaning: "ranking" },
       最高: {
@@ -2682,7 +2690,7 @@ export const ARTICLES: Article[] = [
         {
           before: "一人だと、どこでも",
           after: "です。",
-          options: ["入りやすい", "入れる", "入りにくい", "入らない"],
+          options: ["入りやすい", "はいれる", "入りにくい", "入らない"],
           answer: 2,
           explanation: "「V-ます形＋にくい」＝「〜するのが難しい」。",
         },
@@ -3160,7 +3168,7 @@ export const ARTICLES: Article[] = [
           translation: "In 2022 it was even made into an anime.",
           before: "2022年にはアニメ",
           after: "もされました。",
-          options: ["的", "性", "風", "化"],
+          options: ["的", "性", "ふう", "化"],
           answer: 3,
           grammarKey: "tobira-5-8",
           explanation:
@@ -3297,6 +3305,7 @@ export const ARTICLES: Article[] = [
 
 こうしてみると、私たちの安全な生活は、法律と、それを正しく使おうとする人たちに支えられているんですね。`,
     annotations: {
+      何です: { reading: "なんです", pos: "連語", meaning: "what is it", readingOnly: true },
       日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
       安心: {
         reading: "あんしん",
@@ -3943,6 +3952,8 @@ export const ARTICLES: Article[] = [
 愛：決めた！わたし、個性的な女になる。
 さくら：えー！`,
     annotations: {
+      女友達: { reading: "おんなともだち", pos: "名詞", meaning: "female friend", readingOnly: true },
+      笑: { reading: "わらい", pos: "名詞", meaning: "laughter", readingOnly: true },
       "相談": { reading: "そうだん", pos: "名詞・する動詞", meaning: "consultation; asking for advice", note: "「相談がある」で「聞いてほしい話・助けてほしいことがある」。" },
       "サークル": { reading: "サークル", pos: "名詞", meaning: "(university) club; circle", note: "大学の、趣味やスポーツのグループ。「部活」よりゆるいことが多い。" },
       "血液型": { reading: "けつえきがた", pos: "名詞", meaning: "blood type", note: "日本では、血液型で性格が分かると考える人が多く、よく話題になる。" },
@@ -4149,6 +4160,7 @@ export const ARTICLES: Article[] = [
 観客：ええー！
 オカダ社長：ということで、お値段は、19800円。19800円です。さらにさらに、2つ買うと、電子辞書がもう一つもらえます。どうですか！`,
     annotations: {
+      今日中: { reading: "きょうじゅう", pos: "名詞", meaning: "by the end of today", readingOnly: true },
       "紹介": { reading: "しょうかい", pos: "名詞・する動詞", meaning: "introduction; presentation" },
       "発売": { reading: "はつばい", pos: "名詞・する動詞", meaning: "release; putting on sale", note: "「〜から発売されている」で「〜という会社が売っている」。" },
       "電子辞書": { reading: "でんしじしょ", pos: "名詞", meaning: "electronic dictionary" },
@@ -4226,6 +4238,7 @@ DJマキコ：先生、今日はありがとうございます。
 米田ハツ：いえいえ、こちらこそ。
 DJマキコ：それでは、また。`,
     annotations: {
+      日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person", readingOnly: true },
       "ゲスト": { reading: "ゲスト", pos: "名詞", meaning: "guest" },
       "マナー": { reading: "マナー", pos: "名詞", meaning: "manners; etiquette" },
       "達人": { reading: "たつじん", pos: "名詞", meaning: "master; expert" },
@@ -4299,6 +4312,7 @@ DJマキコ：それでは、また。`,
 島崎聖子：よかったー。いつですか。
 赤坂の父：45年後ですね。`,
     annotations: {
+      良い: { reading: "いい", pos: "形容詞", meaning: "good; fine", readingOnly: true },
       "お嬢さん": { reading: "おじょうさん", pos: "名詞", meaning: "young lady; miss", note: "若い女性を丁寧に呼ぶ言い方。人の娘のことも言う。" },
       "悩み": { reading: "なやみ", pos: "名詞", meaning: "worry; trouble" },
       "悩む": { reading: "なやむ", pos: "動詞（五段）", meaning: "to worry; to be troubled" },

@@ -55,8 +55,9 @@ export function buildUnits(
         surface: group.map((t) => t.surface).join(""),
         // Reading-only entries just pin furigana; keep the natural
         // dictionary form so lookups and the word list treat the word
-        // like any other (e.g. 行っ → 行く).
-        key: annotation.readingOnly ? group[0].base : matched.key,
+        // like any other (e.g. 行っ → 行く). A compound keeps its whole
+        // form; the first token's base would be just 女 for 女友達.
+        key: annotation.readingOnly && matched.len === 1 ? group[0].base : matched.key,
         pos: annotation.pos ?? group[0].pos,
         annotation,
         annotationKey: matched.key,
