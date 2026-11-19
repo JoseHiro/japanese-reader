@@ -70,7 +70,7 @@ export const USERS: User[] = [
   {
     id: "artem",
     displayName: "Artem",
-    articleIds: ["kamakura-jidai", "nishikori-kei", "marugame-seimen"],
+    articleIds: ["godzilla", "kamakura-jidai", "nishikori-kei", "marugame-seimen"],
     tobiraCurrent: 5,
     tobiraReviewUpTo: 4,
     vocabPoolId: "artem",

@@ -4372,4 +4372,477 @@ DJマキコ：それでは、また。`,
         "In 45 years.",
     },
   },
+  {
+    id: "godzilla",
+    title: "ゴジラ — 戦争のあとに生まれた怪獣",
+    subtitle: "1954年から70年、世界へ",
+    date: "2026-11-19",
+    text: `「ゴジラ」という名前を知らない人は少ないでしょう。ゴリラとクジラをもとにして作られた名前だと言われています。今では世界中で人気がありますが、最初のゴジラ映画は、子どもが楽しむための映画ではありませんでした。
+1954年3月、アメリカが太平洋で水爆の実験をしました。ところが、近くで魚をとっていた日本の船「第五福竜丸」の人達が、その影響で病気になってしまいました。戦争が終わって、まだ9年しかたっていない時のことです。この事件をもとにして作られたのが、同じ年の11月に公開された『ゴジラ』です。映画の中のゴジラは、水爆の実験で目を覚まし、東京の町をこわしていきます。900万人以上が映画館に入り、大ヒットになりました。
+当時はCGがなかったので、ゴジラは人が中に入る着ぐるみでした。俳優が重い着ぐるみを着て、小さく作った町の中を動いたのです。今の映画と違って、ビルも電車もすべて手で作られていました。
+世界のゴジラへ
+その後、ゴジラはシリーズ化して、日本だけで30本は作られています。他の怪獣と戦って、子ども達のヒーローになった時代もありました。1998年からはハリウッドでも映画になり、ゴジラは国際的なキャラクターになりました。体も大きくなり、初めは50メートルでしたが、2016年の『シン・ゴジラ』では100メートル以上になりました。
+ゴジラ-1.0
+2023年の『ゴジラ-1.0』は、最初の映画よりも前の、戦争が終わったばかりの日本を舞台にしました。ハリウッド映画と比べると、ずっと少ないお金で作られた映画です。それでも2024年、ついにアメリカのアカデミー賞で視覚効果賞を取りました。日本映画としては初めてのことでした。
+70年たっても、ゴジラが愛されているのは、ただ大きくて強いからではないに違いありません。ゴジラには、その時代の人達の不安が映っているのです。`,
+    headings: ["世界のゴジラへ", "ゴジラ-1.0"],
+    targetGrammar: [
+      "tobira-5-3",  // Number+Counterは (at least)
+      "tobira-5-5",  // 〜以上／〜以下
+      "tobira-5-7",  // ついに
+      "tobira-5-8",  // {N/no-Adj}化(する)
+      "tobira-5-9",  // ところが
+      "tobira-5-10", // 〜に違いない
+      "tobira-5-11", // 〜をもとに(して)
+      "tobira-5-12", // Nと違って
+      "tobira-5-14", // Noun+的
+    ],
+    targetVocab: ["入る", "動く", "達", "違う", "国際"],
+    annotations: {
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
+      "3月": { reading: "さんがつ", pos: "名詞", meaning: "March", readingOnly: true },
+      "11月": { reading: "じゅういちがつ", pos: "名詞", meaning: "November", readingOnly: true },
+      手: { reading: "て", pos: "名詞", meaning: "hand", readingOnly: true },
+      他: { reading: "ほか", pos: "名詞", meaning: "other", readingOnly: true },
+      "30本": { reading: "さんじゅっぽん", pos: "名詞", meaning: "30 (films)", readingOnly: true },
+      何です: { reading: "なんです", pos: "連語", meaning: "what is it", readingOnly: true },
+      何だ: { reading: "なんだ", pos: "連語", meaning: "what is it", readingOnly: true },
+      怪獣: {
+        reading: "かいじゅう",
+        pos: "名詞",
+        meaning: "giant monster; kaiju",
+        note: "映画などに出てくる、とても大きくて強い生き物。英語でも \"kaiju\" と言う。",
+      },
+      もとにして: {
+        reading: "もとにして",
+        pos: "文型",
+        meaning: "based on ~; using ~ as a basis",
+        note: "「A をもとにして B を作る」で「A を土台にして B を作る」。とびら L5-11。",
+      },
+      太平洋: { reading: "たいへいよう", pos: "固有名詞", meaning: "the Pacific Ocean" },
+      水爆: {
+        reading: "すいばく",
+        pos: "名詞",
+        meaning: "hydrogen bomb",
+        note: "「水素爆弾（すいそばくだん）」を短くした言い方。",
+      },
+      実験: { reading: "じっけん", pos: "名詞・する動詞", meaning: "experiment; test" },
+      ところが: {
+        reading: "ところが",
+        pos: "接続詞",
+        meaning: "however; but (unexpectedly)",
+        note: "前の文から考えると思わなかったことが起きた時に使う。とびら L5-9。",
+      },
+      第五福竜丸: {
+        reading: "だいごふくりゅうまる",
+        pos: "固有名詞",
+        meaning: "Daigo Fukuryū Maru (Lucky Dragon No. 5), a Japanese fishing boat",
+        note: "「〜丸（まる）」は日本の船の名前によく付く。",
+      },
+      影響: {
+        reading: "えいきょう",
+        pos: "名詞・する動詞",
+        meaning: "influence; effect",
+        note: "「〜の影響で」で「〜が原因で」。",
+      },
+      事件: { reading: "じけん", pos: "名詞", meaning: "incident; event" },
+      公開: {
+        reading: "こうかい",
+        pos: "名詞・する動詞",
+        meaning: "release (of a film); opening to the public",
+        note: "映画が映画館で見られるようになること。",
+      },
+      目を覚まし: {
+        reading: "めをさまし",
+        pos: "動詞（五段）",
+        meaning: "waking up (目を覚ます)",
+        note: "「目を覚ます」で「眠りから起きる」。",
+      },
+      以上: {
+        reading: "いじょう",
+        pos: "名詞",
+        meaning: "or more; more than",
+        note: "「900万人以上」で「900万人か、それより多い」。反対は「以下」。とびら L5-5。",
+      },
+      映画館: { reading: "えいがかん", pos: "名詞", meaning: "movie theater" },
+      大ヒット: { reading: "だいヒット", pos: "名詞", meaning: "big hit" },
+      当時: { reading: "とうじ", pos: "名詞", meaning: "(at) that time; back then" },
+      着ぐるみ: {
+        reading: "きぐるみ",
+        pos: "名詞",
+        meaning: "full-body costume suit",
+        note: "人が中に入って動く、動物やキャラクターの形をした大きな服。",
+      },
+      俳優: { reading: "はいゆう", pos: "名詞", meaning: "actor" },
+      と違って: {
+        reading: "とちがって",
+        pos: "文型",
+        meaning: "unlike ~; different from ~",
+        note: "「N と違って」で「N と比べて、違う点がある」。とびら L5-12。",
+      },
+      シリーズ化: {
+        reading: "シリーズか",
+        pos: "名詞・する動詞",
+        meaning: "turning into a series",
+        note: "「N＋化（する）」で「N の形になる」。例：アニメ化、映画化。とびら L5-8。",
+      },
+      "30本は": {
+        reading: "さんじゅっぽんは",
+        pos: "文型",
+        meaning: "at least 30 (films)",
+        note: "「数＋助数詞＋は」で「少なくとも」。とびら L5-3。",
+      },
+      戦う: { reading: "たたかう", pos: "動詞（五段）", meaning: "to fight" },
+      国際的: {
+        reading: "こくさいてき",
+        pos: "形容動詞",
+        meaning: "international",
+        note: "「N＋的」で「N のような／N に関係がある」。とびら L5-14。",
+      },
+      舞台: {
+        reading: "ぶたい",
+        pos: "名詞",
+        meaning: "setting (of a story); stage",
+        note: "「〜を舞台にする」で「物語が〜の場所や時代で起きる」。",
+      },
+      比べる: { reading: "くらべる", pos: "動詞（一段）", meaning: "to compare" },
+      ついに: {
+        reading: "ついに",
+        pos: "副詞",
+        meaning: "finally; at last",
+        note: "長い時間や努力のあとで、何かが起きた時に使う。とびら L5-7。",
+      },
+      アカデミー賞: { reading: "アカデミーしょう", pos: "固有名詞", meaning: "the Academy Awards (Oscars)" },
+      視覚効果賞: {
+        reading: "しかくこうかしょう",
+        pos: "名詞",
+        meaning: "(Academy Award for) Best Visual Effects",
+        note: "映画のCGや特別な映像の技術に贈られる賞。",
+      },
+      愛されて: { reading: "あいされて", pos: "動詞", meaning: "being loved (愛する, passive)" },
+      違いありません: {
+        reading: "ちがいありません",
+        pos: "文型",
+        meaning: "must be ~; there is no doubt that ~",
+        note: "「〜に違いない」のていねいな形。強く思っていることを言う。とびら L5-10。",
+      },
+      不安: { reading: "ふあん", pos: "名詞・形容動詞", meaning: "anxiety; unease" },
+      映る: {
+        reading: "うつる",
+        pos: "動詞（五段）",
+        meaning: "to be reflected; to appear (in)",
+        note: "「〜に映っている」で「〜の中に見える」。",
+      },
+    },
+    translations: {
+      "「ゴジラ」という名前を知らない人は少ないでしょう。":
+        "Few people haven't heard the name \"Godzilla.\"",
+      "ゴリラとクジラをもとにして作られた名前だと言われています。":
+        "It's said to be a name made from \"gorilla\" and kujira, the Japanese word for whale.",
+      "今では世界中で人気がありますが、最初のゴジラ映画は、子どもが楽しむための映画ではありませんでした。":
+        "Today Godzilla is popular all over the world, but the very first Godzilla film wasn't a movie for kids to enjoy.",
+      "1954年3月、アメリカが太平洋で水爆の実験をしました。":
+        "In March 1954, the United States tested a hydrogen bomb in the Pacific.",
+      "ところが、近くで魚をとっていた日本の船「第五福竜丸」の人達が、その影響で病気になってしまいました。":
+        "But the crew of a Japanese fishing boat nearby, the Daigo Fukuryū Maru, fell ill from its effects.",
+      "戦争が終わって、まだ9年しかたっていない時のことです。":
+        "It happened only nine years after the war had ended.",
+      "この事件をもとにして作られたのが、同じ年の11月に公開された『ゴジラ』です。":
+        "The film based on this incident was Godzilla, released that November.",
+      "映画の中のゴジラは、水爆の実験で目を覚まし、東京の町をこわしていきます。":
+        "In the film, Godzilla is woken by the hydrogen bomb tests and goes on to destroy Tokyo.",
+      "900万人以上が映画館に入り、大ヒットになりました。":
+        "More than nine million people went to see it in theaters, and it became a huge hit.",
+      "当時はCGがなかったので、ゴジラは人が中に入る着ぐるみでした。":
+        "There was no CG back then, so Godzilla was a costume suit with a person inside.",
+      "俳優が重い着ぐるみを着て、小さく作った町の中を動いたのです。":
+        "An actor put on the heavy suit and moved through a miniature city.",
+      "今の映画と違って、ビルも電車もすべて手で作られていました。":
+        "Unlike today's films, the buildings, the trains — everything — were made by hand.",
+      "その後、ゴジラはシリーズ化して、日本だけで30本は作られています。":
+        "After that, Godzilla became a series, with at least 30 films made in Japan alone.",
+      "他の怪獣と戦って、子ども達のヒーローになった時代もありました。":
+        "There was even a time when Godzilla fought other monsters and became a hero to kids.",
+      "1998年からはハリウッドでも映画になり、ゴジラは国際的なキャラクターになりました。":
+        "From 1998 on, Hollywood made Godzilla films too, and Godzilla became an international character.",
+      "体も大きくなり、初めは50メートルでしたが、2016年の『シン・ゴジラ』では100メートル以上になりました。":
+        "Godzilla also got bigger: 50 meters tall at first, and over 100 meters in 2016's Shin Godzilla.",
+      "2023年の『ゴジラ-1.0』は、最初の映画よりも前の、戦争が終わったばかりの日本を舞台にしました。":
+        "2023's Godzilla Minus One went back even before the first film, to Japan just after the war.",
+      "ハリウッド映画と比べると、ずっと少ないお金で作られた映画です。":
+        "Compared with Hollywood films, it was made on a much smaller budget.",
+      "それでも2024年、ついにアメリカのアカデミー賞で視覚効果賞を取りました。":
+        "Even so, in 2024 it finally won the Academy Award for Best Visual Effects.",
+      "日本映画としては初めてのことでした。":
+        "It was the first time a Japanese film had won it.",
+      "70年たっても、ゴジラが愛されているのは、ただ大きくて強いからではないに違いありません。":
+        "Seventy years on, Godzilla is surely loved for more than just being big and strong.",
+      "ゴジラには、その時代の人達の不安が映っているのです。":
+        "Godzilla reflects the anxieties of the people of each era.",
+    },
+    translationPractice: [
+      "ゴリラとクジラをもとにして作られた名前だと言われています。",
+      "戦争が終わって、まだ9年しかたっていない時のことです。",
+      "今の映画と違って、ビルも電車もすべて手で作られていました。",
+      "その後、ゴジラはシリーズ化して、日本だけで30本は作られています。",
+      "ハリウッド映画と比べると、ずっと少ないお金で作られた映画です。",
+      "70年たっても、ゴジラが愛されているのは、ただ大きくて強いからではないに違いありません。",
+    ],
+    quiz: {
+      cloze: [
+        {
+          before: "1954年3月、アメリカが太平洋で水爆の",
+          after: "をしました。",
+          options: ["注文", "実験", "投資", "関係"],
+          answer: 1,
+          explanation: "新しい物が本当に使えるか、ためしてみることを「実験」という。",
+        },
+        {
+          before: "近くで魚をとっていた日本の船の人達が、その",
+          after: "で病気になってしまいました。",
+          options: ["影響", "意味", "場合", "最後"],
+          answer: 0,
+          explanation: "「〜の影響で」で「〜が原因で」。実験が原因で病気になった。",
+        },
+        {
+          before: "900万人以上が映画館に",
+          after: "、大ヒットになりました。",
+          options: ["座り", "呼び", "入り", "残り"],
+          answer: 2,
+          explanation: "映画を見るために映画館の中へ行くので「入る」。",
+        },
+        {
+          before: "俳優が重い着ぐるみを着て、小さく作った町の中を",
+          after: "のです。",
+          options: ["覚えた", "呼んだ", "注文した", "動いた"],
+          answer: 3,
+          explanation: "着ぐるみを着た俳優が、町の中をあちこち移動したので「動く」。",
+        },
+        {
+          before: "他の怪獣と",
+          after: "、子ども達のヒーローになった時代もありました。",
+          options: ["戦って", "座って", "覚えて", "呼んで"],
+          answer: 0,
+          explanation: "ヒーローは悪い怪獣と「戦う」。",
+        },
+        {
+          before: "ハリウッドでも映画になり、ゴジラは",
+          after: "的なキャラクターになりました。",
+          options: ["関係", "国際", "最後", "場合"],
+          answer: 1,
+          explanation: "日本だけでなく、世界の多くの国で知られるようになったので「国際的」。",
+        },
+        {
+          before: "『ゴジラ-1.0』は、戦争が終わったばかりの日本を",
+          after: "にしました。",
+          options: ["実験", "影響", "舞台", "不安"],
+          answer: 2,
+          explanation: "「〜を舞台にする」で「物語が〜の場所や時代で起きる」。",
+        },
+        {
+          before: "ゴジラには、その時代の人達の",
+          after: "が映っているのです。",
+          options: ["舞台", "俳優", "実験", "不安"],
+          answer: 3,
+          explanation: "「不安」は、これからどうなるか分からなくて心配な気持ち。",
+        },
+      ],
+      grammarChoice: [
+        {
+          translation: "It's said to be a name made from \"gorilla\" and \"whale.\"",
+          before: "ゴリラとクジラ",
+          after: "作られた名前だと言われています。",
+          options: ["にとって", "をもとにして", "と違って", "をはじめ"],
+          answer: 1,
+          grammarKey: "tobira-5-11",
+          explanation:
+            "〜をもとにして = \"based on ~ / using ~ as the source.\" The name was built from the two words.",
+        },
+        {
+          translation: "The US tested a hydrogen bomb. But the crew of a Japanese boat nearby fell ill.",
+          before: "アメリカが水爆の実験をしました。",
+          after: "、近くにいた日本の船の人達が病気になってしまいました。",
+          options: ["ところが", "なぜなら", "それに", "たとえば"],
+          answer: 0,
+          grammarKey: "tobira-5-9",
+          explanation:
+            "ところが introduces a result nobody expected (\"but\"). なぜなら gives a reason, それに adds a point, and たとえば gives an example.",
+        },
+        {
+          translation: "More than nine million people went to see it in theaters.",
+          before: "900万人",
+          after: "が映画館に入りました。",
+          options: ["以下", "未満", "以上", "しか"],
+          answer: 2,
+          grammarKey: "tobira-5-5",
+          explanation:
+            "以上 = \"or more.\" 以下 and 未満 mean \"or fewer\" / \"under,\" and しか needs a negative verb.",
+        },
+        {
+          translation: "Unlike today's films, everything was made by hand.",
+          before: "今の映画",
+          after: "、ビルも電車もすべて手で作られていました。",
+          options: ["と同じで", "をはじめ", "をもとに", "と違って"],
+          answer: 3,
+          grammarKey: "tobira-5-12",
+          explanation:
+            "N と違って = \"unlike N.\" Today's films use CG, so と同じで (\"like N\") doesn't fit.",
+        },
+        {
+          translation: "After that, Godzilla became a series.",
+          before: "その後、ゴジラはシリーズ",
+          after: "しました。",
+          options: ["化", "的", "性", "式"],
+          answer: 0,
+          grammarKey: "tobira-5-8",
+          explanation:
+            "N + 化する = \"to turn into N.\" シリーズ化 = \"to become a series,\" like アニメ化 or 映画化.",
+        },
+        {
+          translation: "Godzilla became an international character.",
+          before: "ゴジラは国際",
+          after: "なキャラクターになりました。",
+          options: ["化", "的", "性", "式"],
+          answer: 1,
+          grammarKey: "tobira-5-14",
+          explanation:
+            "N + 的 makes a な-adjective: 国際的な = \"international.\"",
+        },
+        {
+          translation: "In 2024, it finally won the Academy Award.",
+          before: "それでも2024年、",
+          after: "アメリカのアカデミー賞で視覚効果賞を取りました。",
+          options: ["たぶん", "なかなか", "ついに", "さっき"],
+          answer: 2,
+          grammarKey: "tobira-5-7",
+          explanation:
+            "ついに = \"finally, at last\" after a long wait. なかなか needs a negative verb, たぶん (probably) doesn't fit a known fact, and さっき means \"a moment ago.\"",
+        },
+        {
+          translation: "Godzilla is surely loved for more than just being big and strong.",
+          before: "ゴジラが愛されているのは、ただ大きくて強いからではない",
+          after: "。",
+          options: ["はずがありません", "に違いありません", "わけにはいきません", "ことになりました"],
+          answer: 1,
+          grammarKey: "tobira-5-10",
+          explanation:
+            "〜に違いない = \"must be / I'm sure.\" 〜はずがない would flip the meaning (\"it can't be that it isn't...\").",
+        },
+      ],
+      particle: [
+        {
+          text: "「ゴジラ」［と］いう名前［を］知らない人［は］少ないでしょう。",
+          translation: "Few people haven't heard the name \"Godzilla.\"",
+          explanation:
+            "「X」という名前 = \"the name X\" (と quotes it). を marks what you know. は marks the topic, 知らない人.",
+        },
+        {
+          text: "1954年3月、アメリカが太平洋［で］水爆の実験［を］しました。",
+          translation: "In March 1954, the United States tested a hydrogen bomb in the Pacific.",
+          explanation:
+            "で marks where an action happens. を marks the object of する (実験をする).",
+        },
+        {
+          text: "近く［で］魚［を］とっていた日本の船の人達が、その影響［で］病気［に］なってしまいました。",
+          translation: "The crew of a Japanese boat fishing nearby fell ill from its effects.",
+          explanation:
+            "近くで = where they were fishing. 影響で = \"because of the effects\" (で for a cause). 病気になる = \"to become ill.\"",
+        },
+        {
+          text: "この事件［を］もとにして作られたのが、同じ年［の］11月［に］公開された『ゴジラ』です。",
+          translation: "The film based on this incident was Godzilla, released that November.",
+          explanation:
+            "〜をもとにして always takes を. の connects nouns (同じ年の11月). Dates take に.",
+        },
+        {
+          text: "900万人以上［が］映画館［に］入り、大ヒットになりました。",
+          translation: "More than nine million people went to see it, and it became a huge hit.",
+          explanation:
+            "が marks who went in. 入る takes に for the place you enter.",
+        },
+        {
+          text: "俳優［が］重い着ぐるみ［を］着て、小さく作った町［の］中を動いたのです。",
+          translation: "An actor put on the heavy suit and moved through a miniature city.",
+          explanation:
+            "が marks who did it. を marks what you put on (着る). の connects nouns: 町の中 = \"inside the town.\"",
+        },
+        {
+          text: "他の怪獣［と］戦って、子ども達［の］ヒーロー［に］なった時代もありました。",
+          translation: "There was a time when Godzilla fought other monsters and became a hero to kids.",
+          explanation:
+            "〜と戦う = \"to fight (with) ~.\" の connects nouns: 子ども達のヒーロー. 〜になる = \"to become ~.\"",
+        },
+        {
+          text: "『ゴジラ-1.0』は、戦争が終わったばかりの日本［を］舞台［に］しました。",
+          translation: "Godzilla Minus One used Japan just after the war as its setting.",
+          explanation:
+            "〜を舞台にする = \"to make ~ the setting\" (を + に).",
+        },
+      ],
+      rearrange: [
+        {
+          translation: "It's a name made from \"gorilla\" and \"whale.\"",
+          chunks: ["ゴリラと", "クジラを", "もとにして", "作られた", "名前です"],
+          grammarKey: "tobira-5-11",
+          hint: "「〜をもとにして」を使って",
+        },
+        {
+          translation: "Unlike today's films, everything was made by hand.",
+          chunks: ["今の映画と", "違って", "すべて手で", "作られていました"],
+          grammarKey: "tobira-5-12",
+          hint: "「N と違って」を使って",
+        },
+        {
+          translation: "At least 30 films have been made in Japan alone.",
+          chunks: ["日本だけで", "30本は", "作られて", "います"],
+          grammarKey: "tobira-5-3",
+          hint: "「30本は」(少なくとも30本) を使って",
+        },
+        {
+          translation: "It surely isn't just because Godzilla is big and strong.",
+          chunks: ["ただ大きくて", "強いから", "ではない", "に違いありません"],
+          grammarKey: "tobira-5-10",
+          hint: "「〜に違いない」を使って",
+        },
+      ],
+      reading: [
+        {
+          question: "1954年3月に、どんなことが起きましたか。",
+          answer:
+            "アメリカが太平洋で水爆の実験をした。ところが、近くで魚をとっていた日本の船「第五福竜丸」の人達が、その影響で病気になってしまった。",
+          hints: ["水爆", "実験", "船", "影響", "病気"],
+        },
+        {
+          question: "最初の映画『ゴジラ』は、何をもとにして作られましたか。映画の中のゴジラは、どんな怪獣ですか。",
+          answer:
+            "第五福竜丸の事件をもとにして作られた。水爆の実験で目を覚まし、東京の町をこわしていく怪獣。",
+          hints: ["事件", "もとにして", "目を覚ます", "東京", "こわす"],
+        },
+        {
+          question: "当時のゴジラ映画は、どうやって作られていましたか。今の映画と違うところは何ですか。",
+          answer:
+            "CGがなかったので、俳優が重い着ぐるみを着て、小さく作った町の中を動いた。今の映画と違って、ビルも電車もすべて手で作られていた。",
+          hints: ["CG", "俳優", "着ぐるみ", "動く", "手で"],
+        },
+        {
+          question: "その後、ゴジラはどのように変わっていきましたか。二つ挙げてください。",
+          answer:
+            "①シリーズ化して日本だけで30本は作られた。他の怪獣と戦って、子ども達のヒーローになった時代もあった。②ハリウッドでも映画になり、国際的なキャラクターになった。（体も50メートルから100メートル以上に大きくなった。）",
+          hints: ["シリーズ化", "ヒーロー", "ハリウッド", "国際的", "以上"],
+        },
+        {
+          question: "『ゴジラ-1.0』は、どんな映画ですか。どうしてすごいと言えますか。",
+          answer:
+            "最初の映画よりも前の、戦争が終わったばかりの日本を舞台にした映画。ハリウッド映画よりずっと少ないお金で作られたのに、2024年にアカデミー賞の視覚効果賞を取った。日本映画として初めてだった。",
+          hints: ["舞台", "比べる", "少ないお金", "ついに", "初めて"],
+        },
+        {
+          question: "この記事を書いた人は、ゴジラが70年たっても愛されている理由を何だと考えていますか。",
+          answer:
+            "ただ大きくて強いからではなく、ゴジラにはその時代の人達の不安が映っているから、と考えている。",
+          hints: ["大きくて強い", "違いない", "時代", "不安", "映る"],
+        },
+      ],
+    },
+  },
 ];
