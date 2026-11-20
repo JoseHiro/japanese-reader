@@ -97,7 +97,8 @@ export interface Lesson {
   target?: string;
   /**
    * Japanese-only lesson (Dominik): UI labels drop their " · English"
-   * halves and the data carries no English fields.
+   * halves and the data carries no English fields, except each blank's
+   * `intentEn` (the task), so the Japanese task doesn't give the answer away.
    */
   japaneseOnly?: boolean;
   challenges?: Challenge[];
@@ -899,12 +900,7 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b1",
         intent: "名前を言い、2週間前にネットで今夜一泊の予約をしたと伝える",
-        rules: [
-          {
-            kind: "message",
-            items: ["名前", "2週間前にネットで予約", "今夜一泊"],
-          },
-        ],
+        intentEn: "Give your name and say you booked one night, tonight, online two weeks ago.",
         samples: [
           "ドミニクです。2週間前にネットで、今夜一泊で予約してるんですけど。",
           "ドミニクと申します。ネットで今日一泊、予約してあるんですが。",
@@ -922,9 +918,7 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b2",
         intent: "驚きを見せ、確認メールも来ていると言って画面を見せる",
-        rules: [
-          { kind: "message", items: ["驚き", "確認メールが来ている", "画面を見せる"] },
-        ],
+        intentEn: "React with surprise, say you even got a confirmation email, and show it on your phone.",
         samples: [
           "えっ、本当ですか？ 確認メールも来てるんですけど……。これです。",
           "え、そうなんですか。ちゃんと予約したんですけど……。メール、見ていただけますか。",
@@ -942,9 +936,9 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b3",
         intent: "日付の間違いに気づいてあやまり、「確認メールが来たからといって、日付が合っているとは限らない」と自分の反省として言う",
+        intentEn: "Admit the date mistake and apologise. Reflect that getting a confirmation email doesn't mean the date is right.",
         rules: [
           { kind: "grammar", items: ["〜からといって〜とは限らない"] },
-          { kind: "message", items: ["日付の間違いに気づいてあやまる", "自分の反省"] },
         ],
         samples: [
           "すみません、私の間違いですね。確認メールが来たからといって、日付が合っているとは限らないんですね……。",
@@ -959,9 +953,7 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b4",
         intent: "電車もバスももうほとんどないと伝え、どんな部屋でもいいので何とかならないか頼む",
-        rules: [
-          { kind: "message", items: ["電車もバスもほとんどない", "どんな部屋でもいい", "何とかならないか"] },
-        ],
+        intentEn: "Say there are hardly any trains or buses left, and ask if they can do anything. Any room is fine.",
         samples: [
           "どうしよう……。もう電車もバスもほとんどないんですよね。どんな部屋でもいいので、何とかなりませんか。",
           "今から帰るのはちょっと難しくて……。狭い部屋でもかまわないので、空いていませんか。",
@@ -978,9 +970,9 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b5",
         intent: "申し訳なさそうなスタッフに「全然大丈夫」と伝え、「外を少し歩くからといって、困ることはない」と気づかって、その部屋を頼む",
+        intentEn: "The staff apologise that the annex has no bath. Reassure them that walking outside a little is no problem, and take the room.",
         rules: [
           { kind: "grammar", items: ["〜からといって（後ろは否定）"] },
-          { kind: "message", items: ["大丈夫だと伝える", "外を歩くのは困らない", "その部屋をお願いする"] },
         ],
         samples: [
           "全然大丈夫です。外を少し歩くからといって、困ることはないです。泊まれるだけでありがたいです。その部屋でお願いします。",
@@ -998,9 +990,7 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b6",
         intent: "仕方ないので今夜はコンビニで買うしかないと言い、近くにあるか聞く",
-        rules: [
-          { kind: "message", items: ["コンビニで買うしかない", "近くにあるか聞く"] },
-        ],
+        intentEn: "Dinner is over. Say you'll just have to buy something at a convenience store, and ask if there's one nearby.",
         samples: [
           "そうですよね、こんな時間ですもんね。じゃあ、今夜はコンビニで買うしかないですね。近くにありますか？",
           "遅く着いたのは私なので、大丈夫です。コンビニで何か買います。この近くにありますか？",
@@ -1018,9 +1008,7 @@ const ryokanReservation: Lesson = {
       blank: {
         id: "b7",
         intent: "お礼を言い、予約の日付は自分でも確認しておくと言って締める",
-        rules: [
-          { kind: "message", items: ["お礼", "日付を確認しておく"] },
-        ],
+        intentEn: "Thank the staff, and say you'll double-check your booking dates.",
         samples: [
           "本当に助かりました。ありがとうございます。来月の予約も、ちゃんと確認しておきます。",
           "無理を言ってすみませんでした。おかげで温泉に入れます。ありがとうございました。",
@@ -1057,9 +1045,7 @@ const travelAgencyCancel: Lesson = {
       blank: {
         id: "b1",
         intent: "あいさつして名前を言い、箱根の旅館を2泊で予約していると伝える",
-        rules: [
-          { kind: "message", items: ["あいさつ", "名前", "箱根の旅館を2泊で予約"] },
-        ],
+        intentEn: "Greet the agent, give your name, and say you have a two-night booking at a Hakone ryokan.",
         samples: [
           "お世話になっております。ドミニクと申します。箱根の旅館を2泊で予約している者なんですが。",
           "お世話になります。ドミニクです。そちらで箱根の旅館を、昨日から2泊で予約しているんですが。",
@@ -1076,9 +1062,9 @@ const travelAgencyCancel: Lesson = {
       blank: {
         id: "b2",
         intent: "急に仕事が入ったので、2泊目（今夜）をキャンセルせ「ざるを得なくなった」と報告する",
+        intentEn: "Explain that work came up suddenly, so you have no choice but to cancel the second night.",
         rules: [
           { kind: "grammar", items: ["〜ざるを得ない（する → せざるを得ない）"] },
-          { kind: "message", items: ["急に仕事が入った", "2泊目をキャンセル"] },
         ],
         samples: [
           "実は、急に仕事が入りまして、2泊目はキャンセルせざるを得なくなりました。",
@@ -1097,9 +1083,7 @@ const travelAgencyCancel: Lesson = {
       blank: {
         id: "b3",
         intent: "今夜の分でいいと答え、キャンセル料がかかるか聞く",
-        rules: [
-          { kind: "message", items: ["今夜の分で合っている", "キャンセル料を聞く"] },
-        ],
+        intentEn: "Confirm it's tonight's stay, and ask whether there's a cancellation fee.",
         samples: [
           "はい、今夜の分でお願いします。キャンセル料はかかりますでしょうか。",
           "はい、それでお願いいたします。あの、キャンセル料はどのくらいかかりますか。",
@@ -1116,9 +1100,9 @@ const travelAgencyCancel: Lesson = {
       blank: {
         id: "b4",
         intent: "残念だが、今日中に東京に戻ら「ざるを得ない」ので、キャンセル料を受け入れる",
+        intentEn: "Accept the fee: you have no choice but to be back in Tokyo today.",
         rules: [
           { kind: "grammar", items: ["〜ざるを得ない（丁寧形：〜ざるを得ません）"] },
-          { kind: "message", items: ["今日中に東京に戻る", "キャンセル料を受け入れる"] },
         ],
         samples: [
           "そうですか……。残念ですが、本日中に東京に戻らざるを得ませんので、それでお願いします。",
@@ -1137,9 +1121,7 @@ const travelAgencyCancel: Lesson = {
       blank: {
         id: "b5",
         intent: "お礼とおわびを言って、電話を切る",
-        rules: [
-          { kind: "message", items: ["お礼", "急なことへのおわび", "電話を切るあいさつ"] },
-        ],
+        intentEn: "Thank the agent, apologise for the short notice, and end the call.",
         samples: [
           "ありがとうございます。急なことで申し訳ありません。よろしくお願いいたします。失礼いたします。",
           "助かります。急なお願いですみませんでした。では、失礼いたします。",

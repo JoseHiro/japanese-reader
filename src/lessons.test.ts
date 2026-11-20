@@ -57,7 +57,7 @@ describe("Dominik's practice parts", () => {
     }
   });
 
-  it("are Japanese only: no English fields, and labels without English", () => {
+  it("are Japanese only except the blank tasks; no 伝えること rules", () => {
     for (const id of ["hakone-practice", ...SECTIONS]) {
       const l = lesson(id);
       expect(l.japaneseOnly, id).toBe(true);
@@ -66,9 +66,14 @@ describe("Dominik's practice parts", () => {
       for (const key of ["titleEn", "shortTitleEn", "situationEn", "goalEn", "registerEn", "intentEn"] as const) {
         expect(l[key], `${id} ${key}`).toBeUndefined();
       }
+      // Blank tasks are the exception: in English, so the Japanese task
+      // doesn't give the answer away. Rules are grammar only, in Japanese.
       for (const b of blanksOf(l)) {
-        expect(b.intentEn, `${id} ${b.id}`).toBeUndefined();
-        for (const r of b.rules ?? []) expect(r.itemsEn, `${id} ${b.id}`).toBeUndefined();
+        expect(b.intentEn, `${id} ${b.id}`).toBeTruthy();
+        for (const r of b.rules ?? []) {
+          expect(r.kind, `${id} ${b.id}`).toBe("grammar");
+          expect(r.itemsEn, `${id} ${b.id}`).toBeUndefined();
+        }
       }
       for (const c of l.challenges ?? []) {
         expect(c.titleEn ?? c.promptEn, `${id} ${c.id}`).toBeUndefined();
