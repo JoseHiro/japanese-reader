@@ -4845,4 +4845,359 @@ DJマキコ：それでは、また。`,
       ],
     },
   },
+  {
+    // Dominik (N3 → N2, 2027). Travel series 「Dominikの日本旅」 #1.
+    // Grammar group: 〜ものの / 〜わけにはいかない / 〜わけではない.
+    id: "tabi-hakone-onsen",
+    title: "箱根の温泉で",
+    subtitle: "Dominikの日本旅 ① 〜ものの／〜わけにはいかない／〜わけではない",
+    date: "2026-11-20",
+    text: `先月、友人に勧められて、箱根の小さな旅館に泊まった。日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。
+
+チェックインのとき、女将さんが館内の決まりを丁寧に説明してくれた。浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。正直に言うと、細かいルールが多いと思った。でも、ルールが厳しいから守るというわけではない。みんなで同じお湯を気持ちよく使うためにあるのだ。
+
+夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。
+
+翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。帰りの電車で、次はどの温泉に行こうかと考えていた。`,
+    annotations: {
+      // kuromoji misreads these; pin the readings.
+      日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
+      一人: { reading: "ひとり", pos: "名詞", meaning: "alone; one person", readingOnly: true },
+      後: { reading: "あと", pos: "名詞", meaning: "after", readingOnly: true },
+      入れない: {
+        reading: "はいれない",
+        pos: "動詞（五段）",
+        meaning: "can't go in",
+        readingOnly: true,
+      },
+      箱根: { reading: "はこね", pos: "固有名詞", meaning: "Hakone (hot-spring town near Mt. Fuji)", readingOnly: true },
+
+      // Grammar points of this episode.
+      ものの: {
+        reading: "ものの",
+        pos: "接続助詞（N2）",
+        meaning: "although; but (what you'd expect doesn't follow)",
+        note: "普通形（な形容詞は「な／である」）＋ものの。書き言葉寄りで、話すときは「〜けど」が自然。後ろに意志や依頼（〜よう、〜てください）は来ない。",
+        examples: [
+          { ja: "温泉の入り方を本で読んだものの、実際に入るとやっぱり緊張した。", en: "Although I'd read how to use an onsen in a book, I was still nervous when I actually got in." },
+        ],
+      },
+      わけにはいか: {
+        reading: "わけにはいか",
+        pos: "文型（N3）",
+        meaning: "can't (for social / moral reasons); ない-form + = must",
+        note: "辞書形＋わけにはいかない＝社会的・道徳的な理由で「できない」。能力の「できない」には使わない（×難しくて読むわけにはいかない → 読めない）。ない形＋わけにはいかない＝「しなければならない」。会話でもよく使う。",
+        examples: [
+          { ja: "明日は大事な会議があるので、休むわけにはいかない。", en: "I have an important meeting tomorrow, so I can't take the day off." },
+        ],
+      },
+      わけではない: {
+        reading: "わけではない",
+        pos: "文型（N3）",
+        meaning: "it's not (necessarily) that ~; partial denial",
+        note: "普通形＋わけではない。相手の思い込みを部分的に打ち消す。「全部が〜というわけではない」「〜からといって〜わけではない」の形でよく使う。会話でもよく使う。",
+        examples: [
+          { ja: "京都に住んでいるからといって、お寺に詳しいわけではない。", en: "Just because I live in Kyoto doesn't mean I know a lot about temples." },
+        ],
+      },
+
+      // Vocabulary.
+      友人: { reading: "ゆうじん", pos: "名詞", meaning: "friend", note: "「友だち」より少しかたい言い方。書き言葉やていねいな場面で使う。" },
+      勧める: {
+        reading: "すすめる",
+        pos: "動詞（一段）",
+        meaning: "to recommend; to suggest",
+        note: "「友人に勧められて」＝友人が「いいよ」と言ったので。お酒や食べ物を「どうぞ」と出すときにも使う。",
+      },
+      旅館: {
+        reading: "りょかん",
+        pos: "名詞",
+        meaning: "ryokan; traditional Japanese inn",
+        note: "畳の部屋・浴衣・温泉・夕食と朝食が付くことが多い、日本式のホテル。",
+      },
+      泊まる: { reading: "とまる", pos: "動詞（五段）", meaning: "to stay (overnight)" },
+      温泉: { reading: "おんせん", pos: "名詞", meaning: "hot spring; onsen" },
+      女将: {
+        reading: "おかみ",
+        pos: "名詞",
+        meaning: "proprietress (of a ryokan or restaurant)",
+        note: "旅館や料亭をまとめる女性。客には「女将さん」と「さん」を付けて呼ぶ。",
+      },
+      館内: { reading: "かんない", pos: "名詞", meaning: "inside the building / inn" },
+      決まり: { reading: "きまり", pos: "名詞", meaning: "rule; regulation", note: "「ルール」とほぼ同じ意味。" },
+      丁寧: { reading: "ていねい", pos: "な形容詞", meaning: "polite; careful; thorough" },
+      浴衣: {
+        reading: "ゆかた",
+        pos: "名詞",
+        meaning: "yukata; light cotton kimono",
+        note: "旅館では部屋着・寝間着として用意されていることが多い。館内はそのまま歩いてよいことが多い。",
+      },
+      湯船: {
+        reading: "ゆぶね",
+        pos: "名詞",
+        meaning: "bathtub; the bath (hot water you soak in)",
+        note: "体を洗う場所ではなく、お湯につかる所。タオルは湯船に入れないのがマナー。",
+      },
+      正直: {
+        reading: "しょうじき",
+        pos: "な形容詞・名詞",
+        meaning: "honest",
+        note: "「正直に言うと／正直（言って）」で「本当のことを言うと」。",
+      },
+      細かい: { reading: "こまかい", pos: "い形容詞", meaning: "detailed; minute; fussy" },
+      厳しい: { reading: "きびしい", pos: "い形容詞", meaning: "strict; severe" },
+      守る: {
+        reading: "まもる",
+        pos: "動詞（五段）",
+        meaning: "to keep (a rule / promise); to protect",
+        note: "「ルールを守る」「約束を守る」。",
+      },
+      お湯: { reading: "おゆ", pos: "名詞", meaning: "hot water (here: the onsen water)" },
+      露天風呂: {
+        reading: "ろてんぶろ",
+        pos: "名詞",
+        meaning: "open-air bath",
+        note: "屋根のない外のお風呂。「露天」＝屋根のない外。",
+      },
+      年配: {
+        reading: "ねんぱい",
+        pos: "名詞",
+        meaning: "elderly; middle-aged and older",
+        note: "「お年寄り」よりていねいで、60代くらいの人にも使いやすい。「年配の男性／方」。",
+      },
+      話しかける: {
+        reading: "はなしかける",
+        pos: "動詞（一段）",
+        meaning: "to start talking to (someone)",
+        note: "知らない人に自分から話し始めること。「〜てくる」で、相手から自分の方へ。",
+      },
+      入れ墨: {
+        reading: "いれずみ",
+        pos: "名詞",
+        meaning: "tattoo",
+        note: "「タトゥー」とも言う。入れ墨がある人は入れない温泉もあるが、シールで隠せばいい所や、気にしない所も増えている。",
+      },
+      翌朝: { reading: "よくあさ", pos: "名詞", meaning: "the next morning", note: "「次の日の朝」。「翌日（よくじつ）」も同じ「翌」。" },
+      一泊: {
+        reading: "いっぱく",
+        pos: "名詞・する動詞",
+        meaning: "one night's stay",
+        note: "「一泊二日（いっぱくふつか）」のように旅行の長さを言う。二泊（にはく）、三泊（さんぱく）。",
+      },
+    },
+    translations: {
+      "先月、友人に勧められて、箱根の小さな旅館に泊まった。":
+        "Last month, on a friend's recommendation, I stayed at a small ryokan in Hakone.",
+      "日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。":
+        "Although I'd been to Japanese hot springs many times, it was my first time staying at a ryokan on my own.",
+      "チェックインのとき、女将さんが館内の決まりを丁寧に説明してくれた。":
+        "When I checked in, the proprietress carefully explained the house rules.",
+      "浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。":
+        "You're free to wear the yukata, but apparently you mustn't put your towel in the bath.",
+      "正直に言うと、細かいルールが多いと思った。":
+        "To be honest, I thought there were a lot of fussy rules.",
+      "でも、ルールが厳しいから守るというわけではない。":
+        "But it's not that you follow them just because they're strict.",
+      "みんなで同じお湯を気持ちよく使うためにあるのだ。":
+        "They exist so that everyone can share the same water comfortably.",
+      "夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。":
+        "After dinner, when I got into the open-air bath, an older man next to me started talking to me.",
+      "「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。":
+        "He told me, \"A lot of onsen won't let in people with tattoos, but that's not true of all of them, you know.\"",
+      "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。":
+        "The next morning I wanted to stay one more night, but I had work, so I had no choice but to go home.",
+      "帰りの電車で、次はどの温泉に行こうかと考えていた。":
+        "On the train home, I was already thinking about which onsen to go to next.",
+    },
+    translationPractice: [
+      "日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。",
+      "浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。",
+      "でも、ルールが厳しいから守るというわけではない。",
+      "「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。",
+      "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
+    ],
+    quiz: {
+      cloze: [
+        {
+          before: "先月、友人に",
+          after: "、箱根の小さな旅館に泊まった。",
+          options: ["守られて", "勧められて", "話しかけられて", "説明されて"],
+          answer: 1,
+          explanation: "友人が「いいよ、行ってみて」と言ったので、「勧める」の受け身「勧められて」。",
+        },
+        {
+          before: "チェックインのとき、",
+          after: "さんが館内の決まりを丁寧に説明してくれた。",
+          options: ["年配", "友人", "女将", "男性"],
+          answer: 2,
+          explanation: "旅館をまとめる女性は「女将（おかみ）」。客は「女将さん」と呼ぶ。",
+        },
+        {
+          before: "チェックインのとき、女将さんが館内の",
+          after: "を丁寧に説明してくれた。",
+          options: ["決まり", "お湯", "浴衣", "翌朝"],
+          answer: 0,
+          explanation: "「決まり」は「ルール」とほぼ同じ意味。",
+        },
+        {
+          before: "浴衣は自由に着ていいが、タオルを",
+          after: "に入れるわけにはいかないそうだ。",
+          options: ["館内", "電車", "旅館", "湯船"],
+          answer: 3,
+          explanation: "「湯船」はお湯につかる所。タオルを入れないのが温泉のマナー。",
+        },
+        {
+          before: "正直に言うと、",
+          after: "ルールが多いと思った。",
+          options: ["細かい", "小さな", "丁寧な", "同じ"],
+          answer: 0,
+          explanation: "小さなことまで決めてあるルールは「細かいルール」。",
+        },
+        {
+          before: "夕食の後、",
+          after: "に入ると、隣にいた年配の男性が話しかけてきた。",
+          options: ["館内", "露天風呂", "旅館", "浴衣"],
+          answer: 1,
+          explanation: "外にある、屋根のないお風呂は「露天風呂」。",
+        },
+        {
+          before: "「",
+          after: "がある人は入れない温泉も多いけど、全部がそうというわけではないよ」",
+          options: ["浴衣", "決まり", "入れ墨", "仕事"],
+          answer: 2,
+          explanation: "温泉によっては「入れ墨（タトゥー）」がある人は入れないことがある。",
+        },
+        {
+          before: "翌朝、もう",
+          after: "したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
+          options: ["説明", "年配", "正直", "一泊"],
+          answer: 3,
+          explanation: "もう一晩泊まりたかったので「もう一泊（いっぱく）したい」。",
+        },
+      ],
+      grammarChoice: [
+        // From the article.
+        {
+          translation:
+            "Although I'd been to Japanese hot springs many times, it was my first time staying at a ryokan alone.",
+          before: "日本の温泉には何度も入ったことがある",
+          after: "、旅館に一人で泊まるのは初めてだった。",
+          options: ["ものの", "わけではなく", "わけにはいかず", "ために"],
+          answer: 0,
+          explanation:
+            "ものの = \"although\": the second half isn't what you'd expect from the first. It's written-style; in speech you'd say 〜けど.",
+        },
+        {
+          translation: "Apparently you mustn't put your towel in the bath.",
+          before: "タオルを湯船に入れる",
+          after: "そうだ。",
+          options: ["わけではない", "わけにはいかない", "ものの", "わけがない"],
+          answer: 1,
+          explanation:
+            "Dictionary form + わけにはいかない = you can't do it because of rules or manners, not because you're unable to.",
+        },
+        {
+          translation: "A lot of onsen won't let in people with tattoos, but that's not true of all of them.",
+          before: "「入れ墨がある人は入れない温泉も多いけど、全部がそうという",
+          after: "よ」と教えてくれた。",
+          options: ["わけにはいかない", "ものの", "わけではない", "わけだ"],
+          answer: 2,
+          explanation:
+            "全部が〜というわけではない = \"not all of them are ~\". わけではない denies part of what someone might assume.",
+        },
+        // 使い分け: choose between the three.
+        {
+          translation: "It's not that I dislike Japanese food — it's just nattō I can't handle.",
+          before: "日本料理が嫌いな",
+          after: "けど、納豆だけは苦手だ。",
+          options: ["わけにはいかない", "わけではない", "ものの", "わけがない"],
+          answer: 1,
+          explanation:
+            "Partial denial: \"I don't dislike Japanese food in general.\" な-adjective + な + わけではない.",
+        },
+        {
+          translation: "I have an important meeting tomorrow, so I can't take the day off.",
+          before: "明日は大事な会議があるので、休む",
+          after: "。",
+          options: ["わけではない", "ものの", "わけにはいかない", "わけだ"],
+          answer: 2,
+          explanation:
+            "You could physically stay home, but the situation doesn't allow it → 休むわけにはいかない.",
+        },
+        {
+          translation: "Although I'd read about how to use an onsen in a book, I was still nervous when I actually got in.",
+          before: "温泉の入り方を本で読んだ",
+          after: "、実際に入るとやっぱり緊張した。",
+          options: ["わけにはいかず", "ものの", "わけではなく", "ために"],
+          answer: 1,
+          explanation:
+            "Reading about it should have helped, but it didn't → ものの (\"although\").",
+        },
+        {
+          translation: "They're sweets my teacher gave me, so I have to eat them.",
+          before: "先生にいただいたお菓子なので、食べない",
+          after: "。",
+          options: ["わけにはいかない", "わけではない", "ものの", "わけがない"],
+          answer: 0,
+          explanation:
+            "ない-form + わけにはいかない = \"I can't not do it\" = I must. Not eating a gift from your teacher would be rude.",
+        },
+        {
+          translation: "Just because I live in Kyoto doesn't mean I know a lot about temples.",
+          before: "京都に住んでいるからといって、お寺に詳しい",
+          after: "。",
+          options: ["わけにはいかない", "ものの", "わけだ", "わけではない"],
+          answer: 3,
+          explanation:
+            "〜からといって〜わけではない = \"just because ~ doesn't mean ~\".",
+        },
+        // Spot the mistake: the natural form vs. the wrong pattern.
+        {
+          translation: "This kanji is too difficult — I can't read it.",
+          before: "この漢字は難しすぎて、",
+          after: "。",
+          options: ["読むわけにはいかない", "読めない", "読むわけではない", "読まないわけにはいかない"],
+          answer: 1,
+          explanation:
+            "This is about ability, so use 読めない. 読むわけにはいかない is only for social reasons (\"I'm not allowed / it wouldn't be right\").",
+        },
+        {
+          translation: "The tickets are expensive, but let's go together.",
+          before: "チケットは高い",
+          after: "、一緒に行こう。",
+          options: ["ものの", "わけではなく", "けど", "わけにはいかず"],
+          answer: 2,
+          explanation:
+            "ものの can't be followed by an invitation or your own will (〜よう, 〜てください). Use けど: 高いけど、一緒に行こう.",
+        },
+      ],
+      reading: [
+        {
+          question: "旅館に泊まる前、温泉や旅館についてどんな経験がありましたか。",
+          answer: "日本の温泉には何度も入ったことがあったが、旅館に一人で泊まるのは初めてだった。",
+          hints: ["何度も", "ものの", "一人で", "初めて"],
+        },
+        {
+          question: "チェックインのとき、女将さんはどんな決まりを説明しましたか。",
+          answer: "浴衣は自由に着ていいが、タオルを湯船に入れてはいけないということ。",
+          hints: ["浴衣", "自由に", "タオル", "湯船"],
+        },
+        {
+          question: "筆者は、温泉のルールは何のためにあると考えていますか。",
+          answer: "厳しいから守るのではなく、みんなで同じお湯を気持ちよく使うためにあると考えている。",
+          hints: ["厳しい", "わけではない", "同じお湯", "気持ちよく"],
+        },
+        {
+          question: "露天風呂で、年配の男性は入れ墨について何と言いましたか。",
+          answer: "入れ墨がある人は入れない温泉も多いが、全部がそうではないと教えてくれた。",
+          hints: ["入れ墨", "入れない", "全部", "わけではない"],
+        },
+        {
+          question: "翌朝、筆者はどうしてもう一泊しなかったのですか。",
+          answer: "もう一泊したかったが、仕事があるので、帰らなければならなかったから。",
+          hints: ["一泊", "仕事", "帰らないわけにはいかない"],
+        },
+      ],
+    },
+  },
 ];

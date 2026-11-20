@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import type { User } from "./users";
+import { lessonsForUser, type User } from "./users";
 import {
   LESSONS,
   RULE_ICON,
@@ -23,7 +23,7 @@ function J({ text }: { text: string }) {
 }
 
 // Practice mode. Compact dialogue "script" on top with numbered blanks
-// (①②③...) for Andy's turns; clicking a number scrolls to the numbered
+// (①②③...) for the student's turns; clicking a number scrolls to the numbered
 // drill below and reveals the answer there. Revealing an answer also
 // inlines it into the script so the whole conversation can be re-read.
 
@@ -338,7 +338,7 @@ function starredVocab(lesson: Lesson): Set<string> {
   const s = new Set<string>();
   for (const v of lesson.warmup?.vocab ?? []) s.add(v);
   for (const t of lesson.turns) {
-    if (t.speaker !== "andy") continue;
+    if (t.speaker !== "student") continue;
     for (const r of t.blank.rules ?? []) {
       if (r.kind === "vocab" || r.kind === "avoid") for (const it of r.items) s.add(it);
     }
@@ -551,12 +551,12 @@ function LessonPage({
 
   const interlocutor = lesson.interlocutorLabel ?? "相手";
 
-  // Number each Andy blank in the order it appears in the dialogue.
+  // Number each student blank in the order it appears in the dialogue.
   const blanks: { blank: Blank; number: number }[] = [];
   {
     let n = 0;
     for (const t of lesson.turns) {
-      if (t.speaker === "andy") {
+      if (t.speaker === "student") {
         n += 1;
         blanks.push({ blank: t.blank, number: n });
       }
@@ -649,8 +649,8 @@ function LessonPage({
           const isRevealed = revealed.has(turn.blank.id);
           return (
             <p className="pr-script-line" key={i}>
-              <span className="pr-script-who pr-script-who-andy">
-                🎤 Andy：
+              <span className="pr-script-who pr-script-who-student">
+                🎤 {user.displayName}：
               </span>
               {isRevealed ? (
                 <span className="pr-script-answer">
@@ -762,13 +762,13 @@ export function Practice({
   return (
     <FuriCtx.Provider value={showFurigana}>
     <div className="pr-list">
-      {LESSONS.map((l) => {
+      {lessonsForUser(user).map((l) => {
         const allIds = [
-          ...l.turns.filter((t) => t.speaker === "andy").map((t) => (t as { blank: Blank }).blank.id),
+          ...l.turns.filter((t) => t.speaker === "student").map((t) => (t as { blank: Blank }).blank.id),
           ...(l.challenges?.map((c) => c.id) ?? []),
         ];
         const starCount = allIds.filter((id) => bookmarks.has(id)).length;
-        const blankCount = l.turns.filter((t) => t.speaker === "andy").length;
+        const blankCount = l.turns.filter((t) => t.speaker === "student").length;
         return (
           <button
             key={l.id}

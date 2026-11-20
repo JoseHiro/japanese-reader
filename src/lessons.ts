@@ -1,5 +1,6 @@
 // Practice-mode lesson data: a conversation between an interlocutor and
-// Andy, with (        ) blanks on Andy's turns. Each blank carries the
+// the student (Andy, Dominik, ...), with (        ) blanks on the student's
+// turns. Each blank carries the
 // intent, optional grammar/vocab constraints, and sample answers.
 
 /**
@@ -16,16 +17,16 @@ export interface Rule {
   items: string[];
   /**
    * Optional parallel English translations for each item (same order/length).
-   * Useful for message rules so Andy can see the task requirements in
+   * Useful for message rules so the student can see the task requirements in
    * English before producing Japanese.
    */
   itemsEn?: string[];
 }
 
-/** Fillable blank on an Andy turn. */
+/** Fillable blank on a student turn. */
 export interface Blank {
   id: string;
-  /** One-line summary of what Andy needs to say. */
+  /** One-line summary of what the student needs to say. */
   intent: string;
   /** English translation of the intent (shown as a subtitle). */
   intentEn?: string;
@@ -37,7 +38,7 @@ export interface Blank {
 
 export type DialogueTurn =
   | { speaker: "them"; text: string; who?: string }
-  | { speaker: "andy"; blank: Blank };
+  | { speaker: "student"; blank: Blank };
 
 /** Optional warm-up shown above the dialogue. */
 export interface Warmup {
@@ -113,7 +114,7 @@ const deliveryRedelivery: Lesson = {
   turns: [
     { speaker: "them", text: "はい、ヤマト運輸〇〇センターです。" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b1",
         intent: "用件を切り出す（再配達依頼＋追跡番号紛失、名前と住所で対応可能か）",
@@ -132,7 +133,7 @@ const deliveryRedelivery: Lesson = {
     },
     { speaker: "them", text: "ご住所とお名前をお願いいたします。" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b2",
         intent: "住所（オートロック付き501号室）と名前を伝える",
@@ -158,7 +159,7 @@ const deliveryRedelivery: Lesson = {
     },
     { speaker: "them", text: "承知いたしました。ご希望のお日にちとお時間帯はございますか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b3",
         intent: "第一希望と代替案を伝える",
@@ -182,7 +183,7 @@ const deliveryRedelivery: Lesson = {
     },
     { speaker: "them", text: "はい、明日の18-20時ですね。玄関先までお持ちしましょうか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b4",
         intent: "理由を添えて「玄関前ではなく宅配ボックス」を希望する",
@@ -204,7 +205,7 @@ const deliveryRedelivery: Lesson = {
       text: "宅配ボックスがご利用可能でしたら、そちらに入れさせていただきますが、もし満杯だった場合はいかがいたしましょうか？",
     },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b5",
         intent: "条件付きの代替案（隣の502号室に預ける）を事前確認",
@@ -226,7 +227,7 @@ const deliveryRedelivery: Lesson = {
     },
     { speaker: "them", text: "かしこまりました。それではそのように手配いたします。" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b6",
         intent: "お礼＋電話を切る",
@@ -315,7 +316,7 @@ const clinicSymptoms: Lesson = {
   turns: [
     { speaker: "them", text: "（受付）おはようございます。今日はどうされましたか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b1",
         intent: "初診の切り出し（数日前から複数症状がある）",
@@ -343,7 +344,7 @@ const clinicSymptoms: Lesson = {
     },
     { speaker: "them", text: "（受付）初めてですね。保険証はお持ちですか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b2",
         intent: "保険証はまだない。代わりに在留カードで自費で払えるか確認",
@@ -370,7 +371,7 @@ const clinicSymptoms: Lesson = {
     { speaker: "them", text: "（受付）ありがとうございます。しばらくお待ちください。" },
     { speaker: "them", text: "（医師）どんな症状ですか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b3",
         intent: "症状を時系列で説明（月曜=頭痛 → 火曜=胃痛 → 今朝=吐き気）",
@@ -402,7 +403,7 @@ const clinicSymptoms: Lesson = {
     },
     { speaker: "them", text: "（医師）熱は測りましたか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b4",
         intent: "昨晩は38.2°C、今朝37.4°C。熱は下がったが体はだるい",
@@ -432,7 +433,7 @@ const clinicSymptoms: Lesson = {
     },
     { speaker: "them", text: "（医師）他に持病や、普段飲んでいる薬はありますか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b5",
         intent: "花粉症の薬を毎日、時々胃薬。ただし服用中じゃない期間もある",
@@ -467,7 +468,7 @@ const clinicSymptoms: Lesson = {
     },
     { speaker: "them", text: "（医師）アレルギーはありますか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b6",
         intent: "ペニシリン系の薬にアレルギーがあり、以前じんましんが出た",
@@ -498,7 +499,7 @@ const clinicSymptoms: Lesson = {
       text: "（医師）分かりました。風邪と胃腸の疲れが重なっているみたいですね。薬を出します。",
     },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b7",
         intent: "薬の受け取り方と、副作用が出たときの対処を確認",
@@ -607,7 +608,7 @@ const salonHaircut: Lesson = {
   turns: [
     { speaker: "them", text: "いらっしゃいませ。今日はどうされますか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b1",
         intent: "カット希望。全体は大きく変えたくないけど、少しだけ雰囲気を変えたい",
@@ -639,7 +640,7 @@ const salonHaircut: Lesson = {
     },
     { speaker: "them", text: "かしこまりました。長さはどれくらいにしましょうか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b2",
         intent: "サイドは短め（ツーブロック寄り）、トップは動きが出るように少し長め",
@@ -671,7 +672,7 @@ const salonHaircut: Lesson = {
     },
     { speaker: "them", text: "前髪はどうされますか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b3",
         intent: "前髪はアップバング寄りに、量を少し軽くしたい（自然な感じで）",
@@ -706,7 +707,7 @@ const salonHaircut: Lesson = {
       text: "レイヤーはどうしますか？入れると動きが出て、若く見えますよ。",
     },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b4",
         intent: "提案は素敵だけど今回はレイヤーなしで、次回試したい（丁寧に断る）",
@@ -741,7 +742,7 @@ const salonHaircut: Lesson = {
     },
     { speaker: "them", text: "仕上げにトリートメントもいかがですか？" },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b5",
         intent: "予算オーバーになりそうなので今回は見送り、次回ぜひ試したい",
@@ -779,7 +780,7 @@ const salonHaircut: Lesson = {
       text: "ありがとうございました。次回のご予約は？",
     },
     {
-      speaker: "andy",
+      speaker: "student",
       blank: {
         id: "b6",
         intent: "次回は月末の週末か平日夜がいい。候補が複数あるので合わせやすい方で",
@@ -841,7 +842,262 @@ const salonHaircut: Lesson = {
   ],
 };
 
-export const LESSONS: Lesson[] = [deliveryRedelivery, clinicSymptoms, salonHaircut];
+// Dominik (N2 track), 「Dominikの日本旅」 #1 箱根. Follows the article
+// `tabi-hakone-onsen`: the same three patterns, now produced in speech.
+const ryokanReservation: Lesson = {
+  id: "ryokan-reservation",
+  title: "旅館で「予約が見つからない」",
+  titleEn: "At the ryokan: \"We can't find your reservation\"",
+  shortTitle: "予約が見つからない",
+  shortTitleEn: "Missing reservation",
+  situation:
+    "夜7時、Dominik は箱根の旅館に着いた。2週間前にネットで予約したのに、フロントで名前が見つからないと言われる。もう電車やバスはほとんどなく、温泉も楽しみにしていた。先生は旅館のスタッフ役（今夜は満室。別館に小さな和室が一つだけ空いているが、別館にはお風呂がなく、外を歩いて本館まで行く必要がある。夕食の時間ももう終わっている）。",
+  situationEn:
+    "It's 7 p.m. and Dominik has just arrived at a ryokan in Hakone. He booked online two weeks ago, but the front desk can't find his name. There are hardly any trains or buses left, and he was looking forward to the onsen. The teacher plays the staff: the inn is full tonight; one small Japanese-style room is free in the annex, but it has no bath, so he'd have to walk outside to the main building. Dinner time is already over.",
+  goal: "困った状況を説明し、帰れない事情を伝えて、相手の代わりの提案を受け入れながら交渉する。",
+  goalEn:
+    "Explain a problem, say why you can't just leave, and negotiate while accepting the staff's alternative.",
+  intent:
+    "記事「箱根の温泉で」の3文型を、会話で使えるところまで持っていく。「〜わけにはいかない」「〜わけではない」は会話でそのまま使う。「〜ものの」は書き言葉寄りなので、言いよどみ（「予約したものの…」）に限って使い、ふだんは「〜けど」に言い換える感覚もつかむ。",
+  intentEn:
+    "Take the three patterns from the 箱根 article into speech. 〜わけにはいかない and 〜わけではない are used as-is in conversation. 〜ものの is written-leaning, so here it appears only as a trailing-off (予約したものの…); otherwise get used to swapping it for 〜けど.",
+  warmup: {
+    vocab: ["予約", "確認メール", "満室", "別館", "本館", "和室", "夕食"],
+    grammar: [
+      "〜ものの（N2・書き言葉寄り）",
+      "〜わけにはいかない（N3）",
+      "〜ないわけにはいかない（N3）",
+      "〜わけではない（N3）",
+    ],
+    tip: "困ったときほど、まず「実は…」「あの、…」でクッションを置く。言いたいことは「事実 → 困っている理由 → お願い」の順に。",
+  },
+  interlocutorLabel: "旅館のスタッフ",
+  turns: [
+    { speaker: "them", text: "いらっしゃいませ。遠いところをお疲れさまでした。お名前を伺ってもよろしいでしょうか。" },
+    {
+      speaker: "student",
+      blank: {
+        id: "b1",
+        intent: "名前を言い、2週間前にネットで今夜一泊の予約をしたと伝える",
+        intentEn: "Give your name and say you booked one night, tonight, online two weeks ago.",
+        rules: [
+          {
+            kind: "message",
+            items: ["名前", "2週間前にネットで予約", "今夜一泊"],
+            itemsEn: ["your name", "booked online two weeks ago", "one night, tonight"],
+          },
+          { kind: "vocab", items: ["予約", "一泊"] },
+        ],
+        samples: [
+          "Dominik と申します。2週間前にネットで、今夜一泊で予約しています。",
+          "Dominik です。今夜一泊の予約を、2週間ほど前にネットでしたんですが。",
+        ],
+      },
+    },
+    {
+      speaker: "them",
+      text: "Dominik様ですね。少々お待ちください。……大変申し訳ございません。本日のご予約の中に、お名前が見当たらないのですが……。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b2",
+        intent: "驚きを見せ、確かに予約したこと（確認メールも来た）を伝える。言いよどみで「予約したものの…」",
+        intentEn:
+          "Show your surprise and insist that you did book (you even got a confirmation email). Trail off with 予約したものの…",
+        rules: [
+          { kind: "grammar", items: ["〜ものの…（言いよどみ）"] },
+          { kind: "vocab", items: ["確認メール"] },
+        ],
+        samples: [
+          "えっ、本当ですか。確かにネットで予約したものの……。確認メールも届いているんですが、見ていただけますか。",
+          "そうですか……。2週間前に予約したものの……。あ、確認メールがあります。これです。",
+        ],
+        teacherNote:
+          "「〜ものの」は書き言葉寄り。会話で使うならこのように後ろを言わずに止める形が自然。言い切るなら「予約したんですけど」。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "拝見いたします。……日付が来月になっているようです。あいにく本日は満室でございまして……。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b3",
+        intent: "日付を間違えたことを認め、今から帰れない事情（電車もバスももうほとんどない／温泉を楽しみにしていた）を伝えて頼む",
+        intentEn:
+          "Admit the date mix-up, explain why you can't go back now (hardly any trains or buses left; you were looking forward to the onsen), and ask for help.",
+        rules: [
+          {
+            kind: "message",
+            items: ["日付の間違いを認める", "電車もバスもほとんどない", "温泉を楽しみにしていた", "何とかならないか頼む"],
+            itemsEn: [
+              "admit the wrong date",
+              "hardly any trains or buses left",
+              "you were looking forward to the onsen",
+              "ask if anything can be done",
+            ],
+          },
+          { kind: "grammar", items: ["〜わけにはいかない", "〜し、〜し"] },
+        ],
+        samples: [
+          "えっ、来月……。私の間違いですね。すみません。でも、もう電車もバスもほとんどないし、温泉もすごく楽しみにしていたので、今から帰るわけにはいかないんです。何とかなりませんか。",
+          "あ、日付を間違えてしまったんですね……。ただ、この時間だと電車もバスもほとんどないので、今から帰るわけにはいかないんです。どんなお部屋でもいいので、お願いできませんか。",
+        ],
+        teacherNote:
+          "「帰れない」（能力・手段）と「帰るわけにはいかない」（事情・気持ち）の違いを確認。ここはどちらも言えるが、「わけにはいかない」の方が「困っている事情」が伝わる。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "そうですよね……。実は、お部屋が全くないわけではないんですが……。別館に小さな和室が一つだけ空いております。ただ、別館にはお風呂がございませんので、お風呂は一度、外に出て、本館まで歩いていただくことになります。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b4",
+        intent: "「全くないわけではない」を受けて喜び、外を歩くのは気にしないと伝えてその部屋を頼む",
+        intentEn:
+          "Pick up on 全くないわけではない, show relief, say you don't mind walking outside, and take the room.",
+        rules: [
+          { kind: "grammar", items: ["〜わけではない"] },
+          { kind: "message", items: ["ほっとした気持ち", "外を歩くのは平気", "その部屋をお願いする"], itemsEn: ["relief", "walking outside is fine", "ask for that room"] },
+        ],
+        samples: [
+          "本当ですか。よかった……。外を歩くのが嫌なわけではないので、大丈夫です。ぜひその和室でお願いします。",
+          "ありがとうございます！ 外を少し歩くのは全然かまいません。お風呂が使えないわけではないなら、その部屋で十分です。",
+        ],
+        teacherNote:
+          "先生のモデル文「全くないわけではないんですが…」を聞き取って、同じ文型で返す練習。「嫌なわけではない」＝「嫌ではない」より、相手の心配を打ち消すニュアンスが出る。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "かしこまりました。それから、大変申し訳ないのですが、夕食のお時間はもう終わってしまいまして……。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b5",
+        intent: "残念な気持ちを伝えつつ受け入れ、近くで食べられる所（コンビニ・食堂）があるか聞く",
+        intentEn:
+          "Say it's a shame but accept it, and ask if there's somewhere nearby to eat (a convenience store or diner).",
+        rules: [
+          { kind: "grammar", items: ["〜ものの（または 〜けど）", "〜ないわけにはいかない"] },
+        ],
+        samples: [
+          "そうですか。夕食も楽しみにしていたものの、仕方ないですね。何か食べないわけにはいかないので、近くにコンビニか食堂はありますか。",
+          "残念ですけど、遅く着いたのは私なので大丈夫です。何も食べないわけにはいかないので、この近くで食べられる所を教えていただけますか。",
+        ],
+        teacherNote:
+          "「〜ものの、仕方ない」はOK（後ろが意志・依頼ではない）。「〜ものの、教えてください」は×。後ろで依頼するなら文を切る。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "歩いて5分ほどのところにコンビニがございます。本館のお風呂は夜12時までご利用いただけますので、ごゆっくりどうぞ。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b6",
+        intent: "お礼を言い、予約の日付は自分でも確認すると伝えて締める",
+        intentEn: "Thank the staff, say you'll double-check your booking dates yourself, and close.",
+        samples: [
+          "本当に助かりました。予約の日付は、あとで自分でも確認してみます。ありがとうございました。",
+          "無理を言ってすみませんでした。おかげで温泉に入ることができます。来月の予約も、もう一度確認しておきます。",
+        ],
+      },
+    },
+  ],
+  challenges: [
+    {
+      id: "c1",
+      title: "続けて話す ①：〜わけではない",
+      titleEn: "Finish the sentence ①: 〜わけではない",
+      prompt:
+        "先生が前半を言うので、後半を続けて言う。① 日本に住んでいるからといって、…　② 日本の習慣が全部好きな…",
+      promptEn:
+        "The teacher says the first half; you finish it. ① 日本に住んでいるからといって、…　② 日本の習慣が全部好きな…",
+      rules: [{ kind: "grammar", items: ["〜からといって〜わけではない", "〜わけではないけど"] }],
+      samples: [
+        "① 日本に住んでいるからといって、毎日和食を食べているわけではない。",
+        "② 日本の習慣が全部好きなわけではないけど、お土産の文化はいいと思う。",
+      ],
+    },
+    {
+      id: "c2",
+      title: "続けて話す ②：〜わけにはいかない",
+      titleEn: "Finish the sentence ②: 〜わけにはいかない",
+      prompt:
+        "① 友だちの結婚式に呼ばれたので、…　② 先輩にお酒をすすめられたけど、明日は運転するので、…",
+      promptEn:
+        "① 友だちの結婚式に呼ばれたので、…　② 先輩にお酒をすすめられたけど、明日は運転するので、…",
+      refBlankId: "b3",
+      rules: [{ kind: "grammar", items: ["〜ないわけにはいかない", "〜わけにはいかない"] }],
+      samples: [
+        "① 友だちの結婚式に呼ばれたので、行かないわけにはいかない。",
+        "② 先輩にお酒をすすめられたけど、明日は運転するので、飲むわけにはいかない。",
+      ],
+    },
+    {
+      id: "c3",
+      title: "続けて話す ③：〜ものの",
+      titleEn: "Finish the sentence ③: 〜ものの",
+      prompt: "① 温泉に行こうと思った…　② 説明書を読んだ…",
+      promptEn: "① 温泉に行こうと思った…　② 説明書を読んだ…",
+      refBlankId: "b2",
+      rules: [{ kind: "grammar", items: ["〜ものの（後ろに意志・依頼は×）"] }],
+      samples: [
+        "① 温泉に行こうと思ったものの、どこも予約がいっぱいだった。",
+        "② 説明書を読んだものの、使い方がよく分からなかった。",
+      ],
+    },
+    {
+      id: "c4",
+      title: "話し合い：温泉のルール",
+      titleEn: "Discuss: onsen rules",
+      prompt:
+        "日本の温泉のルールで、あなたの国にはない習慣は？ 全部に賛成というわけではないなら、どれ？",
+      promptEn:
+        "Which Japanese onsen rules don't exist in your country? If you don't agree with all of them, which ones?",
+      rules: [{ kind: "grammar", items: ["全部に〜というわけではない"] }],
+      samples: [
+        "体を洗ってから湯船に入るのは、私の国にはない習慣です。いいルールだと思いますが、全部に賛成というわけではありません。入れ墨のルールは、少し厳しすぎると思います。",
+      ],
+    },
+    {
+      id: "c5",
+      title: "話し合い：分かっていたものの",
+      titleEn: "Discuss: you knew, but…",
+      prompt: "旅行先で、マナーだと分かっていたものの、守るのが難しかったことは？",
+      promptEn: "On a trip, was there a manner you knew about but still found hard to follow?",
+      rules: [{ kind: "grammar", items: ["〜ものの"] }],
+      samples: [
+        "電車の中で電話をしないのがマナーだと分かっていたものの、母から電話が来たとき、つい出てしまいました。",
+      ],
+    },
+    {
+      id: "c6",
+      title: "話し合い：断るわけにはいかない",
+      titleEn: "Discuss: when you can't say no",
+      prompt: "あなたの国で「本当は断りたいけど、断るわけにはいかない」のはどんなとき？",
+      promptEn: "In your country, when do you want to say no but can't?",
+      rules: [{ kind: "grammar", items: ["〜わけにはいかない"] }],
+      samples: [
+        "上司の家に食事に呼ばれたときは、ちょっと疲れていても、断るわけにはいかないと思います。",
+      ],
+    },
+  ],
+};
+
+export const LESSONS: Lesson[] = [
+  deliveryRedelivery,
+  clinicSymptoms,
+  salonHaircut,
+  ryokanReservation,
+];
 
 export function findLesson(id: string): Lesson | undefined {
   return LESSONS.find((l) => l.id === id);

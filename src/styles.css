@@ -1448,7 +1448,7 @@ ruby rt {
   min-width: 82px;
 }
 .pr-script-who-them { color: var(--text-muted); }
-.pr-script-who-andy { color: var(--accent); }
+.pr-script-who-student { color: var(--accent); }
 .pr-script-text { flex: 1; }
 .pr-script-answer { flex: 1; display: inline-flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
 .pr-slot {

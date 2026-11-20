@@ -36,7 +36,7 @@ import {
   IconRetry,
   IconList,
 } from "./shared/icons";
-import { findUser, articlesForUser, podsForUser, lessonsForUser, vocabForUser, type User } from "./users";
+import { findUser, articlesForUser, podsForUser, lessonsForUser, vocabForUser, hasGrammarChoice, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
@@ -212,6 +212,9 @@ function tabGroupsForUser(u: User): TabGroup[] {
   ];
   if (u.tobiraCurrent !== undefined) {
     practice.push(GRAMMAR_CHOICE_TAB, PARTICLE_QUIZ_TAB, GRAMMAR_QUIZ_TAB);
+  } else if (hasGrammarChoice(u)) {
+    // JLPT-track users (Dominik) get 文法選択 for their 使い分け questions.
+    practice.push(GRAMMAR_CHOICE_TAB);
   }
   practice.push(BASE_TABS[4]); // 読解クイズ
   practice.push(BASE_TABS[2]); // 翻訳練習
@@ -344,7 +347,7 @@ export default function App() {
   const hasPodTab = !!user?.podIds;
   // Everything the reader can open by id (route lookups).
   const readable = useMemo(() => [...sortedArticles, ...sortedPods], [sortedArticles, sortedPods]);
-  const [libraryTab, setLibraryTab] = useState<"articles" | "pod">("articles");
+  const [libraryTab, setLibraryTab] = useState<"articles" | "pod" | "lessons">("articles");
   const libraryList = libraryTab === "pod" ? sortedPods : sortedArticles;
   const isPodArticle = (a: Article) => sortedPods.some((p) => p.id === a.id);
   const isPod = !!article && isPodArticle(article);
@@ -353,13 +356,19 @@ export default function App() {
     isPodArticle(a) && !POD_TABS.some((t) => t.id === tab) ? "article" : tab;
 
   const userLessons = useMemo(() => (user ? lessonsForUser(user) : []), [user]);
-  const isLessonMode = userLessons.length > 0;
+  // A user with both articles and lessons (Dominik) switches between them
+  // with the sidebar library tabs; lesson-only users (Andy) are always in
+  // lesson mode.
+  const hasLessonTab = userLessons.length > 0 && sortedArticles.length > 0;
+  const isLessonMode =
+    userLessons.length > 0 && (!hasLessonTab || libraryTab === "lessons");
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
   const [lessonTab, setLessonTab] = useState<string>("lesson");
 
   function signOut() {
     localStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
+    setLibraryTab("articles");
     setArticle(null);
     setParagraphs([]);
     if (typeof window !== "undefined" && window.location.hash) {
@@ -798,6 +807,10 @@ export default function App() {
   useEffect(() => {
     if (isLessonMode) return;
     const r = parseHash();
+    if (r.kind === "lesson" && hasLessonTab && userLessons.some((l) => l.id === r.lessonId)) {
+      setLibraryTab("lessons");
+      return;
+    }
     const target =
       r.kind === "article"
         ? readable.find((a) => a.id === r.articleId)
@@ -842,6 +855,7 @@ export default function App() {
       if (r.kind === "article" && r.articleId) {
         const target = readable.find((a) => a.id === r.articleId);
         if (target) {
+          if (libraryTab === "lessons") setLibraryTab(isPodArticle(target) ? "pod" : "articles");
           const tab = tabFor(target, r.articleTab ?? "article");
           if (article?.id !== target.id) loadArticle(target, tab);
           else if (tab !== activeTab) setActiveTab(tab);
@@ -852,6 +866,7 @@ export default function App() {
         }
       } else if (r.kind === "lesson" && r.lessonId) {
         if (userLessons.some((l) => l.id === r.lessonId)) {
+          if (hasLessonTab && libraryTab !== "lessons") setLibraryTab("lessons");
           if (openLessonId !== r.lessonId) setOpenLessonId(r.lessonId);
           if (r.lessonTab && r.lessonTab !== lessonTab) setLessonTab(r.lessonTab);
         }
@@ -860,7 +875,7 @@ export default function App() {
     window.addEventListener("hashchange", handle);
     return () => window.removeEventListener("hashchange", handle);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [readable, userLessons, article?.id, activeTab, openLessonId, lessonTab]);
+  }, [readable, userLessons, hasLessonTab, libraryTab, article?.id, activeTab, openLessonId, lessonTab]);
 
   function openPopup(unit: Unit, el: HTMLElement) {
     const container = readerRef.current;
@@ -938,6 +953,39 @@ export default function App() {
 
   if (!user) return <SignIn onSignIn={setUser} />;
 
+  // Sidebar switch between the user's libraries (記事 / JapanesePod101 /
+  // レッスン). Only shown when there is more than one.
+  const libraryTabDefs: [typeof libraryTab, string][] = [
+    ["articles", "記事"],
+    ...(hasPodTab ? [["pod", "JapanesePod101"] as [typeof libraryTab, string]] : []),
+    ...(hasLessonTab ? [["lessons", "レッスン"] as [typeof libraryTab, string]] : []),
+  ];
+  function selectLibraryTab(id: typeof libraryTab) {
+    if (libraryTab === "lessons" && id !== "lessons") {
+      // Leaving the lessons: go back to the open article (or the newest one).
+      if (article) setActiveTab(tabFor(article, "article"));
+      else if (sortedArticles[0]) loadArticle(sortedArticles[0]);
+    }
+    setLibraryTab(id);
+  }
+  const libraryTabs =
+    libraryTabDefs.length > 1 ? (
+      <div className="library-tabs" role="tablist" aria-label="ライブラリ">
+        {libraryTabDefs.map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={libraryTab === id}
+            className={"library-tab" + (libraryTab === id ? " active" : "")}
+            onClick={() => selectLibraryTab(id)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    ) : null;
+
   return (
     <ReadingOverridesProvider value={readingOverrides}>
     <div
@@ -1004,7 +1052,7 @@ export default function App() {
         </button>
         {!sidebarCollapsed && (isLessonMode ? (
           <nav className="article-list">
-            <span className="list-label">レッスン</span>
+            {libraryTabs ?? <span className="list-label">レッスン</span>}
             {userLessons.map((l) => (
               <button
                 key={l.id}
@@ -1025,7 +1073,7 @@ export default function App() {
                   </span>
                 )}
                 <span className="ai-date">
-                  {l.turns.filter((t) => t.speaker === "andy").length} 空欄
+                  {l.turns.filter((t) => t.speaker === "student").length} 空欄
                   {l.challenges && ` ・ チャレンジ ${l.challenges.length}`}
                 </span>
               </button>
@@ -1033,29 +1081,7 @@ export default function App() {
           </nav>
         ) : (
           <nav className="article-list">
-            {hasPodTab ? (
-              <div className="library-tabs" role="tablist" aria-label="ライブラリ">
-                {(
-                  [
-                    ["articles", "記事"],
-                    ["pod", "JapanesePod101"],
-                  ] as const
-                ).map(([id, label]) => (
-                  <button
-                    key={id}
-                    type="button"
-                    role="tab"
-                    aria-selected={libraryTab === id}
-                    className={"library-tab" + (libraryTab === id ? " active" : "")}
-                    onClick={() => setLibraryTab(id)}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <span className="list-label">記事</span>
-            )}
+            {libraryTabs ?? <span className="list-label">記事</span>}
             {libraryList.length === 0 && (
               <p className="empty-library">
                 {libraryTab === "pod"

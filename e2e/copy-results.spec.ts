@@ -1,4 +1,4 @@
-import { USERS, articlesForUser } from "../src/users";
+import { USERS, articlesForUser, hasGrammarChoice } from "../src/users";
 import { REPORT_LABELS, type ReportKind } from "../src/quizReport";
 import { test, expect, signIn, copiedText } from "./fixtures";
 
@@ -20,9 +20,14 @@ const ANSWER_FIRST = new Set<ReportKind>(["cloze", "grammarChoice"]);
 for (const user of USERS) {
   const articles = articlesForUser(user);
   if (!articles.length) continue;
-  // Matches tabGroupsForUser in App.tsx: the grammar quizzes need a Tobira chapter.
+  // Matches tabGroupsForUser in App.tsx: the grammar quizzes need a Tobira
+  // chapter, except 文法選択, which also shows when the user's articles have it.
   const tabs = QUIZ_TABS.filter(
-    (t) => user.tobiraCurrent !== undefined || t.kind === "cloze" || t.kind === "reading",
+    (t) =>
+      user.tobiraCurrent !== undefined ||
+      t.kind === "cloze" ||
+      t.kind === "reading" ||
+      (t.kind === "grammarChoice" && hasGrammarChoice(user)),
   );
 
   for (const article of articles) {

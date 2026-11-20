@@ -5,6 +5,8 @@ import {
   findUser,
   articlesForUser,
   vocabForUser,
+  lessonsForUser,
+  hasGrammarChoice,
 } from "./users";
 
 describe("USERS registry", () => {
@@ -52,5 +54,19 @@ describe("Artem's profile", () => {
   it("vocabForUser returns Artem's non-empty pool", () => {
     const pool = vocabForUser(artem);
     expect(pool.length).toBeGreaterThan(0);
+  });
+});
+
+describe("Dominik's profile", () => {
+  const dominik = findUser("dominik")!;
+
+  it("has the 箱根 article and the ryokan lesson", () => {
+    expect(articlesForUser(dominik).map((a) => a.id)).toEqual(["tabi-hakone-onsen"]);
+    expect(lessonsForUser(dominik).map((l) => l.id)).toEqual(["ryokan-reservation"]);
+  });
+
+  it("gets 文法選択 without a Tobira chapter", () => {
+    expect(dominik.tobiraCurrent).toBeUndefined();
+    expect(hasGrammarChoice(dominik)).toBe(true);
   });
 });

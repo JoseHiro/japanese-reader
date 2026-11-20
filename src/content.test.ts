@@ -173,3 +173,27 @@ describe("Kamakura article", () => {
     }
   });
 });
+
+describe("箱根 article (Dominik)", () => {
+  const article = ARTICLES.find((a) => a.id === "tabi-hakone-onsen")!;
+  const sentences = article.text
+    .split("\n")
+    .flatMap((line) => line.split(/(?<=。)/).filter((s) => s.includes("。")));
+
+  it("has a translation for every sentence", () => {
+    const missing = sentences.filter((s) => !(s in (article.translations ?? {})));
+    expect(missing).toEqual([]);
+  });
+
+  it("builds its cloze and first grammarChoice questions from article sentences", () => {
+    for (const q of article.quiz?.cloze ?? []) {
+      const sentence = q.before + q.options[q.answer] + q.after;
+      expect(article.text, sentence).toContain(sentence);
+    }
+    // The first three come from the article; the rest are 使い分け drills.
+    for (const q of (article.quiz?.grammarChoice ?? []).slice(0, 3)) {
+      const sentence = q.before + q.options[q.answer] + q.after;
+      expect(article.text, sentence).toContain(sentence);
+    }
+  });
+});

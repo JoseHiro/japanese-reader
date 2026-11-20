@@ -81,6 +81,15 @@ export const USERS: User[] = [
     displayName: "Chris",
     articleIds: [],
   },
+  {
+    // Passed N3; working towards N2 (2027). Grammar in contrasting groups
+    // through the travel series 「Dominikの日本旅」: each episode is an
+    // article (read + 使い分け quiz) plus a role-play lesson.
+    id: "dominik",
+    displayName: "Dominik",
+    articleIds: ["tabi-hakone-onsen"],
+    lessonIds: ["ryokan-reservation"],
+  },
 ];
 
 function articlesById(ids: string[]): Article[] {
@@ -102,6 +111,11 @@ export function lessonsForUser(user: User): Lesson[] {
   return user.lessonIds
     .map((id) => byId.get(id))
     .filter((l): l is Lesson => !!l);
+}
+
+/** Whether any of the user's articles has 文法選択 questions. */
+export function hasGrammarChoice(user: User): boolean {
+  return articlesForUser(user).some((a) => (a.quiz?.grammarChoice?.length ?? 0) > 0);
 }
 
 export function findUser(id: string): User | undefined {
