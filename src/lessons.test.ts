@@ -57,6 +57,13 @@ describe("Dominik's practice parts", () => {
     }
   });
 
+  it("場面 and ゴール are Japanese only (no English versions)", () => {
+    for (const id of ["hakone-practice", ...SECTIONS]) {
+      expect(lesson(id).situationEn, id).toBeUndefined();
+      expect(lesson(id).goalEn, id).toBeUndefined();
+    }
+  });
+
   it("every challenge names a target grammar", () => {
     for (const id of SECTIONS) {
       for (const c of lesson(id).challenges ?? []) {

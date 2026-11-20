@@ -882,11 +882,7 @@ const ryokanReservation: Lesson = {
     "Spoken, casual-polite: talking to staff at a ryokan front desk. Use natural speech (〜んですけど, 〜しかないですね). 〜ものの / 〜ざるを得ない are too stiff here.",
   situation:
     "夜7時、Dominik は箱根の旅館に着いた。2週間前にネットで予約したのに、フロントで名前が見つからないと言われる。もう電車やバスはほとんどなく、温泉も楽しみにしていた。先生は旅館のスタッフ役（今夜は本館が満室。別館に小さな和室が一つだけ空いているが、別館にはお風呂がなく、外を歩いて本館まで行く必要がある。夕食の時間ももう終わっている）。",
-  situationEn:
-    "It's 7 p.m. and Dominik has just arrived at a ryokan in Hakone. He booked online two weeks ago, but the front desk can't find his name. There are hardly any trains or buses left, and he was looking forward to the onsen. The teacher plays the staff: the main building is full; one small Japanese-style room is free in the annex, which has no bath, so he'd have to walk outside to the main building. Dinner time is already over.",
   goal: "困った状況を自然な話し言葉で説明し、相手の提案を受け入れながら交渉する。〜からといって を会話の中で自然に使う。",
-  goalEn:
-    "Explain a problem in natural spoken Japanese and negotiate while accepting the staff's offer. Use 〜からといって where it fits naturally in conversation.",
   intent:
     "N2 の目標は「〜からといって」だけ（③⑤）。気づき（〜からといって〜とは限らないんですね）と、やわらかい気づかい（〜からといって、全然気にしないですよ）の2つの自然な場面で使う。ほかの空欄は話し言葉の練習。先生メモの「書くなら／かたく言うと」で、〜ものの・〜ざるを得ない との使い分けをその場で示す。",
   intentEn:
@@ -1062,10 +1058,7 @@ const travelAgencyCancel: Lesson = {
     "Polite / business phone call: reporting your situation to a travel agent and asking to cancel. In polite reporting like this, 〜ざるを得ない sounds natural.",
   situation:
     "Dominik は旅行会社「さくら旅行」で、箱根の旅館を2泊予約していた。1泊目の翌朝、急に仕事が入り、今日中に東京に戻らなければならなくなった。旅行会社に電話して、今夜（2泊目）のキャンセルを伝える。先生は旅行会社の担当者役（当日のキャンセルなので、キャンセル料は宿泊料金の50%）。",
-  situationEn:
-    "Dominik booked two nights at a Hakone ryokan through Sakura Travel. On the morning after the first night, work comes up suddenly and he has to be back in Tokyo today. He calls the agency to cancel tonight (the second night). The teacher plays the agent (same-day cancellation: 50% fee).",
   goal: "事情を丁寧に報告し、キャンセルと料金の確認をして、電話をきちんと終える。",
-  goalEn: "Report the situation politely, confirm the cancellation and the fee, and close the call properly.",
   intent:
     "N2 の目標は「〜ざるを得ない」（②④）。仕事の事情を報告する、丁寧な電話の場面で使う。する動詞は「せざるを得ない」、丁寧には「〜ざるを得ません／〜ざるを得なくなりました」。ほかの空欄は丁寧な電話の決まった言い方の練習。",
   intentEn:
@@ -1196,10 +1189,7 @@ const ryokanReview: Lesson = {
     "Written: a review on a booking site. です・ます style is fine, but written forms fit better than spoken ones: 〜ものの rather than 〜けど, 〜ざるを得ない rather than 〜しかない.",
   situation:
     "東京に戻った Dominik は、予約サイトに箱根の旅館の口コミを書く。部屋は小さかったが、女将さんの対応は丁寧で、露天風呂もよかった。急な仕事で1泊で帰ることになったのが残念だった。",
-  situationEn:
-    "Back in Tokyo, Dominik writes a review of the Hakone ryokan on the booking site. The room was small, but the proprietress was very attentive and the open-air bath was good. It was a shame he had to leave after one night because of work.",
   goal: "よかった点と残念だった点を、書き言葉で4〜6文の口コミにまとめる。",
-  goalEn: "Write a 4–6 sentence review in written style, covering both the good points and the disappointments.",
   intent:
     "N2 の目標は「〜ものの」（2回以上）。「AものののB」で、期待と違った点・よかった点を対比させる。「〜ざるを得ない」は1回まで（急な仕事で帰らざるを得なかった）。書いたあと、先生と一緒に「話すならどう言うか（〜けど／〜しかない）」も確認する。",
   intentEn:
@@ -1248,9 +1238,7 @@ const hakoneFollowups: Lesson = {
   registerEn:
     "Each form has its own setting: 〜からといって in conversation, 〜ざるを得ない in a polite report, 〜ものの in writing (a diary). The teacher says the first half; you finish it.",
   situation: "1〜3 の場面で使った文型を、別の話題で短く使ってみる。",
-  situationEn: "Use the forms from sections 1–3 briefly, on other topics.",
   goal: "場面に合った文型で、文の後半をすぐに言える・書けるようにする。",
-  goalEn: "Finish sentences quickly with the form that fits the setting.",
   readings: { 日本: "にほん" },
   turns: [],
   challenges: [
@@ -1324,9 +1312,7 @@ const hakoneCulture: Lesson = {
   registerEn:
     "Each question has its own setting: onsen rules in conversation (〜からといって), a change of plans as a polite report (〜ざるを得ない), manners as a travel-blog post (〜ものの).",
   situation: "温泉や旅行のマナーについて、自分の経験や意見を話したり書いたりする。",
-  situationEn: "Talk or write about your own experience and opinions on onsen and travel manners.",
   goal: "文化の違いについて、場面に合った文型で自分の意見を言う。",
-  goalEn: "Give your view on cultural differences, using the form that fits the setting.",
   readings: { 一泊: "いっぱく", 日本: "にほん" },
   turns: [],
   challenges: [
@@ -1383,9 +1369,7 @@ const hakonePractice: Lesson = {
   shortTitle: "箱根の練習",
   shortTitleEn: "Hakone practice",
   situation: "記事「箱根の温泉で」の N2 文型を、それぞれ自然な場面で使う。",
-  situationEn: "Use the N2 forms from the 箱根 article, each in a setting where it is natural.",
   goal: "〜からといって は会話で、〜ざるを得ない は丁寧な報告で、〜ものの は書き言葉で使えるようにする。",
-  goalEn: "Use 〜からといって in conversation, 〜ざるを得ない in polite reports, and 〜ものの in writing.",
   turns: [],
   parts: [ryokanReservation, travelAgencyCancel, ryokanReview, hakoneFollowups, hakoneCulture],
 };
