@@ -7,6 +7,7 @@ import {
   vocabForUser,
   lessonsForUser,
   hasGrammarChoice,
+  jlptGrammarListLevel,
 } from "./users";
 
 describe("USERS registry", () => {
@@ -68,5 +69,13 @@ describe("Dominik's profile", () => {
   it("gets 文法選択 without a Tobira chapter", () => {
     expect(dominik.tobiraCurrent).toBeUndefined();
     expect(hasGrammarChoice(dominik)).toBe(true);
+  });
+});
+
+describe("JLPT grammar list item", () => {
+  it("only users with jlptGrammarLevel get it (Dominik: N2)", () => {
+    const withList = USERS.filter((u) => jlptGrammarListLevel(u)).map((u) => [u.id, jlptGrammarListLevel(u)]);
+    expect(withList).toEqual([["dominik", "N2"]]);
+    expect(jlptGrammarListLevel(findUser("shaun")!)).toBeUndefined();
   });
 });

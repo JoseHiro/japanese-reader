@@ -2416,3 +2416,36 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
 .fg-en { display: block; font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
 .fg-register { display: block; font-size: 12px; color: var(--text-muted); }
 .fg-example .gram { border-bottom-width: 2px; }
+
+/* ---- Rail foot item (JLPT grammar list): small, muted, pinned last ---- */
+.tab-group-foot {
+  margin-top: 28px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+.tab-group-foot .tab-btn { font-size: 12px; opacity: .8; }
+.tab-group-foot .tab-btn.active { opacity: 1; }
+.tab-group-foot .tab-icon svg { width: 13px; height: 13px; }
+@media (max-width: 760px) {
+  .tab-group-foot { margin-top: 0; padding-top: 0; border-top: none; }
+}
+
+/* ---- JLPT grammar list (reuses 文法帳 gr-* styles) ---- */
+.jlpt-head { grid-template-columns: 1fr; cursor: default; }
+.jlpt-head:hover { background: transparent; }
+.jlpt-head .gr-item-en { grid-column: 1; margin-top: 0; }
+.jlpt-current { border-color: var(--accent); }
+.jlpt-now {
+  margin-left: 8px;
+  padding: 0 7px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  vertical-align: 2px;
+}
+.jlpt-list .gr-item-body { padding-top: 4px; }
+.jlpt-en { margin: 2px 0 0; font-size: 12px; color: var(--text-muted); font-style: italic; }
+.jlpt-source { margin: 4px 0 0; font-size: 12px; color: var(--text-muted); }
+.jlpt-source a { color: inherit; }

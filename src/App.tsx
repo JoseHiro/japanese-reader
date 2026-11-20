@@ -3,6 +3,7 @@ import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import type { Annotation, Article, FocusGrammar } from "./content";
 import { FocusGrammarBox } from "./FocusGrammarBox";
+import { JlptGrammarList } from "./JlptGrammarList";
 import { findLesson, lessonMeta } from "./lessons";
 import { grammarClass, grammarForPieces, grammarRanges } from "./focusGrammar";
 import { lookupGlosses, loadDictionary } from "./dictionary";
@@ -39,7 +40,7 @@ import {
   IconRetry,
   IconList,
 } from "./shared/icons";
-import { findUser, articlesForUser, podsForUser, lessonsForUser, vocabForUser, hasGrammarChoice, type User } from "./users";
+import { findUser, articlesForUser, podsForUser, lessonsForUser, vocabForUser, hasGrammarChoice, jlptGrammarListLevel, type User } from "./users";
 import { SignIn } from "./SignIn";
 import { Practice } from "./Practice";
 import { ArticleTranslate } from "./ArticleTranslate";
@@ -189,6 +190,20 @@ const GRAMMAR_REF_TAB: TabDef = {
   icon: <IconGrammarBook />,
 };
 
+// Small item pinned at the bottom of the rail for users with a JLPT grammar
+// list (Dominik: N2). Kept low-key on purpose.
+function jlptFootGroup(u: User): TabGroup[] {
+  const level = jlptGrammarListLevel(u);
+  if (!level) return [];
+  return [
+    {
+      id: "jlpt-foot",
+      variant: "foot",
+      tabs: [{ id: "jlptGrammar", label: `文法リスト ${level}`, icon: <IconGrammarBook /> }],
+    },
+  ];
+}
+
 const LESSON_TABS: TabDef[] = [
   { id: "lesson", label: "レッスン", icon: <IconArticle /> },
   { id: "vocab", label: "単語リスト", icon: <IconWordList /> },
@@ -196,9 +211,9 @@ const LESSON_TABS: TabDef[] = [
 
 // A grouped lesson (Dominik's 箱根 practice) lists its sections in the rail,
 // like an article's tabs; the lesson sub-tab is then the section's id.
-function lessonRailGroups(lessonId: string): TabGroup[] {
+function lessonRailGroups(lessonId: string, u: User): TabGroup[] {
   const parts = findLesson(lessonId)?.parts;
-  if (!parts?.length) return [{ id: "lesson", tabs: LESSON_TABS }];
+  if (!parts?.length) return [{ id: "lesson", tabs: LESSON_TABS }, ...jlptFootGroup(u)];
   return [
     {
       id: "lesson-sections",
@@ -210,11 +225,12 @@ function lessonRailGroups(lessonId: string): TabGroup[] {
       })),
     },
     { id: "lesson-ref", tabs: [LESSON_TABS[1]] },
+    ...jlptFootGroup(u),
   ];
 }
 function lessonRailActive(lessonId: string, tab: string): string {
   const parts = findLesson(lessonId)?.parts;
-  if (!parts?.length || tab === "vocab") return tab;
+  if (!parts?.length || tab === "vocab" || tab === "jlptGrammar") return tab;
   return parts.some((p) => p.id === tab) ? tab : parts[0].id;
 }
 
@@ -252,6 +268,7 @@ function tabGroupsForUser(u: User): TabGroup[] {
   return [
     { id: "main", tabs: main },
     { id: "practice", label: "練習", collapsible: true, tabs: practice },
+    ...jlptFootGroup(u),
   ];
 }
 
@@ -1175,7 +1192,7 @@ export default function App() {
       )}
       {isLessonMode && openLessonId && (
         <TabRail
-          groups={lessonRailGroups(openLessonId)}
+          groups={lessonRailGroups(openLessonId, user)}
           active={lessonRailActive(openLessonId, lessonTab)}
           onChange={setLessonTab}
         />
@@ -1720,7 +1737,20 @@ export default function App() {
         </section>
       )}
 
-      {activeTab === "practice" && (
+      {(isLessonMode ? lessonTab === "jlptGrammar" : activeTab === "jlptGrammar") &&
+        jlptGrammarListLevel(user) && (
+          <section className="quiz">
+            <JlptGrammarList
+              level={jlptGrammarListLevel(user)!}
+              current={(article ? [article] : articlesForUser(user)).flatMap(
+                (a) => a.focusGrammar?.map((g) => g.label) ?? [],
+              )}
+              showFurigana={showFurigana}
+            />
+          </section>
+        )}
+
+      {activeTab === "practice" && !(isLessonMode && lessonTab === "jlptGrammar") && (
         <Practice
           user={user}
           openLessonId={openLessonId}

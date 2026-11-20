@@ -14,6 +14,7 @@ const TAB_TO_SLUG: Record<string, string> = {
   particleQuiz: "particle-quiz",
   flashcards: "flashcards",
   grammarRef: "grammar",
+  jlptGrammar: "jlpt-grammar",
 };
 
 const SLUG_TO_TAB: Record<string, string> = Object.fromEntries(

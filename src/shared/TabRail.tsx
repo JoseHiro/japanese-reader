@@ -15,6 +15,8 @@ export interface TabGroup {
   label?: string;
   /** When true (and `label` is set) the header becomes a chevron toggle. */
   collapsible?: boolean;
+  /** "foot": a small, muted group pinned at the bottom of the rail. */
+  variant?: "foot";
   tabs: TabDef[];
 }
 
@@ -56,7 +58,7 @@ export function TabRail({
 
   return (
     <nav className="tab-rail" aria-label="ページ内タブ">
-      {groups.map((g, gi) => {
+      {[...groups.filter((g) => g.variant !== "foot"), ...groups.filter((g) => g.variant === "foot")].map((g, gi) => {
         const isCollapsed = !!collapsed[g.id];
         const header = g.label ? (
           g.collapsible ? (
@@ -81,7 +83,9 @@ export function TabRail({
         return (
           <div
             key={g.id}
-            className={"tab-group" + (gi > 0 ? " tab-group-gap" : "")}
+            className={
+              "tab-group" + (gi > 0 ? " tab-group-gap" : "") + (g.variant === "foot" ? " tab-group-foot" : "")
+            }
           >
             {header}
             {!isCollapsed &&

@@ -30,6 +30,7 @@ test("dominik: 箱根 article with its quizzes, then the ryokan lesson", async (
     "4. 続けて話す",
     "5. 文化の質問",
     "単語リスト",
+    "文法リスト N2",
   ]);
   // The first section is shown by default.
   await expect(page.locator(".pr-title")).toContainText("フロント");
@@ -185,4 +186,40 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
   await expect(page.locator(".reader .para .gram")).toHaveCount(0);
   await toggle.click();
   await expect(page.locator(".reader .para .gram-0")).not.toHaveCount(0);
+});
+
+test("dominik: small 文法リスト N2 item at the bottom of the rail", async ({ page }) => {
+  await signIn(page, "dominik");
+  await page.goto("/#/a/tabi-hakone-onsen");
+  const rail = page.locator(".tab-rail");
+  // Pinned last, in its own muted group below 練習.
+  const item = rail.locator(".tab-group-foot .tab-btn");
+  await expect(item).toHaveText("文法リスト N2");
+  await expect(rail.locator(".tab-group").last()).toHaveClass(/tab-group-foot/);
+
+  await item.click();
+  await expect(page).toHaveURL(/#\/a\/tabi-hakone-onsen\/jlpt-grammar$/);
+  await expect(page.locator(".jlpt-list .gr-hits")).toContainText("N2");
+  // The article's focus grammar is marked 今回.
+  await expect(page.locator(".jlpt-current")).toHaveCount(3);
+  await expect(page.locator(".jlpt-source a")).toHaveText("JLPT Grammar List");
+
+  await page.getByRole("textbox", { name: "N2 の文法を検索" }).fill("からといって");
+  await expect(page.locator(".jlpt-list .gr-item")).toHaveCount(1);
+  await expect(page.locator(".jlpt-list .gr-item")).toContainText("just because");
+  await expect(page.locator(".jlpt-list .jlpt-now")).toHaveText("今回");
+
+  // The same item is on the lesson page's rail.
+  await page.getByRole("tablist", { name: "ライブラリ" }).getByRole("tab", { name: "レッスン" }).click();
+  await rail.locator(".tab-group-foot .tab-btn").click();
+  await expect(page).toHaveURL(/#\/l\/hakone-practice\/jlptGrammar$/);
+  await expect(page.locator(".jlpt-list")).toBeVisible();
+  await expect(page.locator(".pr-page")).toHaveCount(0);
+});
+
+test("shaun: no JLPT grammar list item", async ({ page }) => {
+  await signIn(page, "shaun");
+  await page.goto("/");
+  await expect(page.locator(".tab-rail .tab-btn").first()).toBeVisible();
+  await expect(page.locator(".tab-group-foot")).toHaveCount(0);
 });

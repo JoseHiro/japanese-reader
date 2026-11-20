@@ -4,6 +4,7 @@ import { LESSONS } from "./lessons";
 import type { Lesson } from "./lessons";
 import { vocabForPool } from "./vocabulary";
 import type { VocabItem } from "./vocabulary";
+import type { JLPTLevel } from "./grammar";
 
 // A user in the reader. Each user is scoped to their own set of articles;
 // other reader state (theme, furigana, quiz answers) stays global.
@@ -35,6 +36,11 @@ export interface User {
    * the flashcard tab and biases cloze distractors.
    */
   vocabPoolId?: string;
+  /**
+   * JLPT level whose grammar list (src/data/grammar.json) this user can
+   * open from a small item at the bottom of the rail. Unset = no item.
+   */
+  jlptGrammarLevel?: JLPTLevel;
 }
 
 // Predefined users. Adding a new one here (with the article ids they own)
@@ -82,6 +88,7 @@ export const USERS: User[] = [
     id: "dominik",
     displayName: "Dominik",
     articleIds: ["tabi-hakone-onsen"],
+    jlptGrammarLevel: "N2",
     lessonIds: ["hakone-practice"],
   },
 ];
@@ -110,6 +117,11 @@ export function lessonsForUser(user: User): Lesson[] {
 /** Whether any of the user's articles has 文法選択 questions. */
 export function hasGrammarChoice(user: User): boolean {
   return articlesForUser(user).some((a) => (a.quiz?.grammarChoice?.length ?? 0) > 0);
+}
+
+/** The JLPT grammar list the user can open from the rail, if any. */
+export function jlptGrammarListLevel(user: User): JLPTLevel | undefined {
+  return user.jlptGrammarLevel;
 }
 
 export function findUser(id: string): User | undefined {
