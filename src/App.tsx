@@ -3,6 +3,7 @@ import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
 import type { Annotation, Article, FocusGrammar } from "./content";
 import { FocusGrammarBox } from "./FocusGrammarBox";
+import { findLesson, lessonMeta } from "./lessons";
 import { grammarClass, grammarForPieces, grammarRanges } from "./focusGrammar";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
@@ -192,6 +193,30 @@ const LESSON_TABS: TabDef[] = [
   { id: "lesson", label: "レッスン", icon: <IconArticle /> },
   { id: "vocab", label: "単語リスト", icon: <IconWordList /> },
 ];
+
+// A grouped lesson (Dominik's 箱根 practice) lists its sections in the rail,
+// like an article's tabs; the lesson sub-tab is then the section's id.
+function lessonRailGroups(lessonId: string): TabGroup[] {
+  const parts = findLesson(lessonId)?.parts;
+  if (!parts?.length) return [{ id: "lesson", tabs: LESSON_TABS }];
+  return [
+    {
+      id: "lesson-sections",
+      label: "セクション",
+      tabs: parts.map((p) => ({
+        id: p.id,
+        label: p.sectionLabel ?? p.shortTitle ?? p.title,
+        icon: <IconArticle />,
+      })),
+    },
+    { id: "lesson-ref", tabs: [LESSON_TABS[1]] },
+  ];
+}
+function lessonRailActive(lessonId: string, tab: string): string {
+  const parts = findLesson(lessonId)?.parts;
+  if (!parts?.length || tab === "vocab") return tab;
+  return parts.some((p) => p.id === tab) ? tab : parts[0].id;
+}
 
 function tabGroupsForUser(u: User): TabGroup[] {
   if (u.id === "andy") {
@@ -1104,8 +1129,7 @@ export default function App() {
                   </span>
                 )}
                 <span className="ai-date">
-                  {l.turns.filter((t) => t.speaker === "student").length} 空欄
-                  {l.challenges && ` ・ チャレンジ ${l.challenges.length}`}
+                  {lessonMeta(l)}
                 </span>
               </button>
             ))}
@@ -1151,8 +1175,8 @@ export default function App() {
       )}
       {isLessonMode && openLessonId && (
         <TabRail
-          groups={[{ id: "lesson", tabs: LESSON_TABS }]}
-          active={lessonTab}
+          groups={lessonRailGroups(openLessonId)}
+          active={lessonRailActive(openLessonId, lessonTab)}
           onChange={setLessonTab}
         />
       )}

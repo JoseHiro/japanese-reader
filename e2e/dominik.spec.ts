@@ -19,23 +19,58 @@ test("dominik: 箱根 article with its quizzes, then the ryokan lesson", async (
 
   const tabs = page.getByRole("tablist", { name: "ライブラリ" });
   await tabs.getByRole("tab", { name: "レッスン" }).click();
-  await expect(page).toHaveURL(/#\/l\/ryokan-reservation$/);
+  await expect(page).toHaveURL(/#\/l\/hakone-practice$/);
+  // One lesson in the sidebar; its sections are in the right-hand rail.
+  await expect(page.locator(".article-item")).toHaveCount(1);
+  const rail2 = page.locator(".tab-rail");
+  await expect(rail2.locator(".tab-label")).toHaveText([
+    "1. フロント",
+    "2. 電話",
+    "3. 口コミ",
+    "4. 続けて話す",
+    "5. 文化の質問",
+    "単語リスト",
+  ]);
+  // The first section is shown by default.
   await expect(page.locator(".pr-title-en")).toContainText("We can't find your reservation");
+  await expect(page.locator(".pr-intro-card-register")).toContainText("〜からといって");
   await expect(page.locator(".pr-script-who-student").first()).toContainText("Dominik");
-  await expect(page.locator(".pr-challenge")).toHaveCount(6);
+  await expect(page.locator(".pr-challenge")).toHaveCount(0);
+
+  await rail2.getByRole("button", { name: "2. 電話" }).click();
+  await expect(page).toHaveURL(/#\/l\/hakone-practice\/travel-agency-cancel$/);
+  await expect(page.locator(".pr-intro-card-register")).toContainText("〜ざるを得ない");
+  await expect(page.locator(".pr-script-who-them").first()).toContainText("旅行会社の担当者");
+
+  await rail2.getByRole("button", { name: "3. 口コミ" }).click();
+  await expect(page.locator(".pr-intro-card-register")).toContainText("Written");
+  await expect(page.locator(".pr-script")).toHaveCount(0);
+  await expect(page.locator(".pr-challenge")).toHaveCount(1);
+  await expect(page.locator(".pr-progress")).toHaveText("課題 1");
+
+  await rail2.getByRole("button", { name: "4. 続けて話す" }).click();
+  await expect(page.locator(".pr-challenge")).toHaveCount(4);
+  await rail2.getByRole("button", { name: "5. 文化の質問" }).click();
+  await expect(page.locator(".pr-challenge")).toHaveCount(3);
+
+  // Back / forward move between sections.
+  await page.goBack();
+  await expect(page).toHaveURL(/#\/l\/hakone-practice\/hakone-followups$/);
+  await expect(page.locator(".pr-challenge")).toHaveCount(4);
 
   await tabs.getByRole("tab", { name: "記事" }).click();
   await expect(page).toHaveURL(/#\/a\/tabi-hakone-onsen$/);
   await expect(page.locator(".article-head h2")).toHaveText("箱根の温泉で");
 });
 
-test("dominik: a lesson URL opens the lesson directly", async ({ page }) => {
+test("dominik: a section URL opens that section directly", async ({ page }) => {
   await signIn(page, "dominik");
-  await page.goto("/#/l/ryokan-reservation");
-  await expect(page.locator(".pr-title-en")).toContainText("We can't find your reservation");
+  await page.goto("/#/l/hakone-practice/ryokan-review");
+  await expect(page.locator(".pr-title-en")).toContainText("review");
   await expect(
     page.getByRole("tablist", { name: "ライブラリ" }).getByRole("tab", { name: "レッスン" }),
   ).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator(".tab-rail .tab-btn.active")).toContainText("3. 口コミ");
 });
 
 test("dominik: 今回の文法 box and matching highlights in the body", async ({ page }) => {

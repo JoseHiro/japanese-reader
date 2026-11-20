@@ -1,47 +1,124 @@
 import { describe, expect, it } from "vitest";
-import { LESSONS, type Blank } from "./lessons";
+import { findLesson, lessonMeta, type Blank, type Lesson } from "./lessons";
+import { findUser, lessonsForUser } from "./users";
 
-const TARGETS = ["〜ものの", "〜からといって", "〜ざるを得ない"];
+// Dominik's 箱根 practice: each N2 form appears only in the register where a
+// native speaker would use it.
+//   ryokan-reservation   spoken      → 〜からといって (1–2 blanks)
+//   travel-agency-cancel polite call → 〜ざるを得ない (2 blanks)
+//   ryokan-review        writing     → 〜ものの (≥2 in the model), ざるを得ない ≤1
 
-describe("ryokan-reservation lesson (Dominik, N2)", () => {
-  const lesson = LESSONS.find((l) => l.id === "ryokan-reservation")!;
-  const blanks = lesson.turns.flatMap((t) => (t.speaker === "student" ? [t.blank] : []));
-  const targetsOf = (rules: Blank["rules"]) =>
-    TARGETS.filter((g) =>
-      (rules ?? []).some((r) => r.kind === "grammar" && r.items.some((it) => it.startsWith(g))),
-    );
+const TARGETS = ["〜ものの", "〜からといって", "〜ざるを得ない"] as const;
+type Target = (typeof TARGETS)[number];
+const STEM: Record<Target, string> = {
+  "〜ものの": "ものの",
+  "〜からといって": "からといって",
+  "〜ざるを得ない": "ざるを得",
+};
 
-  it("every blank names an N2 target in a grammar rule, listed first", () => {
-    for (const b of blanks) {
-      expect(targetsOf(b.rules), b.id).not.toEqual([]);
-      expect(b.rules?.[0].kind, b.id).toBe("grammar");
-      expect(b.intentEn, b.id).toBeTruthy();
-      expect(b.teacherNote, b.id).toBeTruthy();
-    }
+const lesson = (id: string): Lesson => findLesson(id)!;
+const blanksOf = (l: Lesson): Blank[] =>
+  l.turns.flatMap((t) => (t.speaker === "student" ? [t.blank] : []));
+const targetsOf = (rules: Blank["rules"]): Target[] =>
+  TARGETS.filter((g) =>
+    (rules ?? []).some((r) => r.kind === "grammar" && r.items.some((it) => it.startsWith(g))),
+  );
+const count = (text: string, stem: string) => text.split(stem).length - 1;
+
+describe("Dominik's practice parts", () => {
+  const SECTIONS = [
+    "ryokan-reservation",
+    "travel-agency-cancel",
+    "ryokan-review",
+    "hakone-followups",
+    "hakone-culture",
+  ];
+
+  it("are one lesson for Dominik, with its sections in order", () => {
+    const [group, ...rest] = lessonsForUser(findUser("dominik")!);
+    expect(rest).toEqual([]);
+    expect(group.id).toBe("hakone-practice");
+    expect(group.turns).toEqual([]);
+    expect(group.parts?.map((p) => p.id)).toEqual(SECTIONS);
+    expect(group.parts?.map((p) => p.sectionLabel)).toEqual([
+      "1. フロント",
+      "2. 電話",
+      "3. 口コミ",
+      "4. 続けて話す",
+      "5. 文化の質問",
+    ]);
+    expect(lessonMeta(group)).toBe("5 セクション");
   });
 
-  it("requires each target at least twice", () => {
-    const counts = Object.fromEntries(TARGETS.map((g) => [g, 0]));
-    for (const b of blanks) for (const g of targetsOf(b.rules)) counts[g]++;
-    for (const g of TARGETS) expect(counts[g], g).toBeGreaterThanOrEqual(2);
-  });
-
-  it("samples actually use the blank's target", () => {
-    const stem: Record<string, string> = {
-      "〜ものの": "ものの",
-      "〜からといって": "からといって",
-      "〜ざるを得ない": "ざるを得",
-    };
-    for (const b of blanks) {
-      for (const g of targetsOf(b.rules)) {
-        for (const s of b.samples) expect(s, `${b.id} ${g}`).toContain(stem[g]);
-      }
+  it("every section opens with a register note and its target grammar", () => {
+    for (const id of SECTIONS) {
+      expect(lesson(id).register, id).toBeTruthy();
+      expect(lesson(id).target, id).toBeTruthy();
     }
   });
 
   it("every challenge names a target grammar", () => {
-    for (const c of lesson.challenges ?? []) {
-      expect(targetsOf(c.rules), c.id).not.toEqual([]);
+    for (const id of SECTIONS) {
+      for (const c of lesson(id).challenges ?? []) {
+        expect(targetsOf(c.rules), `${id} ${c.id}`).not.toEqual([]);
+      }
     }
+  });
+
+  it("blank samples use the grammar their rule asks for", () => {
+    for (const id of ["ryokan-reservation", "travel-agency-cancel"]) {
+      for (const b of blanksOf(lesson(id))) {
+        for (const g of targetsOf(b.rules)) {
+          for (const s of b.samples) expect(s, `${id} ${b.id}`).toContain(STEM[g]);
+        }
+        expect(b.intentEn && b.teacherNote, `${id} ${b.id}`).toBeTruthy();
+      }
+    }
+  });
+});
+
+describe("① 会話：旅館のフロント (spoken)", () => {
+  const l = lesson("ryokan-reservation");
+  const blanks = blanksOf(l);
+
+  it("targets only 〜からといって, in 1–2 blanks", () => {
+    const targeted = blanks.filter((b) => targetsOf(b.rules).length > 0);
+    expect(targeted.length).toBeGreaterThanOrEqual(1);
+    expect(targeted.length).toBeLessThanOrEqual(2);
+    for (const b of targeted) expect(targetsOf(b.rules), b.id).toEqual(["〜からといって"]);
+  });
+
+  it("keeps stiff written forms out of the spoken dialogue", () => {
+    const spoken = l.turns.flatMap((t) => (t.speaker === "them" ? [t.text] : t.blank.samples));
+    for (const line of spoken) {
+      expect(line).not.toContain("ものの");
+      expect(line).not.toContain("ざるを得");
+    }
+  });
+});
+
+describe("② 丁寧な電話 (polite call)", () => {
+  it("uses 〜ざるを得ない in exactly two blanks", () => {
+    const blanks = blanksOf(lesson("travel-agency-cancel"));
+    const targeted = blanks.filter((b) => targetsOf(b.rules).length > 0);
+    expect(targeted.map((b) => targetsOf(b.rules))).toEqual([["〜ざるを得ない"], ["〜ざるを得ない"]]);
+  });
+});
+
+describe("③ 書く：口コミ (writing)", () => {
+  const l = lesson("ryokan-review");
+
+  it("is a writing task: no dialogue, tasks as challenges", () => {
+    expect(l.turns).toEqual([]);
+    expect(lessonMeta(l)).toBe("課題 1");
+  });
+
+  it("the model review uses ものの at least twice and ざるを得ない at most once", () => {
+    const model = l.challenges![0].samples[0];
+    expect(count(model, "ものの")).toBeGreaterThanOrEqual(2);
+    expect(count(model, "ざるを得")).toBeLessThanOrEqual(1);
+    const sentences = model.split("。").filter(Boolean);
+    expect(sentences.length).toBeGreaterThanOrEqual(4);
+    expect(sentences.length).toBeLessThanOrEqual(6);
   });
 });

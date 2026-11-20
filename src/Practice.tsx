@@ -7,6 +7,7 @@ import {
   type Blank,
   type Challenge,
   type Lesson,
+  lessonMeta,
 } from "./lessons";
 import { Furigana } from "./shared/Furigana";
 import { ReadingOverridesProvider } from "./shared/readingOverrides";
@@ -313,7 +314,7 @@ interface LessonWord {
 // Collect every Japanese source string in a lesson (them turns, blank
 // samples, intents, rule items, warmup, challenges).
 function lessonTexts(lesson: Lesson): string[] {
-  const out: string[] = [];
+  const out: string[] = (lesson.parts ?? []).flatMap(lessonTexts);
   out.push(lesson.title, lesson.situation, lesson.goal);
   if (lesson.intent) out.push(lesson.intent);
   if (lesson.warmup?.tip) out.push(lesson.warmup.tip);
@@ -336,7 +337,7 @@ function lessonTexts(lesson: Lesson): string[] {
 // Words explicitly called out as vocabulary targets (warmup + vocab/avoid
 // rules across the lesson). These get a "★" marker in the list.
 function starredVocab(lesson: Lesson): Set<string> {
-  const s = new Set<string>();
+  const s = new Set<string>((lesson.parts ?? []).flatMap((p) => [...starredVocab(p)]));
   for (const v of lesson.warmup?.vocab ?? []) s.add(v);
   for (const t of lesson.turns) {
     if (t.speaker !== "student") continue;
@@ -505,11 +506,14 @@ function LessonVocab({ lesson }: { lesson: Lesson }) {
 
 function LessonPage({
   lesson,
+  group,
   user,
   onExit,
   subTab = "lesson",
 }: {
   lesson: Lesson;
+  /** The grouped lesson this one is a section of, if any. */
+  group?: Lesson;
   user: User;
   onExit: () => void;
   subTab?: string;
@@ -571,12 +575,10 @@ function LessonPage({
         <button className="pr-mini" onClick={onExit}>
           ← レッスン一覧
         </button>
-        <span className="pr-progress">
-          {blanks.length} 空欄
-          {lesson.challenges && ` ・ チャレンジ ${lesson.challenges.length}`}
-        </span>
+        <span className="pr-progress">{lessonMeta(lesson)}</span>
       </div>
 
+      {group && <p className="pr-group-title"><J text={group.shortTitle ?? group.title} /></p>}
       <h2 className="pr-title"><J text={lesson.title} /></h2>
       {lesson.titleEn && <p className="pr-title-en">{lesson.titleEn}</p>}
 
@@ -585,6 +587,18 @@ function LessonPage({
       {subTab === "lesson" && (
       <>
       <div className="pr-intro-cards">
+        {lesson.register && (
+          <div className="pr-intro-card pr-intro-card-register">
+            <span className="pr-intro-label">🗣 場面とことば · Register</span>
+            <p><J text={lesson.register} /></p>
+            {lesson.registerEn && <p className="pr-en">{lesson.registerEn}</p>}
+            {lesson.target && (
+              <p className="pr-target">
+                🎯 目標の文法：<span className="pr-chip pr-chip-accent"><J text={lesson.target} /></span>
+              </p>
+            )}
+          </div>
+        )}
         <div className="pr-intro-card">
           <span className="pr-intro-label">📍 場面 · Situation</span>
           <p><J text={lesson.situation} /></p>
@@ -634,6 +648,7 @@ function LessonPage({
       )}
 
       {/* Script view: compact conversation with numbered blanks */}
+      {blanks.length > 0 && (
       <div className="pr-script">
         {lesson.turns.map((turn, i) => {
           if (turn.speaker === "them") {
@@ -677,15 +692,18 @@ function LessonPage({
           );
         })}
       </div>
+      )}
 
       {/* Drills: numbered detail cards */}
       <div className="pr-drills">
+        {blanks.length > 0 && (
         <h3 className="pr-drills-title">
           練習 · Practice
           <span className="pr-drills-sub">
             各空欄をクリック → 詳しい指示と模範解答へ · Click a blank to jump to its drill
           </span>
         </h3>
+        )}
         {blanks.map(({ blank, number }) => (
           <DrillCard
             key={blank.id}
@@ -700,8 +718,8 @@ function LessonPage({
 
         {lesson.challenges && lesson.challenges.length > 0 && (
           <>
-            <h3 className="pr-drills-title pr-drills-title-sub">
-              追加チャレンジ · Bonus challenges
+            <h3 className={"pr-drills-title" + (blanks.length > 0 ? " pr-drills-title-sub" : "")}>
+              {blanks.length > 0 ? "追加チャレンジ · Bonus challenges" : "課題 · Tasks"}
             </h3>
             {lesson.challenges.map((c) => (
               <ChallengeCard
@@ -748,14 +766,29 @@ export function Practice({
     : null;
 
   if (openLesson) {
+    // A grouped lesson shows the section picked in the rail (the first by
+    // default); its 単語リスト covers every section.
+    const parts = openLesson.parts;
+    const shown =
+      parts?.length && lessonTab !== "vocab"
+        ? parts.find((p) => p.id === lessonTab) ?? parts[0]
+        : openLesson;
+    const subTab = lessonTab === "vocab" ? "vocab" : "lesson";
+    const readings = {
+      ...openLesson.readings,
+      ...Object.assign({}, ...(parts ?? []).map((p) => p.readings ?? {})),
+      ...shown.readings,
+    };
     return (
       <FuriCtx.Provider value={showFurigana}>
-        <ReadingOverridesProvider value={openLesson.readings ?? {}}>
+        <ReadingOverridesProvider value={readings}>
           <LessonPage
-            lesson={openLesson}
+            key={shown.id}
+            lesson={shown}
+            group={shown !== openLesson ? openLesson : undefined}
             user={user}
             onExit={() => setOpenLessonId(null)}
-            subTab={lessonTab}
+            subTab={subTab}
           />
         </ReadingOverridesProvider>
       </FuriCtx.Provider>
@@ -771,7 +804,6 @@ export function Practice({
           ...(l.challenges?.map((c) => c.id) ?? []),
         ];
         const starCount = allIds.filter((id) => bookmarks.has(id)).length;
-        const blankCount = l.turns.filter((t) => t.speaker === "student").length;
         return (
           <button
             key={l.id}
@@ -781,8 +813,7 @@ export function Practice({
             <span className="pr-lesson-title"><J text={l.title} /></span>
             <span className="pr-lesson-goal">🎯 <J text={l.goal} /></span>
             <span className="pr-lesson-meta">
-              {blankCount} 空欄
-              {l.challenges && ` ・ チャレンジ ${l.challenges.length}`}
+              {lessonMeta(l)}
               {starCount > 0 && ` ・ ⭐ ${starCount}`}
             </span>
           </button>

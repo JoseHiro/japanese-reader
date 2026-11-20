@@ -73,12 +73,28 @@ export interface Lesson {
   situationEn?: string;
   goal: string;
   goalEn?: string;
+  /**
+   * One line on the setting and its register (話し言葉／丁寧な会話／書き言葉),
+   * shown first so the student learns where each form belongs.
+   */
+  register?: string;
+  registerEn?: string;
   intent?: string;
   intentEn?: string;
   warmup?: Warmup;
   /** Label for the interlocutor across the dialogue (e.g., "配達員"). */
   interlocutorLabel?: string;
+  /** Dialogue; may be empty for a writing-only lesson (tasks as challenges). */
   turns: DialogueTurn[];
+  /**
+   * Sections of a grouped lesson. Each is a full lesson, listed in the
+   * right-hand rail by its `sectionLabel`; the group itself has no turns.
+   */
+  parts?: Lesson[];
+  /** Rail label when this lesson is a section of a group, e.g. "1. フロント". */
+  sectionLabel?: string;
+  /** Target grammar shown with the register note, e.g. "〜からといって". */
+  target?: string;
   challenges?: Challenge[];
   /**
    * Furigana fixes for words kuromoji misreads in this lesson, as
@@ -847,60 +863,62 @@ const salonHaircut: Lesson = {
   ],
 };
 
-// Dominik (N2 track), 「Dominikの日本旅」 #1 箱根. Follows the article
-// `tabi-hakone-onsen`: the same three N2 patterns (〜ものの / 〜からといって /
-// 〜ざるを得ない), now produced in speech.
+// Dominik (N2 track), 「Dominikの日本旅」 #1 箱根. Three practice parts that
+// put each N2 form of the article where a native speaker would use it:
+//   会話（話し言葉）     → 〜からといって
+//   丁寧な電話（報告）   → 〜ざるを得ない
+//   口コミ（書き言葉）   → 〜ものの（＋ざるを得ない 1回まで）
 const ryokanReservation: Lesson = {
   id: "ryokan-reservation",
-  title: "旅館で「予約が見つからない」",
-  titleEn: "At the ryokan: \"We can't find your reservation\"",
-  shortTitle: "予約が見つからない",
-  shortTitleEn: "Missing reservation",
+  title: "会話：旅館のフロントで「予約が見つからない」",
+  titleEn: "Conversation: \"We can't find your reservation\" at the ryokan",
+  shortTitle: "① 会話：旅館のフロント",
+  shortTitleEn: "Front desk talk",
+  sectionLabel: "1. フロント",
+  target: "〜からといって",
+  register:
+    "話し言葉（丁寧な会話）：旅館のフロントでスタッフと話す。「〜んですけど」「〜しかないですね」のような自然な話し言葉で。〜ものの／〜ざるを得ない はかたいので、ここでは使わない。",
+  registerEn:
+    "Spoken, casual-polite: talking to staff at a ryokan front desk. Use natural speech (〜んですけど, 〜しかないですね). 〜ものの / 〜ざるを得ない are too stiff here.",
   situation:
-    "夜7時、Dominik は箱根の旅館に着いた。2週間前にネットで予約したのに、フロントで名前が見つからないと言われる。もう電車やバスはほとんどなく、温泉も楽しみにしていた。先生は旅館のスタッフ役（今夜は満室。別館に小さな和室が一つだけ空いているが、別館にはお風呂がなく、外を歩いて本館まで行く必要がある。夕食の時間ももう終わっている）。",
+    "夜7時、Dominik は箱根の旅館に着いた。2週間前にネットで予約したのに、フロントで名前が見つからないと言われる。もう電車やバスはほとんどなく、温泉も楽しみにしていた。先生は旅館のスタッフ役（今夜は本館が満室。別館に小さな和室が一つだけ空いているが、別館にはお風呂がなく、外を歩いて本館まで行く必要がある。夕食の時間ももう終わっている）。",
   situationEn:
-    "It's 7 p.m. and Dominik has just arrived at a ryokan in Hakone. He booked online two weeks ago, but the front desk can't find his name. There are hardly any trains or buses left, and he was looking forward to the onsen. The teacher plays the staff: the inn is full tonight; one small Japanese-style room is free in the annex, but it has no bath, so he'd have to walk outside to the main building. Dinner time is already over.",
-  goal: "困った状況を説明し、帰れない事情を伝えて、相手の代わりの提案を受け入れながら交渉する。",
+    "It's 7 p.m. and Dominik has just arrived at a ryokan in Hakone. He booked online two weeks ago, but the front desk can't find his name. There are hardly any trains or buses left, and he was looking forward to the onsen. The teacher plays the staff: the main building is full; one small Japanese-style room is free in the annex, which has no bath, so he'd have to walk outside to the main building. Dinner time is already over.",
+  goal: "困った状況を自然な話し言葉で説明し、相手の提案を受け入れながら交渉する。〜からといって を会話の中で自然に使う。",
   goalEn:
-    "Explain a problem, say why you can't just leave, and negotiate while accepting the staff's alternative.",
+    "Explain a problem in natural spoken Japanese and negotiate while accepting the staff's offer. Use 〜からといって where it fits naturally in conversation.",
   intent:
-    "記事「箱根の温泉で」の N2 文型3つを会話で使う。Dominik の空欄はすべて、どれか1つの文型を使う練習（各文型2回ずつ：ものの①②、からといって③⑥、ざるを得ない④⑤）。名前や日付などの情報は、文型の文の中に入れて言う。「〜ものの」「〜ざるを得ない」はかたいので、会話では「〜けど」「〜しかない」にもなることを確認する。N3 の「〜わけではない」「〜わけにはいかない」は支えとして使ってよいが、目標ではない。",
+    "N2 の目標は「〜からといって」だけ（③⑤）。気づき（〜からといって〜とは限らないんですね）と、やわらかい気づかい（〜からといって、全然気にしないですよ）の2つの自然な場面で使う。ほかの空欄は話し言葉の練習。先生メモの「書くなら／かたく言うと」で、〜ものの・〜ざるを得ない との使い分けをその場で示す。",
   intentEn:
-    "Use the article's three N2 patterns in speech. Every one of Dominik's blanks drills one of them, each twice (ものの ①②, からといって ③⑥, ざるを得ない ④⑤); names and dates go inside those sentences. ものの and ざるを得ない are stiff, so also note the conversational 〜けど / 〜しかない. N3 forms (〜わけではない, 〜わけにはいかない) may support the answers but aren't targets.",
+    "The only N2 target here is 〜からといって (③⑤): once as a realisation (〜からといって〜とは限らないんですね) and once as a gentle reassurance (〜からといって、全然気にしないですよ). The other blanks practise natural speech. Use the teacher notes (書くなら／かたく言うと) to point out on the spot where 〜ものの / 〜ざるを得ない would belong instead.",
   warmup: {
     vocab: ["予約", "確認メール", "満室", "別館", "本館", "和室", "夕食"],
-    grammar: [
-      "〜ものの（N2・書き言葉寄り）",
-      "〜からといって（N2）",
-      "〜ざるを得ない（N2・かたい）",
-    ],
-    tip: "困ったときほど、まず「実は…」「あの、…」でクッションを置く。言いたいことは「事実 → 困っている理由 → お願い」の順に。",
+    grammar: ["〜からといって（N2）", "〜んですけど", "〜しかない"],
+    tip: "困ったときほど、まず「あの、…」「実は…」でクッションを置く。言いたいことは「事実 → 困っている理由 → お願い」の順に。",
   },
   interlocutorLabel: "旅館のスタッフ",
-  readings: { 一泊: "いっぱく", 普通形: "ふつうけい", 日本: "にほん" },
+  readings: { 一泊: "いっぱく", 日本: "にほん", 入れます: "はいれます", 一言: "ひとこと" },
   turns: [
     { speaker: "them", text: "いらっしゃいませ。遠いところをお疲れさまでした。お名前を伺ってもよろしいでしょうか。" },
     {
       speaker: "student",
       blank: {
         id: "b1",
-        intent: "名前を言い、2週間前にネットで今夜一泊を予約した「ものの」、確認メールが届いていないと伝える",
-        intentEn:
-          "Give your name and say that although you booked one night for tonight online two weeks ago, you never got a confirmation email (use 〜ものの).",
+        intent: "名前を言い、2週間前にネットで今夜一泊の予約をしたと伝える",
+        intentEn: "Give your name and say you booked one night, tonight, online two weeks ago.",
         rules: [
-          { kind: "grammar", items: ["〜ものの"] },
           {
             kind: "message",
-            items: ["名前", "2週間前にネットで今夜一泊を予約", "確認メールが届いていない"],
-            itemsEn: ["your name", "booked one night tonight, online, two weeks ago", "no confirmation email came"],
+            items: ["名前", "2週間前にネットで予約", "今夜一泊"],
+            itemsEn: ["your name", "booked online two weeks ago", "one night, tonight"],
           },
         ],
         samples: [
-          "ドミニクと申します。2週間前にネットで今夜一泊予約したものの、確認のメールが届いていなくて……。",
-          "ドミニクです。今夜一泊の予約をネットでしたものの、確認メールが来なかったので、少し心配していたんです。",
+          "ドミニクです。2週間前にネットで、今夜一泊で予約してるんですけど。",
+          "ドミニクと申します。ネットで今日一泊、予約してあるんですが。",
         ],
         teacherNote:
-          "聞くところ：「予約した」→「ものの」の接続（普通形＋ものの）。後ろは事実（届いていない）で、意志や依頼が来ていないか。言いよどみで止める「〜ものの……」も可。",
+          "「〜んですけど／〜んですが」で言いさすと、フロントでの切り出しとして自然。",
       },
     },
     {
@@ -911,65 +929,79 @@ const ryokanReservation: Lesson = {
       speaker: "student",
       blank: {
         id: "b2",
-        intent: "確かに予約した「ものの」名前がないと言われて困っていると伝え、予約画面を見てもらう",
-        intentEn:
-          "Say that you definitely booked, yet being told your name isn't there leaves you stuck (〜ものの), and show the booking screen.",
+        intent: "驚きを見せ、確認メールも来ていると言って画面を見せる",
+        intentEn: "Show your surprise, say you even got a confirmation email, and show the screen.",
         rules: [
-          { kind: "grammar", items: ["〜ものの"] },
-          { kind: "message", items: ["確かに予約した", "困っている", "予約画面を見せる"], itemsEn: ["you definitely booked", "you're stuck", "show the booking screen"] },
+          { kind: "message", items: ["驚き", "確認メールが来ている", "画面を見せる"], itemsEn: ["surprise", "you got a confirmation email", "show the screen"] },
         ],
         samples: [
-          "確かに予約したものの、名前がないと言われても困ります……。予約の画面はこれです。",
-          "えっ、本当ですか。ちゃんとネットで予約したものの、そう言われても……。スマホに予約の画面があります。",
+          "えっ、本当ですか？ 確認メールも来てるんですけど……。これです。",
+          "え、そうなんですか。ちゃんと予約したんですけど……。メール、見ていただけますか。",
         ],
         teacherNote:
-          "聞くところ：「予約したものの、〜てください」のように後ろで依頼していないか（×）。依頼したいときは文を切って「見ていただけますか」。",
+          "使い分けメモ：会話の「予約したんですけど、名前がない」は、書くなら「予約したものの、名前がなかった」。ここで「ものの」は言わない。",
       },
     },
     {
       speaker: "them",
-      text: "拝見いたします。……日付が来月になっているようです。あいにく本日は満室でございまして……。",
+      text: "拝見いたします。……あ、日付が来月になっているようです。あいにく本日は満室でございまして……。",
     },
     {
       speaker: "student",
       blank: {
         id: "b3",
-        intent: "日付の間違いを認めつつ、「満室だからといって、今から帰るわけにはいかない」と事情（電車もバスもほとんどない）を伝える",
+        intent: "日付の間違いに気づき、「ネットで予約できたからといって、取れているとは限らない」と自分の反省として言う",
         intentEn:
-          "Admit the date mix-up, but say that just because the inn is full, you can't simply go back now (〜からといって), since there are hardly any trains or buses.",
+          "Realise the date mistake and say, as a lesson to yourself, that just because the online booking went through doesn't mean you actually got the room you wanted.",
         rules: [
-          { kind: "grammar", items: ["〜からといって（後ろは否定）"] },
-          { kind: "message", items: ["日付の間違いを認める", "電車もバスもほとんどない"], itemsEn: ["admit the wrong date", "hardly any trains or buses left"] },
+          { kind: "grammar", items: ["〜からといって〜とは限らない"] },
+          { kind: "message", items: ["日付の間違いに気づく", "自分の反省"], itemsEn: ["notice the wrong date", "a lesson for yourself"] },
         ],
         samples: [
-          "あ、私の間違いですね。すみません。でも、満室だからといって、今から帰るわけにはいきません。もう電車もバスもほとんどないんです。",
-          "日付を間違えてしまったんですね……。ただ、私のミスだからといって、この時間に帰れるわけではないんです。電車もバスもほとんどありませんから。",
+          "あ、本当だ、来月になってる……。ネットで予約できたからといって、ちゃんと取れているとは限らないんですね。気をつけます。",
+          "すみません、私の間違いですね。メールが来たからといって、日付が合っているとは限らないんですね……。",
         ],
         teacherNote:
-          "聞くところ：「〜からといって」の後ろが否定（〜わけにはいかない／〜わけではない／〜ない）になっているか。「わけにはいかない」は N3 の支えで、目標ではない。",
+          "聞くところ：後ろが「〜とは限らない」の否定になっているか。相手を責める言い方ではなく、自分への気づきとして言えているか。",
       },
-    },
-    {
-      speaker: "them",
-      text: "そうですよね……。満室だからといって、お泊まりいただけないわけではないんですが……。別館に小さな和室が一つだけ空いております。ただ、別館にはお風呂がございませんので、お風呂は一度、外に出て、本館まで歩いていただくことになります。",
     },
     {
       speaker: "student",
       blank: {
         id: "b4",
-        intent: "別館しかないなら仕方ないので、そこに泊まら「ざるを得ない」と受け入れ、その部屋を頼む",
-        intentEn:
-          "Accept that if the annex is all there is, you have no choice but to stay there (〜ざるを得ない), and ask for the room.",
+        intent: "電車もバスももうほとんどないと伝え、どんな部屋でもいいので何とかならないか頼む",
+        intentEn: "Say there are hardly any trains or buses left, and ask if anything at all can be done, any room is fine.",
         rules: [
-          { kind: "grammar", items: ["〜ざるを得ない"] },
-          { kind: "message", items: ["仕方ないと受け入れる", "その部屋をお願いする"], itemsEn: ["accept it", "ask for that room"] },
+          { kind: "message", items: ["電車もバスもほとんどない", "どんな部屋でもいい", "何とかならないか"], itemsEn: ["hardly any trains or buses left", "any room is fine", "can anything be done"] },
         ],
         samples: [
-          "別館なら仕方ないので、そこに泊まらざるを得ないですね。その和室でお願いします。",
-          "ほかに部屋がないなら、別館に泊まらざるを得ません。外を歩くのは大丈夫です。よろしくお願いします。",
+          "どうしよう……。もう電車もバスもほとんどないんですよね。どんな部屋でもいいので、何とかなりませんか。",
+          "今から帰るのはちょっと難しくて……。狭い部屋でもかまわないので、空いていませんか。",
+        ],
+        teacherNote: "「〜んですよね」「〜て……」の言いさしで、困っている気持ちを自然に出せているか。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "本館は満室なんですが、別館でしたら小さな和室が一つだけ空いております。ただ、別館にはお風呂がございませんので、お風呂は一度、外に出て、本館まで歩いていただくことになりますが……。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b5",
+        intent: "申し訳なさそうなスタッフに「お風呂が別館にないからといって、全然気にしない」と気づかい、その部屋を頼む",
+        intentEn:
+          "Reassure the apologetic staff that the annex having no bath doesn't bother you at all (〜からといって), and take the room.",
+        rules: [
+          { kind: "grammar", items: ["〜からといって（後ろは否定）"] },
+          { kind: "message", items: ["気にしないと伝える", "その部屋をお願いする"], itemsEn: ["say it doesn't bother you", "ask for that room"] },
+        ],
+        samples: [
+          "全然大丈夫です！ お風呂が別館にないからといって、全然気にしないですよ。泊まれるだけでありがたいです。その部屋でお願いします。",
+          "ありがとうございます。外を少し歩くからといって、困ることはないです。ぜひその和室でお願いします。",
         ],
         teacherNote:
-          "聞くところ：ない形の語幹＋ざるを得ない（泊まら＋ざるを得ない）。本当はしたくないが仕方ない、という気持ちで使えているか。かたい言い方なので、会話では「泊まるしかないですね」も自然と伝える。",
+          "聞くところ：「〜からといって」の後ろが否定（気にしない／困ることはない）になっているか。相手の心配を打ち消す、やわらかい使い方。",
       },
     },
     {
@@ -979,84 +1011,283 @@ const ryokanReservation: Lesson = {
     {
       speaker: "student",
       blank: {
-        id: "b5",
-        intent: "夕食が終わっているなら、コンビニで済ませ「ざるを得ない」と言い、近くにあるか聞く",
-        intentEn:
-          "Say that if dinner is over, you'll have no choice but to make do with the convenience store (〜ざるを得ない), and ask if there's one nearby.",
+        id: "b6",
+        intent: "仕方ないので今夜はコンビニで買うしかないと言い、近くにあるか聞く",
+        intentEn: "Say you'll just have to buy something at a convenience store tonight, and ask if there's one nearby.",
         rules: [
-          { kind: "grammar", items: ["〜ざるを得ない"] },
-          { kind: "message", items: ["コンビニで済ませる", "近くにあるか聞く"], itemsEn: ["make do with a convenience store", "ask if one is nearby"] },
+          { kind: "message", items: ["コンビニで買うしかない", "近くにあるか聞く"], itemsEn: ["you'll have to use a convenience store", "ask if one is nearby"] },
         ],
         samples: [
-          "夕食が終わっているなら、今夜はコンビニで済ませざるを得ないですね。近くにありますか。",
-          "そうですか。遅く着いたのは私なので、コンビニのお弁当で済ませざるを得ません。この近くにコンビニはありますか。",
+          "そうですよね、こんな時間ですもんね。じゃあ、今夜はコンビニで買うしかないですね。近くにありますか？",
+          "遅く着いたのは私なので、大丈夫です。コンビニで何か買います。この近くにありますか？",
         ],
         teacherNote:
-          "聞くところ：「済ませる」→「済ませ＋ざるを得ない」の形。する動詞なら「せざるを得ない」。楽しいことや自分がしたいことに使っていないか。",
+          "使い分けメモ：会話の「〜しかない」は、かたく言うと「〜ざるを得ない」（報告や書き言葉で：コンビニで済ませざるを得なかった）。フロントでの会話では「しかない」が自然。",
       },
     },
     {
       speaker: "them",
-      text: "歩いて5分ほどのところにコンビニがございます。本館のお風呂は夜12時までご利用いただけます。お部屋にお風呂がなくて、本当に申し訳ございません。",
+      text: "歩いて5分ほどのところにコンビニがございます。本館のお風呂は夜12時までご利用いただけますので、ごゆっくりどうぞ。",
     },
     {
       speaker: "student",
       blank: {
-        id: "b6",
-        intent: "部屋にお風呂がない「からといって」文句はないと伝え、お礼を言って締める",
-        intentEn:
-          "Say that the room having no bath is no reason to complain (〜からといって), thank the staff and close.",
+        id: "b7",
+        intent: "お礼を言い、予約の日付は自分でも確認しておくと言って締める",
+        intentEn: "Thank the staff, say you'll double-check your booking dates, and close.",
         rules: [
-          { kind: "grammar", items: ["〜からといって（後ろは否定）"] },
-          { kind: "message", items: ["文句はない", "お礼"], itemsEn: ["no complaints", "thank them"] },
+          { kind: "message", items: ["お礼", "日付を確認しておく"], itemsEn: ["thank them", "you'll check the dates"] },
         ],
         samples: [
-          "いえいえ。部屋にお風呂がないからといって、文句はありません。泊まれるだけで本当に助かりました。ありがとうございました。",
-          "部屋が小さいからといって、不満があるわけではありません。無理を言ってすみませんでした。予約の日付は自分でも確認しておきます。",
+          "本当に助かりました。ありがとうございます。来月の予約も、ちゃんと確認しておきます。",
+          "無理を言ってすみませんでした。おかげで温泉に入れます。ありがとうございました。",
         ],
-        teacherNote:
-          "聞くところ：「〜からといって」の後ろが否定（文句はない／不満があるわけではない）になっているか。×「お風呂がないからといって、残念です」のように肯定で終わらないか。",
+        teacherNote: "お礼のあとに、次にすること（日付を確認する）を一言添えると自然。",
       },
     },
   ],
+};
+
+const travelAgencyCancel: Lesson = {
+  id: "travel-agency-cancel",
+  title: "丁寧な電話：旅行会社に2泊目のキャンセルを伝える",
+  titleEn: "Polite phone call: cancel the second night with the travel agency",
+  shortTitle: "② 丁寧な電話：キャンセル",
+  shortTitleEn: "Cancellation call",
+  sectionLabel: "2. 電話",
+  target: "〜ざるを得ない",
+  register:
+    "丁寧な会話（ビジネスの電話）：旅行会社の担当者に、事情を報告してキャンセルをお願いする。こういう丁寧な報告では「〜ざるを得ない」が自然に使える。",
+  registerEn:
+    "Polite / business phone call: reporting your situation to a travel agent and asking to cancel. In polite reporting like this, 〜ざるを得ない sounds natural.",
+  situation:
+    "Dominik は旅行会社「さくら旅行」で、箱根の旅館を2泊予約していた。1泊目の翌朝、急に仕事が入り、今日中に東京に戻らなければならなくなった。旅行会社に電話して、今夜（2泊目）のキャンセルを伝える。先生は旅行会社の担当者役（当日のキャンセルなので、キャンセル料は宿泊料金の50%）。",
+  situationEn:
+    "Dominik booked two nights at a Hakone ryokan through Sakura Travel. On the morning after the first night, work comes up suddenly and he has to be back in Tokyo today. He calls the agency to cancel tonight (the second night). The teacher plays the agent (same-day cancellation: 50% fee).",
+  goal: "事情を丁寧に報告し、キャンセルと料金の確認をして、電話をきちんと終える。",
+  goalEn: "Report the situation politely, confirm the cancellation and the fee, and close the call properly.",
+  intent:
+    "N2 の目標は「〜ざるを得ない」（②④）。仕事の事情を報告する、丁寧な電話の場面で使う。する動詞は「せざるを得ない」、丁寧には「〜ざるを得ません／〜ざるを得なくなりました」。ほかの空欄は丁寧な電話の決まった言い方の練習。",
+  intentEn:
+    "The N2 target is 〜ざるを得ない (②④), used where it's natural: politely reporting a work situation on the phone. Note する → せざるを得ない and the polite forms 〜ざるを得ません / 〜ざるを得なくなりました. The other blanks practise set phrases for polite calls.",
+  warmup: {
+    vocab: ["予約", "キャンセル", "キャンセル料", "宿泊料金", "当日", "担当"],
+    grammar: ["〜ざるを得ない（N2）", "〜ざるを得なくなりました", "〜まして（丁寧な理由）"],
+    tip: "電話の最初は「お世話になっております」、最後は「失礼いたします」。理由は「〜まして、」でつなぐと丁寧。",
+  },
+  interlocutorLabel: "旅行会社の担当者",
+  readings: { 一泊: "いっぱく", 日本: "にほん", 今日中: "きょうじゅう", ない形: "ないけい", 丁寧形: "ていねいけい" },
+  turns: [
+    { speaker: "them", text: "お電話ありがとうございます。さくら旅行、予約センターの山田でございます。" },
+    {
+      speaker: "student",
+      blank: {
+        id: "b1",
+        intent: "あいさつして名前を言い、箱根の旅館を2泊で予約していると伝える",
+        intentEn: "Greet the agent, give your name, and say you have a two-night booking at a Hakone ryokan.",
+        rules: [
+          { kind: "message", items: ["あいさつ", "名前", "箱根の旅館を2泊で予約"], itemsEn: ["greeting", "your name", "two-night booking at a Hakone ryokan"] },
+        ],
+        samples: [
+          "お世話になっております。ドミニクと申します。箱根の旅館を2泊で予約している者なんですが。",
+          "お世話になります。ドミニクです。そちらで箱根の旅館を、昨日から2泊で予約しているんですが。",
+        ],
+        teacherNote: "「〜している者なんですが」は電話で自分の立場を伝える決まった言い方。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "ドミニク様ですね。ご予約を確認いたします。……はい、昨日から2泊のご予約でございますね。本日はどのようなご用件でしょうか。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b2",
+        intent: "急に仕事が入ったので、2泊目（今夜）をキャンセルせ「ざるを得なくなった」と報告する",
+        intentEn: "Report that because work came up suddenly, you've had no choice but to cancel the second night, tonight (〜ざるを得なくなりました).",
+        rules: [
+          { kind: "grammar", items: ["〜ざるを得ない（する → せざるを得ない）"] },
+          { kind: "message", items: ["急に仕事が入った", "2泊目をキャンセル"], itemsEn: ["work came up suddenly", "cancel the second night"] },
+        ],
+        samples: [
+          "実は、急に仕事が入りまして、2泊目はキャンセルせざるを得なくなりました。",
+          "申し訳ないのですが、急な仕事で、今夜の宿泊はキャンセルせざるを得なくなってしまいまして……。",
+        ],
+        teacherNote:
+          "聞くところ：「キャンセルする」→「キャンセルせざるを得ない」（×しざるを得ない）。報告なので「〜なりました」の形が自然。理由は「〜まして、」で。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "さようでございますか。それは大変でございますね。本日の夜、2泊目の分のキャンセルでよろしいでしょうか。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b3",
+        intent: "今夜の分でいいと答え、キャンセル料がかかるか聞く",
+        intentEn: "Confirm it's tonight's night, and ask whether there's a cancellation fee.",
+        rules: [
+          { kind: "message", items: ["今夜の分で合っている", "キャンセル料を聞く"], itemsEn: ["yes, tonight", "ask about the fee"] },
+        ],
+        samples: [
+          "はい、今夜の分でお願いします。キャンセル料はかかりますでしょうか。",
+          "はい、それでお願いいたします。あの、キャンセル料はどのくらいかかりますか。",
+        ],
+        teacherNote: "「〜でしょうか」で丁寧に聞けているか。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "当日のキャンセルとなりますので、宿泊料金の50%をキャンセル料としていただくことになりますが、よろしいでしょうか。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b4",
+        intent: "残念だが、今日中に東京に戻ら「ざるを得ない」ので、キャンセル料を受け入れる",
+        intentEn: "It's a shame, but since you have no choice but to be back in Tokyo today (〜ざるを得ません), accept the fee.",
+        rules: [
+          { kind: "grammar", items: ["〜ざるを得ない（丁寧形：〜ざるを得ません）"] },
+          { kind: "message", items: ["今日中に東京に戻る", "キャンセル料を受け入れる"], itemsEn: ["back in Tokyo today", "accept the fee"] },
+        ],
+        samples: [
+          "そうですか……。残念ですが、本日中に東京に戻らざるを得ませんので、それでお願いします。",
+          "わかりました。仕事の都合で、今日中に帰らざるを得ないので、仕方ありません。キャンセルをお願いいたします。",
+        ],
+        teacherNote:
+          "聞くところ：ない形の語幹＋ざるを得ない（戻ら＋ざるを得ません）。本当はしたくないが仕方ない、という場面で使えているか。友だちとの会話なら「帰るしかない」。",
+      },
+    },
+    {
+      speaker: "them",
+      text: "かしこまりました。では、本日の分をキャンセルいたします。旅館には、こちらからご連絡しておきます。",
+    },
+    {
+      speaker: "student",
+      blank: {
+        id: "b5",
+        intent: "お礼とおわびを言って、電話を切る",
+        intentEn: "Thank the agent, apologise for the short notice, and end the call.",
+        rules: [
+          { kind: "message", items: ["お礼", "急なことへのおわび", "電話を切るあいさつ"], itemsEn: ["thanks", "sorry for the short notice", "closing the call"] },
+        ],
+        samples: [
+          "ありがとうございます。急なことで申し訳ありません。よろしくお願いいたします。失礼いたします。",
+          "助かります。急なお願いですみませんでした。では、失礼いたします。",
+        ],
+        teacherNote: "電話の最後は「失礼いたします」。",
+      },
+    },
+  ],
+};
+
+const ryokanReview: Lesson = {
+  id: "ryokan-review",
+  title: "書く：予約サイトに旅館の口コミを書く",
+  titleEn: "Writing: post a review of the ryokan on a booking site",
+  shortTitle: "③ 書く：旅館の口コミ",
+  shortTitleEn: "Ryokan review",
+  sectionLabel: "3. 口コミ",
+  target: "〜ものの（〜ざるを得ない は1回まで）",
+  register:
+    "書き言葉：予約サイトの口コミ。です・ます体でよいが、話し言葉の「〜けど」「〜しかない」ではなく、書き言葉の「〜ものの」「〜ざるを得ない」が合う。",
+  registerEn:
+    "Written: a review on a booking site. です・ます style is fine, but written forms fit better than spoken ones: 〜ものの rather than 〜けど, 〜ざるを得ない rather than 〜しかない.",
+  situation:
+    "東京に戻った Dominik は、予約サイトに箱根の旅館の口コミを書く。部屋は小さかったが、女将さんの対応は丁寧で、露天風呂もよかった。急な仕事で1泊で帰ることになったのが残念だった。",
+  situationEn:
+    "Back in Tokyo, Dominik writes a review of the Hakone ryokan on the booking site. The room was small, but the proprietress was very attentive and the open-air bath was good. It was a shame he had to leave after one night because of work.",
+  goal: "よかった点と残念だった点を、書き言葉で4〜6文の口コミにまとめる。",
+  goalEn: "Write a 4–6 sentence review in written style, covering both the good points and the disappointments.",
+  intent:
+    "N2 の目標は「〜ものの」（2回以上）。「AものののB」で、期待と違った点・よかった点を対比させる。「〜ざるを得ない」は1回まで（急な仕事で帰らざるを得なかった）。書いたあと、先生と一緒に「話すならどう言うか（〜けど／〜しかない）」も確認する。",
+  intentEn:
+    "The N2 target is 〜ものの (at least twice), contrasting expectations with what happened. 〜ざるを得ない may appear once (急な仕事で帰らざるを得なかった). Afterwards, check together how each sentence would sound in speech (〜けど / 〜しかない).",
+  warmup: {
+    vocab: ["口コミ", "清潔", "対応", "景色", "設備", "残念"],
+    grammar: ["〜ものの（N2・書き言葉）", "〜ざるを得ない（N2・1回まで）"],
+    tip: "口コミは「全体の印象 → よかった点 → 残念だった点 → また行きたいか」の順にすると読みやすい。",
+  },
+  readings: { 一泊: "いっぱく", "1泊": "いっぱく", 日本: "にほん" },
+  turns: [],
   challenges: [
     {
       id: "c1",
-      title: "続けて話す ①：〜からといって",
-      titleEn: "Finish the sentence ①: 〜からといって",
+      title: "口コミを書く（4〜6文）",
+      titleEn: "Write the review (4–6 sentences)",
+      prompt:
+        "箱根の旅館の口コミを4〜6文で書く。入れること：① 部屋や設備　② 女将さん・スタッフの対応　③ 温泉　④ 残念だったこと　⑤ また行きたいか。「〜ものの」を2回以上使う。「〜ざるを得ない」は1回まで使ってよい。",
+      promptEn:
+        "Write a 4–6 sentence review of the Hakone ryokan. Cover: ① the room and facilities ② the proprietress / staff ③ the onsen ④ what was disappointing ⑤ whether you'd go again. Use 〜ものの at least twice; 〜ざるを得ない at most once.",
+      rules: [
+        { kind: "grammar", items: ["〜ものの（2回以上）", "〜ざるを得ない（1回まで）"] },
+        {
+          kind: "message",
+          items: ["部屋や設備", "スタッフの対応", "温泉", "残念だったこと", "また行きたいか"],
+          itemsEn: ["room and facilities", "staff", "onsen", "what was disappointing", "would you go again"],
+        },
+      ],
+      samples: [
+        "部屋は小さかったものの、清潔で、窓からの景色がとてもきれいでした。チェックインのとき、女将さんが館内の決まりを丁寧に説明してくださったので、初めての旅館でも安心して過ごせました。露天風呂は広くはないものの、静かで、ゆっくり入ることができました。急な仕事で1泊で帰らざるを得なかったのが残念です。次は家族と2泊で来たいと思います。",
+      ],
+    },
+  ],
+};
+
+const hakoneFollowups: Lesson = {
+  id: "hakone-followups",
+  title: "続けて話す・書く",
+  titleEn: "Finish the sentence (spoken, polite and written)",
+  shortTitle: "4. 続けて話す",
+  shortTitleEn: "Finish the sentence",
+  sectionLabel: "4. 続けて話す",
+  target: "〜からといって／〜ざるを得ない／〜ものの",
+  register:
+    "文型ごとに場面が違う：〜からといって は会話、〜ざるを得ない は丁寧な報告、〜ものの は書き言葉（日記）。先生が前半を言い、後半を続ける。",
+  registerEn:
+    "Each form has its own setting: 〜からといって in conversation, 〜ざるを得ない in a polite report, 〜ものの in writing (a diary). The teacher says the first half; you finish it.",
+  situation: "1〜3 の場面で使った文型を、別の話題で短く使ってみる。",
+  situationEn: "Use the forms from sections 1–3 briefly, on other topics.",
+  goal: "場面に合った文型で、文の後半をすぐに言える・書けるようにする。",
+  goalEn: "Finish sentences quickly with the form that fits the setting.",
+  readings: { 日本: "にほん" },
+  turns: [],
+  challenges: [
+    {
+      id: "f1",
+      title: "続けて話す：〜からといって",
+      titleEn: "Finish the sentence: 〜からといって",
       prompt:
         "先生が前半を言うので、後半を続けて言う。① 日本に住んでいるからといって、…　② 値段が高いからといって、…",
       promptEn:
         "The teacher says the first half; you finish it. ① 日本に住んでいるからといって、…　② 値段が高いからといって、…",
-      refBlankId: "b4",
       rules: [{ kind: "grammar", items: ["〜からといって〜わけではない", "〜からといって〜とは限らない"] }],
       samples: [
-        "① 日本に住んでいるからといって、毎日和食を食べているわけではない。",
-        "② 値段が高いからといって、おいしいとは限らない。",
+        "① 日本に住んでいるからといって、毎日和食を食べているわけではないですよ。",
+        "② 値段が高いからといって、おいしいとは限らないですよね。",
       ],
     },
     {
-      id: "c2",
-      title: "続けて話す ②：〜ざるを得ない",
-      titleEn: "Finish the sentence ②: 〜ざるを得ない",
+      id: "f2",
+      title: "続けて言う（丁寧な報告）：〜ざるを得ない",
+      titleEn: "Finish the sentence (polite report): 〜ざるを得ない",
       prompt:
-        "① 台風で電車が止まったので、…　② 上司に頼まれたので、週末も…",
+        "上司やお客様への丁寧な報告として、後半を続けて言う。① （上司に電話で）台風で新幹線が止まってしまったので、本日の会議は…　② （お客様に）講師が急に体調を崩しまして、明日の授業は…",
       promptEn:
-        "① 台風で電車が止まったので、…　② 上司に頼まれたので、週末も…",
-      refBlankId: "b3",
+        "As a polite report to your boss or a customer, finish the sentence. ① （上司に電話で）台風で新幹線が止まってしまったので、本日の会議は…　② （お客様に）講師が急に体調を崩しまして、明日の授業は…",
       rules: [{ kind: "grammar", items: ["〜ざるを得ない", "する → せざるを得ない"] }],
       samples: [
-        "① 台風で電車が止まったので、旅行をキャンセルせざるを得なかった。",
-        "② 上司に頼まれたので、週末も働かざるを得ない。",
+        "① 本日の会議は欠席せざるを得ません。申し訳ありません。",
+        "② 明日の授業は中止せざるを得なくなりました。ご迷惑をおかけして申し訳ございません。",
       ],
     },
     {
-      id: "c3",
-      title: "続けて話す ③：〜ものの",
-      titleEn: "Finish the sentence ③: 〜ものの",
-      prompt: "① 温泉に行こうと思った…　② 説明書を読んだ…",
-      promptEn: "① 温泉に行こうと思った…　② 説明書を読んだ…",
-      refBlankId: "b2",
+      id: "f3",
+      title: "続けて書く（日記）：〜ものの",
+      titleEn: "Finish the sentence (diary): 〜ものの",
+      prompt: "日記に書く文として、後半を続けて書く。① 温泉に行こうと思った…　② 説明書を読んだ…",
+      promptEn: "Finish these as diary sentences. ① 温泉に行こうと思った…　② 説明書を読んだ…",
       rules: [{ kind: "grammar", items: ["〜ものの（後ろに意志・依頼は×）"] }],
       samples: [
         "① 温泉に行こうと思ったものの、どこも予約がいっぱいだった。",
@@ -1064,52 +1295,126 @@ const ryokanReservation: Lesson = {
       ],
     },
     {
-      id: "c4",
-      title: "話し合い：温泉のルール",
-      titleEn: "Discuss: onsen rules",
+      id: "f4",
+      title: "言い換え：話し言葉 → 書き言葉",
+      titleEn: "Rephrase: spoken → written",
       prompt:
-        "日本の温泉のルールで、あなたの国にはない習慣は？ ルールが多いからといって、悪いことだと思いますか。",
+        "先生が話し言葉で言った文を、日記や口コミに書く文に言い換える。① 予約したんだけど、名前がなかった。　② 夕食が終わってたから、コンビニで買うしかなかった。",
       promptEn:
-        "Which Japanese onsen rules don't exist in your country? Does having a lot of rules make it a bad thing?",
-      rules: [{ kind: "grammar", items: ["〜からといって"] }],
+        "Turn the teacher's spoken sentences into ones you'd write in a diary or review. ① 予約したんだけど、名前がなかった。　② 夕食が終わってたから、コンビニで買うしかなかった。",
+      rules: [{ kind: "grammar", items: ["〜ものの（書き言葉）", "〜ざるを得ない（書き言葉）"] }],
       samples: [
-        "体を洗ってから湯船に入るのは、私の国にはない習慣です。ルールが多いからといって、悪いことだとは思いません。みんなが気持ちよく使えるからです。",
-      ],
-    },
-    {
-      id: "c5",
-      title: "話し合い：分かっていたものの",
-      titleEn: "Discuss: you knew, but…",
-      prompt: "旅行先で、マナーだと分かっていたものの、守るのが難しかったことは？",
-      promptEn: "On a trip, was there a manner you knew about but still found hard to follow?",
-      rules: [{ kind: "grammar", items: ["〜ものの"] }],
-      samples: [
-        "電車の中で電話をしないのがマナーだと分かっていたものの、母から電話が来たとき、つい出てしまいました。",
-      ],
-    },
-    {
-      id: "c6",
-      title: "話し合い：予定を変えざるを得なかった",
-      titleEn: "Discuss: when you had to change plans",
-      prompt: "旅行中に、予定を変えざるを得なかったことはありますか。どうしましたか。",
-      promptEn: "Have you ever had no choice but to change your plans on a trip? What did you do?",
-      rules: [{ kind: "grammar", items: ["〜ざるを得ない"] }],
-      samples: [
-        "北海道で大雪になって、飛行機が飛ばなかったので、もう一泊せざるを得ませんでした。でも、そのおかげでおいしいラーメンの店を見つけました。",
+        "① 予約したものの、名前がなかった。",
+        "② 夕食の時間が終わっていたので、コンビニで済ませざるを得なかった。",
       ],
     },
   ],
+};
+
+const hakoneCulture: Lesson = {
+  id: "hakone-culture",
+  title: "文化の質問",
+  titleEn: "Culture questions",
+  shortTitle: "5. 文化の質問",
+  shortTitleEn: "Culture questions",
+  sectionLabel: "5. 文化の質問",
+  target: "〜からといって／〜ざるを得ない／〜ものの",
+  register:
+    "質問ごとに場面が違う：温泉のルールは会話（〜からといって）、予定の変更は丁寧な報告（〜ざるを得ない）、マナーは旅行ブログ（〜ものの）。",
+  registerEn:
+    "Each question has its own setting: onsen rules in conversation (〜からといって), a change of plans as a polite report (〜ざるを得ない), manners as a travel-blog post (〜ものの).",
+  situation: "温泉や旅行のマナーについて、自分の経験や意見を話したり書いたりする。",
+  situationEn: "Talk or write about your own experience and opinions on onsen and travel manners.",
+  goal: "文化の違いについて、場面に合った文型で自分の意見を言う。",
+  goalEn: "Give your view on cultural differences, using the form that fits the setting.",
+  readings: { 一泊: "いっぱく", 日本: "にほん" },
+  turns: [],
+  challenges: [
+    {
+      id: "k1",
+      title: "話し合い：温泉のルール",
+      titleEn: "Discuss: onsen rules",
+      prompt:
+        "日本の温泉のルールで、あなたの国にはない習慣は？ ルールが多いからといって、堅苦しいと思いますか。",
+      promptEn:
+        "Which Japanese onsen rules don't exist in your country? Does having a lot of rules make it feel stiff?",
+      rules: [{ kind: "grammar", items: ["〜からといって"] }],
+      samples: [
+        "体を洗ってから湯船に入るのは、私の国にはない習慣です。でも、ルールが多いからといって、堅苦しいとは思わないです。みんなが気持ちよく使えるからだと思います。",
+      ],
+    },
+    {
+      id: "k2",
+      title: "話してみよう：予定を変えざるを得なかったこと",
+      titleEn: "Talk: a time you had to change plans",
+      prompt:
+        "旅行中に予定を変えざるを得なかったことはありますか。旅行会社や上司に報告するつもりで、丁寧に話してみる。",
+      promptEn:
+        "Have you ever had no choice but to change your plans on a trip? Tell it politely, as if reporting to a travel agency or your boss.",
+      rules: [{ kind: "grammar", items: ["〜ざるを得ない"] }],
+      samples: [
+        "昨年、北海道で大雪になりまして、飛行機が欠航になったため、もう一泊せざるを得ませんでした。翌日の会議にも出られず、オンラインで参加させていただきました。",
+      ],
+    },
+    {
+      id: "k3",
+      title: "旅行ブログに書く：分かっていたものの",
+      titleEn: "Travel blog: you knew, but…",
+      prompt:
+        "旅行先で、マナーだと分かっていたものの、守るのが難しかったことを、旅行ブログに2〜3文で書く。",
+      promptEn:
+        "In 2–3 sentences for a travel blog, write about a manner you knew about on a trip but still found hard to follow.",
+      rules: [{ kind: "grammar", items: ["〜ものの"] }],
+      samples: [
+        "電車の中では電話に出ないのがマナーだと分かっていたものの、母から電話が来たとき、つい出てしまった。小さい声で話したものの、周りの人の目が気になった。",
+      ],
+    },
+  ],
+};
+
+/**
+ * Dominik's 箱根 practice: one lesson whose sections (shown in the right-hand
+ * rail) each put one N2 form in the register where it is natural.
+ */
+const hakonePractice: Lesson = {
+  id: "hakone-practice",
+  title: "箱根の練習：旅館とその後",
+  titleEn: "Hakone practice: at the ryokan and after",
+  shortTitle: "箱根の練習",
+  shortTitleEn: "Hakone practice",
+  situation: "記事「箱根の温泉で」の N2 文型を、それぞれ自然な場面で使う。",
+  situationEn: "Use the N2 forms from the 箱根 article, each in a setting where it is natural.",
+  goal: "〜からといって は会話で、〜ざるを得ない は丁寧な報告で、〜ものの は書き言葉で使えるようにする。",
+  goalEn: "Use 〜からといって in conversation, 〜ざるを得ない in polite reports, and 〜ものの in writing.",
+  turns: [],
+  parts: [ryokanReservation, travelAgencyCancel, ryokanReview, hakoneFollowups, hakoneCulture],
 };
 
 export const LESSONS: Lesson[] = [
   deliveryRedelivery,
   clinicSymptoms,
   salonHaircut,
-  ryokanReservation,
+  hakonePractice,
 ];
 
+/** A lesson by id, including the sections of grouped lessons. */
 export function findLesson(id: string): Lesson | undefined {
-  return LESSONS.find((l) => l.id === id);
+  for (const l of LESSONS) {
+    if (l.id === id) return l;
+    const part = l.parts?.find((p) => p.id === id);
+    if (part) return part;
+  }
+  return undefined;
+}
+
+/** Sidebar / list meta line, e.g. "6 空欄 ・ チャレンジ 2" (no "0 空欄"). */
+export function lessonMeta(l: Lesson): string {
+  if (l.parts?.length) return `${l.parts.length} セクション`;
+  const blanks = l.turns.filter((t) => t.speaker === "student").length;
+  const parts: string[] = [];
+  if (blanks > 0) parts.push(`${blanks} 空欄`);
+  if (l.challenges?.length) parts.push(`${blanks > 0 ? "チャレンジ" : "課題"} ${l.challenges.length}`);
+  return parts.join(" ・ ");
 }
 
 export const RULE_LABEL: Record<RuleKind, string> = {

@@ -60,9 +60,9 @@ describe("Artem's profile", () => {
 describe("Dominik's profile", () => {
   const dominik = findUser("dominik")!;
 
-  it("has the 箱根 article and the ryokan lesson", () => {
+  it("has the 箱根 article and its three practice parts", () => {
     expect(articlesForUser(dominik).map((a) => a.id)).toEqual(["tabi-hakone-onsen"]);
-    expect(lessonsForUser(dominik).map((l) => l.id)).toEqual(["ryokan-reservation"]);
+    expect(lessonsForUser(dominik).map((l) => l.id)).toEqual(["hakone-practice"]);
   });
 
   it("gets 文法選択 without a Tobira chapter", () => {

@@ -82,7 +82,7 @@ export const USERS: User[] = [
     id: "dominik",
     displayName: "Dominik",
     articleIds: ["tabi-hakone-onsen"],
-    lessonIds: ["ryokan-reservation"],
+    lessonIds: ["hakone-practice"],
   },
 ];
 

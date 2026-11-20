@@ -43,7 +43,8 @@ export function parseHash(hash?: string): Route {
     return {
       kind: "lesson",
       lessonId: decodeURIComponent(parts[1]),
-      lessonTab: sub === "vocab" ? "vocab" : "lesson",
+      // "vocab", a section id of a grouped lesson, or the lesson itself.
+      lessonTab: sub ? decodeURIComponent(sub) : "lesson",
     };
   }
   return { kind: "root" };
@@ -57,5 +58,5 @@ export function formatArticleHash(articleId: string, tab: string): string {
 
 export function formatLessonHash(lessonId: string, tab: string): string {
   const id = encodeURIComponent(lessonId);
-  return tab === "vocab" ? `#/l/${id}/vocab` : `#/l/${id}`;
+  return tab === "lesson" ? `#/l/${id}` : `#/l/${id}/${encodeURIComponent(tab)}`;
 }

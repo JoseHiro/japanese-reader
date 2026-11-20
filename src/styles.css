@@ -1397,6 +1397,14 @@ ruby rt {
 }
 .pr-intro-card > p { margin: 0; font-size: 15px; line-height: 1.7; }
 .pr-intro-card > p + p { margin-top: 6px; }
+.pr-group-title { margin: 0 0 2px; font-size: 13px; color: var(--text-muted); }
+.pr-target { margin-top: 8px !important; font-size: 14px !important; }
+/* Setting + register line (話し言葉／丁寧な会話／書き言葉). */
+.pr-intro-card-register {
+  grid-column: 1 / -1;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-bg);
+}
 .pr-intro-card-teacher {
   grid-column: 1 / -1;
   background: transparent;
