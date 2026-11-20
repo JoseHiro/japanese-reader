@@ -43,7 +43,18 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
   await page.goto("/#/a/tabi-hakone-onsen");
   const box = page.getByRole("region", { name: "今回の文法" });
   await expect(box.locator(".fg-label")).toHaveText(["〜ものの", "〜からといって", "〜ざるを得ない"]);
-  await expect(box.locator(".fg-rows dt").first()).toHaveText("形");
+  // Labels stack above their content, with 違い between 注意 and 例.
+  const first = box.locator(".fg-item").first();
+  await expect(first.locator(".fg-rows dt")).toHaveText(["形", "意味", "注意", "違い", "例"]);
+  const [dt, dd] = await Promise.all([
+    first.locator(".fg-rows dt").first().boundingBox(),
+    first.locator(".fg-rows dd").first().boundingBox(),
+  ]);
+  expect(dd!.y).toBeGreaterThanOrEqual(dt!.y + dt!.height - 1);
+  expect(Math.round(dd!.x)).toBe(Math.round(dt!.x));
+  for (const [i, n] of [2, 3, 4].entries()) {
+    await expect(box.locator(".fg-item").nth(i).locator(".fg-diffs li")).toHaveCount(n);
+  }
 
   // Each highlight run in the body, as "index:text" (furigana excluded).
   const runs = () =>

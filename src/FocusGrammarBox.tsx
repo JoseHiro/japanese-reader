@@ -51,6 +51,28 @@ export function FocusGrammarBox({
                   <Furigana text={g.register} show={showFurigana} />
                 </span>
               </dd>
+              {g.differences?.length ? (
+                <>
+                  <dt>違い</dt>
+                  <dd>
+                    <ul className="fg-diffs">
+                      {g.differences.map((d) => (
+                        <li key={d.form}>
+                          <span className="fg-diff-form">
+                            <Furigana text={d.form} show={showFurigana} />
+                          </span>
+                          <Furigana text={d.note} show={showFurigana} />
+                          {d.example && (
+                            <span className="fg-diff-ex">
+                              <Furigana text={`例：${d.example}`} show={showFurigana} />
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </>
+              ) : null}
               <dt>例</dt>
               <dd className="fg-example">
                 <Furigana

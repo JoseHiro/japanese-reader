@@ -127,10 +127,22 @@ export interface FocusGrammar {
   caution: string;
   /** Register, e.g. "書き言葉寄り（会話では〜けど）" or "会話でもよく使う". */
   register: string;
+  /** 違い: how it differs from similar expressions, one line each. */
+  differences?: GrammarDifference[];
   /** Example sentence; normally copied from the article body. */
   example: string;
   /** RegExp source matching each use in the body, e.g. "わけではない". */
   pattern: string;
+}
+
+/** One line of a FocusGrammar's 違い list. */
+export interface GrammarDifference {
+  /** The compared form, e.g. "〜のに". */
+  form: string;
+  /** How it differs, in short Japanese. */
+  note: string;
+  /** A tiny example. */
+  example?: string;
 }
 
 export interface Article {
@@ -4906,6 +4918,18 @@ DJマキコ：それでは、また。`,
         meaningEn: "although; but (what you'd expect doesn't follow)",
         caution: "後ろに意志・依頼・命令は来ない（×高いものの、買おう）。",
         register: "書き言葉寄り。話すときは「〜けど」が自然。",
+        differences: [
+          {
+            form: "〜けど／けれども",
+            note: "いちばん一般的で、会話でも自然。もののは書き言葉寄り。",
+            example: "高いけど、買った。",
+          },
+          {
+            form: "〜のに",
+            note: "話し手の不満や驚きが入る。もののは事実をもっと淡々と述べる。",
+            example: "勉強したのに、落ちた。／勉強したものの、合格できなかった。",
+          },
+        ],
         example: "日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。",
         pattern: "ものの",
       },
@@ -4917,6 +4941,23 @@ DJマキコ：それでは、また。`,
         meaningEn: "just because X, it doesn't follow that Y",
         caution: "後ろはふつう否定・部分否定（〜わけではない／〜とは限らない／〜ない）。×日本人だからといって、日本語を教えるのが上手だ。",
         register: "かたすぎず、会話でもよく使う。",
+        differences: [
+          {
+            form: "〜から",
+            note: "理由から結果をそのまま言う。",
+            example: "雨だから、行かない。",
+          },
+          {
+            form: "〜からといって",
+            note: "その理由だけで結果が決まることを打ち消す。",
+            example: "雨だからといって、行かないわけではない。",
+          },
+          {
+            form: "〜からって／だからって",
+            note: "会話でのくだけた言い方。",
+            example: "雨だからって、休まないよ。",
+          },
+        ],
         example: "でも、ルールが多いからといって、堅苦しい場所だというわけではない。",
         pattern: "からといって",
       },
@@ -4928,6 +4969,28 @@ DJマキコ：それでは、また。`,
         meaningEn: "have no choice but to (done unwillingly)",
         caution: "自分がしたいことには使わない（×楽しいので、旅行に行かざるを得ない）。",
         register: "かたい、書き言葉寄り。会話では「〜しかない」「〜なきゃいけない」が柔らかい。",
+        differences: [
+          {
+            form: "〜なければならない",
+            note: "義務やルール。気持ちは入らない。",
+            example: "パスポートを見せなければならない。",
+          },
+          {
+            form: "〜しかない",
+            note: "ほかに方法がない。会話的。",
+            example: "終電がないから、歩くしかない。",
+          },
+          {
+            form: "〜ざるを得ない",
+            note: "状況のせいで、したくないことをする。かたい言い方。",
+            example: "台風で、旅行を中止せざるを得なかった。",
+          },
+          {
+            form: "〜ないわけにはいかない（N3・既習）",
+            note: "社会的な関係や立場から、しなければならない。（比較用）",
+            example: "先生に誘われたので、行かないわけにはいかない。",
+          },
+        ],
         example: "翌朝、もう一泊したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。",
         pattern: "[ぁ-ん]?ざるを得(?:ない|なかった)",
       },

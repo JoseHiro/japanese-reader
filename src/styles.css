@@ -2364,16 +2364,31 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
   border: 1px solid var(--g);
   color: var(--g);
 }
+/* Labels (形／意味／注意／違い／例) are small headings stacked above
+   their full-width content. */
 .fg-rows {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 10px;
-  row-gap: 4px;
+  display: block;
   margin: 0;
   line-height: 1.9;
 }
-.fg-rows dt { font-size: 12px; font-weight: 700; color: var(--text-muted); padding-top: .45em; }
+.fg-rows dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--g);
+  margin-top: 10px;
+  line-height: 1.4;
+}
+.fg-rows dt:first-child { margin-top: 2px; }
 .fg-rows dd { margin: 0; min-width: 0; }
+.fg-diffs { list-style: none; margin: 0; padding: 0; }
+.fg-diffs li {
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid var(--border);
+  margin-top: 4px;
+}
+.fg-diff-form { font-weight: 700; margin-right: 6px; }
+.fg-diff-ex { display: block; font-size: 12.5px; color: var(--text-muted); }
 .fg-en { display: block; font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
 .fg-register { display: block; font-size: 12px; color: var(--text-muted); }
 .fg-example .gram { border-bottom-width: 2px; }

@@ -48,6 +48,9 @@ describe("Article.focusGrammar data", () => {
         expect(a.text, `${a.id} ${g.label}`).toContain(g.example);
         expect(new RegExp(g.pattern).test(g.example), `${a.id} ${g.label}`).toBe(true);
         expect(g.form && g.meaning && g.caution && g.register, `${a.id} ${g.label}`).toBeTruthy();
+        for (const d of g.differences ?? []) {
+          expect(d.form && d.note, `${a.id} ${g.label} 違い`).toBeTruthy();
+        }
       }
     }
   });
