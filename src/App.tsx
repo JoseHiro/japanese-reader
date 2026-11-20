@@ -390,6 +390,9 @@ export default function App() {
       return true;
     }
   });
+  // Which 今回の文法 tab is open; back to the first one per article.
+  const [grammarTab, setGrammarTab] = useState(0);
+  useEffect(() => setGrammarTab(0), [article?.id]);
   function toggleGrammarHighlight() {
     setGrammarHighlight((v) => {
       try {
@@ -1236,6 +1239,8 @@ export default function App() {
       {activeTab === "article" && !loading && !!article?.focusGrammar?.length && paragraphs.length > 0 && (
         <FocusGrammarBox
           items={article.focusGrammar}
+          selected={grammarTab}
+          onSelect={setGrammarTab}
           showFurigana={showFurigana}
           highlight={grammarHighlight}
           onToggleHighlight={toggleGrammarHighlight}
@@ -1260,17 +1265,25 @@ export default function App() {
             return (
               <span className="sentence" key={i}>
                 {s.units.map((u, j) => {
-                  const gram = grammarHighlight ? grammarClass(s.gram?.[j]) : "";
+                  const gi = grammarHighlight ? s.gram?.[j] : undefined;
+                  const gram = grammarClass(gi);
+                  // Clicking a highlighted grammar also opens its 今回の文法 tab.
+                  const showGrammar = gi === undefined ? undefined : () => setGrammarTab(gi);
                   return u.clickable ? (
                     <span
                       className={"word" + (isAuthored(u) ? " annotated" : "") + gram}
                       key={j}
-                      onClick={(e) => openPopup(u, e.currentTarget)}
+                      onClick={(e) => {
+                        showGrammar?.();
+                        openPopup(u, e.currentTarget);
+                      }}
                     >
                       {renderUnit(u)}
                     </span>
                   ) : (
-                    <span key={j} className={gram.trim() || undefined}>{renderUnit(u)}</span>
+                    <span key={j} className={gram.trim() || undefined} onClick={showGrammar}>
+                      {renderUnit(u)}
+                    </span>
                   );
                 })}
                 {!isHeading && (

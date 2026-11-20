@@ -42,9 +42,16 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
   await signIn(page, "dominik");
   await page.goto("/#/a/tabi-hakone-onsen");
   const box = page.getByRole("region", { name: "今回の文法" });
-  await expect(box.locator(".fg-label")).toHaveText(["〜ものの", "〜からといって", "〜ざるを得ない"]);
+  // One card at a time, behind tabs; the first tab is open by default.
+  const tabs = box.getByRole("tab");
+  await expect(tabs.locator(".fg-label")).toHaveText(["〜ものの", "〜からといって", "〜ざるを得ない"]);
+  await expect(tabs.locator(".fg-level")).toHaveText(["N2", "N2", "N2"]);
+  await expect(tabs.nth(0)).toHaveAttribute("aria-selected", "true");
+  const panel = box.getByRole("tabpanel");
+  await expect(panel).toHaveCount(1);
+  await expect(panel.locator(".fg-en")).toContainText("although");
   // Labels stack above their content, with 違い between 注意 and 例.
-  const first = box.locator(".fg-item").first();
+  const first = panel;
   await expect(first.locator(".fg-rows dt")).toHaveText(["形", "意味", "注意", "違い", "例"]);
   const [dt, dd] = await Promise.all([
     first.locator(".fg-rows dt").first().boundingBox(),
@@ -53,8 +60,21 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
   expect(dd!.y).toBeGreaterThanOrEqual(dt!.y + dt!.height - 1);
   expect(Math.round(dd!.x)).toBe(Math.round(dt!.x));
   for (const [i, n] of [2, 3, 4].entries()) {
-    await expect(box.locator(".fg-item").nth(i).locator(".fg-diffs li")).toHaveCount(n);
+    await tabs.nth(i).click();
+    await expect(tabs.nth(i)).toHaveAttribute("aria-selected", "true");
+    await expect(panel.locator(".fg-diffs li")).toHaveCount(n);
   }
+  await expect(panel.locator(".fg-en")).toContainText("have no choice but to");
+
+  // Arrow keys move between tabs (wrapping) and select them.
+  await tabs.nth(2).focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(tabs.nth(0)).toBeFocused();
+  await expect(tabs.nth(0)).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("ArrowLeft");
+  await expect(tabs.nth(2)).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("Home");
+  await expect(tabs.nth(0)).toHaveAttribute("aria-selected", "true");
 
   // Each highlight run in the body, as "index:text" (furigana excluded).
   const runs = () =>
@@ -105,15 +125,20 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
     return {
       vocab: c(".reader .para .word.annotated:not(.gram)"),
       body: c(".reader .para .gram-1"),
-      box: c(".fg-item.gram-1 .fg-label"),
+      box: c(".fg-tab.gram-1 .fg-label"),
     };
   });
   expect(colors.body).toBe(colors.box);
   expect(colors.body).not.toBe(colors.vocab);
 
-  // Word popups still open on highlighted words.
+  // Word popups still open on highlighted words, and clicking a highlight
+  // opens that grammar's tab.
+  await page.locator(".reader .para .word.gram-1").first().click();
+  await expect(page.locator(".popup")).toContainText("just because");
+  await expect(tabs.nth(1)).toHaveAttribute("aria-selected", "true");
   await page.locator(".reader .para .word.gram-0").first().click();
   await expect(page.locator(".popup")).toContainText("although");
+  await expect(tabs.nth(0)).toHaveAttribute("aria-selected", "true");
 
   // The toggle turns the body highlights off and on.
   const toggle = box.getByRole("button", { name: /文法ハイライト/ });
