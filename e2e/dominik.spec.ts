@@ -37,3 +37,63 @@ test("dominik: a lesson URL opens the lesson directly", async ({ page }) => {
     page.getByRole("tablist", { name: "ライブラリ" }).getByRole("tab", { name: "レッスン" }),
   ).toHaveAttribute("aria-selected", "true");
 });
+
+test("dominik: 今回の文法 box and matching highlights in the body", async ({ page }) => {
+  await signIn(page, "dominik");
+  await page.goto("/#/a/tabi-hakone-onsen");
+  const box = page.getByRole("region", { name: "今回の文法" });
+  await expect(box.locator(".fg-label")).toHaveText(["〜ものの", "〜わけにはいかない", "〜わけではない"]);
+  await expect(box.locator(".fg-rows dt").first()).toHaveText("形");
+
+  // Each highlight run in the body, as "index:text" (furigana excluded).
+  const runs = () =>
+    page.evaluate(() => {
+      const out: string[] = [];
+      for (const sent of document.querySelectorAll(".reader .para .sentence")) {
+        let cur: { i: string; t: string } | null = null;
+        for (const el of sent.children) {
+          const m = el.className.match(/gram-(\d)/);
+          const clone = el.cloneNode(true) as HTMLElement;
+          clone.querySelectorAll("rt").forEach((rt) => rt.remove());
+          if (m && cur?.i === m[1]) cur.t += clone.textContent;
+          else {
+            if (cur) out.push(`${cur.i}:${cur.t}`);
+            cur = m ? { i: m[1], t: clone.textContent ?? "" } : null;
+          }
+        }
+        if (cur) out.push(`${cur.i}:${cur.t}`);
+      }
+      return out;
+    });
+  await expect.poll(runs).toEqual([
+    "0:ものの",
+    "1:わけにはいかない",
+    "2:というわけではない",
+    "2:というわけではない",
+    "0:ものの",
+    "1:帰らないわけにはいかなかった",
+  ]);
+
+  // The grammar color differs from the blue vocab underline, and matches the box.
+  const colors = await page.evaluate(() => {
+    const c = (sel: string) => getComputedStyle(document.querySelector(sel)!).color;
+    return {
+      vocab: c(".reader .para .word.annotated:not(.gram)"),
+      body: c(".reader .para .gram-1"),
+      box: c(".fg-item.gram-1 .fg-label"),
+    };
+  });
+  expect(colors.body).toBe(colors.box);
+  expect(colors.body).not.toBe(colors.vocab);
+
+  // Word popups still open on highlighted words.
+  await page.locator(".reader .para .word.gram-0").first().click();
+  await expect(page.locator(".popup")).toContainText("although");
+
+  // The toggle turns the body highlights off and on.
+  const toggle = box.getByRole("button", { name: /文法ハイライト/ });
+  await toggle.click();
+  await expect(page.locator(".reader .para .gram")).toHaveCount(0);
+  await toggle.click();
+  await expect(page.locator(".reader .para .gram-0")).not.toHaveCount(0);
+});

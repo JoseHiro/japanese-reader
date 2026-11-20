@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { loadTokenizer, toTokens, type Token } from "../tokenizer";
 import { useReadingOverrides } from "./readingOverrides";
+import { grammarAt, grammarClass, type GrammarRange } from "../focusGrammar";
 
 const KANJI_RE = /[一-鿿]/;
 const MAX_OVERRIDE_SPAN = 4;
@@ -52,7 +53,17 @@ function groupWithOverrides(
 // across the reader, quizzes, and word list. Reading overrides from the
 // enclosing article (via ReadingOverridesContext) win over kuromoji's
 // default reading — used to fix names / compounds like 錦織.
-export function Furigana({ text, show }: { text: string; show: boolean }) {
+// `marks` (character ranges in `text`) wraps the overlapping chips in the
+// focus-grammar highlight, so a highlight never splits a word's reading.
+export function Furigana({
+  text,
+  show,
+  marks,
+}: {
+  text: string;
+  show: boolean;
+  marks?: readonly GrammarRange[];
+}) {
   const [tokens, setTokens] = useState<Token[] | null>(null);
   const overrides = useReadingOverrides();
   useEffect(() => {
@@ -66,18 +77,22 @@ export function Furigana({ text, show }: { text: string; show: boolean }) {
   }, [text]);
   if (!tokens) return <>{text}</>;
   const chips = groupWithOverrides(tokens, overrides);
+  let pos = 0;
   return (
     <>
-      {chips.map((c, k) =>
-        show && c.hasKanji && c.reading ? (
-          <ruby key={k}>
+      {chips.map((c, k) => {
+        const start = pos;
+        pos += c.surface.length;
+        const cls = marks?.length ? grammarClass(grammarAt(marks, start, pos)).trim() : "";
+        return show && c.hasKanji && c.reading ? (
+          <ruby key={k} className={cls || undefined}>
             {c.surface}
             <rt>{c.reading}</rt>
           </ruby>
         ) : (
-          <span key={k}>{c.surface}</span>
-        ),
-      )}
+          <span key={k} className={cls || undefined}>{c.surface}</span>
+        );
+      })}
     </>
   );
 }

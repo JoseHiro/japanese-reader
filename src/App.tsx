@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { loadTokenizer, toTokens, type Token } from "./tokenizer";
 import { buildUnits, type Unit } from "./units";
-import type { Annotation, Article } from "./content";
+import type { Annotation, Article, FocusGrammar } from "./content";
+import { FocusGrammarBox } from "./FocusGrammarBox";
+import { grammarClass, grammarForPieces, grammarRanges } from "./focusGrammar";
 import { lookupGlosses, loadDictionary } from "./dictionary";
 import { Furigana } from "./shared/Furigana";
 import { ReadingOverridesProvider } from "./shared/readingOverrides";
@@ -59,6 +61,8 @@ import { parseHash, formatArticleHash, formatLessonHash } from "./route";
 
 interface Sentence {
   units: Unit[];
+  /** Per unit: index of the article's focus grammar it is part of. */
+  gram?: (number | undefined)[];
   text: string;
   translation?: string;
   /** Speaker label for dialogue-style lines (e.g. "レポーター："). */
@@ -378,6 +382,24 @@ export default function App() {
   }
   const [paragraphs, setParagraphs] = useState<Paragraph[]>([]);
   const [showFurigana, setShowFurigana] = useState(true);
+  // Color highlights for the article's focus grammar (今回の文法).
+  const [grammarHighlight, setGrammarHighlight] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem("yomu-grammar-highlight") !== "0";
+    } catch {
+      return true;
+    }
+  });
+  function toggleGrammarHighlight() {
+    setGrammarHighlight((v) => {
+      try {
+        localStorage.setItem("yomu-grammar-highlight", v ? "0" : "1");
+      } catch {
+        /* ignore */
+      }
+      return !v;
+    });
+  }
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<PopupState | null>(null);
   const [glosses, setGlosses] = useState<"loading" | string[] | null>(null);
@@ -725,6 +747,7 @@ export default function App() {
     text: string,
     annotations: Record<string, Annotation>,
     translations?: Record<string, string>,
+    focusGrammar?: FocusGrammar[],
   ) {
     setLoading(true);
     setPopup(null);
@@ -736,12 +759,17 @@ export default function App() {
         const m = line.match(SPEAKER_LINE_RE);
         const speaker = m?.[1];
         const body = m ? m[2] : line;
-        return splitIntoSentences(toTokens(tokenizer.tokenize(body))).map((s) => ({
-          units: buildUnits(s.tokens, annotations),
+        return splitIntoSentences(toTokens(tokenizer.tokenize(body))).map((s) => {
+          const units = buildUnits(s.tokens, annotations);
+          const ranges = grammarRanges(s.text, focusGrammar);
+          return {
+          units,
+          gram: ranges.length ? grammarForPieces(units.map((u) => u.surface), ranges) : undefined,
           text: s.text,
           translation: translations?.[s.text],
           speaker,
-        }));
+        };
+        });
       });
       setParagraphs(result);
     } catch (e) {
@@ -765,7 +793,7 @@ export default function App() {
     setListGlosses({});
     setWordQuery("");
     resetQuiz();
-    analyze(a.text, a.annotations, a.translations);
+    analyze(a.text, a.annotations, a.translations, a.focusGrammar);
   }
 
   // Lesson-mode users (Andy today): jump straight to the Practice tab and
@@ -1205,6 +1233,14 @@ export default function App() {
 
       {activeTab === "article" && (
       <div className="reader" ref={readerRef}>
+        {!loading && !!article?.focusGrammar?.length && paragraphs.length > 0 && (
+          <FocusGrammarBox
+            items={article.focusGrammar}
+            showFurigana={showFurigana}
+            highlight={grammarHighlight}
+            onToggleHighlight={toggleGrammarHighlight}
+          />
+        )}
         {!loading && paragraphs.map((sents, pi) => {
           const paraText = sents.map((s) => s.text).join("");
           const isHeading = headings.has(paraText);
@@ -1215,19 +1251,20 @@ export default function App() {
             const trShown = shownTr.has(trKey);
             return (
               <span className="sentence" key={i}>
-                {s.units.map((u, j) =>
-                  u.clickable ? (
+                {s.units.map((u, j) => {
+                  const gram = grammarHighlight ? grammarClass(s.gram?.[j]) : "";
+                  return u.clickable ? (
                     <span
-                      className={"word" + (isAuthored(u) ? " annotated" : "")}
+                      className={"word" + (isAuthored(u) ? " annotated" : "") + gram}
                       key={j}
                       onClick={(e) => openPopup(u, e.currentTarget)}
                     >
                       {renderUnit(u)}
                     </span>
                   ) : (
-                    <span key={j}>{renderUnit(u)}</span>
-                  ),
-                )}
+                    <span key={j} className={gram.trim() || undefined}>{renderUnit(u)}</span>
+                  );
+                })}
                 {!isHeading && (
                   <span className="sent-tools">
                     <button

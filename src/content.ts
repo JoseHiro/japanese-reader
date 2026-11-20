@@ -108,6 +108,31 @@ export interface Quiz {
   particle?: ParticleQuestion[];
 }
 
+/**
+ * A grammar point an article is built around (JLPT or otherwise; not tied
+ * to the Tobira index). Shown in the 今回の文法 box above the body, and
+ * every match of `pattern` in the body is highlighted in this entry's color.
+ */
+export interface FocusGrammar {
+  /** Pattern name, e.g. "〜ものの". */
+  label: string;
+  /** e.g. "N2". */
+  level?: string;
+  /** 形: how it attaches. */
+  form: string;
+  /** 意味 (Japanese). */
+  meaning: string;
+  meaningEn?: string;
+  /** 注意: when not to use it. */
+  caution: string;
+  /** Register, e.g. "書き言葉寄り（会話では〜けど）" or "会話でもよく使う". */
+  register: string;
+  /** Example sentence; normally copied from the article body. */
+  example: string;
+  /** RegExp source matching each use in the body, e.g. "わけではない". */
+  pattern: string;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -154,6 +179,11 @@ export interface Article {
    * sidebar. Purely informational — the article is still just prose.
    */
   targetGrammar?: string[];
+  /**
+   * Grammar points this article teaches, shown in a 今回の文法 box above
+   * the body with matching highlights in the text (see FocusGrammar).
+   */
+  focusGrammar?: FocusGrammar[];
   /**
    * Dictionary-form words from the user's monthly vocab pool that this
    * article intentionally features. Used to weight cloze picks and to show
@@ -4859,6 +4889,41 @@ DJマキコ：それでは、また。`,
 夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。
 
 翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。帰りの電車で、次はどの温泉に行こうかと考えていた。`,
+    focusGrammar: [
+      {
+        label: "〜ものの",
+        level: "N2",
+        form: "普通形＋ものの（な形容詞・名詞は「な／である」＋ものの）",
+        meaning: "〜けれども。前のことから期待される結果にならない。",
+        meaningEn: "although; but (what you'd expect doesn't follow)",
+        caution: "後ろに意志・依頼・命令は来ない（×高いものの、買おう）。",
+        register: "書き言葉寄り。話すときは「〜けど」が自然。",
+        example: "日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。",
+        pattern: "ものの",
+      },
+      {
+        label: "〜わけにはいかない",
+        level: "N3",
+        form: "辞書形＋わけにはいかない／ない形＋わけにはいかない",
+        meaning: "社会的・道徳的な理由でできない。ない形につくと「しなければならない」。",
+        meaningEn: "can't (for social / moral reasons); with ない-form: must",
+        caution: "能力の「できない」には使わない（×難しくて読むわけにはいかない → 読めない）。",
+        register: "会話でもよく使う。",
+        example: "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
+        pattern: "(?:[ぁ-ん]{0,2}ない)?わけにはいか(?:ない|なかった)",
+      },
+      {
+        label: "〜わけではない",
+        level: "N3",
+        form: "普通形＋わけではない（「全部が〜というわけではない」「〜からといって〜わけではない」）",
+        meaning: "必ずしも〜ではない。相手の思い込みを部分的に打ち消す。",
+        meaningEn: "it's not (necessarily) that ~; partial denial",
+        caution: "全部を否定するときは「〜ない」。わけではないは「一部はそうではない」と言いたいとき。",
+        register: "会話でもよく使う。",
+        example: "でも、ルールが厳しいから守るというわけではない。",
+        pattern: "(?:という)?わけではない",
+      },
+    ],
     annotations: {
       // kuromoji misreads these; pin the readings.
       日本: { reading: "にほん", pos: "固有名詞", meaning: "Japan", readingOnly: true },
@@ -4871,6 +4936,10 @@ DJマキコ：それでは、また。`,
         readingOnly: true,
       },
       箱根: { reading: "はこね", pos: "固有名詞", meaning: "Hakone (hot-spring town near Mt. Fuji)", readingOnly: true },
+      // Used in the 今回の文法 box.
+      普通形: { reading: "ふつうけい", pos: "名詞", meaning: "plain form", readingOnly: true },
+      辞書形: { reading: "じしょけい", pos: "名詞", meaning: "dictionary form", readingOnly: true },
+      ない形: { reading: "ないけい", pos: "名詞", meaning: "ない-form", readingOnly: true },
 
       // Grammar points of this episode.
       ものの: {

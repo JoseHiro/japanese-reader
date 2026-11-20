@@ -23,6 +23,15 @@
   --warn-bg: rgba(224, 166, 58, 0.12);
   --sk-base: #e2e2db;
   --sk-highlight: #efefe9;
+  /* Focus-grammar highlights (今回の文法). Built from the quiz green, the
+     warning amber and the header violet so they never read as the blue
+     vocab underline. */
+  --gram-0: #1e7e34;
+  --gram-0-bg: rgba(52, 168, 83, 0.14);
+  --gram-1: #a86a00;
+  --gram-1-bg: rgba(224, 166, 58, 0.18);
+  --gram-2: #7c3aed;
+  --gram-2-bg: rgba(124, 58, 237, 0.11);
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
     "Segoe UI", Roboto, sans-serif;
 }
@@ -51,6 +60,12 @@
   --warn-bg: rgba(224, 166, 58, 0.14);
   --sk-base: #272c35;
   --sk-highlight: #353c48;
+  --gram-0: #7ee0a1;
+  --gram-0-bg: rgba(52, 168, 83, 0.2);
+  --gram-1: #f0bf62;
+  --gram-1-bg: rgba(224, 166, 58, 0.18);
+  --gram-2: #c4a5ff;
+  --gram-2-bg: rgba(167, 139, 250, 0.18);
 }
 
 * { box-sizing: border-box; }
@@ -2256,3 +2271,83 @@ button.pr-drill-main-clickable:hover { filter: brightness(1.03); }
   box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
 }
 .library-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ---- 今回の文法 (Article.focusGrammar) ---- */
+.gram-0 { --g: var(--gram-0); --g-bg: var(--gram-0-bg); }
+.gram-1 { --g: var(--gram-1); --g-bg: var(--gram-1-bg); }
+.gram-2 { --g: var(--gram-2); --g-bg: var(--gram-2-bg); }
+
+/* Body highlight: a marker-style tint with a thick underline in the
+   grammar's color. Adjacent pieces join into one band (no radius/padding). */
+.gram,
+.word.gram,
+.word.annotated.gram {
+  background: var(--g-bg);
+  color: var(--g);
+  border-bottom: 2.5px solid var(--g);
+  border-radius: 0;
+  padding: 0;
+}
+.word.gram:hover { background: var(--g-bg); filter: brightness(0.95); }
+.gram rt { color: var(--g); opacity: .8; }
+
+.focus-grammar {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+.fg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.fg-title { margin: 0; font-size: 15px; font-weight: 700; color: var(--text); }
+.fg-toggle {
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.fg-toggle.on { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.fg-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.fg-item {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--g);
+  border-radius: 10px;
+  padding: 10px 14px 12px;
+  min-width: 0;
+}
+.fg-item-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.fg-label { font-size: 17px; font-weight: 700; color: var(--g); }
+.fg-level {
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--g);
+  color: var(--g);
+}
+.fg-rows {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  row-gap: 4px;
+  margin: 0;
+  line-height: 1.9;
+}
+.fg-rows dt { font-size: 12px; font-weight: 700; color: var(--text-muted); padding-top: .45em; }
+.fg-rows dd { margin: 0; min-width: 0; }
+.fg-en { display: block; font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+.fg-register { display: block; font-size: 12px; color: var(--text-muted); }
+.fg-example .gram { border-bottom-width: 2px; }
