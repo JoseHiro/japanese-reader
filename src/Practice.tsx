@@ -555,6 +555,8 @@ function LessonPage({
   }
 
   const interlocutor = lesson.interlocutorLabel ?? "相手";
+  // UI label with its English half, unless the lesson is Japanese-only.
+  const label = (ja: string, en: string) => (lesson.japaneseOnly ? ja : `${ja} · ${en}`);
 
   // Number each student blank in the order it appears in the dialogue.
   const blanks: { blank: Blank; number: number }[] = [];
@@ -589,7 +591,7 @@ function LessonPage({
       <div className="pr-intro-cards">
         {lesson.register && (
           <div className="pr-intro-card pr-intro-card-register">
-            <span className="pr-intro-label">🗣 場面とことば · Register</span>
+            <span className="pr-intro-label">{label("🗣 場面とことば", "Register")}</span>
             <p><J text={lesson.register} /></p>
             {lesson.registerEn && <p className="pr-en">{lesson.registerEn}</p>}
             {lesson.target && (
@@ -600,18 +602,18 @@ function LessonPage({
           </div>
         )}
         <div className="pr-intro-card">
-          <span className="pr-intro-label">📍 場面 · Situation</span>
+          <span className="pr-intro-label">{label("📍 場面", "Situation")}</span>
           <p><J text={lesson.situation} /></p>
           {lesson.situationEn && <p className="pr-en">{lesson.situationEn}</p>}
         </div>
         <div className="pr-intro-card">
-          <span className="pr-intro-label">🎯 全体ゴール · Goal</span>
+          <span className="pr-intro-label">{label("🎯 全体ゴール", "Goal")}</span>
           <p><J text={lesson.goal} /></p>
           {lesson.goalEn && <p className="pr-en">{lesson.goalEn}</p>}
         </div>
         {lesson.intent && (
           <details className="pr-intro-card pr-intro-card-teacher">
-            <summary className="pr-intro-label">📚 授業の狙い · Teacher intent</summary>
+            <summary className="pr-intro-label">{label("📚 授業の狙い", "Teacher intent")}</summary>
             <p><J text={lesson.intent} /></p>
             {lesson.intentEn && <p className="pr-en">{lesson.intentEn}</p>}
           </details>
@@ -698,9 +700,9 @@ function LessonPage({
       <div className="pr-drills">
         {blanks.length > 0 && (
         <h3 className="pr-drills-title">
-          練習 · Practice
+          {label("練習", "Practice")}
           <span className="pr-drills-sub">
-            各空欄をクリック → 詳しい指示と模範解答へ · Click a blank to jump to its drill
+            {label("各空欄をクリック → 詳しい指示と模範解答へ", "Click a blank to jump to its drill")}
           </span>
         </h3>
         )}
@@ -719,7 +721,7 @@ function LessonPage({
         {lesson.challenges && lesson.challenges.length > 0 && (
           <>
             <h3 className={"pr-drills-title" + (blanks.length > 0 ? " pr-drills-title-sub" : "")}>
-              {blanks.length > 0 ? "追加チャレンジ · Bonus challenges" : "課題 · Tasks"}
+              {blanks.length > 0 ? label("追加チャレンジ", "Bonus challenges") : label("課題", "Tasks")}
             </h3>
             {lesson.challenges.map((c) => (
               <ChallengeCard

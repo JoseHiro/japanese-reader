@@ -57,10 +57,21 @@ describe("Dominik's practice parts", () => {
     }
   });
 
-  it("場面 and ゴール are Japanese only (no English versions)", () => {
+  it("are Japanese only: no English fields, and labels without English", () => {
     for (const id of ["hakone-practice", ...SECTIONS]) {
-      expect(lesson(id).situationEn, id).toBeUndefined();
-      expect(lesson(id).goalEn, id).toBeUndefined();
+      const l = lesson(id);
+      expect(l.japaneseOnly, id).toBe(true);
+      for (const key of ["titleEn", "shortTitleEn", "situationEn", "goalEn", "registerEn", "intentEn"] as const) {
+        expect(l[key], `${id} ${key}`).toBeUndefined();
+      }
+      for (const b of blanksOf(l)) {
+        expect(b.intentEn, `${id} ${b.id}`).toBeUndefined();
+        for (const r of b.rules ?? []) expect(r.itemsEn, `${id} ${b.id}`).toBeUndefined();
+      }
+      for (const c of l.challenges ?? []) {
+        expect(c.titleEn ?? c.promptEn, `${id} ${c.id}`).toBeUndefined();
+        for (const r of c.rules ?? []) expect(r.itemsEn, `${id} ${c.id}`).toBeUndefined();
+      }
     }
   });
 
@@ -78,7 +89,7 @@ describe("Dominik's practice parts", () => {
         for (const g of targetsOf(b.rules)) {
           for (const s of b.samples) expect(s, `${id} ${b.id}`).toContain(STEM[g]);
         }
-        expect(b.intentEn && b.teacherNote, `${id} ${b.id}`).toBeTruthy();
+        expect(b.teacherNote, `${id} ${b.id}`).toBeTruthy();
       }
     }
   });

@@ -32,18 +32,22 @@ test("dominik: 箱根 article with its quizzes, then the ryokan lesson", async (
     "単語リスト",
   ]);
   // The first section is shown by default.
-  await expect(page.locator(".pr-title-en")).toContainText("We can't find your reservation");
+  await expect(page.locator(".pr-title")).toContainText("フロント");
+  // Japanese only: no English subtitle, labels without " · English".
+  await expect(page.locator(".pr-title-en")).toHaveCount(0);
+  await expect(page.locator(".pr-intro-label").first()).toHaveText("🗣 場面とことば");
+  await expect(page.locator(".pr-drill-intent-en")).toHaveCount(0);
   await expect(page.locator(".pr-intro-card-register")).toContainText("〜からといって");
   await expect(page.locator(".pr-script-who-student").first()).toContainText("Dominik");
   await expect(page.locator(".pr-challenge")).toHaveCount(0);
 
   await rail2.getByRole("button", { name: "2. 電話" }).click();
   await expect(page).toHaveURL(/#\/l\/hakone-practice\/travel-agency-cancel$/);
-  await expect(page.locator(".pr-intro-card-register")).toContainText("〜ざるを得ない");
+  await expect(page.locator(".pr-intro-card-register .pr-target")).toContainText("〜ざるを");
   await expect(page.locator(".pr-script-who-them").first()).toContainText("旅行会社の担当者");
 
   await rail2.getByRole("button", { name: "3. 口コミ" }).click();
-  await expect(page.locator(".pr-intro-card-register")).toContainText("Written");
+  await expect(page.locator(".pr-intro-card-register")).toContainText("書き言葉");
   await expect(page.locator(".pr-script")).toHaveCount(0);
   await expect(page.locator(".pr-challenge")).toHaveCount(1);
   await expect(page.locator(".pr-progress")).toHaveText("課題 1");
@@ -66,7 +70,7 @@ test("dominik: 箱根 article with its quizzes, then the ryokan lesson", async (
 test("dominik: a section URL opens that section directly", async ({ page }) => {
   await signIn(page, "dominik");
   await page.goto("/#/l/hakone-practice/ryokan-review");
-  await expect(page.locator(".pr-title-en")).toContainText("review");
+  await expect(page.locator(".pr-title")).toContainText("口コミ");
   await expect(
     page.getByRole("tablist", { name: "ライブラリ" }).getByRole("tab", { name: "レッスン" }),
   ).toHaveAttribute("aria-selected", "true");
