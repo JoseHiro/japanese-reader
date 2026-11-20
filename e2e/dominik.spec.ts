@@ -38,6 +38,7 @@ test("dominik: 箱根 article with its quizzes, then the ryokan lesson", async (
   await expect(page.locator(".pr-title-en")).toHaveCount(0);
   await expect(page.locator(".pr-intro-label").first()).toHaveText("🗣 場面とことば");
   await expect(page.locator(".pr-drill-intent-en")).toHaveCount(0);
+  await expect(page.locator(".pr-intro-card-teacher")).toHaveCount(0);
   await expect(page.locator(".pr-intro-card-register")).toContainText("〜からといって");
   await expect(page.locator(".pr-script-who-student").first()).toContainText("Dominik");
   await expect(page.locator(".pr-challenge")).toHaveCount(0);

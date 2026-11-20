@@ -61,6 +61,8 @@ describe("Dominik's practice parts", () => {
     for (const id of ["hakone-practice", ...SECTIONS]) {
       const l = lesson(id);
       expect(l.japaneseOnly, id).toBe(true);
+      // No 授業の狙い card for Dominik either.
+      expect(l.intent, `${id} intent`).toBeUndefined();
       for (const key of ["titleEn", "shortTitleEn", "situationEn", "goalEn", "registerEn", "intentEn"] as const) {
         expect(l[key], `${id} ${key}`).toBeUndefined();
       }
