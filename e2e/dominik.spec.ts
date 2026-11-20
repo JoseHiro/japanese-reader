@@ -42,7 +42,7 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
   await signIn(page, "dominik");
   await page.goto("/#/a/tabi-hakone-onsen");
   const box = page.getByRole("region", { name: "今回の文法" });
-  await expect(box.locator(".fg-label")).toHaveText(["〜ものの", "〜わけにはいかない", "〜わけではない"]);
+  await expect(box.locator(".fg-label")).toHaveText(["〜ものの", "〜からといって", "〜ざるを得ない"]);
   await expect(box.locator(".fg-rows dt").first()).toHaveText("形");
 
   // Each highlight run in the body, as "index:text" (furigana excluded).
@@ -67,12 +67,26 @@ test("dominik: 今回の文法 box and matching highlights in the body", async (
     });
   await expect.poll(runs).toEqual([
     "0:ものの",
-    "1:わけにはいかない",
-    "2:というわけではない",
-    "2:というわけではない",
+    "2:守らざるを得ない",
+    "1:からといって",
+    "1:からといって",
     "0:ものの",
-    "1:帰らないわけにはいかなかった",
+    "2:帰らざるを得なかった",
   ]);
+
+  // Sections: 今回の文法, then 本文 with its scene headings.
+  await expect(page.locator(".section-title")).toHaveText(["今回の文法", "本文"]);
+  const headings = await page.locator(".reader .para.heading").evaluateAll((els) =>
+    els.map((el) => {
+      const c = el.cloneNode(true) as HTMLElement;
+      c.querySelectorAll("rt").forEach((rt) => rt.remove());
+      return c.textContent?.trim();
+    }),
+  );
+  expect(headings).toEqual(["チェックイン", "露天風呂で", "帰る日"]);
+  // The scene headings have no play / translation buttons; the sentences do.
+  await expect(page.locator(".reader .para.heading .sent-tools")).toHaveCount(0);
+  await expect(page.locator(".reader .tr-btn")).toHaveCount(11);
 
   // The grammar color differs from the blue vocab underline, and matches the box.
   const colors = await page.evaluate(() => {

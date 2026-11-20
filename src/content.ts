@@ -4876,19 +4876,27 @@ DJマキコ：それでは、また。`,
     },
   },
   {
-    // Dominik (N3 → N2, 2027). Travel series 「Dominikの日本旅」 #1.
-    // Grammar group: 〜ものの / 〜わけにはいかない / 〜わけではない.
+    // Dominik (passed N3; N2 in 2027). Travel series 「Dominikの日本旅」 #1.
+    // N2 grammar group: 〜ものの / 〜からといって / 〜ざるを得ない. N3 forms
+    // (〜わけではない etc.) appear only as supporting language.
     id: "tabi-hakone-onsen",
     title: "箱根の温泉で",
-    subtitle: "Dominikの日本旅 ① 〜ものの／〜わけにはいかない／〜わけではない",
+    subtitle: "Dominikの日本旅 ① 〜ものの／〜からといって／〜ざるを得ない",
     date: "2026-11-20",
-    text: `先月、友人に勧められて、箱根の小さな旅館に泊まった。日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。
+    text: `チェックイン
 
-チェックインのとき、女将さんが館内の決まりを丁寧に説明してくれた。浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。正直に言うと、細かいルールが多いと思った。でも、ルールが厳しいから守るというわけではない。みんなで同じお湯を気持ちよく使うためにあるのだ。
+先月、友人に勧められて、箱根の小さな旅館に泊まった。日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。
 
-夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。
+チェックインのとき、女将さんが館内の決まりを丁寧に説明してくれた。浴衣は自由に着ていいが、タオルを湯船に入れてはいけないそうだ。正直に言うと、細かいルールが多くて面倒だと思ったが、守らざるを得ない。でも、ルールが多いからといって、堅苦しい場所だというわけではない。みんなで同じお湯を気持ちよく使うためにあるのだ。
 
-翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。帰りの電車で、次はどの温泉に行こうかと考えていた。`,
+露天風呂で
+
+夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。「入れ墨があるからといって、どこの温泉にも入れないわけではないよ」と教えてくれた。
+
+帰る日
+
+翌朝、もう一泊したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。帰りの電車で、次はどの温泉に行こうかと考えていた。`,
+    headings: ["チェックイン", "露天風呂で", "帰る日"],
     focusGrammar: [
       {
         label: "〜ものの",
@@ -4902,26 +4910,26 @@ DJマキコ：それでは、また。`,
         pattern: "ものの",
       },
       {
-        label: "〜わけにはいかない",
-        level: "N3",
-        form: "辞書形＋わけにはいかない／ない形＋わけにはいかない",
-        meaning: "社会的・道徳的な理由でできない。ない形につくと「しなければならない」。",
-        meaningEn: "can't (for social / moral reasons); with ない-form: must",
-        caution: "能力の「できない」には使わない（×難しくて読むわけにはいかない → 読めない）。",
-        register: "会話でもよく使う。",
-        example: "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
-        pattern: "(?:[ぁ-ん]{0,2}ない)?わけにはいか(?:ない|なかった)",
+        label: "〜からといって",
+        level: "N2",
+        form: "普通形＋からといって",
+        meaning: "〜という理由だけで、後ろのことが必ず言えるわけではない。",
+        meaningEn: "just because X, it doesn't follow that Y",
+        caution: "後ろはふつう否定・部分否定（〜わけではない／〜とは限らない／〜ない）。×日本人だからといって、日本語を教えるのが上手だ。",
+        register: "かたすぎず、会話でもよく使う。",
+        example: "でも、ルールが多いからといって、堅苦しい場所だというわけではない。",
+        pattern: "からといって",
       },
       {
-        label: "〜わけではない",
-        level: "N3",
-        form: "普通形＋わけではない（「全部が〜というわけではない」「〜からといって〜わけではない」）",
-        meaning: "必ずしも〜ではない。相手の思い込みを部分的に打ち消す。",
-        meaningEn: "it's not (necessarily) that ~; partial denial",
-        caution: "全部を否定するときは「〜ない」。わけではないは「一部はそうではない」と言いたいとき。",
-        register: "会話でもよく使う。",
-        example: "でも、ルールが厳しいから守るというわけではない。",
-        pattern: "(?:という)?わけではない",
+        label: "〜ざるを得ない",
+        level: "N2",
+        form: "ない形の語幹＋ざるを得ない（する → せざるを得ない）",
+        meaning: "したくないが、ほかに方法がないので、しなければならない。",
+        meaningEn: "have no choice but to (done unwillingly)",
+        caution: "自分がしたいことには使わない（×楽しいので、旅行に行かざるを得ない）。",
+        register: "かたい、書き言葉寄り。会話では「〜しかない」「〜なきゃいけない」が柔らかい。",
+        example: "翌朝、もう一泊したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。",
+        pattern: "[ぁ-ん]?ざるを得(?:ない|なかった)",
       },
     ],
     annotations: {
@@ -4938,10 +4946,10 @@ DJマキコ：それでは、また。`,
       箱根: { reading: "はこね", pos: "固有名詞", meaning: "Hakone (hot-spring town near Mt. Fuji)", readingOnly: true },
       // Used in the 今回の文法 box.
       普通形: { reading: "ふつうけい", pos: "名詞", meaning: "plain form", readingOnly: true },
-      辞書形: { reading: "じしょけい", pos: "名詞", meaning: "dictionary form", readingOnly: true },
       ない形: { reading: "ないけい", pos: "名詞", meaning: "ない-form", readingOnly: true },
+      日本人: { reading: "にほんじん", pos: "名詞", meaning: "Japanese person", readingOnly: true },
 
-      // Grammar points of this episode.
+      // Grammar points of this episode (N2).
       ものの: {
         reading: "ものの",
         pos: "接続助詞（N2）",
@@ -4951,22 +4959,22 @@ DJマキコ：それでは、また。`,
           { ja: "温泉の入り方を本で読んだものの、実際に入るとやっぱり緊張した。", en: "Although I'd read how to use an onsen in a book, I was still nervous when I actually got in." },
         ],
       },
-      わけにはいか: {
-        reading: "わけにはいか",
-        pos: "文型（N3）",
-        meaning: "can't (for social / moral reasons); ない-form + = must",
-        note: "辞書形＋わけにはいかない＝社会的・道徳的な理由で「できない」。能力の「できない」には使わない（×難しくて読むわけにはいかない → 読めない）。ない形＋わけにはいかない＝「しなければならない」。会話でもよく使う。",
-        examples: [
-          { ja: "明日は大事な会議があるので、休むわけにはいかない。", en: "I have an important meeting tomorrow, so I can't take the day off." },
-        ],
-      },
-      わけではない: {
-        reading: "わけではない",
-        pos: "文型（N3）",
-        meaning: "it's not (necessarily) that ~; partial denial",
-        note: "普通形＋わけではない。相手の思い込みを部分的に打ち消す。「全部が〜というわけではない」「〜からといって〜わけではない」の形でよく使う。会話でもよく使う。",
+      からといって: {
+        reading: "からといって",
+        pos: "文型（N2）",
+        meaning: "just because ~ (it doesn't follow that ~)",
+        note: "普通形＋からといって。後ろはふつう「〜わけではない」「〜とは限らない」「〜ない」などの否定。会話でもよく使う。",
         examples: [
           { ja: "京都に住んでいるからといって、お寺に詳しいわけではない。", en: "Just because I live in Kyoto doesn't mean I know a lot about temples." },
+        ],
+      },
+      ざるを得: {
+        reading: "ざるをえ",
+        pos: "文型（N2）",
+        meaning: "have no choice but to (unwillingly)",
+        note: "ない形の語幹＋ざるを得ない（する→せざるを得ない）。したくないが、しかたなくする。かたい言い方で、会話では「〜しかない」が柔らかい。",
+        examples: [
+          { ja: "電車が止まったので、タクシーで行かざるを得なかった。", en: "The trains stopped, so I had no choice but to take a taxi." },
         ],
       },
 
@@ -5014,12 +5022,23 @@ DJマキコ：それでは、また。`,
         note: "「正直に言うと／正直（言って）」で「本当のことを言うと」。",
       },
       細かい: { reading: "こまかい", pos: "い形容詞", meaning: "detailed; minute; fussy" },
-      厳しい: { reading: "きびしい", pos: "い形容詞", meaning: "strict; severe" },
+      面倒: {
+        reading: "めんどう",
+        pos: "な形容詞・名詞",
+        meaning: "troublesome; a hassle",
+        note: "手間がかかって、やりたくない気持ち。会話では「めんどくさい」とも言う。",
+      },
       守る: {
         reading: "まもる",
         pos: "動詞（五段）",
         meaning: "to keep (a rule / promise); to protect",
         note: "「ルールを守る」「約束を守る」。",
+      },
+      堅苦しい: {
+        reading: "かたくるしい",
+        pos: "い形容詞",
+        meaning: "stiff; formal; uptight",
+        note: "ルールやマナーが多くて、気楽にできない感じ。「堅苦しい挨拶は抜きにしましょう」。",
       },
       お湯: { reading: "おゆ", pos: "名詞", meaning: "hot water (here: the onsen water)" },
       露天風呂: {
@@ -5053,6 +5072,8 @@ DJマキコ：それでは、また。`,
         meaning: "one night's stay",
         note: "「一泊二日（いっぱくふつか）」のように旅行の長さを言う。二泊（にはく）、三泊（さんぱく）。",
       },
+      急に: { reading: "きゅうに", pos: "副詞", meaning: "suddenly; unexpectedly" },
+      予定: { reading: "よてい", pos: "名詞・する動詞", meaning: "plan; schedule" },
     },
     translations: {
       "先月、友人に勧められて、箱根の小さな旅館に泊まった。":
@@ -5061,29 +5082,29 @@ DJマキコ：それでは、また。`,
         "Although I'd been to Japanese hot springs many times, it was my first time staying at a ryokan on my own.",
       "チェックインのとき、女将さんが館内の決まりを丁寧に説明してくれた。":
         "When I checked in, the proprietress carefully explained the house rules.",
-      "浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。":
+      "浴衣は自由に着ていいが、タオルを湯船に入れてはいけないそうだ。":
         "You're free to wear the yukata, but apparently you mustn't put your towel in the bath.",
-      "正直に言うと、細かいルールが多いと思った。":
-        "To be honest, I thought there were a lot of fussy rules.",
-      "でも、ルールが厳しいから守るというわけではない。":
-        "But it's not that you follow them just because they're strict.",
+      "正直に言うと、細かいルールが多くて面倒だと思ったが、守らざるを得ない。":
+        "To be honest, I thought all the fussy rules were a hassle, but I had no choice but to follow them.",
+      "でも、ルールが多いからといって、堅苦しい場所だというわけではない。":
+        "But just because there are a lot of rules doesn't mean it's a stiff, uptight place.",
       "みんなで同じお湯を気持ちよく使うためにあるのだ。":
         "They exist so that everyone can share the same water comfortably.",
       "夕食の後、露天風呂に入ると、隣にいた年配の男性が話しかけてきた。":
         "After dinner, when I got into the open-air bath, an older man next to me started talking to me.",
-      "「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。":
-        "He told me, \"A lot of onsen won't let in people with tattoos, but that's not true of all of them, you know.\"",
-      "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。":
-        "The next morning I wanted to stay one more night, but I had work, so I had no choice but to go home.",
+      "「入れ墨があるからといって、どこの温泉にも入れないわけではないよ」と教えてくれた。":
+        "He told me, \"Just because you have a tattoo doesn't mean you can't get into any onsen, you know.\"",
+      "翌朝、もう一泊したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。":
+        "The next morning I wanted to stay one more night, but some work came up suddenly, so I had no choice but to go home earlier than planned.",
       "帰りの電車で、次はどの温泉に行こうかと考えていた。":
         "On the train home, I was already thinking about which onsen to go to next.",
     },
     translationPractice: [
       "日本の温泉には何度も入ったことがあるものの、旅館に一人で泊まるのは初めてだった。",
-      "浴衣は自由に着ていいが、タオルを湯船に入れるわけにはいかないそうだ。",
-      "でも、ルールが厳しいから守るというわけではない。",
-      "「入れ墨がある人は入れない温泉も多いけど、全部がそうというわけではないよ」と教えてくれた。",
-      "翌朝、もう一泊したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
+      "正直に言うと、細かいルールが多くて面倒だと思ったが、守らざるを得ない。",
+      "でも、ルールが多いからといって、堅苦しい場所だというわけではない。",
+      "「入れ墨があるからといって、どこの温泉にも入れないわけではないよ」と教えてくれた。",
+      "翌朝、もう一泊したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。",
     ],
     quiz: {
       cloze: [
@@ -5102,25 +5123,25 @@ DJマキコ：それでは、また。`,
           explanation: "旅館をまとめる女性は「女将（おかみ）」。客は「女将さん」と呼ぶ。",
         },
         {
-          before: "チェックインのとき、女将さんが館内の",
-          after: "を丁寧に説明してくれた。",
-          options: ["決まり", "お湯", "浴衣", "翌朝"],
-          answer: 0,
-          explanation: "「決まり」は「ルール」とほぼ同じ意味。",
-        },
-        {
           before: "浴衣は自由に着ていいが、タオルを",
-          after: "に入れるわけにはいかないそうだ。",
+          after: "に入れてはいけないそうだ。",
           options: ["館内", "電車", "旅館", "湯船"],
           answer: 3,
           explanation: "「湯船」はお湯につかる所。タオルを入れないのが温泉のマナー。",
         },
         {
-          before: "正直に言うと、",
-          after: "ルールが多いと思った。",
-          options: ["細かい", "小さな", "丁寧な", "同じ"],
+          before: "正直に言うと、細かいルールが多くて",
+          after: "だと思ったが、守らざるを得ない。",
+          options: ["面倒", "丁寧", "自由", "正直"],
           answer: 0,
-          explanation: "小さなことまで決めてあるルールは「細かいルール」。",
+          explanation: "ルールが多くて大変だ、やりたくないという気持ちは「面倒」。",
+        },
+        {
+          before: "でも、ルールが多いからといって、",
+          after: "場所だというわけではない。",
+          options: ["小さな", "堅苦しい", "細かい", "同じ"],
+          answer: 1,
+          explanation: "ルールが多くて気楽にできない感じは「堅苦しい」。",
         },
         {
           before: "夕食の後、",
@@ -5131,14 +5152,14 @@ DJマキコ：それでは、また。`,
         },
         {
           before: "「",
-          after: "がある人は入れない温泉も多いけど、全部がそうというわけではないよ」",
+          after: "があるからといって、どこの温泉にも入れないわけではないよ」",
           options: ["浴衣", "決まり", "入れ墨", "仕事"],
           answer: 2,
           explanation: "温泉によっては「入れ墨（タトゥー）」がある人は入れないことがある。",
         },
         {
           before: "翌朝、もう",
-          after: "したいと思ったものの、仕事があるので、帰らないわけにはいかなかった。",
+          after: "したいと思ったものの、急に仕事が入ったので、予定より早く帰らざるを得なかった。",
           options: ["説明", "年配", "正直", "一泊"],
           answer: 3,
           explanation: "もう一晩泊まりたかったので「もう一泊（いっぱく）したい」。",
@@ -5151,93 +5172,93 @@ DJマキコ：それでは、また。`,
             "Although I'd been to Japanese hot springs many times, it was my first time staying at a ryokan alone.",
           before: "日本の温泉には何度も入ったことがある",
           after: "、旅館に一人で泊まるのは初めてだった。",
-          options: ["ものの", "わけではなく", "わけにはいかず", "ために"],
-          answer: 0,
+          options: ["からといって", "ものの", "ので", "ざるを得ず"],
+          answer: 1,
           explanation:
             "ものの = \"although\": the second half isn't what you'd expect from the first. It's written-style; in speech you'd say 〜けど.",
         },
         {
-          translation: "Apparently you mustn't put your towel in the bath.",
-          before: "タオルを湯船に入れる",
-          after: "そうだ。",
-          options: ["わけではない", "わけにはいかない", "ものの", "わけがない"],
-          answer: 1,
-          explanation:
-            "Dictionary form + わけにはいかない = you can't do it because of rules or manners, not because you're unable to.",
-        },
-        {
-          translation: "A lot of onsen won't let in people with tattoos, but that's not true of all of them.",
-          before: "「入れ墨がある人は入れない温泉も多いけど、全部がそうという",
-          after: "よ」と教えてくれた。",
-          options: ["わけにはいかない", "ものの", "わけではない", "わけだ"],
+          translation: "I thought the rules were a hassle, but I had no choice but to follow them.",
+          before: "細かいルールが多くて面倒だと思ったが、守ら",
+          after: "。",
+          options: ["ないものの", "ずにはいられない", "ざるを得ない", "ないからといって"],
           answer: 2,
           explanation:
-            "全部が〜というわけではない = \"not all of them are ~\". わけではない denies part of what someone might assume.",
+            "ざるを得ない = you don't want to, but there's no other way. ずにはいられない means you can't stop yourself from doing something.",
+        },
+        {
+          translation: "Just because you have a tattoo doesn't mean you can't get into any onsen.",
+          before: "「入れ墨がある",
+          after: "、どこの温泉にも入れないわけではないよ」と教えてくれた。",
+          options: ["ものの", "からといって", "ので", "ざるを得ず"],
+          answer: 1,
+          explanation:
+            "からといって = \"just because ~\". The second half denies what you'd assume (〜わけではない).",
         },
         // 使い分け: choose between the three.
         {
-          translation: "It's not that I dislike Japanese food — it's just nattō I can't handle.",
-          before: "日本料理が嫌いな",
-          after: "けど、納豆だけは苦手だ。",
-          options: ["わけにはいかない", "わけではない", "ものの", "わけがない"],
-          answer: 1,
-          explanation:
-            "Partial denial: \"I don't dislike Japanese food in general.\" な-adjective + な + わけではない.",
-        },
-        {
-          translation: "I have an important meeting tomorrow, so I can't take the day off.",
-          before: "明日は大事な会議があるので、休む",
-          after: "。",
-          options: ["わけではない", "ものの", "わけにはいかない", "わけだ"],
+          translation: "Although it was raining, the match wasn't called off.",
+          before: "雨が降っていた",
+          after: "、試合は中止にならなかった。",
+          options: ["からといって", "ざるを得ず", "ものの", "ために"],
           answer: 2,
           explanation:
-            "You could physically stay home, but the situation doesn't allow it → 休むわけにはいかない.",
+            "You'd expect rain to stop the match, but it didn't → ものの (\"although\").",
         },
         {
-          translation: "Although I'd read about how to use an onsen in a book, I was still nervous when I actually got in.",
-          before: "温泉の入り方を本で読んだ",
-          after: "、実際に入るとやっぱり緊張した。",
-          options: ["わけにはいかず", "ものの", "わけではなく", "ために"],
+          translation: "Just because someone is a foreigner doesn't mean they can't eat Japanese food.",
+          before: "外国人だ",
+          after: "、みんな日本料理が苦手なわけではない。",
+          options: ["ものの", "からといって", "ので", "ざるを得ず"],
           answer: 1,
-          explanation:
-            "Reading about it should have helped, but it didn't → ものの (\"although\").",
-        },
-        {
-          translation: "They're sweets my teacher gave me, so I have to eat them.",
-          before: "先生にいただいたお菓子なので、食べない",
-          after: "。",
-          options: ["わけにはいかない", "わけではない", "ものの", "わけがない"],
-          answer: 0,
-          explanation:
-            "ない-form + わけにはいかない = \"I can't not do it\" = I must. Not eating a gift from your teacher would be rude.",
-        },
-        {
-          translation: "Just because I live in Kyoto doesn't mean I know a lot about temples.",
-          before: "京都に住んでいるからといって、お寺に詳しい",
-          after: "。",
-          options: ["わけにはいかない", "ものの", "わけだ", "わけではない"],
-          answer: 3,
           explanation:
             "〜からといって〜わけではない = \"just because ~ doesn't mean ~\".",
         },
-        // Spot the mistake: the natural form vs. the wrong pattern.
         {
-          translation: "This kanji is too difficult — I can't read it.",
-          before: "この漢字は難しすぎて、",
+          translation: "The trains stopped, so I had no choice but to take a taxi.",
+          before: "電車が止まってしまったので、タクシーで行か",
           after: "。",
-          options: ["読むわけにはいかない", "読めない", "読むわけではない", "読まないわけにはいかない"],
+          options: ["ないものの", "ざるを得なかった", "ずにはいられなかった", "ないからといって"],
           answer: 1,
           explanation:
-            "This is about ability, so use 読めない. 読むわけにはいかない is only for social reasons (\"I'm not allowed / it wouldn't be right\").",
+            "You didn't want to pay for a taxi, but there was no other way → 行かざるを得なかった.",
         },
+        {
+          translation: "Because of the heavy snow, we had no choice but to cancel the trip.",
+          before: "大雪で、旅行を中止",
+          after: "。",
+          options: ["しざるを得なかった", "さざるを得なかった", "せざるを得なかった", "するものの"],
+          answer: 2,
+          explanation:
+            "する becomes せ before ざるを得ない: 中止せざるを得ない.",
+        },
+        // Spot the mistake: pick the natural form.
         {
           translation: "The tickets are expensive, but let's go together.",
           before: "チケットは高い",
           after: "、一緒に行こう。",
-          options: ["ものの", "わけではなく", "けど", "わけにはいかず"],
+          options: ["ものの", "からといって", "けど", "ざるを得ず"],
           answer: 2,
           explanation:
             "ものの can't be followed by an invitation or your own will (〜よう, 〜てください). Use けど: 高いけど、一緒に行こう.",
+        },
+        {
+          translation: "Just because someone is Japanese doesn't mean they're good at teaching Japanese.",
+          before: "日本人だからといって、日本語を教えるのが",
+          after: "。",
+          options: ["上手だ", "上手だとは限らない", "上手にならざるを得ない", "上手なものの"],
+          answer: 1,
+          explanation:
+            "からといって needs a negative or partial denial after it (〜とは限らない, 〜わけではない). 「〜からといって、上手だ」 is wrong.",
+        },
+        {
+          translation: "It's fun, so I want to go on a trip.",
+          before: "楽しいので、旅行に",
+          after: "。",
+          options: ["行かざるを得ない", "行きたい", "行かないものの", "行くからといって"],
+          answer: 1,
+          explanation:
+            "ざるを得ない is only for things you do unwillingly, so it can't follow 楽しいので. Say 行きたい.",
         },
       ],
       reading: [
@@ -5252,19 +5273,19 @@ DJマキコ：それでは、また。`,
           hints: ["浴衣", "自由に", "タオル", "湯船"],
         },
         {
-          question: "筆者は、温泉のルールは何のためにあると考えていますか。",
-          answer: "厳しいから守るのではなく、みんなで同じお湯を気持ちよく使うためにあると考えている。",
-          hints: ["厳しい", "わけではない", "同じお湯", "気持ちよく"],
+          question: "筆者は温泉のルールについて、最初どう思いましたか。今はどう考えていますか。",
+          answer: "最初は細かいルールが多くて面倒だと思った。でも、ルールはみんなで同じお湯を気持ちよく使うためにあると考えている。",
+          hints: ["面倒", "からといって", "同じお湯", "気持ちよく"],
         },
         {
           question: "露天風呂で、年配の男性は入れ墨について何と言いましたか。",
-          answer: "入れ墨がある人は入れない温泉も多いが、全部がそうではないと教えてくれた。",
-          hints: ["入れ墨", "入れない", "全部", "わけではない"],
+          answer: "入れ墨があっても、どこの温泉にも入れないわけではないと教えてくれた。",
+          hints: ["入れ墨", "からといって", "入れない"],
         },
         {
           question: "翌朝、筆者はどうしてもう一泊しなかったのですか。",
-          answer: "もう一泊したかったが、仕事があるので、帰らなければならなかったから。",
-          hints: ["一泊", "仕事", "帰らないわけにはいかない"],
+          answer: "急に仕事が入ったので、予定より早く帰らなければならなかったから。",
+          hints: ["急に", "仕事", "予定", "ざるを得ない"],
         },
       ],
     },

@@ -14,19 +14,25 @@ describe("focus grammar highlights", () => {
   it("finds each 箱根 grammar point twice in the body", () => {
     expect(hakone.focusGrammar?.map((g) => g.label)).toEqual([
       "〜ものの",
-      "〜わけにはいかない",
-      "〜わけではない",
+      "〜からといって",
+      "〜ざるを得ない",
     ]);
     expect(matches(0)).toEqual(["ものの", "ものの"]);
-    expect(matches(1)).toEqual(["わけにはいかない", "らないわけにはいかなかった"]);
-    expect(matches(2)).toEqual(["というわけではない", "というわけではない"]);
+    expect(matches(1)).toEqual(["からといって", "からといって"]);
+    expect(matches(2)).toEqual(["らざるを得ない", "らざるを得なかった"]);
+  });
+
+  it("does not target the N3 forms that only support the text", () => {
+    const labels = (hakone.focusGrammar ?? []).map((g) => g.label).join();
+    expect(labels).not.toMatch(/わけ/);
+    expect(hakone.focusGrammar?.every((g) => g.level === "N2")).toBe(true);
   });
 
   it("marks every piece that overlaps a match", () => {
-    const text = "帰らないわけにはいかなかった。";
+    const text = "早く帰らざるを得なかった。";
     const ranges = grammarRanges(text, hakone.focusGrammar);
-    expect(grammarForPieces(["帰ら", "ない", "わけにはいか", "なかっ", "た", "。"], ranges)).toEqual([
-      1, 1, 1, 1, 1, undefined,
+    expect(grammarForPieces(["早く", "帰ら", "ざるを得", "なかっ", "た", "。"], ranges)).toEqual([
+      undefined, 2, 2, 2, 2, undefined,
     ]);
   });
 

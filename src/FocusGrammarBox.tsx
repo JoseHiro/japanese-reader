@@ -19,7 +19,7 @@ export function FocusGrammarBox({
   return (
     <section className="focus-grammar" aria-label="今回の文法">
       <div className="fg-head">
-        <h3 className="fg-title">今回の文法</h3>
+        <h3 className="section-title">今回の文法</h3>
         <button
           type="button"
           className={"fg-toggle" + (highlight ? " on" : "")}

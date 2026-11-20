@@ -1231,15 +1231,23 @@ export default function App() {
           </div>
         )}
 
+      {/* Articles with a 今回の文法 box are laid out as sections: the box,
+          then 本文 in its own block with its own heading. */}
+      {activeTab === "article" && !loading && !!article?.focusGrammar?.length && paragraphs.length > 0 && (
+        <FocusGrammarBox
+          items={article.focusGrammar}
+          showFurigana={showFurigana}
+          highlight={grammarHighlight}
+          onToggleHighlight={toggleGrammarHighlight}
+        />
+      )}
       {activeTab === "article" && (
-      <div className="reader" ref={readerRef}>
+      <div
+        className={"reader" + (article?.focusGrammar?.length ? " reader-sectioned" : "")}
+        ref={readerRef}
+      >
         {!loading && !!article?.focusGrammar?.length && paragraphs.length > 0 && (
-          <FocusGrammarBox
-            items={article.focusGrammar}
-            showFurigana={showFurigana}
-            highlight={grammarHighlight}
-            onToggleHighlight={toggleGrammarHighlight}
-          />
+          <h3 className="section-title">本文</h3>
         )}
         {!loading && paragraphs.map((sents, pi) => {
           const paraText = sents.map((s) => s.text).join("");

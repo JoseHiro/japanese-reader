@@ -843,7 +843,8 @@ const salonHaircut: Lesson = {
 };
 
 // Dominik (N2 track), 「Dominikの日本旅」 #1 箱根. Follows the article
-// `tabi-hakone-onsen`: the same three patterns, now produced in speech.
+// `tabi-hakone-onsen`: the same three N2 patterns (〜ものの / 〜からといって /
+// 〜ざるを得ない), now produced in speech.
 const ryokanReservation: Lesson = {
   id: "ryokan-reservation",
   title: "旅館で「予約が見つからない」",
@@ -858,16 +859,15 @@ const ryokanReservation: Lesson = {
   goalEn:
     "Explain a problem, say why you can't just leave, and negotiate while accepting the staff's alternative.",
   intent:
-    "記事「箱根の温泉で」の3文型を、会話で使えるところまで持っていく。「〜わけにはいかない」「〜わけではない」は会話でそのまま使う。「〜ものの」は書き言葉寄りなので、言いよどみ（「予約したものの…」）に限って使い、ふだんは「〜けど」に言い換える感覚もつかむ。",
+    "記事「箱根の温泉で」の N2 文型3つを会話で使う。「〜からといって」は会話でもそのまま使える。「〜ものの」「〜ざるを得ない」はかたい言い方なので、言いよどみ（「予約したものの…」）や、困った気持ちを強く出す質問（「帰らざるを得ないんですか」）に限って使い、ふだんは「〜けど」「〜しかない」に言い換える感覚もつかむ。N3 の「〜わけではない」などは支えとして使ってよいが、練習の目標ではない。",
   intentEn:
-    "Take the three patterns from the 箱根 article into speech. 〜わけにはいかない and 〜わけではない are used as-is in conversation. 〜ものの is written-leaning, so here it appears only as a trailing-off (予約したものの…); otherwise get used to swapping it for 〜けど.",
+    "Use the article's three N2 patterns in speech. 〜からといって works as-is in conversation. 〜ものの and 〜ざるを得ない are stiff, so here they appear only as a trailing-off (予約したものの…) or a question that stresses the bind (帰らざるを得ないんですか); otherwise get used to swapping them for 〜けど / 〜しかない. N3 forms such as 〜わけではない may support the answers but aren't targets.",
   warmup: {
     vocab: ["予約", "確認メール", "満室", "別館", "本館", "和室", "夕食"],
     grammar: [
       "〜ものの（N2・書き言葉寄り）",
-      "〜わけにはいかない（N3）",
-      "〜ないわけにはいかない（N3）",
-      "〜わけではない（N3）",
+      "〜からといって（N2）",
+      "〜ざるを得ない（N2・かたい）",
     ],
     tip: "困ったときほど、まず「実は…」「あの、…」でクッションを置く。言いたいことは「事実 → 困っている理由 → お願い」の順に。",
   },
@@ -925,51 +925,51 @@ const ryokanReservation: Lesson = {
       speaker: "student",
       blank: {
         id: "b3",
-        intent: "日付を間違えたことを認め、今から帰れない事情（電車もバスももうほとんどない／温泉を楽しみにしていた）を伝えて頼む",
+        intent: "日付を間違えたことを認め、今から帰るのは難しい事情（電車もバスもほとんどない／温泉を楽しみにしていた）を伝えて、「このまま帰らざるを得ないんですか」と聞く",
         intentEn:
-          "Admit the date mix-up, explain why you can't go back now (hardly any trains or buses left; you were looking forward to the onsen), and ask for help.",
+          "Admit the date mix-up, explain why going back now is hard (hardly any trains or buses left; you were looking forward to the onsen), and ask このまま帰らざるを得ないんですか.",
         rules: [
           {
             kind: "message",
-            items: ["日付の間違いを認める", "電車もバスもほとんどない", "温泉を楽しみにしていた", "何とかならないか頼む"],
+            items: ["日付の間違いを認める", "電車もバスもほとんどない", "温泉を楽しみにしていた", "このまま帰るしかないのか聞く"],
             itemsEn: [
               "admit the wrong date",
               "hardly any trains or buses left",
               "you were looking forward to the onsen",
-              "ask if anything can be done",
+              "ask if you really have to go back like this",
             ],
           },
-          { kind: "grammar", items: ["〜わけにはいかない", "〜し、〜し"] },
+          { kind: "grammar", items: ["〜ざるを得ない"] },
         ],
         samples: [
-          "えっ、来月……。私の間違いですね。すみません。でも、もう電車もバスもほとんどないし、温泉もすごく楽しみにしていたので、今から帰るわけにはいかないんです。何とかなりませんか。",
-          "あ、日付を間違えてしまったんですね……。ただ、この時間だと電車もバスもほとんどないので、今から帰るわけにはいかないんです。どんなお部屋でもいいので、お願いできませんか。",
+          "えっ、来月……。私の間違いですね。すみません。でも、もう電車もバスもほとんどないし、温泉もすごく楽しみにしていたんです。このまま帰らざるを得ないんですか。",
+          "あ、日付を間違えてしまったんですね……。ただ、この時間だと電車もバスもほとんどないんです。このまま帰らざるを得ないんでしょうか。どんなお部屋でもいいんですが……。",
         ],
         teacherNote:
-          "「帰れない」（能力・手段）と「帰るわけにはいかない」（事情・気持ち）の違いを確認。ここはどちらも言えるが、「わけにはいかない」の方が「困っている事情」が伝わる。",
+          "「ざるを得ない」はかたいが、「本当にそうするしかないのか」と困った気持ちを強く出す質問には合う。柔らかく言うなら「帰るしかないんですか」。",
       },
     },
     {
       speaker: "them",
-      text: "そうですよね……。実は、お部屋が全くないわけではないんですが……。別館に小さな和室が一つだけ空いております。ただ、別館にはお風呂がございませんので、お風呂は一度、外に出て、本館まで歩いていただくことになります。",
+      text: "そうですよね……。満室だからといって、お泊まりいただけないわけではないんですが……。別館に小さな和室が一つだけ空いております。ただ、別館にはお風呂がございませんので、お風呂は一度、外に出て、本館まで歩いていただくことになります。",
     },
     {
       speaker: "student",
       blank: {
         id: "b4",
-        intent: "「全くないわけではない」を受けて喜び、外を歩くのは気にしないと伝えてその部屋を頼む",
+        intent: "ほっとした気持ちを伝え、「お風呂が別館にないからといって、困るわけではない」と言ってその部屋を頼む",
         intentEn:
-          "Pick up on 全くないわけではない, show relief, say you don't mind walking outside, and take the room.",
+          "Show relief, say that the annex having no bath isn't a problem for you (use 〜からといって), and take the room.",
         rules: [
-          { kind: "grammar", items: ["〜わけではない"] },
+          { kind: "grammar", items: ["〜からといって〜わけではない／〜とは限らない"] },
           { kind: "message", items: ["ほっとした気持ち", "外を歩くのは平気", "その部屋をお願いする"], itemsEn: ["relief", "walking outside is fine", "ask for that room"] },
         ],
         samples: [
-          "本当ですか。よかった……。外を歩くのが嫌なわけではないので、大丈夫です。ぜひその和室でお願いします。",
-          "ありがとうございます！ 外を少し歩くのは全然かまいません。お風呂が使えないわけではないなら、その部屋で十分です。",
+          "本当ですか。よかった……。お風呂が別館にないからといって、困るわけではありません。ぜひその和室でお願いします。",
+          "ありがとうございます！ 部屋が小さいからといって、不便だとは限りませんし、少し歩くのも全然かまいません。その部屋でお願いします。",
         ],
         teacherNote:
-          "先生のモデル文「全くないわけではないんですが…」を聞き取って、同じ文型で返す練習。「嫌なわけではない」＝「嫌ではない」より、相手の心配を打ち消すニュアンスが出る。",
+          "先生のモデル文「満室だからといって、お泊まりいただけないわけではない」を聞き取って、同じ形で返す練習。後ろが否定になっているか確認する。",
       },
     },
     {
@@ -984,11 +984,11 @@ const ryokanReservation: Lesson = {
         intentEn:
           "Say it's a shame but accept it, and ask if there's somewhere nearby to eat (a convenience store or diner).",
         rules: [
-          { kind: "grammar", items: ["〜ものの（または 〜けど）", "〜ないわけにはいかない"] },
+          { kind: "grammar", items: ["〜ものの（または 〜けど）", "〜ざるを得ない（または 〜しかない）"] },
         ],
         samples: [
-          "そうですか。夕食も楽しみにしていたものの、仕方ないですね。何か食べないわけにはいかないので、近くにコンビニか食堂はありますか。",
-          "残念ですけど、遅く着いたのは私なので大丈夫です。何も食べないわけにはいかないので、この近くで食べられる所を教えていただけますか。",
+          "そうですか。夕食も楽しみにしていたものの、仕方ないですね。近くにコンビニか食堂はありますか。",
+          "残念ですけど、遅く着いたのは私なので、今夜はコンビニで買わざるを得ないですね。この近くにありますか。",
         ],
         teacherNote:
           "「〜ものの、仕方ない」はOK（後ろが意志・依頼ではない）。「〜ものの、教えてください」は×。後ろで依頼するなら文を切る。",
@@ -1014,31 +1014,32 @@ const ryokanReservation: Lesson = {
   challenges: [
     {
       id: "c1",
-      title: "続けて話す ①：〜わけではない",
-      titleEn: "Finish the sentence ①: 〜わけではない",
+      title: "続けて話す ①：〜からといって",
+      titleEn: "Finish the sentence ①: 〜からといって",
       prompt:
-        "先生が前半を言うので、後半を続けて言う。① 日本に住んでいるからといって、…　② 日本の習慣が全部好きな…",
+        "先生が前半を言うので、後半を続けて言う。① 日本に住んでいるからといって、…　② 値段が高いからといって、…",
       promptEn:
-        "The teacher says the first half; you finish it. ① 日本に住んでいるからといって、…　② 日本の習慣が全部好きな…",
-      rules: [{ kind: "grammar", items: ["〜からといって〜わけではない", "〜わけではないけど"] }],
+        "The teacher says the first half; you finish it. ① 日本に住んでいるからといって、…　② 値段が高いからといって、…",
+      refBlankId: "b4",
+      rules: [{ kind: "grammar", items: ["〜からといって〜わけではない", "〜からといって〜とは限らない"] }],
       samples: [
         "① 日本に住んでいるからといって、毎日和食を食べているわけではない。",
-        "② 日本の習慣が全部好きなわけではないけど、お土産の文化はいいと思う。",
+        "② 値段が高いからといって、おいしいとは限らない。",
       ],
     },
     {
       id: "c2",
-      title: "続けて話す ②：〜わけにはいかない",
-      titleEn: "Finish the sentence ②: 〜わけにはいかない",
+      title: "続けて話す ②：〜ざるを得ない",
+      titleEn: "Finish the sentence ②: 〜ざるを得ない",
       prompt:
-        "① 友だちの結婚式に呼ばれたので、…　② 先輩にお酒をすすめられたけど、明日は運転するので、…",
+        "① 台風で電車が止まったので、…　② 上司に頼まれたので、週末も…",
       promptEn:
-        "① 友だちの結婚式に呼ばれたので、…　② 先輩にお酒をすすめられたけど、明日は運転するので、…",
+        "① 台風で電車が止まったので、…　② 上司に頼まれたので、週末も…",
       refBlankId: "b3",
-      rules: [{ kind: "grammar", items: ["〜ないわけにはいかない", "〜わけにはいかない"] }],
+      rules: [{ kind: "grammar", items: ["〜ざるを得ない", "する → せざるを得ない"] }],
       samples: [
-        "① 友だちの結婚式に呼ばれたので、行かないわけにはいかない。",
-        "② 先輩にお酒をすすめられたけど、明日は運転するので、飲むわけにはいかない。",
+        "① 台風で電車が止まったので、旅行をキャンセルせざるを得なかった。",
+        "② 上司に頼まれたので、週末も働かざるを得ない。",
       ],
     },
     {
@@ -1059,12 +1060,12 @@ const ryokanReservation: Lesson = {
       title: "話し合い：温泉のルール",
       titleEn: "Discuss: onsen rules",
       prompt:
-        "日本の温泉のルールで、あなたの国にはない習慣は？ 全部に賛成というわけではないなら、どれ？",
+        "日本の温泉のルールで、あなたの国にはない習慣は？ ルールが多いからといって、悪いことだと思いますか。",
       promptEn:
-        "Which Japanese onsen rules don't exist in your country? If you don't agree with all of them, which ones?",
-      rules: [{ kind: "grammar", items: ["全部に〜というわけではない"] }],
+        "Which Japanese onsen rules don't exist in your country? Does having a lot of rules make it a bad thing?",
+      rules: [{ kind: "grammar", items: ["〜からといって"] }],
       samples: [
-        "体を洗ってから湯船に入るのは、私の国にはない習慣です。いいルールだと思いますが、全部に賛成というわけではありません。入れ墨のルールは、少し厳しすぎると思います。",
+        "体を洗ってから湯船に入るのは、私の国にはない習慣です。ルールが多いからといって、悪いことだとは思いません。みんなが気持ちよく使えるからです。",
       ],
     },
     {
@@ -1080,13 +1081,13 @@ const ryokanReservation: Lesson = {
     },
     {
       id: "c6",
-      title: "話し合い：断るわけにはいかない",
-      titleEn: "Discuss: when you can't say no",
-      prompt: "あなたの国で「本当は断りたいけど、断るわけにはいかない」のはどんなとき？",
-      promptEn: "In your country, when do you want to say no but can't?",
-      rules: [{ kind: "grammar", items: ["〜わけにはいかない"] }],
+      title: "話し合い：予定を変えざるを得なかった",
+      titleEn: "Discuss: when you had to change plans",
+      prompt: "旅行中に、予定を変えざるを得なかったことはありますか。どうしましたか。",
+      promptEn: "Have you ever had no choice but to change your plans on a trip? What did you do?",
+      rules: [{ kind: "grammar", items: ["〜ざるを得ない"] }],
       samples: [
-        "上司の家に食事に呼ばれたときは、ちょっと疲れていても、断るわけにはいかないと思います。",
+        "北海道で大雪になって、飛行機が飛ばなかったので、もう一泊せざるを得ませんでした。でも、そのおかげでおいしいラーメンの店を見つけました。",
       ],
     },
   ],
