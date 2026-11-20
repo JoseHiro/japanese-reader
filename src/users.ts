@@ -62,12 +62,6 @@ export const USERS: User[] = [
     ],
   },
   {
-    id: "andy",
-    displayName: "Andy",
-    articleIds: [],
-    lessonIds: ["salon-haircut", "clinic-symptoms", "delivery-redelivery"],
-  },
-  {
     id: "artem",
     displayName: "Artem",
     articleIds: ["godzilla", "kamakura-jidai", "nishikori-kei", "marugame-seimen"],

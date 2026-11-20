@@ -64,7 +64,7 @@ test("並べ替え: hovering or focusing 💡 shows the Tobira explanation", asy
   await expect(pop).toBeVisible();
 });
 
-for (const id of ["andy", "chris"]) {
+for (const id of ["dominik", "chris"]) {
   test(`${id}: loads without errors and no quiz action bar`, async ({ page }) => {
     await signIn(page, id);
     await page.goto("/");
