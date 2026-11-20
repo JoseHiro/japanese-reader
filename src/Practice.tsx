@@ -9,6 +9,7 @@ import {
   type Lesson,
 } from "./lessons";
 import { Furigana } from "./shared/Furigana";
+import { ReadingOverridesProvider } from "./shared/readingOverrides";
 import { BASIC_WORDS, CONTENT_POS } from "./shared/vocabFilter";
 import { loadTokenizer, toTokens } from "./tokenizer";
 import { loadDictionary } from "./dictionary";
@@ -749,12 +750,14 @@ export function Practice({
   if (openLesson) {
     return (
       <FuriCtx.Provider value={showFurigana}>
-        <LessonPage
-          lesson={openLesson}
-          user={user}
-          onExit={() => setOpenLessonId(null)}
-          subTab={lessonTab}
-        />
+        <ReadingOverridesProvider value={openLesson.readings ?? {}}>
+          <LessonPage
+            lesson={openLesson}
+            user={user}
+            onExit={() => setOpenLessonId(null)}
+            subTab={lessonTab}
+          />
+        </ReadingOverridesProvider>
       </FuriCtx.Provider>
     );
   }
